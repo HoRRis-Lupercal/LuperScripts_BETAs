@@ -999,7 +999,7 @@
 
     function cleanTownName(rawName) {
         if (!rawName) return '';
-        return rawName.replace(/[\(\[\{]\s*Capital\s*[\)\]\}]/gi, '').replace(/^(Capital)\s*[-:]?\s*/gi, '').replace(/\s*-\s*.*$/, '').replace(/^[\s-:]+\vert{}[\s-:]+$/g, '').trim() || rawName;
+        return rawName.replace(/[\(\[\{]\s*Capital\s*[\)\]\}]/gi, '').replace(/^(Capital)\s*[-:]?\s*/gi, '').replace(/\s*-\s*.*$/, '').replace(/^[\s-:]+|[\s-:]+$/g, '').trim() || rawName;
     }
 
     function getActiveTownId() {
