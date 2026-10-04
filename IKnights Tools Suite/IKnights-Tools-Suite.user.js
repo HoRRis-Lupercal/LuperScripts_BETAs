@@ -8,8 +8,8 @@
 // @match        https://elgea.illyriad.co.uk/*
 // @match        http://elgea.illyriad.co.uk/*
 //
-// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/IKnights%20Tools%20Suite/Core/IKTools-Core.js?token=GHSAT0AAAAAAEKQQDNL7DZVNTE4VGVZP27E2WCZMTQ
-// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/IKnights%20Tools%20Suite/Tools/Quartermaster.js?token=GHSAT0AAAAAAEKQQDNKOI4BPG5XJYVEDBVW2WCZNNQ
+// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/IKnights%20Tools%20Suite/Core/IKTools-Core.js?token=GHSAT0AAAAAAEKQQDNLGCB3WCOK4FEWY44K2WC2ABA
+// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/IKnights%20Tools%20Suite/Tools/Quartermaster.js?token=GHSAT0AAAAAAEKQQDNKQNZBTPPFIZZGN4TS2WC2ACA
 //
 // @updateURL    https://github.com/HoRRis-Lupercal/LuperScripts_BETAs/raw/refs/heads/main/IKnights%20Tools%20Suite/IKnights-Tools-Suite.user.js
 // @downloadURL  https://github.com/HoRRis-Lupercal/LuperScripts_BETAs/raw/refs/heads/main/IKnights%20Tools%20Suite/IKnights-Tools-Suite.user.js
