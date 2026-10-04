@@ -19,8 +19,14 @@
     // =========================================================================
 
     let toolsTabSelected = false;
+    let notesTabSelected = false;
     let coreInitialized = false;
     let coreStarting = false;
+
+    // LuperNotes States
+    let notesGlobalMode = false;
+    let currentNotesTown = null;
+    let notesSyncInterval = null;
 
     const initializedTools = new Set();
 
@@ -913,6 +919,73 @@
                 padding-top: 15px;
             }
 
+            /* =============================================================
+               NOTES PANEL (LuperNotes Layout)
+               ============================================================= */
+               
+            #ikNotesPanel {
+                display: flex;
+                flex-direction: column;
+                width: 245px;
+                min-height: 250px;
+                box-sizing: border-box;
+                background: #89501c;
+                padding: 1px;
+                border: 1px solid #89501c;
+                border-radius: 2px;
+            }
+            #ikNotesHeader {
+                background: #d4b767;
+                color: #523307;
+                text-align: center;
+                font-weight: bold;
+                font-size: 10px;
+                padding: 2px;
+                margin-bottom: 1px;
+                flex-shrink: 0;
+            }
+            #ikNotesDisplay, #ikNotesTextarea {
+                flex: 1 1 auto;
+                background: #fef6dc;
+                color: #523307;
+                border: 1px solid #89501c;
+                padding: 4px;
+                font-family: monospace;
+                font-size: 10.5px;
+                line-height: 1.35;
+                box-sizing: border-box;
+                width: 100%;
+                overflow-y: auto;
+            }
+            #ikNotesDisplay {
+                white-space: pre-wrap;
+                word-break: break-word;
+            }
+            #ikNotesTextarea {
+                resize: none;
+                display: none;
+            }
+            #ikNotesFooter {
+                display: flex;
+                gap: 2px;
+                padding-top: 2px;
+                flex-shrink: 0;
+            }
+            .ik-notes-btn {
+                background: #caa84e;
+                color: #523307;
+                border: 1px solid #89501c;
+                border-radius: 2px;
+                padding: 3px 0;
+                font-size: 9px;
+                font-weight: bold;
+                cursor: pointer;
+                text-align: center;
+            }
+            .ik-notes-btn:hover { filter: brightness(1.1); }
+            #ikNotesGlobalBtn { flex: 1; }
+            #ikNotesEditBtn { flex: 2; }
+
         `;
 
         document.head.appendChild(
@@ -920,10 +993,221 @@
         );
     }
 
+    // =========================================================================
+    // LUPERNOTES FUNCTIONALITY
+    // =========================================================================
+
+    function cleanTownName(rawName) {
+        if (!rawName) return '';
+        return rawName.replace(/[\(\[\{]\s*Capital\s*[\)\]\}]/gi, '').replace(/^(Capital)\s*[-:]?\s*/gi, '').replace(/\s*-\s*.*$/, '').replace(/^[\s-:]+\vert{}[\s-:]+$/g, '').trim() || rawName;
+    }
+
+    function getActiveTownId() {
+        try { if (window.Illyriad && window.Illyriad.Town && window.Illyriad.Town.CurrentTownID) return String(window.Illyriad.Town.CurrentTownID); } catch(e) {}
+        const el = document.querySelector('#ddlTowns, select[name="towns"], #townSelect, #currentTown, .town-select, #ddlTown');
+        if (el && el.tagName === 'SELECT' && el.value) return String(el.value);
+        if (el && el.textContent) return el.textContent.trim();
+        const opt = document.querySelector('select option:checked');
+        return (opt && opt.value) ? String(opt.value) : 'default_city';
+    }
+
+    function getActiveTownName() {
+        let rawName = '';
+        try { if (window.Illyriad && window.Illyriad.Town && window.Illyriad.Town.CurrentTownName) rawName = window.Illyriad.Town.CurrentTownName; } catch(e) {}
+        if (!rawName) {
+            const el = document.querySelector('#ddlTowns, select[name="towns"], #townSelect, #currentTown, .town-select, #ddlTown');
+            if (el && el.tagName === 'SELECT' && el.selectedIndex >= 0) rawName = el.options[el.selectedIndex].text.trim();
+            else if (el && el.textContent) rawName = el.textContent.trim();
+        }
+        if (!rawName) {
+            const opt = document.querySelector('select option:checked');
+            if (opt && opt.text) rawName = opt.text.trim();
+        }
+        return cleanTownName(rawName || getActiveTownId());
+    }
+
+    function getNotesStorageKey() {
+        return notesGlobalMode ? 'ikNotes_global' : ('ikNotes_' + getActiveTownId());
+    }
+
+    function renderClickableText(text) {
+        if (!text || !text.trim()) {
+            const emptyLabel = notesGlobalMode ? 'No global notes yet.' : 'No city notes yet.';
+            return `<span style="font-style: italic; opacity: 0.7;">${emptyLabel} Click "Edit" to add notes.</span>`;
+        }
+        
+        let cleanText = text.replace(/!TextColour\(([^)]+)\)/gi, '')
+                            .replace(/!UITextColour\(([^)]+)\)/gi, '')
+                            .replace(/!UIButtonColour\(([^)]+)\)/gi, '')
+                            .replace(/!UIBodyColour\(([^)]+)\)/gi, '')
+                            .replace(/!UIBorderColour\(([^)]+)\)/gi, '')
+                            .replace(/!UIHeaderColour\(([^)]+)\)/gi, '');
+                            
+        let escaped = cleanText.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        let linkRegex = /\[([^\]]+)\]\(([^)]+)\)(?:\{([^}]+)\})?|((?:https?:\/\/|www\.)[^\s<]+)/gi;
+        
+        let processed = escaped.replace(linkRegex, (match, label, mdUrl, hexColor, bareUrl) => {
+            let href = mdUrl ? mdUrl.trim() : bareUrl.trim();
+            let displayText = label || bareUrl;
+            let finalColor = hexColor ? hexColor.trim() : '#3479c6';
+            if (!href.startsWith('http') && !href.startsWith('/')) href = 'https://' + href;
+            return `<a href="${href}" target="_top" style="color: ${finalColor}; text-decoration: underline;" onclick="event.stopPropagation();">${displayText}</a>`;
+        });
+        
+        processed = processed.replace(/&lt;fs\(([^)]+)\)&gt;/gi, (match, size) => {
+            let cleanSize = size.trim().replace(/[^a-zA-Z0-9.%]/g, '');
+            if (/^\d+(\.\d+)?$/.test(cleanSize)) cleanSize += 'px';
+            return `<span style="font-size: ${cleanSize};">`;
+        });
+        
+        processed = processed.replace(/&lt;\/fs(?:\([^)]+\))?&gt;/gi, '</span>');
+        processed = processed.replace(/&lt;(\/?[bui])&gt;/gi, '<$1>');
+        
+        let defaultTextColor = '#523307';
+        const colorMatch = text.match(/!TextColour\(([^)]+)\)/i);
+        if (colorMatch && colorMatch[1]) defaultTextColor = colorMatch[1].trim();
+
+        return `<span style="color: ${defaultTextColor};">${processed}</span>`;
+    }
+    
+    function applyCustomUITheme(text) {
+        const uiTextColor = (text.match(/!UITextColour\(([^)]+)\)/i) || [])[1] || '#523307';
+        const uiHeaderBg = (text.match(/!UIHeaderColour\(([^)]+)\)/i) || [])[1] || '#d4b767';
+        const uiBodyBg = (text.match(/!UIBodyColour\(([^)]+)\)/i) || [])[1] || '#fef6dc';
+        const uiBtnBg = (text.match(/!UIButtonColour\(([^)]+)\)/i) || [])[1] || '#caa84e';
+        const uiBorderColor = (text.match(/!UIBorderColour\(([^)]+)\)/i) || [])[1] || '#89501c';
+
+        const panel = document.querySelector('#ikNotesPanel');
+        const header = document.querySelector('#ikNotesHeader');
+        const title = document.querySelector('#cityNotesTitleLabel');
+        const display = document.querySelector('#ikNotesDisplay');
+        const textarea = document.querySelector('#ikNotesTextarea');
+        const buttons = document.querySelectorAll('.ik-notes-btn');
+
+        if(panel) { panel.style.backgroundColor = uiBorderColor; panel.style.borderColor = uiBorderColor; }
+        if(header) { header.style.backgroundColor = uiHeaderBg; header.style.borderColor = uiBorderColor; }
+        if(title) { title.style.color = uiTextColor; }
+        if(display) { display.style.backgroundColor = uiBodyBg; display.style.borderColor = uiBorderColor; }
+        if(textarea) { 
+            textarea.style.backgroundColor = uiBodyBg; 
+            textarea.style.borderColor = uiBorderColor; 
+            textarea.style.color = (text.match(/!TextColour\(([^)]+)\)/i) || [])[1] || '#523307'; 
+        }
+        buttons.forEach(btn => {
+            btn.style.backgroundColor = uiBtnBg;
+            btn.style.color = uiTextColor;
+            btn.style.borderColor = uiBorderColor;
+        });
+    }
+
+    function updateNotesDisplay() {
+        const displayDiv = document.querySelector('#ikNotesDisplay');
+        if (!displayDiv) return;
+        const savedText = localStorage.getItem(getNotesStorageKey()) || '';
+        displayDiv.innerHTML = renderClickableText(savedText);
+        applyCustomUITheme(savedText);
+    }
+    
+    function checkAndSyncTownNotes() {
+        const activeTownId = getActiveTownId();
+        const activeTownName = getActiveTownName();
+        const titleLabel = document.querySelector('#cityNotesTitleLabel');
+        
+        if (activeTownId !== currentNotesTown) {
+            currentNotesTown = activeTownId;
+            if (!notesGlobalMode) {
+                const savedText = localStorage.getItem(getNotesStorageKey()) || '';
+                const textarea = document.querySelector('#ikNotesTextarea');
+                if (textarea && textarea.style.display !== 'none') {
+                    textarea.value = savedText;
+                }
+                updateNotesDisplay();
+            }
+        }
+        if (titleLabel) {
+            const expectedTitle = notesGlobalMode ? 'Global Notes' : ('City Notes (' + activeTownName + ')');
+            if (titleLabel.textContent !== expectedTitle) titleLabel.textContent = expectedTitle;
+        }
+    }
 
     // =========================================================================
-    // TOOLS TAB
+    // TOOLS & NOTES TABS
     // =========================================================================
+
+    function showNotesTab() {
+        const friendsBtn =
+            document.querySelector(
+                "#FriendsBtn"
+            );
+
+        const toolsBtn =
+            document.querySelector(
+                "#CommunitiesBtn"
+            );
+
+        const notesBtn =
+            document.querySelector(
+                "#NotesBtn"
+            );
+
+        const friendsTab =
+            document.querySelector(
+                "#FriendsTab"
+            );
+
+        const toolsTab =
+            document.querySelector(
+                "#CommunitiesTab"
+            );
+
+        const notesTab =
+            document.querySelector(
+                "#NotesTab"
+            );
+
+
+        if (
+            !friendsBtn ||
+            !toolsBtn ||
+            !notesBtn ||
+            !friendsTab ||
+            !toolsTab ||
+            !notesTab
+        ) {
+            return;
+        }
+
+
+        friendsBtn.classList.remove(
+            "selected"
+        );
+
+        toolsBtn.classList.remove(
+            "selected"
+        );
+
+        notesBtn.classList.add(
+            "selected"
+        );
+
+
+        friendsTab.style.display =
+            "none";
+
+        toolsTab.style.display =
+            "none";
+
+        notesTab.style.display =
+            "block";
+
+
+        toolsTabSelected =
+            false;
+
+        notesTabSelected =
+            true;
+    }
+
 
     function showToolsTab() {
         const friendsBtn =
@@ -936,6 +1220,11 @@
                 "#CommunitiesBtn"
             );
 
+        const notesBtn =
+            document.querySelector(
+                "#NotesBtn"
+            );
+
         const friendsTab =
             document.querySelector(
                 "#FriendsTab"
@@ -944,6 +1233,11 @@
         const toolsTab =
             document.querySelector(
                 "#CommunitiesTab"
+            );
+
+        const notesTab =
+            document.querySelector(
+                "#NotesTab"
             );
 
 
@@ -961,6 +1255,12 @@
             "selected"
         );
 
+        if (notesBtn) {
+            notesBtn.classList.remove(
+                "selected"
+            );
+        }
+
         toolsBtn.classList.add(
             "selected"
         );
@@ -969,12 +1269,20 @@
         friendsTab.style.display =
             "none";
 
+        if (notesTab) {
+            notesTab.style.display =
+                "none";
+        }
+
         toolsTab.style.display =
             "block";
 
 
         toolsTabSelected =
             true;
+
+        notesTabSelected =
+            false;
 
 
         renderToolsList();
@@ -992,6 +1300,11 @@
                 "#CommunitiesBtn"
             );
 
+        const notesBtn =
+            document.querySelector(
+                "#NotesBtn"
+            );
+
         const friendsTab =
             document.querySelector(
                 "#FriendsTab"
@@ -1000,6 +1313,11 @@
         const toolsTab =
             document.querySelector(
                 "#CommunitiesTab"
+            );
+
+        const notesTab =
+            document.querySelector(
+                "#NotesTab"
             );
 
 
@@ -1017,6 +1335,12 @@
             "selected"
         );
 
+        if (notesBtn) {
+            notesBtn.classList.remove(
+                "selected"
+            );
+        }
+
         friendsBtn.classList.add(
             "selected"
         );
@@ -1025,11 +1349,19 @@
         toolsTab.style.display =
             "none";
 
+        if (notesTab) {
+            notesTab.style.display =
+                "none";
+        }
+
         friendsTab.style.display =
             "block";
 
 
         toolsTabSelected =
+            false;
+
+        notesTabSelected =
             false;
     }
 
@@ -1043,6 +1375,11 @@
         const toolsBtn =
             document.querySelector(
                 "#CommunitiesBtn"
+            );
+
+        const notesBtn =
+            document.querySelector(
+                "#NotesBtn"
             );
 
 
@@ -1080,6 +1417,32 @@
 
 
         if (
+            notesBtn &&
+            notesBtn.dataset
+                .ikToolsBound !==
+            "1"
+        ) {
+            notesBtn.dataset
+                .ikToolsBound =
+                "1";
+
+            notesBtn.addEventListener(
+                "click",
+
+                event => {
+                    event.preventDefault();
+
+                    event.stopImmediatePropagation();
+
+                    showNotesTab();
+                },
+
+                true
+            );
+        }
+
+
+        if (
             friendsBtn.dataset
                 .ikToolsBound !==
             "1"
@@ -1093,7 +1456,8 @@
 
                 event => {
                     if (
-                        !toolsTabSelected
+                        !toolsTabSelected &&
+                        !notesTabSelected
                     ) {
                         return;
                     }
@@ -1199,11 +1563,6 @@
                         "input"
                     );
 
-                /*
-                 * Normal button behavior.
-                 *
-                 * It only LOOKS like an Illyriad button.
-                 */
                 button.type =
                     "button";
 
@@ -1288,6 +1647,35 @@
 
 
         if (
+            !document.querySelector(
+                "#NotesBtn"
+            )
+        ) {
+            const notesBtn =
+                toolsBtn.cloneNode(
+                    true
+                );
+
+            notesBtn.id =
+                "NotesBtn";
+
+            notesBtn.textContent =
+                "Notes";
+
+            notesBtn.title =
+                "Notes";
+
+            notesBtn.classList.remove(
+                "selected"
+            );
+
+            toolsBtn.parentNode.appendChild(
+                notesBtn
+            );
+        }
+
+
+        if (
             toolsTab.dataset
                 .ikToolsOwned !==
                 "1" ||
@@ -1313,6 +1701,89 @@
         }
 
 
+        if (!document.querySelector("#NotesTab")) {
+            const notesTab = toolsTab.cloneNode(false);
+            notesTab.id = "NotesTab";
+            
+            // Build the LuperNotes structured UI
+            notesTab.innerHTML = `
+                <div id="ikNotesPanel">
+                    <div id="ikNotesHeader">
+                        <span id="cityNotesTitleLabel">City Notes</span>
+                    </div>
+                    <div id="ikNotesDisplay"></div>
+                    <textarea id="ikNotesTextarea" placeholder="Enter notes here..."></textarea>
+                    <div id="ikNotesFooter">
+                        <button id="ikNotesGlobalBtn" class="ik-notes-btn">Global</button>
+                        <button id="ikNotesEditBtn" class="ik-notes-btn">Edit</button>
+                    </div>
+                </div>
+            `;
+            notesTab.style.display = "none";
+            toolsTab.parentNode.appendChild(notesTab);
+
+            // Bind Elements
+            const display = notesTab.querySelector('#ikNotesDisplay');
+            const textarea = notesTab.querySelector('#ikNotesTextarea');
+            const globalBtn = notesTab.querySelector('#ikNotesGlobalBtn');
+            const editBtn = notesTab.querySelector('#ikNotesEditBtn');
+
+            // Initialize State
+            currentNotesTown = getActiveTownId();
+            textarea.value = localStorage.getItem(getNotesStorageKey()) || "";
+            updateNotesDisplay();
+
+            // Setup Edit Toggle
+            editBtn.addEventListener('click', () => {
+                const isEditing = textarea.style.display !== 'none';
+                const key = getNotesStorageKey();
+                if (isEditing) {
+                    localStorage.setItem(key, textarea.value);
+                    textarea.style.display = 'none';
+                    display.style.display = 'block';
+                    editBtn.textContent = 'Edit';
+                    updateNotesDisplay();
+                } else {
+                    textarea.value = localStorage.getItem(key) || "";
+                    display.style.display = 'none';
+                    textarea.style.display = 'block';
+                    editBtn.textContent = 'Done';
+                    applyCustomUITheme(textarea.value);
+                    textarea.focus();
+                }
+            });
+
+            // Setup Global Mode Toggle
+            globalBtn.addEventListener('click', () => {
+                if (textarea.style.display !== 'none') {
+                    localStorage.setItem(getNotesStorageKey(), textarea.value);
+                }
+                notesGlobalMode = !notesGlobalMode;
+                globalBtn.textContent = notesGlobalMode ? 'City' : 'Global';
+                
+                const key = getNotesStorageKey();
+                textarea.value = localStorage.getItem(key) || "";
+                updateNotesDisplay();
+                
+                const titleLabel = document.querySelector('#cityNotesTitleLabel');
+                if (titleLabel) {
+                    titleLabel.textContent = notesGlobalMode ? 'Global Notes' : ('City Notes (' + getActiveTownName() + ')');
+                }
+            });
+
+            // Auto-Save and UI Update on Type
+            textarea.addEventListener('input', event => {
+                localStorage.setItem(getNotesStorageKey(), event.target.value);
+                applyCustomUITheme(event.target.value);
+            });
+
+            // Start background sync for town switching
+            if (!notesSyncInterval) {
+                notesSyncInterval = setInterval(checkAndSyncTownNotes, 500);
+            }
+        }
+
+
         bindToolsTabs();
 
         renderToolsList();
@@ -1322,12 +1793,16 @@
             toolsTabSelected
         ) {
             showToolsTab();
+
+        } else if (
+            notesTabSelected
+        ) {
+            showNotesTab();
         }
 
 
         return true;
     }
-
 
     // =========================================================================
     // CORE STARTUP
