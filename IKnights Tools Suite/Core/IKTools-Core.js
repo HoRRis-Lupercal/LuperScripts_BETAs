@@ -918,78 +918,6 @@
                 font-style: italic;
                 padding-top: 15px;
             }
-
-            /* =============================================================
-               LUPERNOTES PANEL 
-               ============================================================= */
-               
-            #ikNotesPanel {
-                display: flex;
-                flex-direction: column;
-                width: 245px;
-                min-height: 250px;
-                box-sizing: border-box;
-                background: #89501c;
-                padding: 1px;
-                border: 1px solid #89501c;
-                border-radius: 2px;
-            }
-            #ikNotesHeader {
-                background: #d4b767;
-                color: #523307;
-                text-align: center;
-                font-weight: bold;
-                font-size: 10px;
-                padding: 2px;
-                margin-bottom: 1px;
-                flex-shrink: 0;
-            }
-            #ikNotesDisplay, #ikNotesTextarea {
-                flex: 1 1 auto;
-                background: #fef6dc;
-                color: #523307;
-                border: 1px solid #89501c;
-                padding: 4px;
-                font-family: monospace;
-                font-size: 10.5px;
-                line-height: 1.35;
-                box-sizing: border-box;
-                width: 100%;
-                overflow-y: auto;
-            }
-            #ikNotesDisplay {
-                white-space: pre-wrap;
-                word-break: break-word;
-            }
-            #ikNotesTextarea {
-                resize: none;
-                display: none;
-            }
-            #ikNotesFooter {
-                display: flex;
-                gap: 4px;
-                padding-top: 4px;
-                flex-shrink: 0;
-            }
-            
-            #ikNotesFooter .ik-game-button {
-                flex: 1 1 50% !important;
-                width: auto !important;
-                min-width: 0 !important;
-                max-width: none !important;
-                height: 22px !important;
-                min-height: 22px !important;
-                max-height: 22px !important;
-                margin: 0 !important;
-                line-height: 22px !important;
-                font-size: 10px !important;
-                padding: 0 !important;
-                cursor: pointer !important;
-            }
-            .ik-notes-btn:hover { filter: brightness(1.1); }
-            #ikNotesGlobalBtn { flex: 1; }
-            #ikNotesEditBtn { flex: 2; }
-
             /* =============================================================
                TAB LAYOUT (1/3 SPLIT)
                ============================================================= */
@@ -1015,7 +943,7 @@
             }
             #FriendsBtn { 
                 border-left: none !important; 
-                margin-left: 7px !important; /* Push inwards by 5px */
+                margin-left: 7px !important;
             }
 
             /* =============================================================
@@ -1024,8 +952,8 @@
                
             #FriendsTab, #NotesTab, #CommunitiesTab {
                 position: absolute !important;
-                top: 25px !important; /* Anchor exactly below the tabs */
-                bottom: 0 !important; /* Stretch to the bottom of the dock */
+                top: 25px !important; 
+                bottom: 0 !important; 
                 left: 0 !important;
                 right: 0 !important;
                 width: 100% !important;
@@ -1034,35 +962,28 @@
             }
 
             /* =============================================================
-               NOTES PANEL (LuperNotes Layout)
+               NOTES PANEL
                ============================================================= */
                
             #ikNotesPanel {
                 display: flex;
                 flex-direction: column;
-                width: calc(100% - 2px) !important; /* Prevents overflow */
-                margin-left: 2px !important; /* Shifts the panel right */
+                width: calc(100% - 2px) !important;
+                margin-left: 2px !important; 
+                height: 100%; /* Fixes the squashed panel */
                 box-sizing: border-box;
-                background: #89501c;
                 padding: 1px;
-                border: 1px solid #89501c;
-                border-radius: 2px;
             }
             #ikNotesHeader {
-                background: #d4b767;
-                color: #523307;
                 text-align: center;
                 font-weight: bold;
-                font-size: 10px;
-                padding: 2px;
-                margin-bottom: 1px;
+                font-size: 11px;
+                padding: 4px;
+                margin-bottom: 2px;
                 flex-shrink: 0;
             }
             #ikNotesDisplay, #ikNotesTextarea {
                 flex: 1 1 auto;
-                background: #fef6dc;
-                color: #523307;
-                border: 1px solid #89501c;
                 padding: 4px;
                 font-family: monospace;
                 font-size: 10.5px;
@@ -1070,6 +991,8 @@
                 box-sizing: border-box;
                 width: 100%;
                 overflow-y: auto;
+                background: transparent;
+                border: none;
             }
             #ikNotesDisplay {
                 white-space: pre-wrap;
@@ -1078,12 +1001,21 @@
             #ikNotesTextarea {
                 resize: none;
                 display: none;
+                border: 1px inset rgba(0,0,0,0.2);
             }
             #ikNotesFooter {
                 display: flex;
-                gap: 2px;
-                padding-top: 2px;
+                gap: 4px;
+                padding-top: 4px;
                 flex-shrink: 0;
+            }
+            #ikNotesFooter .ik-game-button {
+                flex: 1 1 50% !important;
+                width: auto !important;
+                min-width: 0 !important;
+                max-width: none !important;
+                margin: 0 !important;
+                /* Native heights maintained to prevent button sprite distortion */
             }
 
         `;
@@ -1163,26 +1095,31 @@
         processed = processed.replace(/&lt;\/fs(?:\([^)]+\))?&gt;/gi, '</span>');
         processed = processed.replace(/&lt;(\/?[bui])&gt;/gi, '<$1>');
         
-        let defaultTextColor = '#523307';
+        let defaultTextColor = '';
         const colorMatch = text.match(/!TextColour\(([^)]+)\)/i);
         if (colorMatch && colorMatch[1]) defaultTextColor = colorMatch[1].trim();
 
-        return `<span style="color: ${defaultTextColor};">${processed}</span>`;
+        if (defaultTextColor) {
+            return `<span style="color: ${defaultTextColor};">${processed}</span>`;
+        }
+        return `<span>${processed}</span>`;
     }
-    
+
     function applyCustomUITheme(text) {
-        const uiTextColor = (text.match(/!UITextColour\(([^)]+)\)/i) || [])[1] || '#523307';
-        const uiHeaderBg = (text.match(/!UIHeaderColour\(([^)]+)\)/i) || [])[1] || '#d4b767';
-        const uiBodyBg = (text.match(/!UIBodyColour\(([^)]+)\)/i) || [])[1] || '#fef6dc';
-        const uiBtnBg = (text.match(/!UIButtonColour\(([^)]+)\)/i) || [])[1] || '#caa84e';
-        const uiBorderColor = (text.match(/!UIBorderColour\(([^)]+)\)/i) || [])[1] || '#89501c';
+        const uiTextColor = (text.match(/!UITextColour\(([^)]+)\)/i) || [])[1] || '';
+        const uiHeaderBg = (text.match(/!UIHeaderColour\(([^)]+)\)/i) || [])[1] || '';
+        const uiBodyBg = (text.match(/!UIBodyColour\(([^)]+)\)/i) || [])[1] || '';
+        const uiBtnBg = (text.match(/!UIButtonColour\(([^)]+)\)/i) || [])[1] || '';
+        const uiBorderColor = (text.match(/!UIBorderColour\(([^)]+)\)/i) || [])[1] || '';
 
         const panel = document.querySelector('#ikNotesPanel');
         const header = document.querySelector('#ikNotesHeader');
         const title = document.querySelector('#cityNotesTitleLabel');
         const display = document.querySelector('#ikNotesDisplay');
         const textarea = document.querySelector('#ikNotesTextarea');
-        const buttons = document.querySelectorAll('.ik-notes-btn');
+        
+        // Ensure this specifically queries the footer buttons to avoid class mismatches
+        const buttons = document.querySelectorAll('#ikNotesFooter .ik-game-button');
 
         if(panel) { panel.style.backgroundColor = uiBorderColor; panel.style.borderColor = uiBorderColor; }
         if(header) { header.style.backgroundColor = uiHeaderBg; header.style.borderColor = uiBorderColor; }
@@ -1191,7 +1128,7 @@
         if(textarea) { 
             textarea.style.backgroundColor = uiBodyBg; 
             textarea.style.borderColor = uiBorderColor; 
-            textarea.style.color = (text.match(/!TextColour\(([^)]+)\)/i) || [])[1] || '#523307'; 
+            textarea.style.color = (text.match(/!TextColour\(([^)]+)\)/i) || [])[1] || ''; 
         }
         buttons.forEach(btn => {
             btn.style.backgroundColor = uiBtnBg;
