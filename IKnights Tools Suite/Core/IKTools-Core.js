@@ -920,7 +920,7 @@
             }
 
             /* =============================================================
-               NOTES PANEL (LuperNotes Layout)
+               LUPERNOTES PANEL 
                ============================================================= */
                
             #ikNotesPanel {
@@ -985,6 +985,21 @@
             .ik-notes-btn:hover { filter: brightness(1.1); }
             #ikNotesGlobalBtn { flex: 1; }
             #ikNotesEditBtn { flex: 2; }
+
+            /* =============================================================
+               TAB LAYOUT (1/3 SPLIT)
+               ============================================================= */
+            
+            #FriendsBtn, #NotesBtn, #CommunitiesBtn {
+                width: 33.33% !important;
+                float: left !important;
+                box-sizing: border-box !important;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                text-align: center !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
 
         `;
 
@@ -1669,9 +1684,7 @@
                 "selected"
             );
 
-            toolsBtn.parentNode.appendChild(
-                notesBtn
-            );
+            toolsBtn.parentNode.insertBefore(notesBtn, toolsBtn);
         }
 
 
