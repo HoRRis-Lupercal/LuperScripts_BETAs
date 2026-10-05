@@ -923,7 +923,7 @@
                ============================================================= */
             
             #FriendsBtn, #NotesBtn, #CommunitiesBtn {
-                width: 33.333% !important;
+                width: calc((100% - 10px) / 3) !important;
                 float: left !important;
                 box-sizing: border-box !important;
                 padding-left: 0 !important;
@@ -943,6 +943,10 @@
             }
             #FriendsBtn { 
                 border-left: none !important; 
+                margin-left: 7px !important;
+            }
+            #CommunitiesBtn {
+                margin-right: 7px !important;
             }
 
             /* =============================================================
@@ -976,19 +980,13 @@
             #ikNotesHeader {
                 text-align: center;
                 font-weight: bold;
-                font-family: inherit !important;
                 font-size: 11px;
                 padding: 4px;
                 margin-bottom: 2px;
                 flex-shrink: 0;
             }
-            
-            #cityNotesTitleLabel {
-                font-family: inherit !important;
-            }
-
             #cityNotesTitleLabel.selected {
-                background: transparent !important;
+                background: transparent !important; /* Prevents native tab backgrounds from appearing here */
                 border: none !important;
             }
             #ikNotesDisplay, #ikNotesTextarea {
@@ -1019,14 +1017,12 @@
                 flex-shrink: 0;
             }
             #ikNotesFooter .ik-game-button {
-                flex: 1 1 calc(50% - 2px) !important;
+                flex: 1 1 calc(50% - 2px) !important; /* Subtract half the gap to prevent overlap */
                 width: calc(50% - 2px) !important;
+                background-size: 100% 100% !important; /* Forces the native sprite to close on the right */
                 min-width: 0 !important;
                 max-width: none !important;
                 margin: 0 !important;
-                
-                /* Scales width to close right border while preserving sprite state height */
-                background-size: 100% auto !important; 
             }
 
         `;
