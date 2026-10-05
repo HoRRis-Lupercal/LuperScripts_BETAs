@@ -943,10 +943,10 @@
             }
             #FriendsBtn { 
                 border-left: none !important; 
-                margin-left: 6px !important; /* Pads inward from left border */
+                margin-left: 7px !important; /* Pads inward from left border */
             }
             #CommunitiesBtn {
-                margin-right: 6px !important; /* Pads inward from right border */
+                margin-right: 7px !important; /* Pads inward from right border */
             }
 
             /* =============================================================
@@ -980,7 +980,11 @@
             #ikNotesHeader {
                 text-align: center;
                 font-weight: bold;
-                font-size: 11px;
+                
+                /* Apply standard Illyriad header font */
+                font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+                font-size: 13px; /* Increased from 11px to match chat header scale */
+                
                 padding: 4px;
                 margin-bottom: 2px;
                 flex-shrink: 0;
@@ -1032,7 +1036,7 @@
                 box-sizing: border-box !important;
                 
                 /* Shrinks the entire footer so the 158px buttons fit naturally */
-                zoom: 0.75 !important;
+                zoom: 0.72 !important;
             }
             
             #ikNotesFooter .ik-game-button {
