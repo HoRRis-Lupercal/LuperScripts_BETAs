@@ -1021,28 +1021,30 @@
                 box-sizing: border-box !important;
             }
             
+            #ikNotesFooter {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                padding-top: 6px !important;
+                flex-shrink: 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                
+                /* Scaling the footer to 75% artificially widens its internal layout space to ~324px. 
+                   This allows two native 158px buttons (316px total) to sit side-by-side naturally,
+                   keeping their native sprite mappings perfectly intact. */
+                zoom: 0.75 !important;
+            }
+            
             #ikNotesFooter .ik-game-button {
-                flex: 0 0 calc(50% - 2px) !important; 
-                width: calc(50% - 2px) !important;
-                height: auto !important;
-                min-height: 0 !important;
-                max-height: none !important;
-                aspect-ratio: 158 / 35 !important;
-                min-width: 0 !important;
-                max-width: none !important;
-                margin: 0 !important;
-                display: block !important;
-                font-size: 11px !important;
-                
-                /* Scale to 300% to fit exactly one of the three states */
-                background-size: 100% 300% !important; 
-                
-                /* Default to the top state (Normal) */
-                background-position: 0 0 !important;
-                outline: none !important;
-                
-                /* Enforce text color via CSS variable to prevent the black flash */
+                /* Let the global .ik-game-button class enforce the native 158x35 dimensions. */
+                /* Preserve the CSS variable to prevent the black text flash. */
                 color: var(--ik-btn-color, #f1e6c3) !important;
+                outline: none !important;
+                margin: 0 !important;
+                
+                /* Clear previous overrides so native Illyriad CSS handles hover/active states */
+                background-size: auto !important;
             }
             
             #ikNotesFooter .ik-game-button:hover {
