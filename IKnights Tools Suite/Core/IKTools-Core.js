@@ -1026,19 +1026,14 @@
                 width: calc(50% - 2px) !important;
                 min-width: 0 !important;
                 max-width: none !important;
+                height: 30px !important;
+                min-height: 30px !important;
+                max-height: 30px !important;
                 margin: 0 !important;
                 display: block !important;
-                
-                /* Clear native OS button styling that can cause rendering conflicts */
-                -webkit-appearance: none !important;
-                appearance: none !important;
-                
-                /* Keep background at absolute native width so the vertical sprite states never squish */
-                background-size: var(--ik-native-button-width, 158px) auto !important; 
-                
-                /* Pin to top center so the first state is aligned, cropping the left/right edges perfectly */
-                background-position: center top !important;
+                background-size: 100% 200% !important; 
                 background-repeat: no-repeat !important;
+                background-position: center top !important;
             }
 
         `;
