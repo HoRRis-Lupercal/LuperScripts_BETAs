@@ -948,7 +948,7 @@
                 margin-left: 7px !important; /* Pads inward from left border */
             }
             #CommunitiesBtn {
-                margin-right: 5px !important; /* Pads inward from right border */
+                margin-right: 0px !important; /* Pads inward from right border */
             }
 
             /* =============================================================
@@ -1110,42 +1110,31 @@
         let linkRegex = /\[([^\]]+)\]\(([^)]+)\)(?:\{([^}]+)\})?|((?:https?:\/\/|www\.)[^\s<]+)/gi;
         
         let processed = escaped.replace(linkRegex, (match, label, mdUrl, hexColor, bareUrl) => {
-            let href = mdUrl ? mdUrl.trim() : bareUrl.trim();
-            let displayText = label || bareUrl;
-            
-            let finalColor = '#3479c6'; // default blue
-            if (hexColor) {
-                finalColor = hexColor.trim();
-                // Automatically prepend missing '#' for standard 3 or 6 character hex codes
-                if (/^[0-9A-Fa-f]{3}$\vert{}^[0-9A-Fa-f]{6}$/.test(finalColor)) {
-                    finalColor = '#' + finalColor;
+                    let href = mdUrl ? mdUrl.trim() : bareUrl.trim();
+                    let displayText = label || bareUrl;
+                    let finalColor = hexColor ? hexColor.trim() : '#3479c6';
+                    if (!href.startsWith('http') && !href.startsWith('/')) href = 'https://' + href;
+                    return `<a href="${href}" target="_top" style="color: ${finalColor}; text-decoration: underline;" onclick="event.stopPropagation();">${displayText}</a>`;
+                });
+                
+                processed = processed.replace(/&lt;fs\(([^)]+)\)&gt;/gi, (match, size) => {
+                    let cleanSize = size.trim().replace(/[^a-zA-Z0-9.%]/g, '');
+                    if (/^\d+(\.\d+)?$/.test(cleanSize)) cleanSize += 'px';
+                    return `<span style="font-size: ${cleanSize};">`;
+                });
+                
+                processed = processed.replace(/&lt;\/fs(?:\([^)]+\))?&gt;/gi, '</span>');
+                processed = processed.replace(/&lt;(\/?[bui])&gt;/gi, '<$1>');
+                
+                let defaultTextColor = '';
+                const colorMatch = text.match(/!TextColour\(([^)]+)\)/i);
+                if (colorMatch && colorMatch[1]) defaultTextColor = colorMatch[1].trim();
+        
+                if (defaultTextColor) {
+                    return `<span style="color: ${defaultTextColor};">${processed}</span>`;
                 }
+                return `<span>${processed}</span>`;
             }
-            
-            if (!href.startsWith('http') && !href.startsWith('/')) href = 'https://' + href;
-            
-            // Appends !important to guarantee the custom color renders
-            return `<a href="${href}" target="_top" style="color: ${finalColor} !important; text-decoration: underline;" onclick="event.stopPropagation();">${displayText}</a>`;
-        });
-        
-        processed = processed.replace(/&lt;fs\(([^)]+)\)&gt;/gi, (match, size) => {
-            let cleanSize = size.trim().replace(/[^a-zA-Z0-9.%]/g, '');
-            if (/^\d+(\.\d+)?$/.test(cleanSize)) cleanSize += 'px';
-            return `<span style="font-size: ${cleanSize};">`;
-        });
-        
-        processed = processed.replace(/&lt;\/fs(?:\([^)]+\))?&gt;/gi, '</span>');
-        processed = processed.replace(/&lt;(\/?[bui])&gt;/gi, '<$1>');
-        
-        let defaultTextColor = '';
-        const colorMatch = text.match(/!TextColour\(([^)]+)\)/i);
-        if (colorMatch && colorMatch[1]) defaultTextColor = colorMatch[1].trim();
-
-        if (defaultTextColor) {
-            return `<span style="color: ${defaultTextColor};">${processed}</span>`;
-        }
-        return `<span>${processed}</span>`;
-    }
 
     function applyCustomUITheme(text) {
         const uiTextColor = (text.match(/!UITextColour\(([^)]+)\)/i) || [])[1] || '';
