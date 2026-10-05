@@ -943,10 +943,10 @@
             }
             #FriendsBtn { 
                 border-left: none !important; 
-                margin-left: 7px !important;
+                margin-left: 5px !important; /* Pads inward from left border */
             }
             #CommunitiesBtn {
-                margin-right: 7px !important;
+                margin-right: 5px !important; /* Pads inward from right border */
             }
 
             /* =============================================================
@@ -1011,18 +1011,26 @@
                 border: 1px inset rgba(0,0,0,0.2);
             }
             #ikNotesFooter {
-                display: flex;
-                gap: 4px;
-                padding-top: 4px;
-                flex-shrink: 0;
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                gap: 4px !important;
+                padding-top: 4px !important;
+                flex-shrink: 0 !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
             }
+            
             #ikNotesFooter .ik-game-button {
-                flex: 1 1 calc(50% - 2px) !important; /* Subtract half the gap to prevent overlap */
+                flex: 0 0 calc(50% - 2px) !important; /* Forces strict half-width minus gap */
                 width: calc(50% - 2px) !important;
-                background-size: 100% 100% !important; /* Forces the native sprite to close on the right */
                 min-width: 0 !important;
                 max-width: none !important;
                 margin: 0 !important;
+                display: block !important;
+                
+                /* Scales width to close right border while preserving sprite state height */
+                background-size: 100% auto !important; 
             }
 
         `;
