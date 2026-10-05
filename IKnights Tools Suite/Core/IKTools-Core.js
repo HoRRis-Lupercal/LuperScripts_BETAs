@@ -923,7 +923,7 @@
                ============================================================= */
             
             #FriendsBtn, #NotesBtn, #CommunitiesBtn {
-                /* Adjusted to account for the 7px left and 7px right margins */
+                /* Adjusted to account for the 5px left and 5px right margins */
                 width: calc((100% - 14px) / 3) !important;
                 
                 float: left !important;
@@ -945,7 +945,7 @@
             }
             #FriendsBtn { 
                 border-left: none !important; 
-                margin-left: 5px !important; /* Pads inward from left border */
+                margin-left: 7px !important; /* Pads inward from left border */
             }
             #CommunitiesBtn {
                 margin-right: 5px !important; /* Pads inward from right border */
@@ -1112,9 +1112,20 @@
         let processed = escaped.replace(linkRegex, (match, label, mdUrl, hexColor, bareUrl) => {
             let href = mdUrl ? mdUrl.trim() : bareUrl.trim();
             let displayText = label || bareUrl;
-            let finalColor = hexColor ? hexColor.trim() : '#3479c6';
+            
+            let finalColor = '#3479c6'; // default blue
+            if (hexColor) {
+                finalColor = hexColor.trim();
+                // Automatically prepend missing '#' for standard 3 or 6 character hex codes
+                if (/^[0-9A-Fa-f]{3}$\vert{}^[0-9A-Fa-f]{6}$/.test(finalColor)) {
+                    finalColor = '#' + finalColor;
+                }
+            }
+            
             if (!href.startsWith('http') && !href.startsWith('/')) href = 'https://' + href;
-            return `<a href="${href}" target="_top" style="color: ${finalColor}; text-decoration: underline;" onclick="event.stopPropagation();">${displayText}</a>`;
+            
+            // Appends !important to guarantee the custom color renders
+            return `<a href="${href}" target="_top" style="color: ${finalColor} !important; text-decoration: underline;" onclick="event.stopPropagation();">${displayText}</a>`;
         });
         
         processed = processed.replace(/&lt;fs\(([^)]+)\)&gt;/gi, (match, size) => {
