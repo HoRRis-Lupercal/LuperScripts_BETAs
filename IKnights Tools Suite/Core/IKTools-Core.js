@@ -967,31 +967,35 @@
             }
             #ikNotesFooter {
                 display: flex;
-                gap: 2px;
-                padding-top: 2px;
+                gap: 4px;
+                padding-top: 4px;
                 flex-shrink: 0;
             }
-            .ik-notes-btn {
-                background: #caa84e;
-                color: #523307;
-                border: 1px solid #89501c;
-                border-radius: 2px;
-                padding: 3px 0;
-                font-size: 9px;
-                font-weight: bold;
-                cursor: pointer;
-                text-align: center;
+            
+            #ikNotesFooter .ik-game-button {
+                flex: 1 1 50% !important;
+                width: auto !important;
+                min-width: 0 !important;
+                max-width: none !important;
+                height: 22px !important;
+                min-height: 22px !important;
+                max-height: 22px !important;
+                margin: 0 !important;
+                line-height: normal !important;
+                font-size: 10px !important;
+                padding: 0 !important;
+                cursor: pointer !important;
             }
             .ik-notes-btn:hover { filter: brightness(1.1); }
             #ikNotesGlobalBtn { flex: 1; }
             #ikNotesEditBtn { flex: 2; }
 
-/* =============================================================
+            /* =============================================================
                TAB LAYOUT (1/3 SPLIT)
                ============================================================= */
             
             #FriendsBtn, #NotesBtn, #CommunitiesBtn {
-                width: 33.33% !important;
+                width: calc((100% - 10px) / 3) !important;
                 float: left !important;
                 box-sizing: border-box !important;
                 padding-left: 0 !important;
@@ -1006,11 +1010,13 @@
                 margin: 0 !important;
                 display: block !important;
                 
-                /* Prevent native borders from pushing width past 100% */
                 border-left: 1px solid #c9a471 !important;
                 border-right: none !important;
             }
-            #FriendsBtn { border-left: none !important; }
+            #FriendsBtn { 
+                border-left: none !important; 
+                margin-left: 5px !important; /* Push inwards by 5px */
+            }
 
             /* =============================================================
                TAB PANELS (FULL HEIGHT FIX)
@@ -1806,8 +1812,8 @@
                     <div id="ikNotesDisplay"></div>
                     <textarea id="ikNotesTextarea" placeholder="Enter notes here..."></textarea>
                     <div id="ikNotesFooter">
-                        <button id="ikNotesGlobalBtn" class="ik-notes-btn">Global</button>
-                        <button id="ikNotesEditBtn" class="ik-notes-btn">Edit</button>
+                        <input type="button" id="ikNotesGlobalBtn" class="ik-game-button" value="Global" />
+                        <input type="button" id="ikNotesEditBtn" class="ik-game-button" value="Edit" />
                     </div>
                 </div>
             `;
@@ -1833,13 +1839,13 @@
                     localStorage.setItem(key, textarea.value);
                     textarea.style.display = 'none';
                     display.style.display = 'block';
-                    editBtn.textContent = 'Edit';
+                    editBtn.value = 'Edit';
                     updateNotesDisplay();
                 } else {
                     textarea.value = localStorage.getItem(key) || "";
                     display.style.display = 'none';
                     textarea.style.display = 'block';
-                    editBtn.textContent = 'Done';
+                    editBtn.value = 'Done';
                     applyCustomUITheme(textarea.value);
                     textarea.focus();
                 }
@@ -1851,7 +1857,7 @@
                     localStorage.setItem(getNotesStorageKey(), textarea.value);
                 }
                 notesGlobalMode = !notesGlobalMode;
-                globalBtn.textContent = notesGlobalMode ? 'City' : 'Global';
+                globalBtn.value = notesGlobalMode ? 'City' : 'Global';
                 
                 const key = getNotesStorageKey();
                 textarea.value = localStorage.getItem(key) || "";
