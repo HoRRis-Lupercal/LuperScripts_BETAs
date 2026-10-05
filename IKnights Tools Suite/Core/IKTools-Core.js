@@ -999,6 +999,13 @@
                 text-align: center !important;
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
+                
+                /* Override native Illyriad positioning */
+                position: relative !important;
+                left: auto !important;
+                right: auto !important;
+                margin: 0 !important;
+                display: block !important;
             }
 
         `;
