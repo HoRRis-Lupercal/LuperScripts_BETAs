@@ -949,10 +949,10 @@
             }
             #FriendsBtn { 
                 border-left: none !important; 
-                margin-left: 6px !important; /* Pads inward from left border */
+                margin-left: 5px !important; /* Pads inward from left border */
             }
             #CommunitiesBtn {
-                margin-right: 6px !important; /* Pads inward from right border */
+                margin-right: 5px !important; /* Pads inward from right border */
             }
 
             /* =============================================================
