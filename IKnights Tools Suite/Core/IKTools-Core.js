@@ -943,10 +943,10 @@
             }
             #FriendsBtn { 
                 border-left: none !important; 
-                margin-left: 5px !important; /* Pads inward from left border */
+                margin-left: 6px !important; /* Pads inward from left border */
             }
             #CommunitiesBtn {
-                margin-right: 5px !important; /* Pads inward from right border */
+                margin-right: 6px !important; /* Pads inward from right border */
             }
 
             /* =============================================================
@@ -1025,36 +1025,22 @@
                 display: flex !important;
                 flex-direction: row !important;
                 justify-content: space-between !important;
+                gap: 4px !important;
                 padding-top: 6px !important;
                 flex-shrink: 0 !important;
                 width: 100% !important;
                 box-sizing: border-box !important;
                 
-                /* Scaling the footer to 75% artificially widens its internal layout space to ~324px. 
-                   This allows two native 158px buttons (316px total) to sit side-by-side naturally,
-                   keeping their native sprite mappings perfectly intact. */
+                /* Shrinks the entire footer so the 158px buttons fit naturally */
                 zoom: 0.75 !important;
             }
             
             #ikNotesFooter .ik-game-button {
-                /* Let the global .ik-game-button class enforce the native 158x35 dimensions. */
-                /* Preserve the CSS variable to prevent the black text flash. */
+                /* Prevents the black text flash mid-click */
                 color: var(--ik-btn-color, #f1e6c3) !important;
                 outline: none !important;
                 margin: 0 !important;
-                
-                /* Clear previous overrides so native Illyriad CSS handles hover/active states */
-                background-size: auto !important;
-            }
-            
-            #ikNotesFooter .ik-game-button:hover {
-                /* Shift exactly to the middle state (Hover) */
-                background-position: 0 50% !important;
-            }
-            
-            #ikNotesFooter .ik-game-button:active {
-                /* Shift exactly to the bottom state (Active) */
-                background-position: 0 100% !important;
+                background-size: auto !important; 
             }
 
         `;
