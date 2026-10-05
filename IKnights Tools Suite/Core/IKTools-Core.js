@@ -981,7 +981,7 @@
                 min-height: 22px !important;
                 max-height: 22px !important;
                 margin: 0 !important;
-                line-height: normal !important;
+                line-height: 22px !important;
                 font-size: 10px !important;
                 padding: 0 !important;
                 cursor: pointer !important;
@@ -1015,7 +1015,7 @@
             }
             #FriendsBtn { 
                 border-left: none !important; 
-                margin-left: 5px !important; /* Push inwards by 5px */
+                margin-left: 7px !important; /* Push inwards by 5px */
             }
 
             /* =============================================================
@@ -1040,8 +1040,8 @@
             #ikNotesPanel {
                 display: flex;
                 flex-direction: column;
-                width: 100%;
-                height: 100%;
+                width: calc(100% - 2px) !important; /* Prevents overflow */
+                margin-left: 2px !important; /* Shifts the panel right */
                 box-sizing: border-box;
                 background: #89501c;
                 padding: 1px;
