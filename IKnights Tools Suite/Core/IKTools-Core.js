@@ -639,7 +639,13 @@
             getComputedStyle(
                 sample
             );
-
+        
+        document.documentElement
+            .style
+            .setProperty(
+                "--ik-native-btn-bg",
+                computed.backgroundImage
+            );
 
         const measuredWidth =
             rect.width ||
@@ -1021,19 +1027,31 @@
                 box-sizing: border-box !important;
             }
             
-            #ikNotesFooter .ik-game-button {
+                #ikNotesFooter .ik-game-button {
                 flex: 0 0 calc(50% - 2px) !important; 
                 width: calc(50% - 2px) !important;
                 min-width: 0 !important;
                 max-width: none !important;
-                height: 30px !important;
-                min-height: 30px !important;
-                max-height: 30px !important;
+                height: 28px !important;
+                min-height: 28px !important;
+                max-height: 28px !important;
                 margin: 0 !important;
-                display: block !important;
-                background-size: 100% 200% !important; 
-                background-repeat: no-repeat !important;
-                background-position: center top !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                
+                /* Uses Illyriad's native button image while preserving side borders via 9-slice border-image */
+                border-image-source: var(--ik-native-btn-bg) !important;
+                border-image-slice: 2 25 33 25 fill !important;
+                border-image-width: 2px 25px 2px 25px !important;
+                border-image-repeat: stretch !important;
+                
+                background: transparent !important;
+                color: #ffffff !important;
+                font-size: 11px !important;
+                font-weight: bold !important;
+                padding: 0 !important;
+                text-shadow: 1px 1px 1px rgba(0,0,0,0.8) !important;
             }
 
         `;
