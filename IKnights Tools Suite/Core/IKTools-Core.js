@@ -943,10 +943,10 @@
             }
             #FriendsBtn { 
                 border-left: none !important; 
-                margin-left: 7px !important; /* Pads inward from left border */
+                margin-left: 6px !important; /* Pads inward from left border */
             }
             #CommunitiesBtn {
-                margin-right: 7px !important; /* Pads inward from right border */
+                margin-right: 6px !important; /* Pads inward from right border */
             }
 
             /* =============================================================
@@ -1041,7 +1041,7 @@
             
             #ikNotesFooter .ik-game-button {
                 /* Prevents the black text flash mid-click */
-                color: var(--ik-btn-color, #f1e6c3) !important;
+                color: var(--ik-btn-color, #fff5d6) !important;
                 outline: none !important;
                 margin: 0 !important;
                 background-size: auto !important; 
