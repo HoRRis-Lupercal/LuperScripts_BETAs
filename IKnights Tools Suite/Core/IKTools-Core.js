@@ -923,7 +923,9 @@
                ============================================================= */
             
             #FriendsBtn, #NotesBtn, #CommunitiesBtn {
-                width: calc((100% - 10px) / 3) !important;
+                /* Adjusted to account for the 7px left and 7px right margins */
+                width: calc((100% - 14px) / 3) !important;
+                
                 float: left !important;
                 box-sizing: border-box !important;
                 padding-left: 0 !important;
