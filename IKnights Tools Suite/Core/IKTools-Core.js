@@ -1024,13 +1024,32 @@
             #ikNotesFooter .ik-game-button {
                 flex: 0 0 calc(50% - 2px) !important; 
                 width: calc(50% - 2px) !important;
+                
+                /* Override the global 35px fixed height to enable proportional scaling */
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                
+                /* Lock the aspect ratio to the native button proportions */
+                aspect-ratio: 158 / 35 !important;
+                
                 min-width: 0 !important;
                 max-width: none !important;
                 margin: 0 !important;
                 display: block !important;
                 
-                /* Forces width to close right border (100%), and scales the 2-state sprite to double height (200%) so only one state shows */
+                /* Scale the text down slightly to fit the new size naturally */
+                font-size: 11px !important;
+                
+                /* Force background to scale perfectly and lock normal state */
                 background-size: 100% 200% !important; 
+                background-position: 0 0 !important;
+                outline: none !important;
+            }
+            
+            /* Strictly isolate the active state and map the sprite using scalable percentages */
+            #ikNotesFooter .ik-game-button:active {
+                background-position: 0 100% !important;
             }
 
         `;
