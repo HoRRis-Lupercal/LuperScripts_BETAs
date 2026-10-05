@@ -896,7 +896,7 @@
                ============================================================= */
 
             #ikToolsPanel {
-                width: 245px;
+                width: calc(100% - 2px) !important;
                 box-sizing: border-box;
                 padding: 6px;
             }
@@ -945,6 +945,9 @@
                 border-left: none !important; 
                 margin-left: 7px !important;
             }
+            #CommunitiesBtn {
+                margin-right: 7px !important;
+            }
 
             /* =============================================================
                TAB PANELS (FULL HEIGHT FIX)
@@ -982,6 +985,10 @@
                 margin-bottom: 2px;
                 flex-shrink: 0;
             }
+            #cityNotesTitleLabel.selected {
+                background: transparent !important; /* Prevents native tab backgrounds from appearing here */
+                border: none !important;
+            }
             #ikNotesDisplay, #ikNotesTextarea {
                 flex: 1 1 auto;
                 padding: 4px;
@@ -1010,12 +1017,12 @@
                 flex-shrink: 0;
             }
             #ikNotesFooter .ik-game-button {
-                flex: 1 1 50% !important;
-                width: auto !important;
+                flex: 1 1 calc(50% - 2px) !important; /* Subtract half the gap to prevent overlap */
+                width: calc(50% - 2px) !important;
+                background-size: 100% 100% !important; /* Forces the native sprite to close on the right */
                 min-width: 0 !important;
                 max-width: none !important;
                 margin: 0 !important;
-                /* Native heights maintained to prevent button sprite distortion */
             }
 
         `;
@@ -1740,11 +1747,11 @@
             const notesTab = toolsTab.cloneNode(false);
             notesTab.id = "NotesTab";
             
-            // Build the LuperNotes structured UI
+        // Build the LuperNotes structured UI
             notesTab.innerHTML = `
                 <div id="ikNotesPanel">
                     <div id="ikNotesHeader">
-                        <span id="cityNotesTitleLabel">City Notes</span>
+                        <span id="cityNotesTitleLabel" class="selected">City Notes</span>
                     </div>
                     <div id="ikNotesDisplay"></div>
                     <textarea id="ikNotesTextarea" placeholder="Enter notes here..."></textarea>
