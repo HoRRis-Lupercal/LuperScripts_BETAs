@@ -1024,31 +1024,34 @@
             #ikNotesFooter .ik-game-button {
                 flex: 0 0 calc(50% - 2px) !important; 
                 width: calc(50% - 2px) !important;
-                
-                /* Override the global 35px fixed height to enable proportional scaling */
                 height: auto !important;
                 min-height: 0 !important;
                 max-height: none !important;
-                
-                /* Lock the aspect ratio to the native button proportions */
                 aspect-ratio: 158 / 35 !important;
-                
                 min-width: 0 !important;
                 max-width: none !important;
                 margin: 0 !important;
                 display: block !important;
-                
-                /* Scale the text down slightly to fit the new size naturally */
                 font-size: 11px !important;
                 
-                /* Force background to scale perfectly and lock normal state */
-                background-size: 100% 200% !important; 
+                /* Scale to 300% to fit exactly one of the three states */
+                background-size: 100% 300% !important; 
+                
+                /* Default to the top state (Normal) */
                 background-position: 0 0 !important;
                 outline: none !important;
+                
+                /* Enforce text color via CSS variable to prevent the black flash */
+                color: var(--ik-btn-color, #f1e6c3) !important;
             }
             
-            /* Strictly isolate the active state and map the sprite using scalable percentages */
+            #ikNotesFooter .ik-game-button:hover {
+                /* Shift exactly to the middle state (Hover) */
+                background-position: 0 50% !important;
+            }
+            
             #ikNotesFooter .ik-game-button:active {
+                /* Shift exactly to the bottom state (Active) */
                 background-position: 0 100% !important;
             }
 
@@ -1166,8 +1169,14 @@
         }
         buttons.forEach(btn => {
             btn.style.backgroundColor = uiBtnBg;
-            btn.style.color = uiTextColor;
             btn.style.borderColor = uiBorderColor;
+            
+            // Pass the text color to the CSS variable to stop the 1-frame flash
+            if (uiTextColor) {
+                btn.style.setProperty('--ik-btn-color', uiTextColor);
+            } else {
+                btn.style.removeProperty('--ik-btn-color');
+            }
         });
     }
 
