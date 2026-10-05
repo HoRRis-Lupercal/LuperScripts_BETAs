@@ -1807,7 +1807,7 @@
 
             // Setup Edit Toggle
             editBtn.addEventListener('click', () => {
-                const isEditing = textarea.style.display !== 'none';
+                const isEditing = textarea.style.display === 'block';
                 const key = getNotesStorageKey();
                 if (isEditing) {
                     localStorage.setItem(key, textarea.value);
