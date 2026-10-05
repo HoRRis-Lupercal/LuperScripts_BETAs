@@ -949,10 +949,10 @@
             }
             #FriendsBtn { 
                 border-left: none !important; 
-                margin-left: 7px !important; /* Pads inward from left border */
+                margin-left: 6px !important; /* Pads inward from left border */
             }
             #CommunitiesBtn {
-                margin-right: 7px !important; /* Pads inward from right border */
+                margin-right: 6px !important; /* Pads inward from right border */
             }
 
             /* =============================================================
@@ -1027,7 +1027,7 @@
                 box-sizing: border-box !important;
             }
             
-                #ikNotesFooter .ik-game-button {
+            #ikNotesFooter .ik-game-button {
                 flex: 0 0 calc(50% - 2px) !important; 
                 width: calc(50% - 2px) !important;
                 min-width: 0 !important;
@@ -1039,14 +1039,16 @@
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
+                overflow: hidden !important;
                 
-                /* Uses Illyriad's native button image while preserving side borders via 9-slice border-image */
-                border-image-source: var(--ik-native-btn-bg) !important;
-                border-image-slice: 2 25 33 25 fill !important;
-                border-image-width: 2px 25px 2px 25px !important;
-                border-image-repeat: stretch !important;
+                /* Uses Illyriad's native sprite sheet without squishing side borders */
+                background-image: var(--ik-native-btn-bg) !important;
+                background-size: auto 200% !important;
+                background-position: center top !important;
+                background-repeat: no-repeat !important;
                 
-                background: transparent !important;
+                border: none !important;
+                background-color: transparent !important;
                 color: #ffffff !important;
                 font-size: 11px !important;
                 font-weight: bold !important;
