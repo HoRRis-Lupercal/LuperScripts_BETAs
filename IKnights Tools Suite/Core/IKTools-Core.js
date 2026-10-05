@@ -1022,15 +1022,15 @@
             }
             
             #ikNotesFooter .ik-game-button {
-                flex: 0 0 calc(50% - 2px) !important; /* Forces strict half-width minus gap */
+                flex: 0 0 calc(50% - 2px) !important; 
                 width: calc(50% - 2px) !important;
                 min-width: 0 !important;
                 max-width: none !important;
                 margin: 0 !important;
                 display: block !important;
                 
-                /* Scales width to close right border while preserving sprite state height */
-                background-size: 100% auto !important; 
+                /* Forces width to close right border (100%), and scales the 2-state sprite to double height (200%) so only one state shows */
+                background-size: 100% 200% !important; 
             }
 
         `;
