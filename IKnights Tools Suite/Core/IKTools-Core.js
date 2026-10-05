@@ -943,10 +943,10 @@
             }
             #FriendsBtn { 
                 border-left: none !important; 
-                margin-left: 5px !important; /* Pads inward from left border */
+                margin-left: 7px !important; /* Pads inward from left border */
             }
             #CommunitiesBtn {
-                margin-right: 5px !important; /* Pads inward from right border */
+                margin-right: 7px !important; /* Pads inward from right border */
             }
 
             /* =============================================================
@@ -1029,8 +1029,16 @@
                 margin: 0 !important;
                 display: block !important;
                 
-                /* Forces width to close right border (100%), and scales the 2-state sprite to double height (200%) so only one state shows */
-                background-size: 100% 200% !important; 
+                /* Clear native OS button styling that can cause rendering conflicts */
+                -webkit-appearance: none !important;
+                appearance: none !important;
+                
+                /* Keep background at absolute native width so the vertical sprite states never squish */
+                background-size: var(--ik-native-button-width, 158px) auto !important; 
+                
+                /* Pin to top center so the first state is aligned, cropping the left/right edges perfectly */
+                background-position: center top !important;
+                background-repeat: no-repeat !important;
             }
 
         `;
