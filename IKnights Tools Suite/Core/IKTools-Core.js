@@ -986,7 +986,7 @@
             #ikNotesGlobalBtn { flex: 1; }
             #ikNotesEditBtn { flex: 2; }
 
-            /* =============================================================
+/* =============================================================
                TAB LAYOUT (1/3 SPLIT)
                ============================================================= */
             
@@ -1000,12 +1000,84 @@
                 overflow: hidden !important;
                 text-overflow: ellipsis !important;
                 
-                /* Override native Illyriad positioning */
                 position: relative !important;
                 left: auto !important;
                 right: auto !important;
                 margin: 0 !important;
                 display: block !important;
+                
+                /* Prevent native borders from pushing width past 100% */
+                border-left: 1px solid #c9a471 !important;
+                border-right: none !important;
+            }
+            #FriendsBtn { border-left: none !important; }
+
+            /* =============================================================
+               TAB PANELS (FULL HEIGHT FIX)
+               ============================================================= */
+               
+            #FriendsTab, #NotesTab, #CommunitiesTab {
+                position: absolute !important;
+                top: 25px !important; /* Anchor exactly below the tabs */
+                bottom: 0 !important; /* Stretch to the bottom of the dock */
+                left: 0 !important;
+                right: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+                overflow-x: hidden !important;
+            }
+
+            /* =============================================================
+               NOTES PANEL (LuperNotes Layout)
+               ============================================================= */
+               
+            #ikNotesPanel {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                background: #89501c;
+                padding: 1px;
+                border: 1px solid #89501c;
+                border-radius: 2px;
+            }
+            #ikNotesHeader {
+                background: #d4b767;
+                color: #523307;
+                text-align: center;
+                font-weight: bold;
+                font-size: 10px;
+                padding: 2px;
+                margin-bottom: 1px;
+                flex-shrink: 0;
+            }
+            #ikNotesDisplay, #ikNotesTextarea {
+                flex: 1 1 auto;
+                background: #fef6dc;
+                color: #523307;
+                border: 1px solid #89501c;
+                padding: 4px;
+                font-family: monospace;
+                font-size: 10.5px;
+                line-height: 1.35;
+                box-sizing: border-box;
+                width: 100%;
+                overflow-y: auto;
+            }
+            #ikNotesDisplay {
+                white-space: pre-wrap;
+                word-break: break-word;
+            }
+            #ikNotesTextarea {
+                resize: none;
+                display: none;
+            }
+            #ikNotesFooter {
+                display: flex;
+                gap: 2px;
+                padding-top: 2px;
+                flex-shrink: 0;
             }
 
         `;
