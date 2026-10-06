@@ -128,9 +128,9 @@
             /* Dialog Title Bar Tabs */
             .ikcat-dialog-tabs {
                 float: left;
-                margin: 0.2em 16px 0.1em 0;
+                margin: 2px 16px 0 8px; /* Added 8px left margin to fix clipping */
                 display: flex;
-                gap: 16px;
+                gap: 8px; 
             }
 
             .ikcat-dialog-tab {
@@ -138,8 +138,10 @@
                 color: #4a3311;
                 font-size: 13px;
                 font-weight: normal;
+                padding: 3px 8px; /* Added padding for the background shape */
+                border-radius: 3px;
                 opacity: 0.7;
-                transition: opacity 0.2s, color 0.2s;
+                transition: opacity 0.2s, color 0.2s, background-color 0.2s;
             }
 
             .ikcat-dialog-tab:hover {
@@ -149,17 +151,18 @@
 
             .ikcat-dialog-tab.active {
                 opacity: 1;
-                color: #b22222; /* Matches default Illyriad title red */
+                color: #b22222;
+                background-color: #ebd3a5; /* Tan background to match chat headers */
                 font-weight: bold;
             }
 
-            #ikCatalogue .ikcat-main {
-                display: flex;
-                flex-direction: column;
-                flex: 1;
-                overflow: hidden;
-                padding: 6px;
-                box-sizing: border-box;
+            /* Core Dialog Flex Layout - Fixed for jQuery UI Resizing */
+            #ikCatalogue {
+                box-sizing: border-box !important;
+                display: flex !important; /* Force flex directly on the dialog wrapper */
+                flex-direction: column !important;
+                overflow: hidden !important;
+                padding: 8px !important;
             }
 
             #ikCatalogue .ikcat-controls {
@@ -167,7 +170,7 @@
                 gap: 8px;
                 margin-bottom: 8px;
                 align-items: center;
-                flex-shrink: 0;
+                flex-shrink: 0; /* Prevents controls from collapsing */
             }
 
             #ikCatalogue #ikCatSearch {
@@ -184,7 +187,8 @@
             }
 
             #ikCatalogue .ikcat-grid-container {
-                flex: 1 1 auto;
+                flex: 1 1 0px !important; /* Critical fix: forces dynamic scale filling during resize */
+                min-height: 0 !important; /* Critical fix: prevents permanent shrinkage */
                 overflow-y: auto;
                 border: 1px inset rgba(0, 0, 0, 0.25);
                 background: rgba(0, 0, 0, 0.05);
@@ -388,19 +392,18 @@ function createCatalogueContents() {
 
         const content = document.createElement("div");
         content.id = "ikCatalogue";
+        
         content.innerHTML = `
-            <div class="ikcat-main">
-                <div class="ikcat-controls">
-                    <input type="text" id="ikCatSearch" placeholder="Search gear or ID..." autocomplete="off" />
-                    <select id="ikCatTypeSelect"></select>
-                </div>
-                <div class="ikcat-grid-container">
-                    <div id="ikCatGrid" class="ikcat-grid"></div>
-                </div>
-                <div class="ikcat-footer">
-                    <div id="ikCatStatus" class="ikcat-status"></div>
-                    <div id="ikCatCount" class="ikcat-count"></div>
-                </div>
+            <div class="ikcat-controls">
+                <input type="text" id="ikCatSearch" placeholder="Search gear or ID..." autocomplete="off" />
+                <select id="ikCatTypeSelect"></select>
+            </div>
+            <div class="ikcat-grid-container">
+                <div id="ikCatGrid" class="ikcat-grid"></div>
+            </div>
+            <div class="ikcat-footer">
+                <div id="ikCatStatus" class="ikcat-status"></div>
+                <div id="ikCatCount" class="ikcat-count"></div>
             </div>
         `;
 
