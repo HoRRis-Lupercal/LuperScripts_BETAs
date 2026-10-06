@@ -363,7 +363,7 @@
 
             .ikcat-dialog-tab.active {
                 opacity: 1;
-                color: #e5dac1 !important;
+                opacity: 0.85;
                 background-color: #e5dac1 !important; /* Illyriad light container background */
                 font-weight: bold;
             }
