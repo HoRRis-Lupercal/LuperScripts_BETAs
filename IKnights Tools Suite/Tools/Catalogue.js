@@ -1,6 +1,3 @@
-Here is the updated script (Catalogue(5).js) with the requested changes integrated.
-JavaScript
-
 /*
  * Illyriad Tools Suite - LuperCat
  * Copyright (c) 2026 HoRRis Lupercal
