@@ -543,10 +543,15 @@
             // Check if tooltip is currently visible, we have an active item, and our button isn't there
             if (wz && wz.style.visibility === "visible" && activeTooltipItem && !document.getElementById("ikCatCopyBtn")) {
                 const popupBody = document.getElementById("WzBoDyI");
-                
+
                 if (popupBody) {
+                    // Target the parchment middle section so the button sits inside the scroll graphic
+                    const middleSection = popupBody.querySelector(".m");
+                    const targetContainer = middleSection || popupBody;
+
                     const btnContainer = document.createElement("div");
-                    btnContainer.style.cssText = "text-align: center; margin-top: 10px; padding: 6px; border-top: 1px solid rgba(139, 90, 43, 0.3); background: rgba(0,0,0,0.05);";
+                    // Removed the background color so it blends with the parchment texture
+                    btnContainer.style.cssText = "text-align: center; margin-top: 10px; padding: 6px; border-top: 1px solid rgba(139, 90, 43, 0.3);";
                     
                     const btn = document.createElement("button");
                     btn.id = "ikCatCopyBtn";
@@ -587,8 +592,11 @@
                     });
 
                     btnContainer.appendChild(btn);
-                    popupBody.appendChild(btnContainer);
+                    
+                    // Append to the middle section instead of the outer body
+                    targetContainer.appendChild(btnContainer);
                 }
+
             }
         });
 
