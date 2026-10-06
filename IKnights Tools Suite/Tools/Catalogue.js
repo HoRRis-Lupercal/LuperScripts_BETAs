@@ -308,6 +308,8 @@
                     }
                 }
             });
+            grid.appendChild(card);
+        });
 
         if (countDisplay) {
             countDisplay.textContent = `Showing ${filtered.length} / ${GEAR_DATA.length}`;
