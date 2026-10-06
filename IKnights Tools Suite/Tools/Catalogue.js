@@ -290,6 +290,7 @@
     let statusClearTimer = null;
     let catalogueInitialized = false;
     let resizeBound = false;
+    let activeTooltipItem = null;
 
 
     // =========================================================================
@@ -475,10 +476,11 @@
 
         filtered.forEach(item => {
             const sheetInfo = SPRITE_SHEETS[item.spriteSheet] || SPRITE_SHEETS.default;
+            const numId = item.id.match(/\d+/)[0];
 
             const card = document.createElement("div");
             card.className = "ikcat-card";
-            card.title = `${item.name} (${item.type})\nTag: ${item.id}\nClick to copy tag`;
+            card.title = `${item.name} (${item.type})\nClick to view details & copy`;
 
             const icon = document.createElement("div");
             icon.className = "ikcat-icon";
@@ -487,8 +489,27 @@
 
             card.appendChild(icon);
 
-            card.addEventListener("click", () => {
-                handleItemClick(item);
+            // Handle the click logic to make the tooltip sticky
+            card.addEventListener("click", (e) => {
+                e.stopPropagation(); // Prevent the document click listener from instantly closing it
+                
+                closeActiveTooltip(); // Close any currently open tooltip
+                
+                activeTooltipItem = item;
+                
+                // Momentarily disguise the card as a native jTip element
+                card.id = "item_" + numId;
+                card.classList.add("jTip");
+                card.removeAttribute("title"); // Remove title so it doesn't overlap the game tooltip
+                
+                if (typeof window.JT_init === "function") window.JT_init();
+                
+                if (window.jQuery) {
+                    const $card = window.jQuery(card);$card.trigger("mouseenter"); // Force the game engine to open it
+                    
+                    // Unbind jTip's auto-close feature so it doesn't vanish when moving to click the button
+                    setTimeout(() => $card.off("mouseleave"), 10);
+                }
             });
 
             grid.appendChild(card);
@@ -498,7 +519,7 @@
             countDisplay.textContent = `Showing ${filtered.length} / ${GEAR_DATA.length}`;
         }
     }
-
+    
     async function handleItemClick(item) {
         try {
             await navigator.clipboard.writeText(item.id);
@@ -709,6 +730,107 @@
         renderCatalogueGrid();
     }
 
+    // =========================================================================
+    // CUSTOM TOOLTIPs
+    // =========================================================================
+
+    function injectCopyButtonIntoTooltip() {
+        // Prevent duplicate observers
+        if (document.getElementById("ikTooltipObserver")) return;
+        const marker = document.createElement("div");
+        marker.id = "ikTooltipObserver";
+        document.body.appendChild(marker);
+
+        // Watch the DOM for the game's jTip tooltip (#JT) appearing
+        const observer = new MutationObserver(() => {
+            const jt = document.getElementById("JT");
+            
+            // If the tooltip is open, triggered by our script, and doesn't have a button yet
+            if (jt && activeTooltipItem && !document.getElementById("ikCatCopyBtn")) {
+                // Ensure the game's AJAX has finished populating the tooltip text
+                if (jt.textContent.length > 20) {
+                    const btnContainer = document.createElement("div");
+                    btnContainer.style.cssText = "text-align: center; margin-top: 10px; padding: 6px; border-top: 1px solid rgba(139, 90, 43, 0.3); background: rgba(0,0,0,0.05);";
+                    
+                    const btn = document.createElement("button");
+                    btn.id = "ikCatCopyBtn";
+                    btn.textContent = `Copy ${activeTooltipItem.id}`;
+                    
+                    // Match Illyriad's default button aesthetic
+                    btn.style.cssText = `
+                        background-color: #f5eedb;
+                        border: 1px solid #8b5a2b;
+                        border-radius: 4px;
+                        color: #333;
+                        padding: 4px 12px;
+                        font-size: 12px;
+                        font-weight: bold;
+                        cursor: pointer;
+                        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+                    `;
+                    
+                    btn.addEventListener("mouseover", () => btn.style.backgroundColor = "#fff");
+                    btn.addEventListener("mouseout", () => btn.style.backgroundColor = "#f5eedb");
+                    
+                    btn.addEventListener("click", async (e) => {
+                        e.stopPropagation();
+                        try {
+                            await navigator.clipboard.writeText(activeTooltipItem.id);
+                        } catch(err) {}
+                        
+                        const chatBox = document.querySelector("#chatInput, #txtChatMessage, input.chatInput");
+                        if (chatBox) {
+                            chatBox.value += (chatBox.value ? " " : "") + activeTooltipItem.id;
+                            chatBox.focus();
+                        }
+                        
+                        btn.textContent = "Copied!";
+                        btn.style.backgroundColor = "#278117";
+                        btn.style.color = "#fff";
+                        
+                        setTimeout(closeActiveTooltip, 1000);
+                    });
+
+                    btnContainer.appendChild(btn);
+                    
+                    // Append inside the inner text wrapper to ensure it stays within the parchment background
+                    const jtCopy = document.getElementById("JT_copy") || jt;
+                    jtCopy.appendChild(btnContainer);
+                }
+            }
+        });
+
+        observer.observe(document.body, { childList: true, subtree: true });
+
+        // Close the sticky tooltip if the user clicks anywhere else on the screen
+        document.addEventListener("click", (e) => {
+            const jt = document.getElementById("JT");
+            if (jt && activeTooltipItem && !jt.contains(e.target)) {
+                closeActiveTooltip();
+            }
+        });
+    }
+
+    function closeActiveTooltip() {
+        const jt = document.getElementById("JT");
+        if (jt) {
+            if (window.jQuery) window.jQuery(jt).remove();
+            else jt.remove();
+        }
+        
+        // Clean up the catalog item so it goes back to standard behavior
+        if (activeTooltipItem) {
+            const numId = activeTooltipItem.id.match(/\d+/)[0];
+            const card = document.getElementById("item_" + numId);
+            if (card) {
+                card.classList.remove("jTip");
+                card.removeAttribute("id");
+                card.title = `${activeTooltipItem.name} (${activeTooltipItem.type})\nClick to view details & copy`;
+            }
+            activeTooltipItem = null;
+        }
+    }
+
 
     // =========================================================================
     // INITIALIZATION & REGISTRATION
@@ -722,6 +844,7 @@
         }
 
         injectCatalogueStyles();
+        injectCopyButtonIntoTooltip();
 
         if (!createCatalogueDialog()) return false;
 
