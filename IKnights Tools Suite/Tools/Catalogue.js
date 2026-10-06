@@ -312,8 +312,7 @@
         ],
         unit: [
             // Add your Unit data here
-            { name: "Spearman", id: "[@u=1]", type: "Spear", x: 1, y: 1, spriteSheet: "sfb" },
-            { name: "Swordsman", id: "[@u=2]", type: "Sword", x: 49, y: 1, spriteSheet: "sfb" }
+            { name: "Spearman", id: "[ @i=5|508]", type: "Human", x: 1, y: 1, spriteSheet: "sfb" }
         ]
     };
 
@@ -365,7 +364,7 @@
             .ikcat-dialog-tab.active {
                 opacity: 1;
                 color: #b22222;
-                background-color: #f7f5eb !important; /* Matches the dialog content background */
+                background-color: #fffae8 !important; /* Matches the dialog content background */
                 font-weight: bold;
             }
 
