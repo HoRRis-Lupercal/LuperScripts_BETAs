@@ -117,18 +117,10 @@
         const style = document.createElement("style");
         style.id = "ikCatalogueStyles";
         style.textContent = `
-            #ikCatalogue {
-                box-sizing: border-box;
-                display: flex;
-                flex-direction: column;
-                height: 100%;
-                overflow: hidden;
-            }
-            
-            /* Dialog Title Bar Tabs */
+/* Dialog Title Bar Tabs */
             .ikcat-dialog-tabs {
                 float: left;
-                margin: 2px 16px 0 8px; /* Added 8px left margin to fix clipping */
+                margin: 5px 16px 0 8px; 
                 display: flex;
                 gap: 8px; 
             }
@@ -138,8 +130,8 @@
                 color: #4a3311;
                 font-size: 13px;
                 font-weight: normal;
-                padding: 3px 8px; /* Added padding for the background shape */
-                border-radius: 3px;
+                padding: 4px 10px 6px 10px; /* Extended bottom padding to connect with body */
+                border-radius: 4px 4px 0 0; /* Tab shape */
                 opacity: 0.7;
                 transition: opacity 0.2s, color 0.2s, background-color 0.2s;
             }
@@ -152,17 +144,24 @@
             .ikcat-dialog-tab.active {
                 opacity: 1;
                 color: #b22222;
-                background-color: #fffbe8 !important; /* Tan background to match chat headers */
+                background-color: #e5dac1 !important; /* Illyriad light container background */
                 font-weight: bold;
             }
 
-            /* Core Dialog Flex Layout - Fixed for jQuery UI Resizing */
+            /* Core Dialog Layout - Fixes jQuery UI recursive shrink bug */
             #ikCatalogue {
-                box-sizing: border-box !important;
-                display: flex !important; /* Force flex directly on the dialog wrapper */
-                flex-direction: column !important;
+                padding: 0 !important; /* CRITICAL: Removing padding stops jQuery UI from subtracting it on every frame */
                 overflow: hidden !important;
-                padding: 8px !important;
+            }
+
+            /* Wrapper to safely handle flexbox and padding away from the game engine */
+            .ikcat-flex-wrapper {
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+                padding: 8px;
             }
 
             #ikCatalogue .ikcat-controls {
@@ -170,7 +169,7 @@
                 gap: 8px;
                 margin-bottom: 8px;
                 align-items: center;
-                flex-shrink: 0; /* Prevents controls from collapsing */
+                flex-shrink: 0; 
             }
 
             #ikCatalogue #ikCatSearch {
@@ -187,8 +186,8 @@
             }
 
             #ikCatalogue .ikcat-grid-container {
-                flex: 1 1 0px !important; /* Critical fix: forces dynamic scale filling during resize */
-                min-height: 0 !important; /* Critical fix: prevents permanent shrinkage */
+                flex: 1 1 0px !important; 
+                min-height: 0 !important; 
                 overflow-y: auto;
                 border: 1px inset rgba(0, 0, 0, 0.25);
                 background: rgba(0, 0, 0, 0.05);
@@ -387,23 +386,25 @@ function populateTypeDropdown() {
         }
     }
 
-function createCatalogueContents() {
+    function createCatalogueContents() {
         if (document.querySelector("#ikCatalogue")) return;
 
         const content = document.createElement("div");
         content.id = "ikCatalogue";
         
         content.innerHTML = `
-            <div class="ikcat-controls">
-                <input type="text" id="ikCatSearch" placeholder="Search gear or ID..." autocomplete="off" />
-                <select id="ikCatTypeSelect"></select>
-            </div>
-            <div class="ikcat-grid-container">
-                <div id="ikCatGrid" class="ikcat-grid"></div>
-            </div>
-            <div class="ikcat-footer">
-                <div id="ikCatStatus" class="ikcat-status"></div>
-                <div id="ikCatCount" class="ikcat-count"></div>
+            <div class="ikcat-flex-wrapper">
+                <div class="ikcat-controls">
+                    <input type="text" id="ikCatSearch" placeholder="Search gear or ID..." autocomplete="off" />
+                    <select id="ikCatTypeSelect"></select>
+                </div>
+                <div class="ikcat-grid-container">
+                    <div id="ikCatGrid" class="ikcat-grid"></div>
+                </div>
+                <div class="ikcat-footer">
+                    <div id="ikCatStatus" class="ikcat-status"></div>
+                    <div id="ikCatCount" class="ikcat-count"></div>
+                </div>
             </div>
         `;
 
