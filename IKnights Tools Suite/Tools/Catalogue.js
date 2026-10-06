@@ -206,31 +206,15 @@
                 opacity: 0.8;
             }
 
-            /* Tooltip Copy Button Styling - Bypasses wz_tooltip inline stripping */
+            /* Tooltip Copy Button Styling - Let Illyriad handle the button, just fix the text color */
             #WzTtDiV #ikCatCopyBtn {
-                background-color: #520005 !important;
-                color: #ffffff !important;
-                border: 1px solid #e0c8a0 !important;
-                font-size: 13px !important;
-                font-family: Arial, sans-serif !important;
-                font-weight: bold !important;
+                color: #ffffff !important; /* Force text to white, overriding tooltip brown */
+                margin: 4px auto !important;
                 cursor: pointer !important;
-                padding: 5px 16px !important;
-                border-radius: 3px !important;
-                box-shadow: 0 1px 4px rgba(0,0,0,0.6) !important;
-                text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
-                display: inline-block !important;
-                text-align: center !important;
-                margin: 0 auto !important;
-            }
-            
-            #WzTtDiV #ikCatCopyBtn:hover {
-                background-color: #7a0008 !important;
             }
             
             #WzTtDiV #ikCatCopyBtn.ikcat-copied {
-                background-color: #278117 !important;
-                border-color: #1f6b12 !important;
+                color: #a4ff99 !important; /* Light green to stand out against the default red button */
             }
         `;
 
