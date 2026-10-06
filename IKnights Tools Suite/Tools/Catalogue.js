@@ -550,27 +550,33 @@
                     const targetContainer = middleSection || popupBody;
 
                     const btnContainer = document.createElement("div");
-                    // Removed the background color so it blends with the parchment texture
-                    btnContainer.style.cssText = "text-align: center; margin-top: 10px; padding: 6px; border-top: 1px solid rgba(139, 90, 43, 0.3);";
+                    // Reduced margin-top to snug it up against the stats, and removed the horizontal line
+                    btnContainer.style.cssText = "text-align: center; margin-top: 2px; margin-bottom: 4px;";
                     
                     const btn = document.createElement("button");
                     btn.id = "ikCatCopyBtn";
                     btn.textContent = `Copy ${activeTooltipItem.id}`;
                     
+                    // Strip the rectangle formatting to make it a naked text link, 
+                    // using the specific dark red for the catalogue/quartermaster theme
                     btn.style.cssText = `
-                        background-color: #f5eedb;
-                        border: 1px solid #8b5a2b;
-                        border-radius: 4px;
-                        color: #333;
-                        padding: 4px 12px;
-                        font-size: 12px;
+                        background: transparent;
+                        border: none;
+                        color: #520005;
+                        font-size: 13px;
                         font-weight: bold;
                         cursor: pointer;
-                        box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+                        padding: 0;
+                        box-shadow: none;
                     `;
                     
-                    btn.addEventListener("mouseover", () => btn.style.backgroundColor = "#fff");
-                    btn.addEventListener("mouseout", () => btn.style.backgroundColor = "#f5eedb");
+                    // Add a simple underline on hover instead of a background color change
+                    btn.addEventListener("mouseover", () => {
+                        btn.style.textDecoration = "underline";
+                    });
+                    btn.addEventListener("mouseout", () => {
+                        btn.style.textDecoration = "none";
+                    });
                     
                     btn.addEventListener("click", async (e) => {
                         e.stopPropagation();
@@ -585,15 +591,15 @@
                         }
                         
                         btn.textContent = "Copied!";
-                        btn.style.backgroundColor = "#278117";
-                        btn.style.color = "#fff";
+                        btn.style.color = "#278117"; // Switch to the success green
+                        btn.style.textDecoration = "none";
                         
                         setTimeout(closeActiveTooltip, 1000);
                     });
 
                     btnContainer.appendChild(btn);
                     
-                    // Append to the middle section instead of the outer body
+                    // Append directly into the parchment middle section
                     targetContainer.appendChild(btnContainer);
                 }
 
