@@ -76,22 +76,33 @@
         }
     };
 
-    const GEAR_DATA = [
+    const CATALOGUE_DATA = {
+        item: [
+            // Add your Item data here
+            { name: "Wood", id: "[@c=1]", type: "Basic", x: 1, y: 1, spriteSheet: "itemsbase9" },
+            { name: "Clay", id: "[@c=2]", type: "Basic", x: 49, y: 1, spriteSheet: "itemsbase9" }
+        ],
+        gear: [
             { name: "Draught Horse", id: "[@c=33]", type: "Horses", x: 1, y: 192, spriteSheet: "itemst2" },
             { name: "Heavy Warhorse", id: "[@c=34]", type: "Horses", x: 1, y: 48, spriteSheet: "itemst2" },
             { name: "Nimble Warhorse", id: "[@c=35]", type: "Horses", x: 1, y: 384, spriteSheet: "itemst2" },
             { name: "Riding Horse", id: "[@c=36]", type: "Horses", x: 1, y: 337, spriteSheet: "itemst2" },
             { name: "Steady Warhorse", id: "[@c=37]", type: "Horses", x: 1, y: 289, spriteSheet: "itemst2" },
             { name: "Adventurer's Sword", id: "[@c=40]", type: "Swords", x: 144, y: 1, spriteSheet: "itemst2" }
-            
-    ];
-
+        ],
+        unit: [
+            // Add your Unit data here
+            { name: "Spearman", id: "[@u=1]", type: "Spear", x: 1, y: 1, spriteSheet: "sfb" },
+            { name: "Swordsman", id: "[@u=2]", type: "Sword", x: 49, y: 1, spriteSheet: "sfb" }
+        ]
+    };
 
     let $catalogue = null;
     let statusClearTimer = null;
     let catalogueInitialized = false;
     let resizeBound = false;
     let activeTooltipItem = null;
+    let currentTab = "gear"; // Set default active tab
 
 
     // =========================================================================
@@ -113,11 +124,41 @@
                 height: 100%;
                 overflow: hidden;
             }
+            
+            #ikCatalogue .ikcat-tabs {
+                display: flex;
+                background-color: rgba(0, 0, 0, 0.1);
+                border-bottom: 1px solid rgba(139, 90, 43, 0.4);
+                flex-shrink: 0;
+            }
+
+            #ikCatalogue .ikcat-tab {
+                padding: 6px 12px;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 12px;
+                color: #4a3311;
+                border: 1px solid transparent;
+                border-bottom: none;
+                opacity: 0.6;
+                transition: opacity 0.2s, background-color 0.2s;
+            }
+
+            #ikCatalogue .ikcat-tab.active {
+                background-color: rgba(255, 255, 255, 0.4);
+                border-color: rgba(139, 90, 43, 0.4);
+                opacity: 1;
+            }
+
+            #ikCatalogue .ikcat-tab:hover {
+                opacity: 1;
+            }
 
             #ikCatalogue .ikcat-main {
                 display: flex;
                 flex-direction: column;
-                height: 100%;
+                flex: 1;
+                overflow: hidden;
                 padding: 6px;
                 box-sizing: border-box;
             }
@@ -253,13 +294,14 @@
         }, 4000);
     }
 
-    function populateTypeDropdown() {
+function populateTypeDropdown() {
         const select = document.querySelector("#ikCatTypeSelect");
         if (!select) return;
 
-        const types = Array.from(new Set(GEAR_DATA.map(item => item.type))).sort();
+        const activeData = CATALOGUE_DATA[currentTab] || [];
+        const types = Array.from(new Set(activeData.map(item => item.type))).sort();
+        
         select.innerHTML = `<option value="">All Types</option>`;
-
         types.forEach(type => {
             const opt = document.createElement("option");
             opt.value = type;
@@ -275,10 +317,10 @@
         const selectedType = document.querySelector("#ikCatTypeSelect")?.value || "";
 
         if (!grid) return;
-
         grid.innerHTML = "";
 
-        const filtered = GEAR_DATA.filter(item => {
+        const activeData = CATALOGUE_DATA[currentTab] || [];
+        const filtered = activeData.filter(item => {
             const matchesSearch = !query || 
                 item.name.toLowerCase().includes(query) || 
                 item.id.toLowerCase().includes(query);
@@ -323,7 +365,7 @@
         });
 
         if (countDisplay) {
-            countDisplay.textContent = `Showing ${filtered.length} / ${GEAR_DATA.length}`;
+            countDisplay.textContent = `Showing ${filtered.length} / ${activeData.length}`;
         }
     }
     
@@ -342,12 +384,17 @@
         }
     }
 
-    function createCatalogueContents() {
+function createCatalogueContents() {
         if (document.querySelector("#ikCatalogue")) return;
 
         const content = document.createElement("div");
         content.id = "ikCatalogue";
         content.innerHTML = `
+            <div class="ikcat-tabs">
+                <div class="ikcat-tab active" data-tab="gear">Gear Catalogue</div>
+                <div class="ikcat-tab" data-tab="item">Item Catalogue</div>
+                <div class="ikcat-tab" data-tab="unit">Unit Catalogue</div>
+            </div>
             <div class="ikcat-main">
                 <div class="ikcat-controls">
                     <input type="text" id="ikCatSearch" placeholder="Search gear or ID..." autocomplete="off" />
@@ -376,11 +423,28 @@
     function bindCatalogueEvents() {
         const content = document.querySelector("#ikCatalogue");
         if (!content || content.dataset.bound === "1") return;
-
         content.dataset.bound = "1";
 
         const searchInput = content.querySelector("#ikCatSearch");
         const typeSelect = content.querySelector("#ikCatTypeSelect");
+        const tabs = content.querySelectorAll(".ikcat-tab");
+
+        tabs.forEach(tab => {
+            tab.addEventListener("click", (e) => {
+                const clickedTab = e.target.dataset.tab;
+                if (currentTab === clickedTab) return; // Ignore if already active
+
+                tabs.forEach(t => t.classList.remove("active"));
+                e.target.classList.add("active");
+                currentTab = clickedTab;
+                
+                if (searchInput) searchInput.value = ""; // Reset search on tab switch
+                
+                populateTypeDropdown();
+                renderCatalogueGrid();
+                saveSettings();
+            });
+        });
 
         searchInput?.addEventListener("input", () => {
             renderCatalogueGrid();
@@ -396,7 +460,8 @@
     function saveSettings() {
         const state = {
             search: document.querySelector("#ikCatSearch")?.value || "",
-            type: document.querySelector("#ikCatTypeSelect")?.value || ""
+            type: document.querySelector("#ikCatTypeSelect")?.value || "",
+            tab: currentTab
         };
         saveJSON(STORAGE.SETTINGS, state);
     }
@@ -405,10 +470,21 @@
         const state = loadJSON(STORAGE.SETTINGS, null);
         if (!state) return;
 
+        if (state.tab) {
+            currentTab = state.tab;
+            const tabs = document.querySelectorAll("#ikCatalogue .ikcat-tab");
+            if (tabs.length) {
+                tabs.forEach(t => t.classList.remove("active"));
+                const activeTab = Array.from(tabs).find(t => t.dataset.tab === currentTab);
+                if (activeTab) activeTab.classList.add("active");
+            }
+        }
+
         const searchInput = document.querySelector("#ikCatSearch");
         const typeSelect = document.querySelector("#ikCatTypeSelect");
-
         if (searchInput && state.search !== undefined) searchInput.value = state.search;
+        
+        populateTypeDropdown(); // Ensure dropdown has the right options before setting value
         if (typeSelect && state.type !== undefined) typeSelect.value = state.type;
     }
 
@@ -488,7 +564,7 @@
         $catalogue = jQuery("#ikCatalogue");
 
         $catalogue.dialog({
-            title: "Item Catalogue",
+            title: "Catalogue",
             autoOpen: false,
             width: Math.max(380, Number(saved.width) || 420),
             height: Math.max(320, Number(saved.height) || 480),
