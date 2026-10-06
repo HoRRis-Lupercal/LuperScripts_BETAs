@@ -298,18 +298,18 @@
                 
                 activeTooltipItem = item;
                 
-                // Momentarily disguise the card as a native jTip element
+                // jTip requires the triggering element to have an ID to calculate positioning offset
                 card.id = "item_" + numId;
-                card.classList.add("jTip");
-                card.removeAttribute("title"); // Remove title so it doesn't overlap the game tooltip
                 
-                if (typeof window.JT_init === "function") window.JT_init();
-                
-                if (window.jQuery) {
-                    const $card = window.jQuery(card);$card.trigger("mouseenter"); // Force the game engine to open it
+                if (typeof window.JT_show === "function") {
+                    // Provide the explicit URL for the item tooltip
+                    // Note: Verify the exact path Illyriad uses. Common variants are /Item/jTip/ or /jTip/Item/
+                    const tooltipUrl = `/Item/jTip/${numId}`; 
                     
-                    // Unbind jTip's auto-close feature so it doesn't vanish when moving to click the button
-                    setTimeout(() => $card.off("mouseleave"), 10);
+                    // Call the renderer directly. Because we aren't triggering a hover event, 
+                    // jTip will not attach its standard mouseleave auto-close behavior, 
+                    // making it natively sticky.
+                    window.JT_show(tooltipUrl, card.id, ""); 
                 }
             });
 
