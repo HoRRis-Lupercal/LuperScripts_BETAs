@@ -363,8 +363,9 @@
 
             .ikcat-dialog-tab.active {
                 opacity: 1;
-                opacity: 0.85;
-                background-color: #e5dac1 !important; /* Illyriad light container background */
+                color: #b22222;
+                background-color: #f7f5eb !important; /* Matches the dialog's light cream body background */
+                border-bottom: 2px solid #f7f5eb !important; /* Blends the bottom edge into the content */
                 font-weight: bold;
             }
 
