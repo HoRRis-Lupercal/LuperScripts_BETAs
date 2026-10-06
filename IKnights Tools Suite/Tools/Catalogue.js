@@ -578,7 +578,7 @@
                     const btnContainer = document.createElement("div");
                     btnContainer.style.cssText = "text-align: center; margin-top: 6px; margin-bottom: 4px; padding-bottom: 4px;";
                     
-                    const btn = document.createElement("div");
+                    const btn = document.createElement("button"); 
                     btn.id = "ikCatCopyBtn";
                     btn.textContent = `Copy ${activeTooltipItem.id}`;
                     
