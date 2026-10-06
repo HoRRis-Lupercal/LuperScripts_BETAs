@@ -302,15 +302,28 @@
                 card.setAttribute("data", "c=" + numId);
                 card.classList.add("itemsprite");
                 
-                // Remove title so the browser's default yellow tooltip doesn't overlap
+                // CRITICAL: Block the game's CSS from applying the default herb background
+                card.style.setProperty("background-image", "none", "important");
                 card.removeAttribute("title"); 
                 
-                if (window.jQuery) {
-                    const $card = window.jQuery(card);
-                    // Trigger the game's pre-loaded hover event listeners
-                    $card.trigger("mouseenter");
-                    $card.trigger("mouseover");
-                }
+                // CRITICAL: Dispatch a native mouse event WITH physical coordinates.
+                // The game's tooltip engine requires X/Y coordinates to position the box.
+                const rect = card.getBoundingClientRect();
+                const mouseX = rect.left + (rect.width / 2);
+                const mouseY = rect.top + (rect.height / 2);
+                
+                const hoverEvent = new MouseEvent('mouseover', {
+                    bubbles: true, cancelable: true, view: window,
+                    clientX: mouseX, clientY: mouseY
+                });
+                
+                const moveEvent = new MouseEvent('mousemove', {
+                    bubbles: true, cancelable: true, view: window,
+                    clientX: mouseX, clientY: mouseY
+                });
+                
+                card.dispatchEvent(hoverEvent);
+                card.dispatchEvent(moveEvent);
             });
 
             grid.appendChild(card);
@@ -613,41 +626,34 @@
     }
 
     function closeActiveTooltip() {
-        // 1. Close standard jTip if it happens to be open
-        const jt = document.getElementById("JT");
-        if (jt) {
-            if (window.jQuery) window.jQuery(jt).remove();
-            else jt.remove();
-        }
-        
-        // 2. Clean up the disguised catalog card
-        if (activeTooltipItem) {
-            const numId = activeTooltipItem.id.match(/\d+/)[0];
-            
-            // Find the active card by the data attribute we added
-            const card = document.querySelector(`.ikcat-card[data="c=${numId}"]`);
-            if (card) {
-                if (window.jQuery) {
-                    const $card = window.jQuery(card);
-                    
-                    // Tell the game's native listeners that our mouse has left the item
-                    $card.trigger("mouseleave");
-                    $card.trigger("mouseout");
-                    
-                    // If the game uses jQuery UI Tooltips for items, force it to close
-                    if (typeof $card.tooltip === "function") {
-                        try { $card.tooltip("close"); } catch(err) {}
-                    }
-                }
-                
-                // Strip the disguise so it goes back to being a normal catalog card
-                card.classList.remove("itemsprite");
-                card.removeAttribute("data");
-                card.title = `${activeTooltipItem.name} (${activeTooltipItem.type})\nClick to view details & copy`;
+            // 1. Close standard jTip if it happens to be open
+            const jt = document.getElementById("JT");
+            if (jt) {
+                if (window.jQuery) window.jQuery(jt).remove();
+                else jt.remove();
             }
-            activeTooltipItem = null;
+            
+            // 2. Clean up the disguised catalog card
+            if (activeTooltipItem) {
+                const numId = activeTooltipItem.id.match(/\d+/)[0];
+                const card = document.querySelector(`.ikcat-card[data="c=${numId}"]`);
+                
+                if (card) {
+                    // Dispatch native mouseout so the game knows to hide the tooltip
+                    const outEvent = new MouseEvent('mouseout', {
+                        bubbles: true, cancelable: true, view: window
+                    });
+                    card.dispatchEvent(outEvent);
+                    
+                    // Strip the disguise and restore original CSS state
+                    card.classList.remove("itemsprite");
+                    card.removeAttribute("data");
+                    card.style.removeProperty("background-image");
+                    card.title = `${activeTooltipItem.name} (${activeTooltipItem.type})\nClick to view details & copy`;
+                }
+                activeTooltipItem = null;
+            }
         }
-    }
 
 
     // =========================================================================
