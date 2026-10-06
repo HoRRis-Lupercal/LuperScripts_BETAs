@@ -290,44 +290,24 @@
 
             card.appendChild(icon);
 
-            // Handle the click logic to make the tooltip sticky
+            // Handle the click logic to trigger the game's native popup engine
             card.addEventListener("click", (e) => {
                 e.stopPropagation(); 
-                
                 closeActiveTooltip(); 
-                
                 activeTooltipItem = item;
                 
-                // Disguise the card to perfectly match the game's native item HTML
-                card.setAttribute("data", "c=" + numId);
-                card.classList.add("itemsprite");
-                
-                // CRITICAL: Block the game's CSS from applying the default herb background
-                card.style.setProperty("background-image", "none", "important");
-                card.removeAttribute("title"); 
-                
-                // CRITICAL: Dispatch a native mouse event WITH physical coordinates.
-                // The game's tooltip engine requires X/Y coordinates to position the box.
-                const rect = card.getBoundingClientRect();
-                const mouseX = rect.left + (rect.width / 2);
-                const mouseY = rect.top + (rect.height / 2);
-                
-                const hoverEvent = new MouseEvent('mouseover', {
-                    bubbles: true, cancelable: true, view: window,
-                    clientX: mouseX, clientY: mouseY
-                });
-                
-                const moveEvent = new MouseEvent('mousemove', {
-                    bubbles: true, cancelable: true, view: window,
-                    clientX: mouseX, clientY: mouseY
-                });
-                
-                card.dispatchEvent(hoverEvent);
-                card.dispatchEvent(moveEvent);
+                // Call the game's native data extractor and popup generator directly
+                if (typeof window.ExtractData === "function") {
+                    try {
+                        const gameData = window.ExtractData("c=" + numId);
+                        if (gameData && gameData.popup) {
+                            gameData.popup({ data: gameData });
+                        }
+                    } catch (err) {
+                        console.error("IKTools: Native popup failed to generate", err);
+                    }
+                }
             });
-
-            grid.appendChild(card);
-        });
 
         if (countDisplay) {
             countDisplay.textContent = `Showing ${filtered.length} / ${GEAR_DATA.length}`;
@@ -549,20 +529,20 @@
     // =========================================================================
 
     function injectCopyButtonIntoTooltip() {
-        // Prevent duplicate observers
         if (document.getElementById("ikTooltipObserver")) return;
         const marker = document.createElement("div");
         marker.id = "ikTooltipObserver";
         document.body.appendChild(marker);
 
-        // Watch the DOM for the game's jTip tooltip (#JT) appearing
+        // Watch the DOM for changes to the wz_tooltip container
         const observer = new MutationObserver(() => {
-            const jt = document.getElementById("JT");
+            const wz = document.getElementById("WzTtDiV");
             
-            // If the tooltip is open, triggered by our script, and doesn't have a button yet
-            if (jt && activeTooltipItem && !document.getElementById("ikCatCopyBtn")) {
-                // Ensure the game's AJAX has finished populating the tooltip text
-                if (jt.textContent.length > 20) {
+            // Check if tooltip is currently visible, we have an active item, and our button isn't there
+            if (wz && wz.style.visibility === "visible" && activeTooltipItem && !document.getElementById("ikCatCopyBtn")) {
+                const popupBody = document.getElementById("WzBoDyI");
+                
+                if (popupBody) {
                     const btnContainer = document.createElement("div");
                     btnContainer.style.cssText = "text-align: center; margin-top: 10px; padding: 6px; border-top: 1px solid rgba(139, 90, 43, 0.3); background: rgba(0,0,0,0.05);";
                     
@@ -570,7 +550,6 @@
                     btn.id = "ikCatCopyBtn";
                     btn.textContent = `Copy ${activeTooltipItem.id}`;
                     
-                    // Match Illyriad's default button aesthetic
                     btn.style.cssText = `
                         background-color: #f5eedb;
                         border: 1px solid #8b5a2b;
@@ -606,54 +585,39 @@
                     });
 
                     btnContainer.appendChild(btn);
-                    
-                    // Append inside the inner text wrapper to ensure it stays within the parchment background
-                    const jtCopy = document.getElementById("JT_copy") || jt;
-                    jtCopy.appendChild(btnContainer);
+                    popupBody.appendChild(btnContainer);
                 }
             }
         });
 
-        observer.observe(document.body, { childList: true, subtree: true });
+        // CRITICAL: We must watch for attribute modifications because wz_tooltip toggles CSS visibility
+        observer.observe(document.body, { 
+            childList: true, 
+            subtree: true, 
+            attributes: true, 
+            attributeFilter: ["style"] 
+        });
 
-        // Close the sticky tooltip if the user clicks anywhere else on the screen
+        // Close the tooltip if the user clicks anywhere else on the screen
         document.addEventListener("click", (e) => {
-            const jt = document.getElementById("JT");
-            if (jt && activeTooltipItem && !jt.contains(e.target)) {
-                ;
+            const wz = document.getElementById("WzTtDiV");
+            if (wz && activeTooltipItem && !wz.contains(e.target)) {
+                closeActiveTooltip();
             }
         });
     }
 
     function closeActiveTooltip() {
-            // 1. Close standard jTip if it happens to be open
-            const jt = document.getElementById("JT");
-            if (jt) {
-                if (window.jQuery) window.jQuery(jt).remove();
-                else jt.remove();
-            }
-            
-            // 2. Clean up the disguised catalog card
-            if (activeTooltipItem) {
-                const numId = activeTooltipItem.id.match(/\d+/)[0];
-                const card = document.querySelector(`.ikcat-card[data="c=${numId}"]`);
-                
-                if (card) {
-                    // Dispatch native mouseout so the game knows to hide the tooltip
-                    const outEvent = new MouseEvent('mouseout', {
-                        bubbles: true, cancelable: true, view: window
-                    });
-                    card.dispatchEvent(outEvent);
-                    
-                    // Strip the disguise and restore original CSS state
-                    card.classList.remove("itemsprite");
-                    card.removeAttribute("data");
-                    card.style.removeProperty("background-image");
-                    card.title = `${activeTooltipItem.name} (${activeTooltipItem.type})\nClick to view details & copy`;
-                }
-                activeTooltipItem = null;
-            }
+        // wz_tooltip's native global hide function
+        if (typeof window.tt_Hide === "function") {
+            window.tt_Hide();
+        } else {
+            // Fallback manual hide
+            const wz = document.getElementById("WzTtDiV");
+            if (wz) wz.style.visibility = "hidden";
         }
+        activeTooltipItem = null;
+    }
 
 
     // =========================================================================
