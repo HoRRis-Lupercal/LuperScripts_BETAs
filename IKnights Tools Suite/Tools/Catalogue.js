@@ -125,33 +125,32 @@
                 overflow: hidden;
             }
             
-            #ikCatalogue .ikcat-tabs {
+            /* Dialog Title Bar Tabs */
+            .ikcat-dialog-tabs {
+                float: left;
+                margin: 0.2em 16px 0.1em 0;
                 display: flex;
-                background-color: rgba(0, 0, 0, 0.1);
-                border-bottom: 1px solid rgba(139, 90, 43, 0.4);
-                flex-shrink: 0;
+                gap: 16px;
             }
 
-            #ikCatalogue .ikcat-tab {
-                padding: 6px 12px;
+            .ikcat-dialog-tab {
                 cursor: pointer;
-                font-weight: bold;
-                font-size: 12px;
                 color: #4a3311;
-                border: 1px solid transparent;
-                border-bottom: none;
-                opacity: 0.6;
-                transition: opacity 0.2s, background-color 0.2s;
+                font-size: 13px;
+                font-weight: normal;
+                opacity: 0.7;
+                transition: opacity 0.2s, color 0.2s;
             }
 
-            #ikCatalogue .ikcat-tab.active {
-                background-color: rgba(255, 255, 255, 0.4);
-                border-color: rgba(139, 90, 43, 0.4);
+            .ikcat-dialog-tab:hover {
                 opacity: 1;
+                color: #8b1111;
             }
 
-            #ikCatalogue .ikcat-tab:hover {
+            .ikcat-dialog-tab.active {
                 opacity: 1;
+                color: #b22222; /* Matches default Illyriad title red */
+                font-weight: bold;
             }
 
             #ikCatalogue .ikcat-main {
@@ -390,11 +389,6 @@ function createCatalogueContents() {
         const content = document.createElement("div");
         content.id = "ikCatalogue";
         content.innerHTML = `
-            <div class="ikcat-tabs">
-                <div class="ikcat-tab active" data-tab="gear">Gear Catalogue</div>
-                <div class="ikcat-tab" data-tab="item">Item Catalogue</div>
-                <div class="ikcat-tab" data-tab="unit">Unit Catalogue</div>
-            </div>
             <div class="ikcat-main">
                 <div class="ikcat-controls">
                     <input type="text" id="ikCatSearch" placeholder="Search gear or ID..." autocomplete="off" />
@@ -429,23 +423,6 @@ function createCatalogueContents() {
         const typeSelect = content.querySelector("#ikCatTypeSelect");
         const tabs = content.querySelectorAll(".ikcat-tab");
 
-        tabs.forEach(tab => {
-            tab.addEventListener("click", (e) => {
-                const clickedTab = e.target.dataset.tab;
-                if (currentTab === clickedTab) return; // Ignore if already active
-
-                tabs.forEach(t => t.classList.remove("active"));
-                e.target.classList.add("active");
-                currentTab = clickedTab;
-                
-                if (searchInput) searchInput.value = ""; // Reset search on tab switch
-                
-                populateTypeDropdown();
-                renderCatalogueGrid();
-                saveSettings();
-            });
-        });
-
         searchInput?.addEventListener("input", () => {
             renderCatalogueGrid();
             saveSettings();
@@ -468,26 +445,30 @@ function createCatalogueContents() {
 
     function restoreSettings() {
         const state = loadJSON(STORAGE.SETTINGS, null);
-        if (!state) return;
-
-        if (state.tab) {
+        
+        if (state && state.tab) {
             currentTab = state.tab;
-            const tabs = document.querySelectorAll("#ikCatalogue .ikcat-tab");
+        }
+
+        // Apply active class to the correct title bar tab
+        if ($catalogue) {
+            const widget = $catalogue.dialog("widget");
+            const tabs = widget.find(".ikcat-dialog-tab");
             if (tabs.length) {
-                tabs.forEach(t => t.classList.remove("active"));
-                const activeTab = Array.from(tabs).find(t => t.dataset.tab === currentTab);
-                if (activeTab) activeTab.classList.add("active");
+                tabs.removeClass("active");
+                tabs.filter(`[data-tab='${currentTab}']`).addClass("active");
             }
         }
 
+        if (!state) return; // Exit if no state saved for search/dropdown
+
         const searchInput = document.querySelector("#ikCatSearch");
         const typeSelect = document.querySelector("#ikCatTypeSelect");
-        if (searchInput && state.search !== undefined) searchInput.value = state.search;
         
-        populateTypeDropdown(); // Ensure dropdown has the right options before setting value
+        if (searchInput && state.search !== undefined) searchInput.value = state.search;
+        populateTypeDropdown(); 
         if (typeSelect && state.type !== undefined) typeSelect.value = state.type;
     }
-
 
     // =========================================================================
     // GEOMETRY & DIALOG MANAGEMENT
@@ -552,7 +533,7 @@ function createCatalogueContents() {
         }
     }
 
-    function createCatalogueDialog() {
+function createCatalogueDialog() {
         if (!window.jQuery || !jQuery.fn || typeof jQuery.fn.dialog !== "function") {
             return false;
         }
@@ -564,7 +545,7 @@ function createCatalogueContents() {
         $catalogue = jQuery("#ikCatalogue");
 
         $catalogue.dialog({
-            title: "Catalogue",
+            title: "Catalogue", // Keep for screen readers/internals
             autoOpen: false,
             width: Math.max(380, Number(saved.width) || 420),
             height: Math.max(320, Number(saved.height) || 480),
@@ -593,7 +574,41 @@ function createCatalogueContents() {
             }
         });
 
-        $catalogue.dialog("widget").addClass("flora");
+        const widget = $catalogue.dialog("widget");
+        widget.addClass("flora");
+
+        // --- NEW TITLE BAR INJECTION ---
+        const titleBar = widget.find(".ui-dialog-titlebar");
+        titleBar.find(".ui-dialog-title").hide(); // Hide the default "Catalogue" text
+
+        if (!titleBar.find(".ikcat-dialog-tabs").length) {
+            const tabsHtml = `
+                <div class="ikcat-dialog-tabs">
+                    <span class="ikcat-dialog-tab" data-tab="gear">Gear Catalogue</span>
+                    <span class="ikcat-dialog-tab" data-tab="item">Item Catalogue</span>
+                    <span class="ikcat-dialog-tab" data-tab="unit">Unit Catalogue</span>
+                </div>
+            `;
+            titleBar.prepend(tabsHtml);
+
+            // Bind click events directly on the new title tabs
+            titleBar.find(".ikcat-dialog-tab").on("click", function(e) {
+                const clickedTab = e.target.dataset.tab;
+                if (currentTab === clickedTab) return;
+
+                titleBar.find(".ikcat-dialog-tab").removeClass("active");
+                jQuery(this).addClass("active");
+                currentTab = clickedTab;
+                
+                const searchInput = document.querySelector("#ikCatSearch");
+                if (searchInput) searchInput.value = ""; 
+                
+                populateTypeDropdown();
+                renderCatalogueGrid();
+                saveSettings();
+            });
+        }
+
         return true;
     }
 
