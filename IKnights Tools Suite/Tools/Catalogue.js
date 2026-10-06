@@ -152,7 +152,7 @@
             .ikcat-dialog-tab.active {
                 opacity: 1;
                 color: #b22222;
-                background-color: #ebd3a5; /* Tan background to match chat headers */
+                background-color: #fffbe8 !important; /* Tan background to match chat headers */
                 font-weight: bold;
             }
 
