@@ -550,32 +550,33 @@
                     const targetContainer = middleSection || popupBody;
 
                     const btnContainer = document.createElement("div");
-                    // Reduced margin-top to snug it up against the stats, and removed the horizontal line
-                    btnContainer.style.cssText = "text-align: center; margin-top: 2px; margin-bottom: 4px;";
+                    btnContainer.style.cssText = "text-align: center; margin-top: 6px; margin-bottom: 4px;";
                     
-                    const btn = document.createElement("button");
+                    // Use a div instead of a button to completely bypass the game's aggressive global button CSS
+                    const btn = document.createElement("div");
                     btn.id = "ikCatCopyBtn";
                     btn.textContent = `Copy ${activeTooltipItem.id}`;
                     
-                    // Strip the rectangle formatting to make it a naked text link, 
-                    // using the specific dark red for the catalogue/quartermaster theme
+                    // Styling to match the Quartermaster/Catalogue sidebar buttons
                     btn.style.cssText = `
-                        background: transparent;
-                        border: none;
-                        color: #520005;
-                        font-size: 13px;
-                        font-weight: bold;
-                        cursor: pointer;
-                        padding: 0;
-                        box-shadow: none;
+                        background-color: #520005 !important;
+                        color: #ffffff !important;
+                        border: 1px solid #e0c8a0 !important;
+                        font-size: 13px !important;
+                        font-weight: bold !important;
+                        cursor: pointer !important;
+                        padding: 5px 16px !important;
+                        border-radius: 3px !important;
+                        box-shadow: 0 1px 4px rgba(0,0,0,0.6) !important;
+                        text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
+                        display: inline-block !important;
                     `;
                     
-                    // Add a simple underline on hover instead of a background color change
                     btn.addEventListener("mouseover", () => {
-                        btn.style.textDecoration = "underline";
+                        btn.style.backgroundColor = "#7a0008"; // Slightly lighter red on hover
                     });
                     btn.addEventListener("mouseout", () => {
-                        btn.style.textDecoration = "none";
+                        btn.style.backgroundColor = "#520005";
                     });
                     
                     btn.addEventListener("click", async (e) => {
@@ -591,8 +592,7 @@
                         }
                         
                         btn.textContent = "Copied!";
-                        btn.style.color = "#278117"; // Switch to the success green
-                        btn.style.textDecoration = "none";
+                        btn.style.backgroundColor = "#278117"; // Success green
                         
                         setTimeout(closeActiveTooltip, 1000);
                     });
