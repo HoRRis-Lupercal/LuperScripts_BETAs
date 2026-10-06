@@ -292,24 +292,24 @@
 
             // Handle the click logic to make the tooltip sticky
             card.addEventListener("click", (e) => {
-                e.stopPropagation(); // Prevent the document click listener from instantly closing it
+                e.stopPropagation(); 
                 
-                closeActiveTooltip(); // Close any currently open tooltip
+                closeActiveTooltip(); 
                 
                 activeTooltipItem = item;
                 
-                // jTip requires the triggering element to have an ID to calculate positioning offset
-                card.id = "item_" + numId;
+                // Disguise the card to perfectly match the game's native item HTML
+                card.setAttribute("data", "c=" + numId);
+                card.classList.add("itemsprite");
                 
-                if (typeof window.JT_show === "function") {
-                    // Provide the explicit URL for the item tooltip
-                    // Note: Verify the exact path Illyriad uses. Common variants are /Item/jTip/ or /jTip/Item/
-                    const tooltipUrl = `/Item/jTip/${numId}`; 
-                    
-                    // Call the renderer directly. Because we aren't triggering a hover event, 
-                    // jTip will not attach its standard mouseleave auto-close behavior, 
-                    // making it natively sticky.
-                    window.JT_show(tooltipUrl, card.id, ""); 
+                // Remove title so the browser's default yellow tooltip doesn't overlap
+                card.removeAttribute("title"); 
+                
+                if (window.jQuery) {
+                    const $card = window.jQuery(card);
+                    // Trigger the game's pre-loaded hover event listeners
+                    $card.trigger("mouseenter");
+                    $card.trigger("mouseover");
                 }
             });
 
@@ -607,25 +607,42 @@
         document.addEventListener("click", (e) => {
             const jt = document.getElementById("JT");
             if (jt && activeTooltipItem && !jt.contains(e.target)) {
-                closeActiveTooltip();
+                ;
             }
         });
     }
 
     function closeActiveTooltip() {
+        // 1. Close standard jTip if it happens to be open
         const jt = document.getElementById("JT");
         if (jt) {
             if (window.jQuery) window.jQuery(jt).remove();
             else jt.remove();
         }
         
-        // Clean up the catalog item so it goes back to standard behavior
+        // 2. Clean up the disguised catalog card
         if (activeTooltipItem) {
             const numId = activeTooltipItem.id.match(/\d+/)[0];
-            const card = document.getElementById("item_" + numId);
+            
+            // Find the active card by the data attribute we added
+            const card = document.querySelector(`.ikcat-card[data="c=${numId}"]`);
             if (card) {
-                card.classList.remove("jTip");
-                card.removeAttribute("id");
+                if (window.jQuery) {
+                    const $card = window.jQuery(card);
+                    
+                    // Tell the game's native listeners that our mouse has left the item
+                    $card.trigger("mouseleave");
+                    $card.trigger("mouseout");
+                    
+                    // If the game uses jQuery UI Tooltips for items, force it to close
+                    if (typeof $card.tooltip === "function") {
+                        try { $card.tooltip("close"); } catch(err) {}
+                    }
+                }
+                
+                // Strip the disguise so it goes back to being a normal catalog card
+                card.classList.remove("itemsprite");
+                card.removeAttribute("data");
                 card.title = `${activeTooltipItem.name} (${activeTooltipItem.type})\nClick to view details & copy`;
             }
             activeTooltipItem = null;
