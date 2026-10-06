@@ -205,6 +205,33 @@
                 font-size: 11px;
                 opacity: 0.8;
             }
+
+            /* Tooltip Copy Button Styling - Bypasses wz_tooltip inline stripping */
+            #WzTtDiV #ikCatCopyBtn {
+                background-color: #520005 !important;
+                color: #ffffff !important;
+                border: 1px solid #e0c8a0 !important;
+                font-size: 13px !important;
+                font-family: Arial, sans-serif !important;
+                font-weight: bold !important;
+                cursor: pointer !important;
+                padding: 5px 16px !important;
+                border-radius: 3px !important;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.6) !important;
+                text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
+                display: inline-block !important;
+                text-align: center !important;
+                margin: 0 auto !important;
+            }
+            
+            #WzTtDiV #ikCatCopyBtn:hover {
+                background-color: #7a0008 !important;
+            }
+            
+            #WzTtDiV #ikCatCopyBtn.ikcat-copied {
+                background-color: #278117 !important;
+                border-color: #1f6b12 !important;
+            }
         `;
 
         document.head.appendChild(style);
@@ -544,40 +571,16 @@
             if (wz && wz.style.visibility === "visible" && activeTooltipItem && !document.getElementById("ikCatCopyBtn")) {
                 const popupBody = document.getElementById("WzBoDyI");
 
-                if (popupBody) {
-                    // Target the parchment middle section so the button sits inside the scroll graphic
+            if (popupBody) {
                     const middleSection = popupBody.querySelector(".m");
                     const targetContainer = middleSection || popupBody;
 
                     const btnContainer = document.createElement("div");
-                    btnContainer.style.cssText = "text-align: center; margin-top: 6px; margin-bottom: 4px;";
+                    btnContainer.style.cssText = "text-align: center; margin-top: 6px; margin-bottom: 4px; padding-bottom: 4px;";
                     
-                    // Use a div instead of a button to completely bypass the game's aggressive global button CSS
                     const btn = document.createElement("div");
                     btn.id = "ikCatCopyBtn";
                     btn.textContent = `Copy ${activeTooltipItem.id}`;
-                    
-                    // Styling to match the Quartermaster/Catalogue sidebar buttons
-                    btn.style.cssText = `
-                        background-color: #520005 !important;
-                        color: #ffffff !important;
-                        border: 1px solid #e0c8a0 !important;
-                        font-size: 13px !important;
-                        font-weight: bold !important;
-                        cursor: pointer !important;
-                        padding: 5px 16px !important;
-                        border-radius: 3px !important;
-                        box-shadow: 0 1px 4px rgba(0,0,0,0.6) !important;
-                        text-shadow: 1px 1px 2px rgba(0,0,0,0.8) !important;
-                        display: inline-block !important;
-                    `;
-                    
-                    btn.addEventListener("mouseover", () => {
-                        btn.style.backgroundColor = "#7a0008"; // Slightly lighter red on hover
-                    });
-                    btn.addEventListener("mouseout", () => {
-                        btn.style.backgroundColor = "#520005";
-                    });
                     
                     btn.addEventListener("click", async (e) => {
                         e.stopPropagation();
@@ -592,14 +595,12 @@
                         }
                         
                         btn.textContent = "Copied!";
-                        btn.style.backgroundColor = "#278117"; // Success green
+                        btn.classList.add("ikcat-copied");
                         
                         setTimeout(closeActiveTooltip, 1000);
                     });
 
                     btnContainer.appendChild(btn);
-                    
-                    // Append directly into the parchment middle section
                     targetContainer.appendChild(btnContainer);
                 }
 
