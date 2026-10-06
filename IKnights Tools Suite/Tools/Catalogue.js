@@ -346,12 +346,13 @@
             }
 
             .ikcat-dialog-tab {
+                display: inline-block !important; /* CRITICAL: Allows background colors and padding to render properly on spans */
                 cursor: pointer;
                 color: #4a3311;
                 font-size: 13px;
                 font-weight: normal;
-                padding: 4px 10px 6px 10px; /* Extended bottom padding to connect with body */
-                border-radius: 4px 4px 0 0; /* Tab shape */
+                padding: 4px 10px 6px 10px; 
+                border-radius: 4px 4px 0 0; 
                 opacity: 0.7;
                 transition: opacity 0.2s, color 0.2s, background-color 0.2s;
             }
@@ -364,8 +365,7 @@
             .ikcat-dialog-tab.active {
                 opacity: 1;
                 color: #b22222;
-                background-color: #f7f5eb !important; /* Matches the dialog's light cream body background */
-                border-bottom: 2px solid #f7f5eb !important; /* Blends the bottom edge into the content */
+                background-color: #f7f5eb !important; /* Matches the dialog content background */
                 font-weight: bold;
             }
 
