@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         IKnights Tools Suite
 // @namespace    IKnights
-// @version      0.12.0
+// @version      0.12.1
 // @description  IKnights' integrated Illyriad tools suite.
 // @author       IKnights and HoRRis
 //
