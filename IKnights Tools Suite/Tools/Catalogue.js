@@ -552,7 +552,10 @@ function populateTypeDropdown() {
 
         filtered.forEach(item => {
             const sheetInfo = SPRITE_SHEETS[item.spriteSheet] || SPRITE_SHEETS.default;
-            const numId = item.id.match(/\d+/)[0];
+            
+            // Extract the correct parameter string (e.g., "c=33" or "i=3|5") from after the "@" symbol
+            const dataMatch = item.id.match(/@([^\]]+)/);
+            const dataQuery = dataMatch ? dataMatch[1].trim() : "";
 
             const card = document.createElement("div");
             card.className = "ikcat-card";
@@ -571,10 +574,10 @@ function populateTypeDropdown() {
                 closeActiveTooltip(); 
                 activeTooltipItem = item;
                 
-                // Call the game's native data extractor and popup generator directly
+                // Call the game's native data extractor and popup generator directly using the dynamic query
                 if (typeof window.ExtractData === "function") {
                     try {
-                        const gameData = window.ExtractData("c=" + numId);
+                        const gameData = window.ExtractData(dataQuery);
                         if (gameData && gameData.popup) {
                             gameData.popup({ data: gameData });
                         }
