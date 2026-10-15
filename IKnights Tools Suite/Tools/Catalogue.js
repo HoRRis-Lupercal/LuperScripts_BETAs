@@ -78,6 +78,21 @@
             url: "https://assets.illyriad.net/img/icons/calamity.png",
             iconWidth: 48,
             iconHeight: 48
+        },
+        scrolls: {
+            url: "https://assets.illyriad.net/img/icons/scrolls3.png",
+            iconWidth: 48,
+            iconHeight: 48
+        },
+        hod: {
+            url: "https://assets.illyriad.net/img/icons/hod.png",
+            iconWidth: 48,
+            iconHeight: 48
+        },
+        animalparts: {
+            url: "https://assets.illyriad.net/img/icons/animal-t2.png",
+            iconWidth: 48,
+            iconHeight: 48
         }
     };
 
@@ -175,31 +190,31 @@
             { name: "Essence of Daybreak", id: "[@c=274]", type: "Exotic", x: 300, y: 2, spriteSheet: "itemst3" },
             { name: "Shard of Putrescence", id: "[@c=275]", type: "Exotic", x: 350, y: 2, spriteSheet: "itemst3" },
             { name: "Essence of Necrosis", id: "[@c=276]", type: "Exotic", x: 400, y: 2, spriteSheet: "itemst3" },
-            { name: "Shard of Life", id: "[@c=277]", type: "Exotic", x: 450, y: 50, spriteSheet: "itemst3" },
+            { name: "Shard of Life", id: "[@c=277]", type: "Exotic", x: 450, y: 2, spriteSheet: "itemst3" },
             { name: "Essence of Anima", id: "[@c=278]", type: "Exotic", x: 2, y: 50, spriteSheet: "itemst3" },
             { name: "Shard of Haste", id: "[@c=279]", type: "Exotic", x: 50, y: 50, spriteSheet: "itemst3" },
             { name: "Esssence of Alacrity", id: "[@c=280]", type: "Exotic", x: 100, y: 50, spriteSheet: "itemst3" },
             { name: "Shard of Ferocity", id: "[@c=281]", type: "Exotic", x: 150, y: 50, spriteSheet: "itemst3" },
             { name: "Essence of Brutality", id: "[@c=282]", type: "Exotic", x: 200, y: 50, spriteSheet: "itemst3" },
-            { name: "Shard of Fortitude", id: "[@c=283]", type: "Exotic", x: 250, y: 195, spriteSheet: "itemst3" },
-            { name: "Essence of Protection", id: "[@c=284]", type: "Exotic", x: 300, y: 195, spriteSheet: "itemst3" },
+            { name: "Shard of Fortitude", id: "[@c=283]", type: "Exotic", x: 250, y: 50, spriteSheet: "itemst3" },
+            { name: "Essence of Protection", id: "[@c=284]", type: "Exotic", x: 300, y: 50, spriteSheet: "itemst3" },
             { name: "Skysplinter", id: "[@c=285]", type: "Harvestable", x: 0, y: 0, spriteSheet: "itemst4" },
             { name: "Air Salt", id: "[@c=290]", type: "Harvestable", x: 443, y: 148, spriteSheet: "itemsbase9" },
             { name: "Earth Salt", id: "[@c=291]", type: "Harvestable", x: 393, y: 148, spriteSheet: "itemsbase9" },
             { name: "Fire Salt", id: "[@c=292]", type: "Harvestable", x: 345, y: 145, spriteSheet: "itemsbase9" },
             { name: "Water Salt", id: "[@c=293]", type: "Harvestable", x: 3, y: 169, spriteSheet: "itemsbase9" },
-            // Animal Parts
-            { name: "Alligator Heart", id: "[@c=298]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
-            { name: "Alligator Skull", id: "[@c=299]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
-            { name: "Alligator Entrail", id: "[@c=300]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
-            { name: "Alligator Vertebra", id: "[@c=301]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
-            { name: "Anaconda Heart", id: "[@c=302]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
-            { name: "Anaconda Fang", id: "[@c=303]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
-            { name: "Anaconda Skin", id: "[@c=304]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
-            { name: "Arctic Wolf Heart", id: "[@c=305]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
-            { name: "Arctic Wolf Entrail", id: "[@c=306]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
-            { name: "Arctic Wolf Fur", id: "[@c=307]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
-            { name: "Arctic Wolf Tooth", id: "[@c=308]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
+            { name: "Alligator Heart", id: "[@c=298]", type: "Harvestable", x: 48, y: 674, spriteSheet: "animalparts" },
+            { name: "Alligator Skull", id: "[@c=299]", type: "Harvestable", x: 0, y: 674, spriteSheet: "animalparts" },
+            { name: "Alligator Entrail", id: "[@c=300]", type: "Harvestable", x: 96, y: 674, spriteSheet: "animalparts" },
+            { name: "Alligator Vertebra", id: "[@c=301]", type: "Harvestable", x: 432, y: 650, spriteSheet: "animalparts" },
+            { name: "Anaconda Heart", id: "[@c=302]", type: "Harvestable", x: 337, y: 650, spriteSheet: "animalparts" },
+            { name: "Anaconda Fang", id: "[@c=303]", type: "Harvestable", x: 382, y: 650, spriteSheet: "animalparts" },
+            { name: "Anaconda Skin", id: "[@c=304]", type: "Harvestable", x: 289, y: 648, spriteSheet: "animalparts" },
+            { name: "Arctic Wolf Heart", id: "[@c=305]", type: "Harvestable", x: 144, y: 624, spriteSheet: "animalparts" },
+            { name: "Arctic Wolf Entrail", id: "[@c=306]", type: "Harvestable", x: 240, y: 624, spriteSheet: "animalparts" },
+            { name: "Arctic Wolf Fur", id: "[@c=307]", type: "Harvestable", x: 192, y: 624, spriteSheet: "animalparts" },
+            { name: "Arctic Wolf Tooth", id: "[@c=308]", type: "Harvestable", x: 97, y: 624, spriteSheet: "animalparts" },
+            // Fix Images Below
             { name: "Baboon Heart", id: "[@c=309]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
             { name: "Baboon Entrail", id: "[@c=310]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
             { name: "Baboon Fur", id: "[@c=311]", type: "Harvestable", x: 149, y: 195, spriteSheet: "itemsbase9" },
