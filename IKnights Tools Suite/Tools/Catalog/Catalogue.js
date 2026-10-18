@@ -1,12 +1,15 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperCat
-// * Copyright (c) 2026 HoRRis Lupercal
-// * Licensed under the HoRRis Lupercal Non-Commercial License
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @match        https://*.illyriad.co.uk/*
 // @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/IKnights%20Tools%20Suite/Tools/Catalog/CatalogueData.js
-// ==/UserScript==/*
+// ==/UserScript==
+
+/*
+ * Copyright (c) 2026 HoRRis Lupercal
+ * Licensed under the HoRRis Lupercal Non-Commercial License
+ */
 
 
 (function () {
