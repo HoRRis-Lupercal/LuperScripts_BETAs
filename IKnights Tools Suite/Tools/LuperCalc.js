@@ -495,7 +495,7 @@
                     ${SAMPLE_UNITS.map(unit => `
                         <tr>
                             <td>${unit}</td>
-                            <td><input type="number" min="0" value="${calcState.calc.units[unit] \vert{}\vert{} 0}" data-calc-unit="${unit}" class="ik-calc-unit-input" /></td>
+                            <td><input type="number" min="0" value="${calcState.calc.units[unit] || 0}" data-calc-unit="${unit}" class="ik-calc-unit-input" /></td>
                         </tr>
                     `).join("")}
                 </tbody>
