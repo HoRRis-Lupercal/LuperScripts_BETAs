@@ -1,4 +1,4 @@
-    window.IKToolsData = {
+    window.LuperCatData = {
         item: [
             { name: "Wood", id: "[@i=1|1]", type: "General", x: 197, y: 199, spriteSheet: "itemsbase9" },
             { name: "Clay", id: "[@i=1|2]", type: "General", x: 394, y: 250, spriteSheet: "itemsbase9" },
