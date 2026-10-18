@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperCalc
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      2.0
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -37,18 +37,71 @@
     const { loadJSON, saveJSON } = IKTools.util;
 
     // =========================================================================
-    // CONFIG & DATASETS
+    // CONFIG & DATASETS (Placeholder / Extensible for external dataset)
     // =========================================================================
 
     const STORAGE = {
-        GEOMETRY: "ikLuperCalc.geometry.v1",
-        OPEN:     "ikLuperCalc.open.v1"
+        STATE: "ikLuperCalc.state.v2",
+        GEOMETRY: "ikLuperCalc.geometry.v2",
+        OPEN:     "ikLuperCalc.open.v2"
     };
 
+    const SAMPLE_UNITS = [
+        "Militiaman", "Pikeman", "Longbowman", "Charioteer", 
+        "Knight", "White Wyrm", "Messenger", "Scout", 
+        "Ranger", "Agent", "Scribe of Allembine", "Assassin"
+    ];
+
+    const ARMY_TYPES = [
+        "Standard Army", "Horde", "Expeditionary Force", "Garrison Defense", "Elite Vanguard"
+    ];
+
+    const GEAR_OPTIONS = {
+        weapons: ["None", "Iron Sword", "Steel Broadsword", "Elven Bow", "Battle Axe", "Lance"],
+        armour: ["None", "Leather Armour", "Chainmail", "Plate Cuirass", "Dragonscale"],
+        mounts: ["None", "Warhorse", "Armoured Charger", "Desert Camel", "Griffon"]
+    };
+
+    const SKILL_LIST = [
+        "Heroism", "Defy Death", "Break Spear Wall", "Cover", 
+        "Sword Mastery", "Avoid Charge", "Vitality", "Accelerated Healing", 
+        "Uncanny Sense", "Close Quarter Penetration", "Agile Defence", "Forced March", 
+        "Concentrated Fire", "Tortoise Formation", "Military Logistics", "Bloodlust", 
+        "Interlocked Shields", "Force Of Will", "Tactical Precision", "Vanguard Discipline"
+    ];
+
+    // Default application state structure
+    const DEFAULT_STATE = {
+        armies: Array.from({ length: 5 }, (_, i) => ({
+            name: `Army ${i + 1}`,
+            divisions: Array.from({ length: 5 }, (_, d) => ({
+                name: `Division ${d + 1}`,
+                commanderId: 0,
+                units: SAMPLE_UNITS.reduce((acc, u) => ({ ...acc, [u]: 0 }), {})
+            }))
+        })),
+        commanders: Array.from({ length: 10 }, (_, i) => ({
+            name: `Commander ${i + 1}`,
+            weapon: "None",
+            armour: "None",
+            mount: "None",
+            skills: SKILL_LIST.reduce((acc, s) => ({ ...acc, [s]: 0 }), {})
+        })),
+        calc: {
+            armyType: ARMY_TYPES[0],
+            selectedArmyIndex: 0,
+            units: SAMPLE_UNITS.reduce((acc, u) => ({ ...acc, [u]: 0 }), {})
+        }
+    };
+
+    let calcState = loadJSON(STORAGE.STATE, DEFAULT_STATE);
     let $luperCalc = null;
     let luperCalcInitialized = false;
     let resizeBound = false;
-    let currentTab = "calculator"; // Default tab
+    let currentTab = "armies"; // Default tab
+    let activeArmyIndex = 0;
+    let activeDivisionIndex = 0;
+    let activeCommanderIndex = 0;
 
     // =========================================================================
     // CSS INJECTION
@@ -62,12 +115,11 @@
         const style = document.createElement("style");
         style.id = "ikLuperCalcStyles";
         style.textContent = `
-            /* Dialog Title Bar Tabs */
             .ikcalc-dialog-tabs {
                 float: left;
                 margin: 5px 16px 0 8px; 
                 display: flex;
-                gap: 8px; 
+                gap: 6px; 
             }
 
             .ikcalc-dialog-tab {
@@ -94,7 +146,6 @@
                 font-weight: bold;
             }
 
-            /* Core Dialog Layout */
             #ikLuperCalc {
                 padding: 0 !important;
                 overflow: hidden !important;
@@ -123,124 +174,129 @@
                 flex-direction: column;
             }
 
-            /* Calculator Armies Screen Styles */
-            .ikcalc-army-container {
+            /* Sub-nav bars */
+            .ikcalc-subnav {
                 display: flex;
-                flex-direction: column;
+                gap: 4px;
+                margin-bottom: 8px;
+                flex-wrap: wrap;
+            }
+
+            .ikcalc-subnav-btn {
+                background: rgba(139, 90, 43, 0.15);
+                border: 1px solid rgba(139, 90, 43, 0.4);
+                padding: 4px 10px;
+                font-size: 11px;
+                cursor: pointer;
+                border-radius: 3px;
+                color: #4a3311;
+            }
+
+            .ikcalc-subnav-btn:hover {
+                background: rgba(139, 90, 43, 0.3);
+            }
+
+            .ikcalc-subnav-btn.active {
+                background: #8b5a2b;
+                color: #fff;
+                font-weight: bold;
+            }
+
+            /* Armies & Division Panels */
+            .ikcalc-panel-box {
+                border: 1px solid rgba(139, 90, 43, 0.3);
+                background: rgba(255, 255, 255, 0.4);
+                padding: 8px;
+                border-radius: 4px;
+                margin-bottom: 8px;
+            }
+
+            .ikcalc-row {
+                display: flex;
                 gap: 8px;
-                flex: 1;
+                align-items: center;
+                margin-bottom: 6px;
+            }
+
+            .ikcalc-row label {
+                font-weight: bold;
+                font-size: 11px;
+                color: #4a3311;
+            }
+
+            .ikcalc-row input, .ikcalc-row select {
+                padding: 3px 6px;
+                font-size: 11px;
+                border: 1px inset #ccc;
+                border-radius: 3px;
+            }
+
+            /* Unit table recreation */
+            .ikcalc-unit-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 4px;
+                font-size: 11px;
+            }
+
+            .ikcalc-unit-table th, .ikcalc-unit-table td {
+                border: 1px solid rgba(139, 90, 43, 0.2);
+                padding: 4px 6px;
+                text-align: left;
+            }
+
+            .ikcalc-unit-table th {
+                background: rgba(139, 90, 43, 0.2);
+                color: #4a3311;
+            }
+
+            .ikcalc-unit-table input[type="number"] {
+                width: 60px;
+                padding: 2px 4px;
+            }
+
+            /* Commanders Grid */
+            .ikcalc-skills-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+                margin-top: 8px;
+            }
+
+            .ikcalc-skill-card {
+                border: 1px solid rgba(139, 90, 43, 0.3);
+                background: #fff;
+                padding: 6px;
+                border-radius: 3px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 11px;
+            }
+
+            .ikcalc-skill-card input {
+                width: 45px;
+                text-align: center;
             }
 
             .ikcalc-results-panel {
                 border: 1px inset rgba(0, 0, 0, 0.25);
                 background: rgba(0, 0, 0, 0.03);
                 padding: 8px;
-                min-height: 100px;
-                max-height: 150px;
+                min-height: 120px;
+                max-height: 180px;
                 overflow-y: auto;
                 border-radius: 4px;
                 font-size: 12px;
                 font-family: serif;
-            }
-
-            .ikcalc-army-dropdown {
-                border: 1px solid rgba(139, 90, 43, 0.4);
-                background: rgba(255, 255, 255, 0.5);
-                border-radius: 4px;
-                margin-bottom: 4px;
-            }
-
-            .ikcalc-army-header {
-                padding: 6px 10px;
-                background-color: rgba(139, 90, 43, 0.15);
-                cursor: pointer;
-                font-weight: bold;
-                font-size: 12px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                user-select: none;
-            }
-
-            .ikcalc-army-header:hover {
-                background-color: rgba(139, 90, 43, 0.25);
-            }
-
-            .ikcalc-army-body {
-                padding: 8px;
-                border-top: 1px solid rgba(139, 90, 43, 0.2);
-                display: none; /* Collapsed by default */
-                background: #fff;
-            }
-
-            .ikcalc-army-dropdown.expanded .ikcalc-army-body {
-                display: block;
-            }
-
-            /* Create Army Screen Recreation Style */
-            .ikcalc-create-army-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-                gap: 6px;
-            }
-
-            .ikcalc-unit-input-group {
-                display: flex;
-                flex-direction: column;
-                font-size: 11px;
-                gap: 2px;
-            }
-
-            .ikcalc-unit-input-group label {
-                font-weight: bold;
-                color: #4a3311;
-            }
-
-            .ikcalc-unit-input-group input {
-                padding: 2px 4px;
-                border: 1px inset #ccc;
-                border-radius: 2px;
-                font-size: 11px;
             }
         `;
         document.head.appendChild(style);
     }
 
     // =========================================================================
-    // UI BUILDER
+    // UI BUILDER & RENDERING
     // =========================================================================
-
-    const SAMPLE_UNITS = [
-        "Spearman", "Swordsman", "Archer", "Light Cavalry", 
-        "Heavy Cavalry", "Crossbowman", "Pikeman", "Scout", 
-        "Ram", "Catapult", "Mage", "Acolyte"
-    ];
-
-    function createArmyBuilderHTML(instanceId) {
-        let gridHtml = SAMPLE_UNITS.map(unit => `
-            <div class="ikcalc-unit-input-group">
-                <label>${unit}</label>
-                <input type="number" min="0" value="0" data-unit="${unit}" class="ikcalc-unit-qty" />
-            </div>
-        `).join("");
-
-        return `
-            <div class="ikcalc-army-dropdown" id="${instanceId}">
-                <div class="ikcalc-army-header">
-                    <span>Army Group (Click to expand/collapse)</span>
-                    <span>▼</span>
-                </div>
-                <div class="ikcalc-army-body">
-                    <div style="margin-bottom: 6px; font-size: 11px; font-style: italic;">
-                        Configure Unit Compositions (Create Army Screen Recreation):
-                    </div>
-                    <div class="ikcalc-create-army-grid">
-                        ${gridHtml}
-                    </div>
-                </div>
-            </div>
-        `;
-    }
 
     function createLuperCalcContents() {
         if (document.querySelector("#ikLuperCalc")) return;
@@ -250,51 +306,344 @@
         
         content.innerHTML = `
             <div class="ikcalc-flex-wrapper">
-                <!-- Tab 1: Battle Calculator -->
-                <div id="ikCalcTabCalculator" class="ikcalc-tab-content active">
-                    <div style="font-weight: bold; font-size: 12px; margin-bottom: 4px;">Battle Calculation Results:</div>
-                    <div class="ikcalc-results-panel">
-                        <span style="color: #888; font-style: italic;">Battle calculation results will appear here...</span>
+                <!-- Tab 1: Armies -->
+                <div id="ikCalcTabArmies" class="ikcalc-tab-content active">
+                    <div class="ikcalc-subnav" id="ikArmySubNav"></div>
+                    <div class="ikcalc-panel-box">
+                        <div class="ikcalc-row">
+                            <label>Army Name:</label>
+                            <input type="text" id="ikArmyNameInput" style="flex:1;" />
+                        </div>
                     </div>
-                    <div style="font-weight: bold; font-size: 12px; margin: 8px 0 4px 0;">Armies Setup:</div>
-                    <div class="ikcalc-army-container">
-                        ${createArmyBuilderHTML("ikArmyDropdown1")}
-                        ${createArmyBuilderHTML("ikArmyDropdown2")}
-                    </div>
+                    <div class="ikcalc-subnav" id="ikDivisionSubNav"></div>
+                    <div class="ikcalc-panel-box" id="ikDivisionDetailsPanel"></div>
                 </div>
 
-                <!-- Tab 2: Additional Tools Tab (Placeholder) -->
-                <div id="ikCalcTabSettings" class="ikcalc-tab-content">
-                    <div style="padding: 10px; font-size: 12px;">
-                        <h3>LuperCalc Settings & Options</h3>
-                        <p>Configure default calculation parameters or preferences here.</p>
+                <!-- Tab 2: Commanders -->
+                <div id="ikCalcTabCommanders" class="ikcalc-tab-content">
+                    <div class="ikcalc-subnav" id="ikCommanderSubNav"></div>
+                    <div class="ikcalc-panel-box" id="ikCommanderDetailsPanel"></div>
+                </div>
+
+                <!-- Tab 3: Battle Calculator -->
+                <div id="ikCalcTabCalculator" class="ikcalc-tab-content">
+                    <div style="font-weight: bold; font-size: 12px; margin-bottom: 4px;">Battle Calculation Results:</div>
+                    <div class="ikcalc-results-panel" id="ikCalcResults">
+                        <span style="color: #888; font-style: italic;">Battle simulation results will appear here...</span>
+                    </div>
+                    <div class="ikcalc-panel-box" style="margin-top: 8px;">
+                        <div class="ikcalc-row">
+                            <label>Army Type:</label>
+                            <select id="ikCalcArmyTypeSelect" style="flex:1;">
+                                ${ARMY_TYPES.map(t => `<option value="${t}">${t}</option>`).join("")}
+                            </select>
+                        </div>
+                        <div class="ikcalc-row">
+                            <label>Import Army:</label>
+                            <select id="ikCalcImportArmySelect" style="flex:1;"></select>
+                        </div>
+                        <div style="font-weight: bold; font-size: 11px; margin-top: 6px;">Test Army Unit Compositions:</div>
+                        <div id="ikCalcUnitInputsContainer" style="margin-top: 4px;"></div>
                     </div>
                 </div>
             </div>
         `;
 
         document.body.appendChild(content);
+        renderArmiesTab();
+        renderCommandersTab();
+        renderCalculatorTab();
         bindLuperCalcEvents();
     }
 
     // =========================================================================
-    // EVENTS
+    // RENDERING LOGIC
     // =========================================================================
 
-    function bindLuperCalcEvents() {
-        const content = document.querySelector("#ikLuperCalc");
-        if (!content || content.dataset.bound === "1") return;
-        content.dataset.bound = "1";
+    function renderArmiesTab() {
+        const armyNav = document.querySelector("#ikArmySubNav");
+        const divisionNav = document.querySelector("#ikDivisionSubNav");
+        const armyNameInput = document.querySelector("#ikArmyNameInput");
+        const divisionPanel = document.querySelector("#ikDivisionDetailsPanel");
 
-        // Bind collapsible headers for the Armies dropdowns
-        content.querySelectorAll(".ikcalc-army-header").forEach(header => {
-            header.addEventListener("click", () => {
-                const dropdown = header.closest(".ikcalc-army-dropdown");
-                dropdown.classList.toggle("expanded");
-                const arrow = header.querySelector("span:last-child");
-                arrow.textContent = dropdown.classList.contains("expanded") ? "▲" : "▼";
-            });
+        if (!armyNav) return;
+
+        // Render Army buttons (1 to 5)
+        armyNav.innerHTML = calcState.armies.map((army, idx) => `
+            <button class="ikcalc-subnav-btn ${idx === activeArmyIndex ? 'active' : ''}" data-army="${idx}">
+                ${army.name}
+            </button>
+        `).join("");
+
+        const currentArmy = calcState.armies[activeArmyIndex];
+        if (armyNameInput) armyNameInput.value = currentArmy.name;
+
+        // Render Division buttons (1 to 5)
+        divisionNav.innerHTML = currentArmy.divisions.map((div, idx) => `
+            <button class="ikcalc-subnav-btn ${idx === activeDivisionIndex ? 'active' : ''}" data-division="${idx}">
+                ${div.name}
+            </button>
+        `).join("");
+
+        const currentDiv = currentArmy.divisions[activeDivisionIndex];
+
+        // Commander options dropdown
+        const commanderOptions = calcState.commanders.map((cmd, idx) => `
+            <option value="${idx}" ${currentDiv.commanderId === idx ? 'selected' : ''}>${cmd.name}</option>
+        `).join("");
+
+        // Units table
+        const unitsRows = SAMPLE_UNITS.map(unit => `
+            <tr>
+                <td>${unit}</td>
+                <td><input type="number" min="0" value="${currentDiv.units[unit] || 0}" data-unit="${unit}" class="ik-army-unit-input" /></td>
+            </tr>
+        `).join("");
+
+        divisionPanel.innerHTML = `
+            <div class="ikcalc-row">
+                <label>Division Name:</label>
+                <input type="text" id="ikDivisionNameInput" value="${currentDiv.name}" style="flex:1;" />
+            </div>
+            <div class="ikcalc-row">
+                <label>Commander:</label>
+                <select id="ikDivisionCommanderSelect" style="flex:1;">
+                    ${commanderOptions}
+                </select>
+            </div>
+            <div style="font-weight: bold; font-size: 11px; margin-top: 8px;">Division Unit Compositions:</div>
+            <table class="ikcalc-unit-table">
+                <thead>
+                    <tr><th>Unit Name</th><th>Count</th></tr>
+                </thead>
+                <tbody>
+                    ${unitsRows}
+                </tbody>
+            </table>
+        `;
+        bindArmiesEvents();
+    }
+
+    function renderCommandersTab() {
+        const commanderNav = document.querySelector("#ikCommanderSubNav");
+        const commanderPanel = document.querySelector("#ikCommanderDetailsPanel");
+
+        if (!commanderNav) return;
+
+        commanderNav.innerHTML = calcState.commanders.map((cmd, idx) => `
+            <button class="ikcalc-subnav-btn ${idx === activeCommanderIndex ? 'active' : ''}" data-commander="${idx}">
+                ${cmd.name}
+            </button>
+        `).join("");
+
+        const currentCmd = calcState.commanders[activeCommanderIndex];
+
+        const weaponOpts = GEAR_OPTIONS.weapons.map(w => `<option value="${w}" ${currentCmd.weapon === w ? 'selected' : ''}>${w}</option>`).join("");
+        const armourOpts = GEAR_OPTIONS.armour.map(a => `<option value="${a}" ${currentCmd.armour === a ? 'selected' : ''}>${a}</option>`).join("");
+        const mountOpts = GEAR_OPTIONS.mounts.map(m => `<option value="${m}" ${currentCmd.mount === m ? 'selected' : ''}>${m}</option>`).join("");
+
+        const skillsCards = SKILL_LIST.map(skill => `
+            <div class="ikcalc-skill-card">
+                <span>${skill} (0/10)</span>
+                <input type="number" min="0" max="10" value="${currentCmd.skills[skill] || 0}" data-skill="${skill}" class="ik-cmd-skill-input" />
+            </div>
+        `).join("");
+
+        commanderPanel.innerHTML = `
+            <div class="ikcalc-row">
+                <label>Commander Name:</label>
+                <input type="text" id="ikCommanderNameInput" value="${currentCmd.name}" style="flex:1;" />
+            </div>
+            <div class="ikcalc-row">
+                <label>Weapon:</label>
+                <select id="ikCommanderWeapon" style="flex:1;">${weaponOpts}</select>
+            </div>
+            <div class="ikcalc-row">
+                <label>Armour:</label>
+                <select id="ikCommanderArmour" style="flex:1;">${armourOpts}</select>
+            </div>
+            <div class="ikcalc-row">
+                <label>Mount:</label>
+                <select id="ikCommanderMount" style="flex:1;">${mountOpts}</select>
+            </div>
+            <div style="font-weight: bold; font-size: 11px; margin-top: 8px;">Commander Skills (20 Trees):</div>
+            <div class="ikcalc-skills-grid">
+                ${skillsCards}
+            </div>
+        `;
+        bindCommandersEvents();
+    }
+
+    function renderCalculatorTab() {
+        const typeSelect = document.querySelector("#ikCalcArmyTypeSelect");
+        const importSelect = document.querySelector("#ikCalcImportArmySelect");
+        const unitsContainer = document.querySelector("#ikCalcUnitInputsContainer");
+
+        if (!typeSelect) return;
+
+        typeSelect.value = calcState.calc.armyType;
+
+        importSelect.innerHTML = `<option value="">-- Choose Army from Armies Tab --</option>` + 
+            calcState.armies.map((army, idx) => `<option value="${idx}">${army.name}</option>`).join("");
+
+        unitsContainer.innerHTML = `
+            <table class="ikcalc-unit-table">
+                <thead>
+                    <tr><th>Unit Name</th><th>Available Count</th></tr>
+                </thead>
+                <tbody>
+                    ${SAMPLE_UNITS.map(unit => `
+                        <tr>
+                            <td>${unit}</td>
+                            <td><input type="number" min="0" value="${calcState.calc.units[unit] \vert{}\vert{} 0}" data-calc-unit="${unit}" class="ik-calc-unit-input" /></td>
+                        </tr>
+                    `).join("")}
+                </tbody>
+            </table>
+        `;
+        bindCalculatorEvents();
+    }
+
+    // =========================================================================
+    // EVENT BINDINGS
+    // =========================================================================
+
+    function bindArmiesEvents() {
+        const content = document.querySelector("#ikCalcTabArmies");
+        if (!content) return;
+
+        content.querySelectorAll("[data-army]").forEach(btn => {
+            btn.onclick = (e) => {
+                activeArmyIndex = Number(e.target.dataset.army);
+                activeDivisionIndex = 0;
+                renderArmiesTab();
+            };
         });
+
+        content.querySelectorAll("[data-division]").forEach(btn => {
+            btn.onclick = (e) => {
+                activeDivisionIndex = Number(e.target.dataset.division);
+                renderArmiesTab();
+            };
+        });
+
+        const armyNameInput = document.querySelector("#ikArmyNameInput");
+        if (armyNameInput) {
+            armyNameInput.oninput = (e) => {
+                calcState.armies[activeArmyIndex].name = e.target.value;
+                saveJSON(STORAGE.STATE, calcState);
+                renderArmiesTab();
+            };
+        }
+
+        const divNameInput = document.querySelector("#ikDivisionNameInput");
+        if (divNameInput) {
+            divNameInput.oninput = (e) => {
+                calcState.armies[activeArmyIndex].divisions[activeDivisionIndex].name = e.target.value;
+                saveJSON(STORAGE.STATE, calcState);
+                renderArmiesTab();
+            };
+        }
+
+        const cmdSelect = document.querySelector("#ikDivisionCommanderSelect");
+        if (cmdSelect) {
+            cmdSelect.onchange = (e) => {
+                calcState.armies[activeArmyIndex].divisions[activeDivisionIndex].commanderId = Number(e.target.value);
+                saveJSON(STORAGE.STATE, calcState);
+            };
+        }
+
+        content.querySelectorAll(".ik-army-unit-input").forEach(input => {
+            input.oninput = (e) => {
+                const unitName = e.target.dataset.unit;
+                calcState.armies[activeArmyIndex].divisions[activeDivisionIndex].units[unitName] = Number(e.target.value) || 0;
+                saveJSON(STORAGE.STATE, calcState);
+            };
+        });
+    }
+
+    function bindCommandersEvents() {
+        const content = document.querySelector("#ikCalcTabCommanders");
+        if (!content) return;
+
+        content.querySelectorAll("[data-commander]").forEach(btn => {
+            btn.onclick = (e) => {
+                activeCommanderIndex = Number(e.target.dataset.commander);
+                renderCommandersTab();
+            };
+        });
+
+        const nameInput = document.querySelector("#ikCommanderNameInput");
+        if (nameInput) {
+            nameInput.oninput = (e) => {
+                calcState.commanders[activeCommanderIndex].name = e.target.value;
+                saveJSON(STORAGE.STATE, calcState);
+                renderArmiesTab(); // Refresh army views in case commander name changed
+                renderCommandersTab();
+            };
+        }
+
+        const wSelect = document.querySelector("#ikCommanderWeapon");
+        if (wSelect) wSelect.onchange = (e) => { calcState.commanders[activeCommanderIndex].weapon = e.target.value; saveJSON(STORAGE.STATE, calcState); };
+
+        const aSelect = document.querySelector("#ikCommanderArmour");
+        if (aSelect) aSelect.onchange = (e) => { calcState.commanders[activeCommanderIndex].armour = e.target.value; saveJSON(STORAGE.STATE, calcState); };
+
+        const mSelect = document.querySelector("#ikCommanderMount");
+        if (mSelect) mSelect.onchange = (e) => { calcState.commanders[activeCommanderIndex].mount = e.target.value; saveJSON(STORAGE.STATE, calcState); };
+
+        content.querySelectorAll(".ik-cmd-skill-input").forEach(input => {
+            input.oninput = (e) => {
+                const skillName = e.target.dataset.skill;
+                calcState.commanders[activeCommanderIndex].skills[skillName] = Number(e.target.value) || 0;
+                saveJSON(STORAGE.STATE, calcState);
+            };
+        });
+    }
+
+    function bindCalculatorEvents() {
+        const content = document.querySelector("#ikCalcTabCalculator");
+        if (!content) return;
+
+        const typeSelect = document.querySelector("#ikCalcArmyTypeSelect");
+        if (typeSelect) {
+            typeSelect.onchange = (e) => {
+                calcState.calc.armyType = e.target.value;
+                saveJSON(STORAGE.STATE, calcState);
+            };
+        }
+
+        const importSelect = document.querySelector("#ikCalcImportArmySelect");
+        if (importSelect) {
+            importSelect.onchange = (e) => {
+                const armyIdx = e.target.value;
+                if (armyIdx !== "") {
+                    const selectedArmy = calcState.armies[Number(armyIdx)];
+                    // Aggregate units across divisions for calculator
+                    const aggregated = SAMPLE_UNITS.reduce((acc, u) => ({ ...acc, [u]: 0 }), {});
+                    selectedArmy.divisions.forEach(div => {
+                        Object.keys(div.units).forEach(u => {
+                            aggregated[u] = (aggregated[u] || 0) + (div.units[u] || 0);
+                        });
+                    });
+                    calcState.calc.units = aggregated;
+                    saveJSON(STORAGE.STATE, calcState);
+                    renderCalculatorTab();
+                }
+            };
+        }
+
+        content.querySelectorAll(".ik-calc-unit-input").forEach(input => {
+            input.oninput = (e) => {
+                const unitName = e.target.dataset.calcUnit;
+                calcState.calc.units[unitName] = Number(e.target.value) || 0;
+                saveJSON(STORAGE.STATE, calcState);
+            };
+        });
+    }
+
+    function bindLuperCalcEvents() {
+        // Global dialog events if needed
     }
 
     // =========================================================================
@@ -344,8 +693,8 @@
 
         try {
             if (geometry.width && geometry.height) {
-                $luperCalc.dialog("option", "width", Math.max(400, geometry.width));
-                $luperCalc.dialog("option", "height", Math.max(350, geometry.height));
+                $luperCalc.dialog("option", "width", Math.max(450, geometry.width));
+                $luperCalc.dialog("option", "height", Math.max(400, geometry.height));
             }
 
             const widget = $luperCalc.dialog("widget");
@@ -373,10 +722,10 @@
         $luperCalc.dialog({
             title: "LuperCalc",
             autoOpen: false,
-            width: Math.max(400, Number(saved.width) || 480),
-            height: Math.max(350, Number(saved.height) || 520),
-            minWidth: 360,
-            minHeight: 300,
+            width: Math.max(450, Number(saved.width) || 520),
+            height: Math.max(400, Number(saved.height) || 560),
+            minWidth: 380,
+            minHeight: 320,
             draggable: true,
             resizable: true,
             closeOnEscape: false,
@@ -407,8 +756,9 @@
         if (!titleBar.find(".ikcalc-dialog-tabs").length) {
             const tabsHtml = `
                 <div class="ikcalc-dialog-tabs">
-                    <span class="ikcalc-dialog-tab active" data-tab="calculator">Battle Calculator</span>
-                    <span class="ikcalc-dialog-tab" data-tab="settings">Settings</span>
+                    <span class="ikcalc-dialog-tab active" data-tab="armies">Armies</span>
+                    <span class="ikcalc-dialog-tab" data-tab="commanders">Commanders</span>
+                    <span class="ikcalc-dialog-tab" data-tab="calculator">Battle Calculator</span>
                 </div>
             `;
             titleBar.prepend(tabsHtml);
@@ -481,7 +831,7 @@
     IKTools.registerTool({
         id: "lupercalc",
         name: "LuperCalc",
-        description: "Battle calculator and army management tool",
+        description: "Battle calculator and army/commander management tool",
         order: 25,
         init: initLuperCalc,
         open: openLuperCalc
