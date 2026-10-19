@@ -154,13 +154,16 @@
             }
 
             /* -------------------------- Top Menu Buttons ------------------------------ */
-            /* Hide default img inside ib2 during dark mode */
+            /* Completely hide the original img element */
             body.ik-dark-mode div.iconbox.ib2 img {
-                opacity: 0 !important;
+                display: none !important;
             }
 
-            /* Apply custom off/on background images to the container div */
+            /* Force container dimensions and display custom background */
             body.ik-dark-mode div.iconbox.ib2 {
+                display: inline-block !important;
+                width: 24px !important;
+                height: 24px !important;
                 background-image: var(--ik-theme-button-city-off) !important;
                 background-repeat: no-repeat !important;
                 background-position: center !important;
