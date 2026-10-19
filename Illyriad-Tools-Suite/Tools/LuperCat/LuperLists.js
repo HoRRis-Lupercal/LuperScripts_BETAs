@@ -129,7 +129,7 @@
             /* Dialog Title Bar Tabs */
             .ikcat-dialog-tabs {
                 float: left;
-                margin: 5px 16px 0 8px; 
+                margin: -3px 0px 0 8px; 
                 display: flex;
                 gap: 8px; 
             }
