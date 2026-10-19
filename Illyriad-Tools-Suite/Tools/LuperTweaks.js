@@ -176,7 +176,13 @@
             body.ik-dark-mode #DockedFriends {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
-            } /* ---------------------- Selected Tab */
+            } 
+            
+            /* ---------------------------- Widget Tabs ------------------------------- */
+            body.ik-dark-mode .sideTab:not(.selected) {
+                background-image: var(--ik-theme-headerO-texture) !important;
+                background-repeat: repeat !important;
+            } /* ------------------------- Selected Tab */
             body.ik-dark-mode .sideTab.selected {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
