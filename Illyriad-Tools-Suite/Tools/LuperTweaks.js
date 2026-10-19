@@ -69,8 +69,8 @@
                 --ik-theme-texture: url("https://i.imgur.com/7j2EhYr.jpeg");
                 --ik-theme-headerO-texture: url("https://i.imgur.com/yCH8seN.png");
                 --ik-theme-header-texture: url("https://i.imgur.com/0nDOLcG.jpeg");
-                --ik-theme-button-city-off: "https://i.imgur.com/HgfvVmZ.png";
-                --ik-theme-button-city-on: "https://i.imgur.com/msAGiHn.png";
+                --ik-theme-button-city-off: url("https://i.imgur.com/HgfvVmZ.png");
+                --ik-theme-button-city-on: url("https://i.imgur.com/msAGiHn.png");
             }
 
             /* Dialog & UI Container Layout */
@@ -155,20 +155,19 @@
 
             /* -------------------------- Top Menu Buttons ------------------------------ */
             /* Hide default img inside ib2 during dark mode */
-            body.ik-dark-mode a.iconbox.ib2 img.iconimg {
+            body.ik-dark-mode div.iconbox.ib2 img {
                 opacity: 0 !important;
             }
 
-            /* Apply custom off/on background images to the container link */
-            body.ik-dark-mode a.iconbox.ib2 {
+            /* Apply custom off/on background images to the container div */
+            body.ik-dark-mode div.iconbox.ib2 {
                 background-image: var(--ik-theme-button-city-off) !important;
                 background-repeat: no-repeat !important;
                 background-position: center !important;
                 background-size: contain !important;
-                display: inline-block !important;
             }
 
-            body.ik-dark-mode a.iconbox.ib2:hover {
+            body.ik-dark-mode div.iconbox.ib2:hover {
                 background-image: var(--ik-theme-button-city-on) !important;
             }
             
