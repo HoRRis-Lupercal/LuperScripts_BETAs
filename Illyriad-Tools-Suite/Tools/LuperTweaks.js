@@ -327,9 +327,7 @@
             }
 
             /* ----------------------- Notifications Tab ------------------------------ */
-            body.ik-dark-mode #tabNotifications div.item:nth-child(2n),
-            body.ik-dark-mode #tabNotifications .oddeven:nth-child(2n),
-            body.ik-dark-mode #Notifications div.item:nth-child(2n) {
+            body.ik-dark-mode #Notifications > div:nth-child(2n) {
                 background-color: var(--ik-theme-alt-bg) !important;
             }
             
