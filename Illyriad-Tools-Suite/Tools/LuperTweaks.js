@@ -163,13 +163,6 @@
             html body.ik-dark-mode {
                 background-image: var(--ik-theme-headermain-texture) !important;
                 background-repeat: no-repeat !important;
-            } /* --------------------------- Table Odd Rows */
-            body.ik-dark-mode .oddeven > *:nth-child(2n+1),
-            body.ik-dark-mode div.oddeven > div:nth-child(2n+1),
-            body.ik-dark-mode tr.odd,
-            body.ik-dark-mode .odd {
-                background-color: var(--ik-theme-alt-bg) !important;
-            }
             } /* ----------------------- Input & Textbox Controls */
             body.ik-dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
             body.ik-dark-mode textarea,
@@ -314,24 +307,43 @@
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] {
                 content: var(--ik-theme-char-ring2-on) !important;
             }
+            /* ========================= End of Buttons ================================== */
+            
+            /* ----------------------- Widget & Panel Alternating Rows ------------------ */
+            /* Table rows tagged with .odd */
+            body.ik-dark-mode tr.odd {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
 
+            /* Next Events & Docked Friends Widgets */
+            body.ik-dark-mode table.oddeven > tbody > tr:nth-child(2n),
+            body.ik-dark-mode table.evenodd > tbody > tr:nth-child(2n+1) {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
+
+            /* UI Widget Content Divs (excluding chat containers) */
+            body.ik-dark-mode .ui-widget-content div.oddeven > div:not([id*="chat"]):nth-child(2n) {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
+
+            /* ----------------------- Notifications Tab ------------------------------ */
+            body.ik-dark-mode #tabNotifications div.item:nth-child(2n),
+            body.ik-dark-mode #tabNotifications .oddeven:nth-child(2n),
+            body.ik-dark-mode #Notifications div.item:nth-child(2n) {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
+            
             /* -------------------------- Next Events Widget ---------------------------- */
             body.ik-dark-mode .smallBorder {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
-            } 
-            body.ik-dark-mode table.oddeven > tbody > tr:nth-child(2n) {
-                background-color: var(--ik-theme-alt-bg) !important;
             }
 
             /* ----------------------- Docked Friends Widget --------------------------- */
             body.ik-dark-mode #DockedFriends {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
-            } /* --------------- Table Evenodd Rows (Odd Children) */
-            body.ik-dark-mode table.evenodd > tbody > tr:nth-child(2n+1) {
-                background-color: var(--ik-theme-alt-bg) !important;
-            }
+            } 
             
             /* ---------------------------- Widget Tabs ------------------------------- */
             body.ik-dark-mode .sideTab {
@@ -346,9 +358,6 @@
             body.ik-dark-mode .ui-widget-content {
                 background-color: var(--ik-theme-content-bg) !important;
                 color: var(--ik-theme-text) !important;
-            } /* ---------------------- Oddeven Divs */
-            body.ik-dark-mode .ui-widget-content div.oddeven > div:nth-child(2n) {
-                background-color: var(--ik-theme-alt-bg) !important;
             } /* ------------------ UI Dialog Titlebar */
             body.ik-dark-mode .ui-dialog .ui-dialog-titlebar {
                 background-image: var(--ik-theme-headerO-texture) !important;
