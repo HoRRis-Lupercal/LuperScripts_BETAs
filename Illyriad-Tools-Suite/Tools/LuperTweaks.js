@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      1.6
+// @version      1.7
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -67,8 +67,8 @@
                 --ik-theme-link: #8ab4f8;
                 --ik-theme-link-hover: #aecbfa;
                 --ik-theme-texture: url("https://i.imgur.com/7j2EhYr.jpeg");
-                --ik-theme-header-texture: url("https://i.imgur.com/rBQ5cFM.jpeg");
-                --ik-theme-accordion-texture: url("https://i.imgur.com/cgsjqZD.jpeg");
+                --ik-theme-headerO-texture: url("https://i.imgur.com/rBQ5cFM.jpeg");
+                --ik-theme-header-texture: url("https://i.imgur.com/cgsjqZD.jpeg");
             }
 
             /* Dialog & UI Container Layout */
@@ -158,25 +158,32 @@
                 background-color: var(--ik-theme-alt-bg) !important;
             }
 
-            /* Replace Chat & Window Headers (header_banner5o.png) with custom dark header */
+            /* Replace Opaque Chat & Window Headers (header_banner5o.png) */
             body.ik-dark-mode [style*="header_banner5o.png"],
             body.ik-dark-mode .chatHeader,
             body.ik-dark-mode .windowHeader,
             body.ik-dark-mode div[id*="chat"] .header,
             body.ik-dark-mode div[class*="chat"] div:first-child {
-                background-image: var(--ik-theme-header-texture) !important;
+                background-image: var(--ik-theme-headerO-texture) !important;
                 background-repeat: no-repeat !important;
                 background-size: cover !important;
             }
 
-            /* Accordion Headers (Both active and inactive states) */
+            /* Main Content Headers, Headlinks, and Accordions */
             body.ik-dark-mode .ui-accordion-header,
             body.ik-dark-mode .ui-accordion-header-active,
             body.ik-dark-mode .ui-state-default,
             body.ik-dark-mode .ui-state-active,
             body.ik-dark-mode .accordionHeader,
-            body.ik-dark-mode a.ui-accordion-header {
-                background-image: var(--ik-theme-accordion-texture) !important;
+            body.ik-dark-mode a.ui-accordion-header,
+            body.ik-dark-mode #mainContentDiv h1,
+            body.ik-dark-mode #mainContentDiv .headlinks,
+            body.ik-dark-mode #scrollContent h1,
+            body.ik-dark-mode #scrollContent .headlinks,
+            body.ik-dark-mode #contentTD h1,
+            body.ik-dark-mode #contentTD .headlinks,
+            body.ik-dark-mode div[class*="headlinks"] {
+                background-image: var(--ik-theme-header-texture) !important;
                 background-repeat: repeat !important;
                 color: var(--ik-theme-text) !important;
             }
@@ -298,7 +305,7 @@
                 </div>
 
                 <div class="iklt-footer">
-                    LuperTweaks v1.6
+                    LuperTweaks v1.7
                 </div>
             </div>
         `;
