@@ -179,7 +179,7 @@
             } 
             
             /* ---------------------------- Widget Tabs ------------------------------- */
-            body.ik-dark-mode .sideTab:not(.selected) {
+            body.ik-dark-mode .sideTab {
                 background-image: var(--ik-theme-headerO-texture) !important;
                 background-repeat: repeat !important;
             } /* ------------------------- Selected Tab */
