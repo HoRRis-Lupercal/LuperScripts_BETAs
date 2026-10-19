@@ -154,13 +154,13 @@
             }
 
             /* -------------------------- Top Menu Buttons ------------------------------ */
-            /* Completely hide the original img element */
-            body.ik-dark-mode div.iconbox.ib2 img {
+            /* Hide the original img.icon */
+            body.ik-dark-mode div.iconbox.ib2 a img.icon {
                 display: none !important;
             }
 
-            /* Force container dimensions and display custom background */
-            body.ik-dark-mode div.iconbox.ib2 {
+            /* Apply custom off/on background images to the inner <a> tag */
+            body.ik-dark-mode div.iconbox.ib2 a {
                 display: inline-block !important;
                 width: 24px !important;
                 height: 24px !important;
@@ -170,7 +170,7 @@
                 background-size: contain !important;
             }
 
-            body.ik-dark-mode div.iconbox.ib2:hover {
+            body.ik-dark-mode div.iconbox.ib2 a:hover {
                 background-image: var(--ik-theme-button-city-on) !important;
             }
             
