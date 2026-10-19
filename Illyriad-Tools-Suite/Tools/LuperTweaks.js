@@ -178,13 +178,27 @@
             }
 
             /* ----------------------- Resbar Status Color Overrides ------------------------ */
-            /* 1. Explicitly preserve positive income (Green) */
+            /* 1. Explicitly preserve positive income (Green) - Safely excludes #000 black */
             body.ik-dark-mode #resbar .resPos,
             body.ik-dark-mode #resbar span[class*="pos"],
             body.ik-dark-mode #resbar [style*="color: green"],
             body.ik-dark-mode #resbar [style*="color:green"],
-            body.ik-dark-mode #resbar [style*="color: #00"],
-            body.ik-dark-mode #resbar [style*="color:#00"] {
+            body.ik-dark-mode #resbar [style*="color: #008"],
+            body.ik-dark-mode #resbar [style*="color:#008"],
+            body.ik-dark-mode #resbar [style*="color: #009"],
+            body.ik-dark-mode #resbar [style*="color:#009"],
+            body.ik-dark-mode #resbar [style*="color: #00a"],
+            body.ik-dark-mode #resbar [style*="color:#00a"],
+            body.ik-dark-mode #resbar [style*="color: #00b"],
+            body.ik-dark-mode #resbar [style*="color:#00b"],
+            body.ik-dark-mode #resbar [style*="color: #00c"],
+            body.ik-dark-mode #resbar [style*="color:#00c"],
+            body.ik-dark-mode #resbar [style*="color: #00d"],
+            body.ik-dark-mode #resbar [style*="color:#00d"],
+            body.ik-dark-mode #resbar [style*="color: #00e"],
+            body.ik-dark-mode #resbar [style*="color:#00e"],
+            body.ik-dark-mode #resbar [style*="color: #00f"],
+            body.ik-dark-mode #resbar [style*="color:#00f"] {
                 color: #55ff55 !important;
             }
 
@@ -194,7 +208,9 @@
             body.ik-dark-mode #resbar [style*="color: red"],
             body.ik-dark-mode #resbar [style*="color:red"],
             body.ik-dark-mode #resbar [style*="color: #f00"],
-            body.ik-dark-mode #resbar [style*="color:#f00"] {
+            body.ik-dark-mode #resbar [style*="color:#f00"],
+            body.ik-dark-mode #resbar [style*="color: rgb(255"],
+            body.ik-dark-mode #resbar [style*="color:rgb(255"] {
                 color: #ff5555 !important;
             }
 
