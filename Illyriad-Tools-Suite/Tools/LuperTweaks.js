@@ -162,6 +162,18 @@
             body.ik-dark-mode div.iconBox.ib2 a:hover img.icon {
                 content: var(--ik-theme-button-city-on) !important;
             }
+
+            /* -------------------------- Next Events Widget ---------------------------- */
+            body.ik-dark-mode .smallBorder {
+                background-image: var(--ik-theme-texture) !important;
+                background-repeat: repeat !important;
+            }
+
+            /* ----------------------- Docked Friends Widget --------------------------- */
+            body.ik-dark-mode #DockedFriends {
+                background-image: var(--ik-theme-texture) !important;
+                background-repeat: repeat !important;
+            }
             
             
         `;
