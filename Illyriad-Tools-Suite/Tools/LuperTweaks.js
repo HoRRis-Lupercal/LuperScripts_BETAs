@@ -163,38 +163,41 @@
                 background-repeat: no-repeat !important;
             }
 
-            /* ----------------------- Default Page Text Color (Excludes Resbar) ------------------------ */
+           /* ----------------------- Default Page Text Color ------------------------ */
             body.ik-dark-mode, 
             body.ik-dark-mode p, 
-            body.ik-dark-mode td:not(#resbar *), 
-            body.ik-dark-mode th:not(#resbar *), 
-            body.ik-dark-mode span:not(#resbar *), 
-            body.ik-dark-mode label:not(#resbar *) {
+            body.ik-dark-mode td, 
+            body.ik-dark-mode th, 
+            body.ik-dark-mode span, 
+            body.ik-dark-mode label,
+            body.ik-dark-mode #resbar,
+            body.ik-dark-mode #resbar td,
+            body.ik-dark-mode #resbar span {
                 color: var(--ik-theme-text) !important;
             }
 
-            /* ----------------------- Resbar Color Exceptions ------------------------ */
-            /* 1. Neutral/Base resource numbers (only when no inline color or status class is set) */
-            body.ik-dark-mode #resbar td:not([style*="color"]):not([class*="res"]),
-            body.ik-dark-mode #resbar span:not([style*="color"]):not([class*="res"]) {
-                color: var(--ik-theme-text) !important;
-            }
-
-            /* 2. Explicitly preserve positive income (Green) */
+            /* ----------------------- Resbar Status Color Overrides ------------------------ */
+            /* 1. Explicitly preserve positive income (Green) */
             body.ik-dark-mode #resbar .resPos,
             body.ik-dark-mode #resbar span[class*="pos"],
-            body.ik-dark-mode #resbar [style*="green"] {
+            body.ik-dark-mode #resbar [style*="color: green"],
+            body.ik-dark-mode #resbar [style*="color:green"],
+            body.ik-dark-mode #resbar [style*="color: #00"],
+            body.ik-dark-mode #resbar [style*="color:#00"] {
                 color: #55ff55 !important;
             }
 
-            /* 3. Explicitly preserve negative income (Red) */
+            /* 2. Explicitly preserve negative income (Red) */
             body.ik-dark-mode #resbar .resNeg,
             body.ik-dark-mode #resbar span[class*="neg"],
-            body.ik-dark-mode #resbar [style*="red"] {
+            body.ik-dark-mode #resbar [style*="color: red"],
+            body.ik-dark-mode #resbar [style*="color:red"],
+            body.ik-dark-mode #resbar [style*="color: #f00"],
+            body.ik-dark-mode #resbar [style*="color:#f00"] {
                 color: #ff5555 !important;
             }
 
-            /* 4. Explicitly preserve capacity max/overflow (Yellow/Orange) */
+            /* 3. Explicitly preserve capacity max/overflow (Yellow/Orange) */
             body.ik-dark-mode #resbar .resMax,
             body.ik-dark-mode #resbar span[class*="max"] {
                 color: #ffaa00 !important;
