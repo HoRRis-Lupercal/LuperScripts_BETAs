@@ -166,13 +166,16 @@
             } /* --------------------------- Table Odd Rows */
             body.ik-dark-mode tr.odd {
                 background-color: var(--ik-theme-alt-bg) !important;
-            }/* ----------------------- Input & Textbox Controls */
+            } /* ----------------------- Input & Textbox Controls */
             body.ik-dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
             body.ik-dark-mode textarea,
             body.ik-dark-mode select {
                 background-color: var(--ik-theme-input-bg) !important;
                 color: var(--ik-theme-text) !important;
                 border: 1px solid var(--ik-theme-border) !important;
+            } /* ------------------- Accordian Headers Background */
+            body.ik-dark-mode .ui-state-default {
+                background-image: var(--ik-theme-header-texture) !important;
             }
 
            /* ----------------------- Default Page Text Color ------------------------ */
