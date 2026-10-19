@@ -69,6 +69,8 @@
                 --ik-theme-texture: url("https://i.imgur.com/7j2EhYr.jpeg");
                 --ik-theme-headerO-texture: url("https://i.imgur.com/yCH8seN.png");
                 --ik-theme-header-texture: url("https://i.imgur.com/0nDOLcG.jpeg");
+                --ik-theme-button-city-off: url("https://i.imgur.com/HgfvVmZ.png");
+                --ik-theme-button-city-on: url("https://i.imgur.com/msAGiHn.png");
             }
 
             /* Dialog & UI Container Layout */
@@ -149,6 +151,14 @@
             /* --------------------------- Top Info Bar -------------------------------- */
             body.ik-dark-mode .topBar {
                 background-color: var(--ik-theme-content-bg) !important;
+            }
+
+            /* -------------------------- Top Menu Buttons ------------------------------ */
+            body.ik-dark-mode .iconbox.ib2 img {
+                content: var(--ik-theme-button-city-off) !important;
+            }
+            body.ik-dark-mode .iconbox.ib2 img:hover {
+                content: var(--ik-theme-button-city-on) !important;
             }
             
             
