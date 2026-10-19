@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      1.4
+// @version      1.5
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -67,6 +67,7 @@
                 --ik-theme-link: #8ab4f8;
                 --ik-theme-link-hover: #aecbfa;
                 --ik-theme-texture: url("https://i.imgur.com/7j2EhYr.jpeg");
+                --ik-theme-header-texture: url("https://i.imgur.com/rBQ5cFM.jpeg");
             }
 
             /* Dialog & UI Container Layout */
@@ -156,10 +157,23 @@
                 background-color: var(--ik-theme-alt-bg) !important;
             }
 
+            /* Replace Chat & Window Headers (header_banner5o.png) with custom dark header */
+            body.ik-dark-mode [style*="header_banner5o.png"],
+            body.ik-dark-mode .chatHeader,
+            body.ik-dark-mode .windowHeader,
+            body.ik-dark-mode div[id*="chat"] .header,
+            body.ik-dark-mode div[class*="chat"] div:first-child {
+                background-image: var(--ik-theme-header-texture) !important;
+                background-repeat: no-repeat !important;
+                background-size: cover !important;
+            }
+
             /* Replace all parchment/paper textures (paper2.jpg, accordions, events widget, chats, side panels) */
             body.ik-dark-mode [style*="paper2.jpg"],
             body.ik-dark-mode .paper,
             body.ik-dark-mode .accordionHeader,
+            body.ik-dark-mode .ui-accordion-header,
+            body.ik-dark-mode .ui-accordion-header-active,
             body.ik-dark-mode .header,
             body.ik-dark-mode div[class*="header"],
             body.ik-dark-mode #DockedFriends,
@@ -276,7 +290,7 @@
                 </div>
 
                 <div class="iklt-footer">
-                    LuperTweaks v1.4
+                    LuperTweaks v1.5
                 </div>
             </div>
         `;
