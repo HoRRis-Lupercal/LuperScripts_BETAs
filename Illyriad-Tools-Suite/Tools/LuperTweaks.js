@@ -172,6 +172,12 @@
             body.ik-dark-mode label:not(#resbar *) {
                 color: var(--ik-theme-text) !important;
             }
+            
+            /* ----------------------- Resbar Neutral Text Color Only ---------------- */
+            body.ik-dark-mode #resbar td:not([style*="color"]),
+            body.ik-dark-mode #resbar span:not([style*="color"]) {
+                color: var(--ik-theme-text) !important;
+            }
                
             /* ------------------- City screen header and background -------------------- */  
             body.ik-dark-mode #contentTD {
@@ -292,12 +298,29 @@
         `;
     }
 
+    function updateResbarTextColors() {
+        const resbar = document.querySelector("#resbar");
+        if (!resbar) return;
+
+        const elements = resbar.querySelectorAll("td, span, div, font");
+        elements.forEach(el => {
+            const computedColor = window.getComputedStyle(el).color;
+            // Check if the current computed text color is pure black
+            if (settings.darkMode && (computedColor === "rgb(0, 0, 0)" || computedColor === "black")) {
+                el.style.setProperty("color", "var(--ik-theme-text)", "important");
+            } else if (!settings.darkMode) {
+                el.style.removeProperty("color");
+            }
+        });
+    }
+
     function applySettings() {
         if (settings.darkMode) {
             document.body.classList.add("ik-dark-mode");
         } else {
             document.body.classList.remove("ik-dark-mode");
         }
+        updateResbarTextColors();
     }
 
     function saveSettings() {
