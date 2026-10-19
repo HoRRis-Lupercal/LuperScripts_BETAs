@@ -896,16 +896,21 @@
                ============================================================= */
 
             #ikToolsPanel {
+                display: flex !important;
+                flex-direction: column !important;
                 width: calc(100% - 2px) !important;
-                box-sizing: border-box;
-                padding: 6px;
+                height: 100% !important;
+                box-sizing: border-box !important;
+                padding: 6px !important;
             }
 
             #ikToolsList {
-                height: 120px;
-                overflow-y: auto;
-                box-sizing: border-box;
-                padding-top: 4px;
+                flex: 1 1 auto !important;
+                height: 100% !important;
+                max-height: 100% !important;
+                overflow-y: auto !important;
+                box-sizing: border-box !important;
+                padding-top: 4px !important;
             }
 
             #ikToolsList .iktools-launch-button {
@@ -1767,6 +1772,9 @@
 
             toolsTab.style.width =
                 "245px";
+
+            toolsTab.style.height = 
+                "100%";
 
             toolsTab.style.overflow =
                 "hidden";
