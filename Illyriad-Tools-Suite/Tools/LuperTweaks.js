@@ -68,6 +68,8 @@
                 --ik-theme-input-bg: #2a2b2d;
                 --ik-theme-border: #333537;
                 --ik-theme-text: #e3e3e3;
+                --ik-theme-special-text1: #fcd116;
+                --ik-theme-special-text2: #fcd116;
                 --ik-theme-link: #8ab4f8;
                 --ik-theme-link-hover: #aecbfa;
                 --ik-theme-texture: url("https://i.imgur.com/7j2EhYr.jpeg");
@@ -173,6 +175,12 @@
             } /* ------------------- Accordian Headers Background */
             body.ik-dark-mode .ui-state-default {
                 background-image: var(--ik-theme-header-texture) !important;
+            }/* ----------------------- UI State Default Links */
+            body.ik-dark-mode .ui-state-default a {
+                color: var(--ik-theme-special-text1) !important;
+            }/* ----------------------- UI State Active Links */
+            body.ik-dark-mode .ui-state-active a {
+                color: var(--ik-theme-special-text2) !important;
             }
 
            /* ----------------------- Default Page Text Color ------------------------ */
