@@ -241,6 +241,13 @@
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
             }
+            /* ----------------------- UI Widget Content & Oddeven Divs --------------------------- */
+            body.ik-dark-mode .ui-widget-content {
+                background-color: var(--ik-theme-content-bg) !important;
+            }
+            body.ik-dark-mode .ui-widget-content div.oddeven > div:nth-child(2n) {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
         `;
     }
 
