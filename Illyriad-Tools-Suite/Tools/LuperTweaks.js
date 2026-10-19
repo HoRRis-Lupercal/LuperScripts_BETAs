@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      1.1
+// @version      1.2
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -111,7 +111,7 @@
             }
 
             /* =========================================================================
-               GLOBAL DARK MODE (Gemini-Inspired Dark Theme)
+               GLOBAL DARK MODE (Gemini-Inspired Dark Theme + Customizations)
                ========================================================================= */
             body.ik-dark-mode {
                 background-color: #131314 !important;
@@ -127,6 +127,24 @@
             body.ik-dark-mode span,
             body.ik-dark-mode p {
                 color: inherit;
+            }
+
+            /* Target Content Area */
+            body.ik-dark-mode #contentTD {
+                background-color: #1e1f20 !important;
+            }
+
+            /* Alternate rows styling */
+            body.ik-dark-mode div.oddeven > div:nth-child(2n) {
+                background-color: #2d2e30 !important;
+            }
+
+            /* Replace parchment background image */
+            body.ik-dark-mode,
+            body.ik-dark-mode #wrap,
+            body.ik-dark-mode #main {
+                background-image: url("https://i.imgur.com/7j2EhYr.jpeg") !important;
+                background-repeat: repeat !important;
             }
 
             /* Panels, Dialogs, and Windows */
@@ -234,7 +252,7 @@
                 </div>
 
                 <div class="iklt-footer">
-                    LuperTweaks v1.1
+                    LuperTweaks v1.2
                 </div>
             </div>
         `;
