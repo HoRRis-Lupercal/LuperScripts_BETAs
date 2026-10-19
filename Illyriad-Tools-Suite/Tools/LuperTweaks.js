@@ -91,6 +91,9 @@
                 
                 --ik-theme-button-inv-off: url("https://i.imgur.com/B8omxkJ.png");
                 --ik-theme-button-inv-on: url("https://i.imgur.com/mOpruAO.png");
+
+                --ik-theme-char-ring2-off: url("https://i.imgur.com/scbj2y9.png");
+                --ik-theme-char-ring2-on: url("https://i.imgur.com/9Ijy5Vv.png");
             }
 
             /* Dialog & UI Container Layout */
@@ -215,6 +218,14 @@
             }
             body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon5 {
                 content: var(--ik-theme-button-inv-on) !important;
+            }
+            /* --------------------------- Character Button ----------------------------- */
+            body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] {
+                content: var(--ik-theme-char-ring2-off) !important;
+            }
+
+            body.ik-dark-mode div.iconBox.ib8 a:hover img.icon[src*="ring2_off.png"] {
+                content: var(--ik-theme-char-ring2-on) !important;
             }
 
             /* -------------------------- Next Events Widget ---------------------------- */
