@@ -158,7 +158,7 @@
 
             /* ----------------------------- Main Header Image ------------------------- */
             body.ik-dark-mode #contentTD {
-                content: var(--ik-theme-headermain-texture) !important;
+                background-image: var(--ik-theme-headermain-texture) !important;
             }
                
             /* ------------------- City screen header and background -------------------- */  
