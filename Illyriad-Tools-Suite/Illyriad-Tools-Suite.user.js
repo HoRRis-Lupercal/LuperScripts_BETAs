@@ -10,8 +10,8 @@
 //
 // @require      https://github.com/HoRRis-Lupercal/LuperScripts_BETAs/raw/refs/heads/main/Illyriad-Tools-Suite/Core/IKTools-Core.js
 // @require      https://github.com/HoRRis-Lupercal/LuperScripts_BETAs/raw/refs/heads/main/Illyriad-Tools-Suite/Tools/IKQuartermaster.js
-// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/Illyriad-Tools-Suite/Tools/Catalogue/CatalogueData.js
-// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/Illyriad-Tools-Suite/Tools/Catalogue/LuperLists.js
+// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/Illyriad-Tools-Suite/Tools/LuperCat/CatalogueData.js
+// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/Illyriad-Tools-Suite/Tools/LuperCat/LuperLists.js
 // @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/Illyriad-Tools-Suite/Tools/Depreciated/LuperTweaks.js
 //
 // @updateURL    https://github.com/HoRRis-Lupercal/LuperScripts_BETAs/raw/refs/heads/main/Illyriad-Tools-Suite/Illyriad-Tools-Suite.user.js
