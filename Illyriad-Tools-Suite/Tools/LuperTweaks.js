@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      1.2
+// @version      1.3
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -118,9 +118,7 @@
                 color: #e3e3e3 !important;
             }
 
-            /* Main Game Backgrounds & Containers */
-            body.ik-dark-mode #wrap,
-            body.ik-dark-mode #main,
+            /* Main Game Text & Inner Elements */
             body.ik-dark-mode div,
             body.ik-dark-mode td,
             body.ik-dark-mode th,
@@ -129,7 +127,7 @@
                 color: inherit;
             }
 
-            /* Target Content Area */
+            /* Target Content Area Background */
             body.ik-dark-mode #contentTD {
                 background-color: #1e1f20 !important;
             }
@@ -139,10 +137,15 @@
                 background-color: #2d2e30 !important;
             }
 
-            /* Replace parchment background image */
-            body.ik-dark-mode,
-            body.ik-dark-mode #wrap,
-            body.ik-dark-mode #main {
+            /* Replace ONLY paper2.jpg instances (Docked Chat, Friends, Tools, Panels) */
+            body.ik-dark-mode [style*="paper2.jpg"],
+            body.ik-dark-mode .paper,
+            body.ik-dark-mode #DockedFriends,
+            body.ik-dark-mode #DockedChat,
+            body.ik-dark-mode #FriendsTab,
+            body.ik-dark-mode #NotesTab,
+            body.ik-dark-mode #CommunitiesTab,
+            body.ik-dark-mode #ikToolsPanel {
                 background-image: url("https://i.imgur.com/7j2EhYr.jpeg") !important;
                 background-repeat: repeat !important;
             }
@@ -160,7 +163,6 @@
                 background-color: #1e1f20 !important;
                 color: #e3e3e3 !important;
                 border-color: #333537 !important;
-                background-image: none !important;
             }
 
             body.ik-dark-mode .ui-dialog-titlebar,
@@ -252,7 +254,7 @@
                 </div>
 
                 <div class="iklt-footer">
-                    LuperTweaks v1.2
+                    LuperTweaks v1.3
                 </div>
             </div>
         `;
