@@ -10,7 +10,6 @@
 //
 // @require      https://github.com/HoRRis-Lupercal/LuperScripts_BETAs/raw/refs/heads/main/IKnights%20Tools%20Suite/Core/IKTools-Core.js
 // @require      https://github.com/HoRRis-Lupercal/LuperScripts_BETAs/raw/refs/heads/main/IKnights%20Tools%20Suite/Tools/Quartermaster.js
-// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/IKnights%20Tools%20Suite/Tools/LuperCalc.js
 // @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/IKnights%20Tools%20Suite/Tools/Catalogue/CatalogueData.js
 // @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/IKnights%20Tools%20Suite/Tools/Catalogue/Module.js
 //
