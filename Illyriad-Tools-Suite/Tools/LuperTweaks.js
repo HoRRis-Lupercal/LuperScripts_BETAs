@@ -50,10 +50,12 @@
     // =========================================================================
 
     function injectTweaksStyles() {
-        if (document.querySelector("#ikLuperTweaksStyles")) return;
-
-        const style = document.createElement("style");
-        style.id = "ikLuperTweaksStyles";
+        let style = document.querySelector("#ikLuperTweaksStyles");
+        if (!style) {
+            style = document.createElement("style");
+            style.id = "ikLuperTweaksStyles";
+            document.head.appendChild(style);
+        }
         style.textContent = `
             /* =========================================================================
                CUSTOMIZABLE THEME VARIABLES (Modify these to easily create custom themes)
@@ -145,7 +147,7 @@
             body.ik-dark-mode .headlinks,
             body.ik-dark-mode .headLinks {
                 background-image: var(--ik-theme-headerO-texture) !important;
-            } /* ---------------------- Subheader selected tab */
+            } 
             body.ik-dark-mode .headlinks a.selected,
             body.ik-dark-mode .headLinks a.selected {
                 background-image: var(--ik-theme-texture) !important;
@@ -158,27 +160,28 @@
 
             /* ========================== Top Menu Buttons ============================= */
             /* ----------------------------- City Button ------------------------------- */
-            /* ----------------------------- Main Button */
             body.ik-dark-mode div.iconBox.ib2 a img.icon {
                 content: var(--ik-theme-button-city-off) !important;
             }
             body.ik-dark-mode div.iconBox.ib2 a:hover img.icon {
                 content: var(--ik-theme-button-city-on) !important;
             }
-            /* ---------------------------- Castle Button */
+
+            /* ---------------------------- Castle Button ------------------------------ */
+            body.ik-dark-mode div.iconBox.ib1 a img.icon,
             body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon1 {
                 content: var(--ik-theme-button-castle-off) !important;
             }
+            body.ik-dark-mode div.iconBox.ib1 a:hover img.icon,
             body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon1 {
                 content: var(--ik-theme-button-castle-on) !important;
             }
-            
 
             /* -------------------------- Next Events Widget ---------------------------- */
             body.ik-dark-mode .smallBorder {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
-            } /* ---------------------- Alternate row colour */
+            } 
             body.ik-dark-mode table.oddeven > tbody > tr:nth-child(2n) {
                 background-color: var(--ik-theme-alt-bg) !important;
             }
@@ -193,15 +196,12 @@
             body.ik-dark-mode .sideTab {
                 background-image: var(--ik-theme-headerO-texture) !important;
                 background-repeat: repeat !important;
-            } /* ------------------------- Selected Tab */
+            } 
             body.ik-dark-mode .sideTab.selected {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
             }
-            
-            
         `;
-        document.head.appendChild(style);
     }
 
     function applySettings() {
