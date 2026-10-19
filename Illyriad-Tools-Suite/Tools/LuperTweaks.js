@@ -71,6 +71,7 @@
                 --ik-theme-texture: url("https://i.imgur.com/7j2EhYr.jpeg");
                 --ik-theme-headerO-texture: url("https://i.imgur.com/yCH8seN.png");
                 --ik-theme-header-texture: url("https://i.imgur.com/0nDOLcG.jpeg");
+                --ik-theme-headermain-texture: url("https://i.imgur.com/TQ2SkKz.png");
                 
                 /* ----------------- Custom Button Image Links ------------------ */
                 
@@ -154,6 +155,11 @@
             /* =========================================================================
                DARK MODE CUSTOM STYLES
                ========================================================================= */
+
+            /* ----------------------------- Main Header Image ------------------------- */
+            body.ik-dark-mode #contentTD {
+                content: var(--ik-theme-headermain-texture) !important;
+            }
                
             /* ------------------- City screen header and background -------------------- */  
             body.ik-dark-mode #contentTD {
@@ -224,7 +230,7 @@
                 content: var(--ik-theme-char-ring2-off) !important;
             }
 
-            body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_off.png"] {
+            body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] {
                 content: var(--ik-theme-char-ring2-on) !important;
             }
 
