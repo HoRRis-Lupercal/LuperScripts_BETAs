@@ -260,7 +260,10 @@
             body.ik-dark-mode #DockedFriends {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
-            } 
+            } /* --------------- Table Evenodd Rows (Odd Children) */
+            body.ik-dark-mode table.evenodd > tbody > tr:nth-child(2n+1) {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
             
             /* ---------------------------- Widget Tabs ------------------------------- */
             body.ik-dark-mode .sideTab {
