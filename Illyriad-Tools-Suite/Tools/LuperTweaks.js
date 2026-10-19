@@ -163,7 +163,7 @@
                 background-repeat: no-repeat !important;
             }
 
-            /* ----------------------- Default Page Text Color ------------------------ */
+            /* ----------------------- Default Page Text Color (Excludes Resbar) ------------------------ */
             body.ik-dark-mode, 
             body.ik-dark-mode p, 
             body.ik-dark-mode td:not(#resbar *), 
@@ -172,11 +172,32 @@
             body.ik-dark-mode label:not(#resbar *) {
                 color: var(--ik-theme-text) !important;
             }
-            
-            /* ----------------------- Resbar Neutral Text Color Only ---------------- */
-            body.ik-dark-mode #resbar td:not([style*="color"]),
-            body.ik-dark-mode #resbar span:not([style*="color"]) {
+
+            /* ----------------------- Resbar Color Exceptions ------------------------ */
+            /* 1. Neutral/Base resource numbers (only when no inline color or status class is set) */
+            body.ik-dark-mode #resbar td:not([style*="color"]):not([class*="res"]),
+            body.ik-dark-mode #resbar span:not([style*="color"]):not([class*="res"]) {
                 color: var(--ik-theme-text) !important;
+            }
+
+            /* 2. Explicitly preserve positive income (Green) */
+            body.ik-dark-mode #resbar .resPos,
+            body.ik-dark-mode #resbar span[class*="pos"],
+            body.ik-dark-mode #resbar [style*="green"] {
+                color: #55ff55 !important;
+            }
+
+            /* 3. Explicitly preserve negative income (Red) */
+            body.ik-dark-mode #resbar .resNeg,
+            body.ik-dark-mode #resbar span[class*="neg"],
+            body.ik-dark-mode #resbar [style*="red"] {
+                color: #ff5555 !important;
+            }
+
+            /* 4. Explicitly preserve capacity max/overflow (Yellow/Orange) */
+            body.ik-dark-mode #resbar .resMax,
+            body.ik-dark-mode #resbar span[class*="max"] {
+                color: #ffaa00 !important;
             }
                
             /* ------------------- City screen header and background -------------------- */  
@@ -298,29 +319,12 @@
         `;
     }
 
-    function updateResbarTextColors() {
-        const resbar = document.querySelector("#resbar");
-        if (!resbar) return;
-
-        const elements = resbar.querySelectorAll("td, span, div, font");
-        elements.forEach(el => {
-            const computedColor = window.getComputedStyle(el).color;
-            // Check if the current computed text color is pure black
-            if (settings.darkMode && (computedColor === "rgb(0, 0, 0)" || computedColor === "black")) {
-                el.style.setProperty("color", "var(--ik-theme-text)", "important");
-            } else if (!settings.darkMode) {
-                el.style.removeProperty("color");
-            }
-        });
-    }
-
     function applySettings() {
         if (settings.darkMode) {
             document.body.classList.add("ik-dark-mode");
         } else {
             document.body.classList.remove("ik-dark-mode");
         }
-        updateResbarTextColors();
     }
 
     function saveSettings() {
