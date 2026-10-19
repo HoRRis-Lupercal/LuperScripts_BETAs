@@ -71,11 +71,26 @@
                 --ik-theme-texture: url("https://i.imgur.com/7j2EhYr.jpeg");
                 --ik-theme-headerO-texture: url("https://i.imgur.com/yCH8seN.png");
                 --ik-theme-header-texture: url("https://i.imgur.com/0nDOLcG.jpeg");
+                
                 /* ----------------- Custom Button Image Links ------------------ */
+                
                 --ik-theme-button-city-off: url("https://i.imgur.com/HgfvVmZ.png");
-                --ik-theme-button-city-on: url("https://i.imgur.com/msAGiHn.png");
-                --ik-theme-button-castle-off: url("https://i.imgur.com/pfGAKIG.png");
+                --ik-theme-button-city-on: url("https://i.imgur.com/CuUPvWZ.png");
+                
+                --ik-theme-button-castle-off: url("https://i.imgur.com/Fy2aIFi.png");
                 --ik-theme-button-castle-on: url("https://i.imgur.com/ioWdmfh.png");
+                
+                --ik-theme-button-res-off: url("https://i.imgur.com/HgfvVmZ.png");
+                --ik-theme-button-res-on: url("https://i.imgur.com/msAGiHn.png");
+                
+                --ik-theme-button-prod-off: url("https://i.imgur.com/oTH90xz.png");
+                --ik-theme-button-prod-on: url("https://i.imgur.com/A5LQ7Ib.png");
+                
+                --ik-theme-button-sov-off: url("https://i.imgur.com/yuy2g5n.png");
+                --ik-theme-button-sov-on: url("https://i.imgur.com/LQMvpD5.png");
+                
+                --ik-theme-button-inv-off: url("https://i.imgur.com/B8omxkJ.png");
+                --ik-theme-button-inv-on: url("https://i.imgur.com/mOpruAO.png");
             }
 
             /* Dialog & UI Container Layout */
@@ -166,15 +181,40 @@
             body.ik-dark-mode div.iconBox.ib2 a:hover img.icon {
                 content: var(--ik-theme-button-city-on) !important;
             }
-
-            /* ---------------------------- Castle Button ------------------------------ */
-            body.ik-dark-mode div.iconBox.ib1 a img.icon,
+            /* ------------------------- City - Castle Button -------------------------- */
             body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon1 {
                 content: var(--ik-theme-button-castle-off) !important;
             }
-            body.ik-dark-mode div.iconBox.ib1 a:hover img.icon,
             body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon1 {
                 content: var(--ik-theme-button-castle-on) !important;
+            }
+            /* ------------------------ City - Resources Button ------------------------- */
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon2 {
+                content: var(--ik-theme-button-res-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon2 {
+                content: var(--ik-theme-button-res-on) !important;
+            }
+            /* ------------------------ City - Production Button ------------------------- */
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon3 {
+                content: var(--ik-theme-button-prod-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon3 {
+                content: var(--ik-theme-button-prod-on) !important;
+            }
+            /* ------------------------ City - Sovereignty Button ------------------------- */
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon4 {
+                content: var(--ik-theme-button-sov-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon4 {
+                content: var(--ik-theme-button-sov-on) !important;
+            }
+            /* ------------------------ City - Inventory Button ------------------------- */
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon5 {
+                content: var(--ik-theme-button-inv-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon5 {
+                content: var(--ik-theme-button-inv-on) !important;
             }
 
             /* -------------------------- Next Events Widget ---------------------------- */
