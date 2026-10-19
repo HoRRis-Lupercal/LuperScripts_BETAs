@@ -166,10 +166,10 @@
             /* ----------------------- Default Page Text Color ------------------------ */
             body.ik-dark-mode, 
             body.ik-dark-mode p, 
-            body.ik-dark-mode td, 
-            body.ik-dark-mode th, 
-            body.ik-dark-mode span, 
-            body.ik-dark-mode label {
+            body.ik-dark-mode td:not(#resbar *), 
+            body.ik-dark-mode th:not(#resbar *), 
+            body.ik-dark-mode span:not(#resbar *), 
+            body.ik-dark-mode label:not(#resbar *) {
                 color: var(--ik-theme-text) !important;
             }
                
@@ -277,6 +277,7 @@
             /* ------------------------- UI Widget Content ----------------------------- */
             body.ik-dark-mode .ui-widget-content {
                 background-color: var(--ik-theme-content-bg) !important;
+                color: var(--ik-theme-text) !important;
             } /* ---------------------- Oddeven Divs */
             body.ik-dark-mode .ui-widget-content div.oddeven > div:nth-child(2n) {
                 background-color: var(--ik-theme-alt-bg) !important;
