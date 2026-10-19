@@ -61,6 +61,7 @@
                CUSTOMIZABLE THEME VARIABLES (Modify these to easily create custom themes)
                ========================================================================= */
             :root {
+                --ik-theme-text: #e3e3e3;
                 --ik-theme-bg: #131314;
                 --ik-theme-content-bg: #1e1f20;
                 --ik-theme-alt-bg: #2d2e30;
@@ -160,6 +161,11 @@
             html body.ik-dark-mode {
                 background-image: var(--ik-theme-headermain-texture) !important;
                 background-repeat: repeat !important;
+            }
+
+            /* ----------------------- Default Page Text Color ------------------------ */
+            body.ik-dark-mode {
+                color: var(--ik-theme-text) !important;
             }
                
             /* ------------------- City screen header and background -------------------- */  
