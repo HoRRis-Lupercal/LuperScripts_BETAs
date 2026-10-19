@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.1
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -41,7 +41,7 @@
     let resizeBound = false;
 
     let settings = {
-        opaquePopups: false
+        darkMode: false
     };
 
 
@@ -110,35 +110,81 @@
                 opacity: 0.7;
             }
 
-            /* Global Opaque / Non-Transparent Mode Rules (Affects base page, scripts, and chat) */
-            body.ik-opaque-mode .ui-dialog,
-            body.ik-opaque-mode .ui-widget-content,
-            body.ik-opaque-mode .window,
-            body.ik-opaque-mode div[id*="chat"],
-            body.ik-opaque-mode div[class*="chat"],
-            body.ik-opaque-mode .dialog,
-            body.ik-opaque-mode #chatWin {
-                background-color: #f7f2e0 !important;
-                opacity: 1 !important;
+            /* =========================================================================
+               GLOBAL DARK MODE (Gemini-Inspired Dark Theme)
+               ========================================================================= */
+            body.ik-dark-mode {
+                background-color: #131314 !important;
+                color: #e3e3e3 !important;
+            }
+
+            /* Main Game Backgrounds & Containers */
+            body.ik-dark-mode #wrap,
+            body.ik-dark-mode #main,
+            body.ik-dark-mode div,
+            body.ik-dark-mode td,
+            body.ik-dark-mode th,
+            body.ik-dark-mode span,
+            body.ik-dark-mode p {
+                color: inherit;
+            }
+
+            /* Panels, Dialogs, and Windows */
+            body.ik-dark-mode .ui-dialog,
+            body.ik-dark-mode .ui-widget-content,
+            body.ik-dark-mode .window,
+            body.ik-dark-mode div[id*="chat"],
+            body.ik-dark-mode div[class*="chat"],
+            body.ik-dark-mode .dialog,
+            body.ik-dark-mode #chatWin,
+            body.ik-dark-mode #ikCatalogue,
+            body.ik-dark-mode #ikLuperTweaks {
+                background-color: #1e1f20 !important;
+                color: #e3e3e3 !important;
+                border-color: #333537 !important;
                 background-image: none !important;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
+            }
+
+            body.ik-dark-mode .ui-dialog-titlebar,
+            body.ik-dark-mode .ui-widget-header {
+                background-color: #28292a !important;
+                color: #f1f3f4 !important;
+                border-bottom: 1px solid #333537 !important;
+            }
+
+            /* Inputs, Textareas, and Select Dropdowns */
+            body.ik-dark-mode input[type="text"],
+            body.ik-dark-mode input[type="password"],
+            body.ik-dark-mode select,
+            body.ik-dark-mode textarea {
+                background-color: #2d2e30 !important;
+                color: #e3e3e3 !important;
+                border: 1px solid #444746 !important;
+            }
+
+            /* Links */
+            body.ik-dark-mode a {
+                color: #8ab4f8 !important;
+            }
+            body.ik-dark-mode a:hover {
+                color: #aecbfa !important;
             }
         `;
         document.head.appendChild(style);
     }
 
     function applySettings() {
-        if (settings.opaquePopups) {
-            document.body.classList.add("ik-opaque-mode");
+        if (settings.darkMode) {
+            document.body.classList.add("ik-dark-mode");
         } else {
-            document.body.classList.remove("ik-opaque-mode");
+            document.body.classList.remove("ik-dark-mode");
         }
     }
 
     function saveSettings() {
-        const opaqueCheckbox = document.querySelector("#ikltOpaqueCheckbox");
-        if (opaqueCheckbox) {
-            settings.opaquePopups = opaqueCheckbox.checked;
+        const darkCheckbox = document.querySelector("#ikltDarkCheckbox");
+        if (darkCheckbox) {
+            settings.darkMode = darkCheckbox.checked;
         }
         saveJSON(STORAGE.SETTINGS, settings);
         applySettings();
@@ -149,9 +195,9 @@
         if (saved) {
             settings = Object.assign({}, settings, saved);
         }
-        const opaqueCheckbox = document.querySelector("#ikltOpaqueCheckbox");
-        if (opaqueCheckbox) {
-            opaqueCheckbox.checked = !!settings.opaquePopups;
+        const darkCheckbox = document.querySelector("#ikltDarkCheckbox");
+        if (darkCheckbox) {
+            darkCheckbox.checked = !!settings.darkMode;
         }
         applySettings();
     }
@@ -169,13 +215,13 @@
         content.innerHTML = `
             <div class="iklt-flex-wrapper">
                 <div class="iklt-section">
-                    <div class="iklt-section-title">Window & Popup Appearance</div>
+                    <div class="iklt-section-title">Theme Preferences</div>
                     <label class="iklt-option-row">
-                        <input type="checkbox" id="ikltOpaqueCheckbox" />
-                        <span>Enable Non-Transparent Popups & Chat Windows</span>
+                        <input type="checkbox" id="ikltDarkCheckbox" />
+                        <span>Enable Global Dark Mode</span>
                     </label>
                     <div style="font-size: 11px; opacity: 0.7; margin-left: 20px; margin-top: 2px;">
-                        Removes transparency from game dialogs, popups, and default chat windows.
+                        Applies a modern dark theme across the webpage, game panels, chat windows, and script tools.
                     </div>
                 </div>
 
@@ -188,13 +234,13 @@
                 </div>
 
                 <div class="iklt-footer">
-                    LuperTweaks v1.0
+                    LuperTweaks v1.1
                 </div>
             </div>
         `;
         document.body.appendChild(content);
 
-        const checkbox = content.querySelector("#ikltOpaqueCheckbox");
+        const checkbox = content.querySelector("#ikltDarkCheckbox");
         checkbox.addEventListener("change", saveSettings);
     }
 
