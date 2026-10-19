@@ -167,10 +167,17 @@
             body.ik-dark-mode .smallBorder {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
+            } /* ---------------------- Alternate row colour */
+            body.ik-dark-mode table.oddeven > tbody > tr:nth-child(2n) {
+                background-color: var(--ik-theme-alt-bg) !important;
             }
 
             /* ----------------------- Docked Friends Widget --------------------------- */
             body.ik-dark-mode #DockedFriends {
+                background-image: var(--ik-theme-texture) !important;
+                background-repeat: repeat !important;
+            } /* ---------------------- Selected Tab */
+            body.ik-dark-mode .sideTab.selected {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
             }
