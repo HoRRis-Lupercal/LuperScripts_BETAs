@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      1.3
+// @version      1.4
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -46,7 +46,7 @@
 
 
     // =========================================================================
-    // CSS INJECTION & GLOBAL STYLING
+    // CSS INJECTION & GLOBAL STYLING (THEME VARIABLES SECTION)
     // =========================================================================
 
     function injectTweaksStyles() {
@@ -55,6 +55,20 @@
         const style = document.createElement("style");
         style.id = "ikLuperTweaksStyles";
         style.textContent = `
+            /* =========================================================================
+               CUSTOMIZABLE THEME VARIABLES (Modify these to easily create custom themes)
+               ========================================================================= */
+            :root {
+                --ik-theme-bg: #131314;
+                --ik-theme-content-bg: #1e1f20;
+                --ik-theme-alt-bg: #2d2e30;
+                --ik-theme-border: #333537;
+                --ik-theme-text: #e3e3e3;
+                --ik-theme-link: #8ab4f8;
+                --ik-theme-link-hover: #aecbfa;
+                --ik-theme-texture: url("https://i.imgur.com/7j2EhYr.jpeg");
+            }
+
             /* Dialog & UI Container Layout */
             #ikLuperTweaks {
                 padding: 0 !important;
@@ -111,11 +125,11 @@
             }
 
             /* =========================================================================
-               GLOBAL DARK MODE (Gemini-Inspired Dark Theme + Customizations)
+               GLOBAL DARK MODE (Driven by Theme Variables)
                ========================================================================= */
             body.ik-dark-mode {
-                background-color: #131314 !important;
-                color: #e3e3e3 !important;
+                background-color: var(--ik-theme-bg) !important;
+                color: var(--ik-theme-text) !important;
             }
 
             /* Main Game Text & Inner Elements */
@@ -129,24 +143,32 @@
 
             /* Target Content Area Background */
             body.ik-dark-mode #contentTD {
-                background-color: #1e1f20 !important;
+                background-color: var(--ik-theme-content-bg) !important;
             }
 
-            /* Alternate rows styling */
-            body.ik-dark-mode div.oddeven > div:nth-child(2n) {
-                background-color: #2d2e30 !important;
+            /* Unified Alternating Rows (Friends lists, army lists, tables, oddeven blocks) */
+            body.ik-dark-mode div.oddeven > div:nth-child(2n),
+            body.ik-dark-mode tr.oddeven:nth-child(even),
+            body.ik-dark-mode .even,
+            body.ik-dark-mode tr.even,
+            body.ik-dark-mode .alt,
+            body.ik-dark-mode tr:nth-child(even) {
+                background-color: var(--ik-theme-alt-bg) !important;
             }
 
-            /* Replace ONLY paper2.jpg instances (Docked Chat, Friends, Tools, Panels) */
+            /* Replace all parchment/paper textures (paper2.jpg, accordions, events widget, chats, side panels) */
             body.ik-dark-mode [style*="paper2.jpg"],
             body.ik-dark-mode .paper,
+            body.ik-dark-mode .accordionHeader,
+            body.ik-dark-mode .header,
+            body.ik-dark-mode div[class*="header"],
             body.ik-dark-mode #DockedFriends,
             body.ik-dark-mode #DockedChat,
             body.ik-dark-mode #FriendsTab,
             body.ik-dark-mode #NotesTab,
             body.ik-dark-mode #CommunitiesTab,
             body.ik-dark-mode #ikToolsPanel {
-                background-image: url("https://i.imgur.com/7j2EhYr.jpeg") !important;
+                background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
             }
 
@@ -160,16 +182,16 @@
             body.ik-dark-mode #chatWin,
             body.ik-dark-mode #ikCatalogue,
             body.ik-dark-mode #ikLuperTweaks {
-                background-color: #1e1f20 !important;
-                color: #e3e3e3 !important;
-                border-color: #333537 !important;
+                background-color: var(--ik-theme-content-bg) !important;
+                color: var(--ik-theme-text) !important;
+                border-color: var(--ik-theme-border) !important;
             }
 
             body.ik-dark-mode .ui-dialog-titlebar,
             body.ik-dark-mode .ui-widget-header {
-                background-color: #28292a !important;
+                background-color: var(--ik-theme-alt-bg) !important;
                 color: #f1f3f4 !important;
-                border-bottom: 1px solid #333537 !important;
+                border-bottom: 1px solid var(--ik-theme-border) !important;
             }
 
             /* Inputs, Textareas, and Select Dropdowns */
@@ -177,17 +199,17 @@
             body.ik-dark-mode input[type="password"],
             body.ik-dark-mode select,
             body.ik-dark-mode textarea {
-                background-color: #2d2e30 !important;
-                color: #e3e3e3 !important;
+                background-color: var(--ik-theme-alt-bg) !important;
+                color: var(--ik-theme-text) !important;
                 border: 1px solid #444746 !important;
             }
 
             /* Links */
             body.ik-dark-mode a {
-                color: #8ab4f8 !important;
+                color: var(--ik-theme-link) !important;
             }
             body.ik-dark-mode a:hover {
-                color: #aecbfa !important;
+                color: var(--ik-theme-link-hover) !important;
             }
         `;
         document.head.appendChild(style);
@@ -254,7 +276,7 @@
                 </div>
 
                 <div class="iklt-footer">
-                    LuperTweaks v1.3
+                    LuperTweaks v1.4
                 </div>
             </div>
         `;
