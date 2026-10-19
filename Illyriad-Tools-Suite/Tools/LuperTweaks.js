@@ -166,10 +166,10 @@
                 content: var(--ik-theme-button-city-on) !important;
             }
             /* ---------------------------- Castle Button */
-            body.ik-dark-mode div.iconBox.ib2 a img.sIcon.sIcon1 {
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon1 {
                 content: var(--ik-theme-button-castle-off) !important;
             }
-            body.ik-dark-mode div.iconBox.ib2 a:hover img.sIcon.sIcon1 {
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon1 {
                 content: var(--ik-theme-button-castle-on) !important;
             }
             
