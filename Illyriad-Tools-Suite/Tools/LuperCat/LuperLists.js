@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperCat
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.01
 // @match        https://*.illyriad.co.uk/*
 // @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/IKnights%20Tools%20Suite/Tools/Catalogue/CatalogueData.js
 // ==/UserScript==
@@ -10,7 +10,6 @@
  * Copyright (c) 2026 HoRRis Lupercal
  * Licensed under the HoRRis Lupercal Non-Commercial License
  */
-
 
 (function () {
     "use strict";
@@ -111,11 +110,11 @@
     let catalogueInitialized = false;
     let resizeBound = false;
     let activeTooltipItem = null;
-    let currentTab = "gear"; // Set default active tab
+    let currentTab = "gear";
 
 
     // =========================================================================
-    // CSS INJECTION
+    // CSS INJECTION (Only layout & structural rules, utilizing native widget classes)
     // =========================================================================
 
     function injectCatalogueStyles() {
@@ -126,45 +125,41 @@
         const style = document.createElement("style");
         style.id = "ikCatalogueStyles";
         style.textContent = `
-            /* Dialog Title Bar Tabs */
+            /* Native Title Bar & Tab Layout Structure */
+            .ui-dialog .ui-dialog-titlebar {
+                padding: 4px 8px 0 8px !important;
+                height: 32px;
+                box-sizing: border-box;
+            }
+
             .ikcat-dialog-tabs {
                 float: left;
-                margin: 5px 16px 0 8px; 
+                margin: 0 16px 0 4px; 
                 display: flex;
-                gap: 8px; 
+                height: 100%;
+                align-items: flex-end;
+                gap: 4px; 
             }
 
             .ikcat-dialog-tab {
-                display: inline-block !important; /* CRITICAL: Allows background colors and padding to render properly on spans */
                 cursor: pointer;
-                color: #4a3311;
-                font-size: 13px;
-                font-weight: normal;
-                padding: 4px 10px 6px 10px; 
-                border-radius: 4px 4px 0 0; 
-                opacity: 0.7;
-                transition: opacity 0.2s, color 0.2s, background-color 0.2s;
+                padding: 4px 10px;
+                position: relative;
+                bottom: -1px;
+                z-index: 1;
             }
 
-            .ikcat-dialog-tab:hover {
-                opacity: 1;
-                color: #8b1111;
-            }
-
-            .ikcat-dialog-tab.active {
-                opacity: 1;
-                color: #b22222;
-                background-color: #fffae8 !important; /* Matches the dialog content background */
+            .ikcat-dialog-tab.ui-state-active {
+                z-index: 5;
                 font-weight: bold;
             }
 
-            /* Core Dialog Layout - Fixes jQuery UI recursive shrink bug */
+            /* Core Dialog Layout */
             #ikCatalogue {
-                padding: 0 !important; /* CRITICAL: Removing padding stops jQuery UI from subtracting it on every frame */
+                padding: 0 !important;
                 overflow: hidden !important;
             }
 
-            /* Wrapper to safely handle flexbox and padding away from the game engine */
             .ikcat-flex-wrapper {
                 box-sizing: border-box;
                 display: flex;
@@ -259,15 +254,14 @@
                 opacity: 0.8;
             }
 
-            /* Tooltip Copy Button Styling - Let Illyriad handle the button, just fix the text color */
             #WzTtDiV #ikCatCopyBtn {
-                color: #ffffff !important; /* Force text to white, overriding tooltip brown */
+                color: #ffffff !important;
                 margin: 4px auto !important;
                 cursor: pointer !important;
             }
             
             #WzTtDiV #ikCatCopyBtn.ikcat-copied {
-                color: #a4ff99 !important; /* Light green to stand out against the default red button */
+                color: #a4ff99 !important;
             }
         `;
 
@@ -306,7 +300,7 @@
         }, 4000);
     }
 
-function populateTypeDropdown() {
+    function populateTypeDropdown() {
         const select = document.querySelector("#ikCatTypeSelect");
         if (!select) return;
 
@@ -341,12 +335,10 @@ function populateTypeDropdown() {
         });
 
         filtered.forEach(item => {
-            // Determine sheet info: support direct URLs for units while falling back to SPRITE_SHEETS keys
             const sheetInfo = (item.spriteSheet && item.spriteSheet.startsWith("http"))
                 ? { url: item.spriteSheet, iconWidth: 48, iconHeight: 48 }
                 : (SPRITE_SHEETS[item.spriteSheet] || SPRITE_SHEETS.default);
             
-            // Extract the correct parameter string (e.g., "c=33" or "i=3|5") from after the "@" symbol
             const dataMatch = item.id.match(/@([^\]]+)/);
             const dataQuery = dataMatch ? dataMatch[1].trim() : "";
 
@@ -361,13 +353,11 @@ function populateTypeDropdown() {
 
             card.appendChild(icon);
 
-            // Handle the click logic to trigger the game's native popup engine
             card.addEventListener("click", (e) => {
                 e.stopPropagation(); 
                 closeActiveTooltip(); 
                 activeTooltipItem = item;
                 
-                // Call the game's native data extractor and popup generator directly using the dynamic query
                 if (typeof window.ExtractData === "function") {
                     try {
                         const gameData = window.ExtractData(dataQuery);
@@ -384,21 +374,6 @@ function populateTypeDropdown() {
 
         if (countDisplay) {
             countDisplay.textContent = `Showing ${filtered.length} / ${activeData.length}`;
-        }
-    }
-    
-    async function handleItemClick(item) {
-        try {
-            await navigator.clipboard.writeText(item.id);
-            setStatus(`Copied ${item.name} (${item.id}) to clipboard!`, "good");
-
-            const chatBox = document.querySelector("#chatInput, #txtChatMessage, input.chatInput");
-            if (chatBox) {
-                chatBox.value += (chatBox.value ? " " : "") + item.id;
-                chatBox.focus();
-            }
-        } catch (err) {
-            setStatus(`Selected: ${item.id}`, "warn");
         }
     }
 
@@ -431,7 +406,7 @@ function populateTypeDropdown() {
 
 
     // =========================================================================
-    // EVENTS
+    // EVENTS & SETTINGS
     // =========================================================================
 
     function bindCatalogueEvents() {
@@ -441,7 +416,6 @@ function populateTypeDropdown() {
 
         const searchInput = content.querySelector("#ikCatSearch");
         const typeSelect = content.querySelector("#ikCatTypeSelect");
-        const tabs = content.querySelectorAll(".ikcat-tab");
 
         searchInput?.addEventListener("input", () => {
             renderCatalogueGrid();
@@ -470,17 +444,16 @@ function populateTypeDropdown() {
             currentTab = state.tab;
         }
 
-        // Apply active class to the correct title bar tab
         if ($catalogue) {
             const widget = $catalogue.dialog("widget");
             const tabs = widget.find(".ikcat-dialog-tab");
             if (tabs.length) {
-                tabs.removeClass("active");
-                tabs.filter(`[data-tab='${currentTab}']`).addClass("active");
+                tabs.removeClass("ui-state-active active").addClass("ui-state-default");
+                tabs.filter(`[data-tab='${currentTab}']`).removeClass("ui-state-default").addClass("ui-state-active active");
             }
         }
 
-        if (!state) return; // Exit if no state saved for search/dropdown
+        if (!state) return;
 
         const searchInput = document.querySelector("#ikCatSearch");
         const typeSelect = document.querySelector("#ikCatTypeSelect");
@@ -489,6 +462,7 @@ function populateTypeDropdown() {
         populateTypeDropdown(); 
         if (typeSelect && state.type !== undefined) typeSelect.value = state.type;
     }
+
 
     // =========================================================================
     // GEOMETRY & DIALOG MANAGEMENT
@@ -553,7 +527,7 @@ function populateTypeDropdown() {
         }
     }
 
-function createCatalogueDialog() {
+    function createCatalogueDialog() {
         if (!window.jQuery || !jQuery.fn || typeof jQuery.fn.dialog !== "function") {
             return false;
         }
@@ -565,7 +539,7 @@ function createCatalogueDialog() {
         $catalogue = jQuery("#ikCatalogue");
 
         $catalogue.dialog({
-            title: "Catalogue", // Keep for screen readers/internals
+            title: "Catalogue",
             autoOpen: false,
             width: Math.max(380, Number(saved.width) || 420),
             height: Math.max(320, Number(saved.height) || 480),
@@ -597,27 +571,27 @@ function createCatalogueDialog() {
         const widget = $catalogue.dialog("widget");
         widget.addClass("flora");
 
-        // --- NEW TITLE BAR INJECTION ---
         const titleBar = widget.find(".ui-dialog-titlebar");
-        titleBar.find(".ui-dialog-title").hide(); // Hide the default "Catalogue" text
+        titleBar.find(".ui-dialog-title").hide();
 
         if (!titleBar.find(".ikcat-dialog-tabs").length) {
+            /* Using native jQuery UI button/state classes (ui-button, ui-state-default, etc.) 
+               so the game engine and flora theme automatically format them */
             const tabsHtml = `
                 <div class="ikcat-dialog-tabs">
-                    <span class="ikcat-dialog-tab" data-tab="gear">Gear Catalogue</span>
-                    <span class="ikcat-dialog-tab" data-tab="item">Item Catalogue</span>
-                    <span class="ikcat-dialog-tab" data-tab="unit">Unit Catalogue</span>
+                    <span class="ikcat-dialog-tab ik-game-button ui-button ui-state-default ${currentTab === 'gear' ? 'ui-state-active active' : ''}" data-tab="gear">Gear Catalogue</span>
+                    <span class="ikcat-dialog-tab ik-game-button ui-button ui-state-default ${currentTab === 'item' ? 'ui-state-active active' : ''}" data-tab="item">Item Catalogue</span>
+                    <span class="ikcat-dialog-tab ik-game-button ui-button ui-state-default ${currentTab === 'unit' ? 'ui-state-active active' : ''}" data-tab="unit">Unit Catalogue</span>
                 </div>
             `;
             titleBar.prepend(tabsHtml);
 
-            // Bind click events directly on the new title tabs
             titleBar.find(".ikcat-dialog-tab").on("click", function(e) {
                 const clickedTab = e.target.dataset.tab;
                 if (currentTab === clickedTab) return;
 
-                titleBar.find(".ikcat-dialog-tab").removeClass("active");
-                jQuery(this).addClass("active");
+                titleBar.find(".ikcat-dialog-tab").removeClass("ui-state-active active").addClass("ui-state-default");
+                jQuery(this).removeClass("ui-state-default").addClass("ui-state-active active");
                 currentTab = clickedTab;
                 
                 const searchInput = document.querySelector("#ikCatSearch");
@@ -648,8 +622,9 @@ function createCatalogueDialog() {
         renderCatalogueGrid();
     }
 
+
     // =========================================================================
-    // CUSTOM TOOLTIPs
+    // CUSTOM TOOLTIPS
     // =========================================================================
 
     function injectCopyButtonIntoTooltip() {
@@ -658,15 +633,13 @@ function createCatalogueDialog() {
         marker.id = "ikTooltipObserver";
         document.body.appendChild(marker);
 
-        // Watch the DOM for changes to the wz_tooltip container
         const observer = new MutationObserver(() => {
             const wz = document.getElementById("WzTtDiV");
             
-            // Check if tooltip is currently visible, we have an active item, and our button isn't there
             if (wz && wz.style.visibility === "visible" && activeTooltipItem && !document.getElementById("ikCatCopyBtn")) {
                 const popupBody = document.getElementById("WzBoDyI");
 
-            if (popupBody) {
+                if (popupBody) {
                     const middleSection = popupBody.querySelector(".m");
                     const targetContainer = middleSection || popupBody;
 
@@ -698,11 +671,9 @@ function createCatalogueDialog() {
                     btnContainer.appendChild(btn);
                     targetContainer.appendChild(btnContainer);
                 }
-
             }
         });
 
-        // CRITICAL: We must watch for attribute modifications because wz_tooltip toggles CSS visibility
         observer.observe(document.body, { 
             childList: true, 
             subtree: true, 
@@ -710,7 +681,6 @@ function createCatalogueDialog() {
             attributeFilter: ["style"] 
         });
 
-        // Close the tooltip if the user clicks anywhere else on the screen
         document.addEventListener("click", (e) => {
             const wz = document.getElementById("WzTtDiV");
             if (wz && activeTooltipItem && !wz.contains(e.target)) {
@@ -720,11 +690,9 @@ function createCatalogueDialog() {
     }
 
     function closeActiveTooltip() {
-        // wz_tooltip's native global hide function
         if (typeof window.tt_Hide === "function") {
             window.tt_Hide();
         } else {
-            // Fallback manual hide
             const wz = document.getElementById("WzTtDiV");
             if (wz) wz.style.visibility = "hidden";
         }
