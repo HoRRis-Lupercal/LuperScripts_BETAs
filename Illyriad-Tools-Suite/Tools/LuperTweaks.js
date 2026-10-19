@@ -74,14 +74,14 @@
                 
                 /* ----------------- Custom Button Image Links ------------------ */
                 
-                --ik-theme-button-city-off: url("https://i.imgur.com/HgfvVmZ.png");
-                --ik-theme-button-city-on: url("https://i.imgur.com/CuUPvWZ.png");
+                --ik-theme-button-city-off: url("https://i.imgur.com/m28vfLz.png");
+                --ik-theme-button-city-on: url("https://i.imgur.com/fdNOBi5.png");
                 
-                --ik-theme-button-castle-off: url("https://i.imgur.com/Fy2aIFi.png");
+                --ik-theme-button-castle-off: url("https://i.imgur.com/pfGAKIG.png");
                 --ik-theme-button-castle-on: url("https://i.imgur.com/ioWdmfh.png");
                 
-                --ik-theme-button-res-off: url("https://i.imgur.com/HgfvVmZ.png");
-                --ik-theme-button-res-on: url("https://i.imgur.com/msAGiHn.png");
+                --ik-theme-button-res-off: url("https://i.imgur.com/Fy2aIFi.png");
+                --ik-theme-button-res-on: url("https://i.imgur.com/CuUPvWZ.png");
                 
                 --ik-theme-button-prod-off: url("https://i.imgur.com/oTH90xz.png");
                 --ik-theme-button-prod-on: url("https://i.imgur.com/A5LQ7Ib.png");
