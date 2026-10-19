@@ -1,5 +1,5 @@
 /*
- * IKnights Tools Suite - Quartermaster
+ * Illyriad Tools Suite - IKQuartermaster
  * Copyright (c) 2026 IKnights
  * Licensed under the IKnights Non-Commercial License
  */
