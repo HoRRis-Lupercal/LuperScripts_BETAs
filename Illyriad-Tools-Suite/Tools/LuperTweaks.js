@@ -172,7 +172,8 @@
             body.ik-dark-mode label,
             body.ik-dark-mode #resbar,
             body.ik-dark-mode #resbar td,
-            body.ik-dark-mode #resbar span {
+            body.ik-dark-mode #resbar span,
+            body.ik-dark-mode #resbar a {
                 color: var(--ik-theme-text) !important;
             }
 
