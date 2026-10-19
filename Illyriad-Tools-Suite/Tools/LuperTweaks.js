@@ -65,6 +65,7 @@
                 --ik-theme-bg: #131314;
                 --ik-theme-content-bg: #1e1f20;
                 --ik-theme-alt-bg: #2d2e30;
+                --ik-theme-input-bg: #2a2b2d;
                 --ik-theme-border: #333537;
                 --ik-theme-text: #e3e3e3;
                 --ik-theme-link: #8ab4f8;
@@ -157,10 +158,21 @@
                DARK MODE CUSTOM STYLES
                ========================================================================= */
 
-            /* ----------------------------- Main Header Image ------------------------- */
+            /* ----------------------------- Main Content---- ------------------------- */
+            /* --------------------------- Main Header Image */
             html body.ik-dark-mode {
                 background-image: var(--ik-theme-headermain-texture) !important;
                 background-repeat: no-repeat !important;
+            } /* --------------------------- Table Odd Rows */
+            body.ik-dark-mode tr.odd {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }/* ----------------------- Input & Textbox Controls */
+            body.ik-dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+            body.ik-dark-mode textarea,
+            body.ik-dark-mode select {
+                background-color: var(--ik-theme-input-bg) !important;
+                color: var(--ik-theme-text) !important;
+                border: 1px solid var(--ik-theme-border) !important;
             }
 
            /* ----------------------- Default Page Text Color ------------------------ */
