@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      1.7
+// @version      1.9
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -127,118 +127,11 @@
             }
 
             /* =========================================================================
-               GLOBAL DARK MODE (Driven by Theme Variables)
+               DARK MODE CUSTOM STYLES
                ========================================================================= */
-            body.ik-dark-mode {
-                background-color: var(--ik-theme-bg) !important;
-                color: var(--ik-theme-text) !important;
-            }
-
-            /* Main Game Text & Inner Elements */
-            body.ik-dark-mode div,
-            body.ik-dark-mode td,
-            body.ik-dark-mode th,
-            body.ik-dark-mode span,
-            body.ik-dark-mode p {
-                color: inherit;
-            }
-
-            /* Target Content Area Background */
             body.ik-dark-mode #contentTD {
-                background-color: var(--ik-theme-content-bg) !important;
-            }
-
-            /* Unified Alternating Rows (Friends lists, army lists, tables, oddeven blocks) */
-            body.ik-dark-mode div.oddeven > div:nth-child(2n),
-            body.ik-dark-mode tr.oddeven:nth-child(even),
-            body.ik-dark-mode .even,
-            body.ik-dark-mode tr.even,
-            body.ik-dark-mode .alt,
-            body.ik-dark-mode tr:nth-child(even) {
-                background-color: var(--ik-theme-alt-bg) !important;
-            }
-
-            /* Replace Opaque Chat & Window Headers (header_banner5o.png) */
-            body.ik-dark-mode [style*="header_banner5o.png"],
-            body.ik-dark-mode .chatHeader,
-            body.ik-dark-mode .windowHeader,
-            body.ik-dark-mode div[id*="chat"] .header,
-            body.ik-dark-mode div[class*="chat"] div:first-child {
-                background-image: var(--ik-theme-headerO-texture) !important;
-                background-repeat: no-repeat !important;
-                background-size: cover !important;
-            }
-
-            /* Main Content Headers, Headlinks, and Accordions */
-            body.ik-dark-mode .ui-accordion-header,
-            body.ik-dark-mode .ui-accordion-header-active,
-            body.ik-dark-mode .ui-state-default,
-            body.ik-dark-mode .ui-state-active,
-            body.ik-dark-mode .accordionHeader,
-            body.ik-dark-mode a.ui-accordion-header,
-            body.ik-dark-mode #mainContentDiv h1,
-            body.ik-dark-mode #mainContentDiv .headlinks,
-            body.ik-dark-mode #scrollContent h1,
-            body.ik-dark-mode #scrollContent .headlinks,
-            body.ik-dark-mode #contentTD h1,
-            body.ik-dark-mode #contentTD .headlinks,
-            body.ik-dark-mode div[class*="headlinks"] {
                 background-image: var(--ik-theme-header-texture) !important;
-                background-repeat: repeat !important;
-                color: var(--ik-theme-text) !important;
-            }
-
-            /* Replace standard parchment/paper textures (paper2.jpg, events widget, chats, side panels) */
-            body.ik-dark-mode [style*="paper2.jpg"],
-            body.ik-dark-mode .paper,
-            body.ik-dark-mode #DockedFriends,
-            body.ik-dark-mode #DockedChat,
-            body.ik-dark-mode #FriendsTab,
-            body.ik-dark-mode #NotesTab,
-            body.ik-dark-mode #CommunitiesTab,
-            body.ik-dark-mode #ikToolsPanel {
-                background-image: var(--ik-theme-texture) !important;
-                background-repeat: repeat !important;
-            }
-
-            /* Panels, Dialogs, and Windows */
-            body.ik-dark-mode .ui-dialog,
-            body.ik-dark-mode .ui-widget-content,
-            body.ik-dark-mode .window,
-            body.ik-dark-mode div[id*="chat"],
-            body.ik-dark-mode div[class*="chat"],
-            body.ik-dark-mode .dialog,
-            body.ik-dark-mode #chatWin,
-            body.ik-dark-mode #ikCatalogue,
-            body.ik-dark-mode #ikLuperTweaks {
                 background-color: var(--ik-theme-content-bg) !important;
-                color: var(--ik-theme-text) !important;
-                border-color: var(--ik-theme-border) !important;
-            }
-
-            body.ik-dark-mode .ui-dialog-titlebar,
-            body.ik-dark-mode .ui-widget-header {
-                background-color: var(--ik-theme-alt-bg) !important;
-                color: #f1f3f4 !important;
-                border-bottom: 1px solid var(--ik-theme-border) !important;
-            }
-
-            /* Inputs, Textareas, and Select Dropdowns */
-            body.ik-dark-mode input[type="text"],
-            body.ik-dark-mode input[type="password"],
-            body.ik-dark-mode select,
-            body.ik-dark-mode textarea {
-                background-color: var(--ik-theme-alt-bg) !important;
-                color: var(--ik-theme-text) !important;
-                border: 1px solid #444746 !important;
-            }
-
-            /* Links */
-            body.ik-dark-mode a {
-                color: var(--ik-theme-link) !important;
-            }
-            body.ik-dark-mode a:hover {
-                color: var(--ik-theme-link-hover) !important;
             }
         `;
         document.head.appendChild(style);
@@ -305,7 +198,7 @@
                 </div>
 
                 <div class="iklt-footer">
-                    LuperTweaks v1.7
+                    LuperTweaks v1.9
                 </div>
             </div>
         `;
