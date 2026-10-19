@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperCat
 // @namespace    http://tampermonkey.net/
-// @version      1.01
+// @version      1.3
 // @match        https://*.illyriad.co.uk/*
 // @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/IKnights%20Tools%20Suite/Tools/Catalogue/CatalogueData.js
 // ==/UserScript==
@@ -114,7 +114,7 @@
 
 
     // =========================================================================
-    // CSS INJECTION (Only layout & structural rules, utilizing native widget classes)
+    // CSS INJECTION
     // =========================================================================
 
     function injectCatalogueStyles() {
@@ -125,32 +125,35 @@
         const style = document.createElement("style");
         style.id = "ikCatalogueStyles";
         style.textContent = `
-            /* Native Title Bar & Tab Layout Structure */
-            .ui-dialog .ui-dialog-titlebar {
-                padding: 4px 8px 0 8px !important;
-                height: 32px;
-                box-sizing: border-box;
-            }
-
+            /* Dialog Title Bar Tabs */
             .ikcat-dialog-tabs {
                 float: left;
-                margin: 0 16px 0 4px; 
+                margin: 5px 16px 0 8px; 
                 display: flex;
-                height: 100%;
-                align-items: flex-end;
-                gap: 4px; 
+                gap: 8px; 
             }
 
             .ikcat-dialog-tab {
+                display: inline-block !important;
                 cursor: pointer;
-                padding: 4px 10px;
-                position: relative;
-                bottom: -1px;
-                z-index: 1;
+                color: #4a3311;
+                font-size: 13px;
+                font-weight: normal;
+                padding: 4px 10px 6px 10px; 
+                border-radius: 4px 4px 0 0; 
+                opacity: 0.7;
+                transition: opacity 0.2s, color 0.2s, background-color 0.2s;
             }
 
-            .ikcat-dialog-tab.ui-state-active {
-                z-index: 5;
+            .ikcat-dialog-tab:hover {
+                opacity: 1;
+                color: #8b1111;
+            }
+
+            .ikcat-dialog-tab.active {
+                opacity: 1;
+                color: #b22222;
+                background-color: #fffae8 !important;
                 font-weight: bold;
             }
 
@@ -448,8 +451,8 @@
             const widget = $catalogue.dialog("widget");
             const tabs = widget.find(".ikcat-dialog-tab");
             if (tabs.length) {
-                tabs.removeClass("ui-state-active active").addClass("ui-state-default");
-                tabs.filter(`[data-tab='${currentTab}']`).removeClass("ui-state-default").addClass("ui-state-active active");
+                tabs.removeClass("active");
+                tabs.filter(`[data-tab='${currentTab}']`).addClass("active");
             }
         }
 
@@ -575,13 +578,12 @@
         titleBar.find(".ui-dialog-title").hide();
 
         if (!titleBar.find(".ikcat-dialog-tabs").length) {
-            /* Using native jQuery UI button/state classes (ui-button, ui-state-default, etc.) 
-               so the game engine and flora theme automatically format them */
+            // Tagged with ik-game-button to use the game's default widget button formatting like IKQuartermaster
             const tabsHtml = `
                 <div class="ikcat-dialog-tabs">
-                    <span class="ikcat-dialog-tab ik-game-button ui-button ui-state-default ${currentTab === 'gear' ? 'ui-state-active active' : ''}" data-tab="gear">Gear Catalogue</span>
-                    <span class="ikcat-dialog-tab ik-game-button ui-button ui-state-default ${currentTab === 'item' ? 'ui-state-active active' : ''}" data-tab="item">Item Catalogue</span>
-                    <span class="ikcat-dialog-tab ik-game-button ui-button ui-state-default ${currentTab === 'unit' ? 'ui-state-active active' : ''}" data-tab="unit">Unit Catalogue</span>
+                    <span class="ikcat-dialog-tab ik-game-button" data-tab="gear">Gear Catalogue</span>
+                    <span class="ikcat-dialog-tab ik-game-button" data-tab="item">Item Catalogue</span>
+                    <span class="ikcat-dialog-tab ik-game-button" data-tab="unit">Unit Catalogue</span>
                 </div>
             `;
             titleBar.prepend(tabsHtml);
@@ -590,8 +592,8 @@
                 const clickedTab = e.target.dataset.tab;
                 if (currentTab === clickedTab) return;
 
-                titleBar.find(".ikcat-dialog-tab").removeClass("ui-state-active active").addClass("ui-state-default");
-                jQuery(this).removeClass("ui-state-default").addClass("ui-state-active active");
+                titleBar.find(".ikcat-dialog-tab").removeClass("active");
+                jQuery(this).addClass("active");
                 currentTab = clickedTab;
                 
                 const searchInput = document.querySelector("#ikCatSearch");
