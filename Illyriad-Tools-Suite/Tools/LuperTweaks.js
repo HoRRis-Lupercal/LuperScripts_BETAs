@@ -158,14 +158,14 @@
 
             /* ========================== Top Menu Buttons ============================= */
             /* ----------------------------- City Button ------------------------------- */
-            /* ----------------------------- Main Button
+            /* ----------------------------- Main Button */
             body.ik-dark-mode div.iconBox.ib2 a img.icon {
                 content: var(--ik-theme-button-city-off) !important;
             }
             body.ik-dark-mode div.iconBox.ib2 a:hover img.icon {
                 content: var(--ik-theme-button-city-on) !important;
             }
-            /* ---------------------------- Castle Button
+            /* ---------------------------- Castle Button */
             body.ik-dark-mode div.iconBox.ib2 a img.sIcon.sIcon1 {
                 content: var(--ik-theme-button-castle-off) !important;
             }
