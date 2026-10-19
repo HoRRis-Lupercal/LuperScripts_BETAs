@@ -164,7 +164,12 @@
             }
 
             /* ----------------------- Default Page Text Color ------------------------ */
-            body.ik-dark-mode {
+            body.ik-dark-mode, 
+            body.ik-dark-mode p, 
+            body.ik-dark-mode td, 
+            body.ik-dark-mode th, 
+            body.ik-dark-mode span, 
+            body.ik-dark-mode label {
                 color: var(--ik-theme-text) !important;
             }
                
@@ -172,7 +177,6 @@
             body.ik-dark-mode #contentTD {
                 background-image: var(--ik-theme-header-texture) !important;
                 background-color: var(--ik-theme-content-bg) !important;
-                color: var(--ik-theme-text) !important;
             }
             
             /* ------------------- City screen subheader background --------------------- */
@@ -247,18 +251,15 @@
             body.ik-dark-mode .smallBorder {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
-                color: var(--ik-theme-text) !important;
             } 
             body.ik-dark-mode table.oddeven > tbody > tr:nth-child(2n) {
                 background-color: var(--ik-theme-alt-bg) !important;
-                color: var(--ik-theme-text) !important;
             }
 
             /* ----------------------- Docked Friends Widget --------------------------- */
             body.ik-dark-mode #DockedFriends {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
-                color: var(--ik-theme-text) !important;
             } 
             
             /* ---------------------------- Widget Tabs ------------------------------- */
@@ -282,7 +283,7 @@
                 background-repeat: repeat !important;
             } /* ------------------ UI Dialog Selected Title */
             body.ik-dark-mode .ui-dialog .ui-dialog-title {
-                color: var(--ik-theme-content-bg) !important;
+                background-color: var(--ik-theme-content-bg) !important;
             }
         `;
     }
