@@ -172,6 +172,7 @@
             body.ik-dark-mode #contentTD {
                 background-image: var(--ik-theme-header-texture) !important;
                 background-color: var(--ik-theme-content-bg) !important;
+                color: var(--ik-theme-text) !important;
             }
             
             /* ------------------- City screen subheader background --------------------- */
@@ -187,6 +188,7 @@
             /* --------------------------- Top Info Bar -------------------------------- */
             body.ik-dark-mode .topBar {
                 background-color: var(--ik-theme-content-bg) !important;
+                color: var(--ik-theme-text) !important;
             }
 
             /* ========================== Top Menu Buttons ============================= */
@@ -245,15 +247,18 @@
             body.ik-dark-mode .smallBorder {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
+                color: var(--ik-theme-text) !important;
             } 
             body.ik-dark-mode table.oddeven > tbody > tr:nth-child(2n) {
                 background-color: var(--ik-theme-alt-bg) !important;
+                color: var(--ik-theme-text) !important;
             }
 
             /* ----------------------- Docked Friends Widget --------------------------- */
             body.ik-dark-mode #DockedFriends {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
+                color: var(--ik-theme-text) !important;
             } 
             
             /* ---------------------------- Widget Tabs ------------------------------- */
