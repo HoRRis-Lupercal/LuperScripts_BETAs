@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      1.5
+// @version      1.6
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -68,6 +68,7 @@
                 --ik-theme-link-hover: #aecbfa;
                 --ik-theme-texture: url("https://i.imgur.com/7j2EhYr.jpeg");
                 --ik-theme-header-texture: url("https://i.imgur.com/rBQ5cFM.jpeg");
+                --ik-theme-accordion-texture: url("https://i.imgur.com/cgsjqZD.jpeg");
             }
 
             /* Dialog & UI Container Layout */
@@ -168,14 +169,21 @@
                 background-size: cover !important;
             }
 
-            /* Replace all parchment/paper textures (paper2.jpg, accordions, events widget, chats, side panels) */
-            body.ik-dark-mode [style*="paper2.jpg"],
-            body.ik-dark-mode .paper,
-            body.ik-dark-mode .accordionHeader,
+            /* Accordion Headers (Both active and inactive states) */
             body.ik-dark-mode .ui-accordion-header,
             body.ik-dark-mode .ui-accordion-header-active,
-            body.ik-dark-mode .header,
-            body.ik-dark-mode div[class*="header"],
+            body.ik-dark-mode .ui-state-default,
+            body.ik-dark-mode .ui-state-active,
+            body.ik-dark-mode .accordionHeader,
+            body.ik-dark-mode a.ui-accordion-header {
+                background-image: var(--ik-theme-accordion-texture) !important;
+                background-repeat: repeat !important;
+                color: var(--ik-theme-text) !important;
+            }
+
+            /* Replace standard parchment/paper textures (paper2.jpg, events widget, chats, side panels) */
+            body.ik-dark-mode [style*="paper2.jpg"],
+            body.ik-dark-mode .paper,
             body.ik-dark-mode #DockedFriends,
             body.ik-dark-mode #DockedChat,
             body.ik-dark-mode #FriendsTab,
@@ -290,7 +298,7 @@
                 </div>
 
                 <div class="iklt-footer">
-                    LuperTweaks v1.5
+                    LuperTweaks v1.6
                 </div>
             </div>
         `;
