@@ -160,7 +160,7 @@
             /* ----------------------------- Main Header Image ------------------------- */
             html body.ik-dark-mode {
                 background-image: var(--ik-theme-headermain-texture) !important;
-                background-repeat: repeat !important;
+                background-repeat: no-repeat !important;
             }
 
             /* ----------------------- Default Page Text Color ------------------------ */
