@@ -224,7 +224,7 @@
                 content: var(--ik-theme-char-ring2-off) !important;
             }
 
-            body.ik-dark-mode div.iconBox.ib8 a:hover img.icon[src*="ring2_off.png"] {
+            body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_off.png"] {
                 content: var(--ik-theme-char-ring2-on) !important;
             }
 
