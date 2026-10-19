@@ -164,8 +164,12 @@
                 background-image: var(--ik-theme-headermain-texture) !important;
                 background-repeat: no-repeat !important;
             } /* --------------------------- Table Odd Rows */
-            body.ik-dark-mode tr.odd {
+            body.ik-dark-mode .oddeven > *:nth-child(2n+1),
+            body.ik-dark-mode div.oddeven > div:nth-child(2n+1),
+            body.ik-dark-mode tr.odd,
+            body.ik-dark-mode .odd {
                 background-color: var(--ik-theme-alt-bg) !important;
+            }
             } /* ----------------------- Input & Textbox Controls */
             body.ik-dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
             body.ik-dark-mode textarea,
@@ -217,8 +221,10 @@
                 color: #55ff55 !important;
             }
 
-            /* 2. Explicitly preserve negative income (Red) */
+            /* 2. Explicitly preserve negative income & full capacity (Red) */
             body.ik-dark-mode #resbar .resNeg,
+            body.ik-dark-mode #resbar .resFull,
+            body.ik-dark-mode #resbar td[class*="resFull"],
             body.ik-dark-mode #resbar span[class*="neg"],
             body.ik-dark-mode #resbar [style*="color: red"],
             body.ik-dark-mode #resbar [style*="color:red"],
