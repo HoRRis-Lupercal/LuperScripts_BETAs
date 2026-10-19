@@ -69,8 +69,11 @@
                 --ik-theme-texture: url("https://i.imgur.com/7j2EhYr.jpeg");
                 --ik-theme-headerO-texture: url("https://i.imgur.com/yCH8seN.png");
                 --ik-theme-header-texture: url("https://i.imgur.com/0nDOLcG.jpeg");
+                /* ----------------- Custom Button Image Links ------------------ */
                 --ik-theme-button-city-off: url("https://i.imgur.com/HgfvVmZ.png");
                 --ik-theme-button-city-on: url("https://i.imgur.com/msAGiHn.png");
+                --ik-theme-button-castle-off: url("https://i.imgur.com/pfGAKIG.png");
+                --ik-theme-button-castle-on: url("https://i.imgur.com/ioWdmfh.png");
             }
 
             /* Dialog & UI Container Layout */
@@ -153,15 +156,23 @@
                 background-color: var(--ik-theme-content-bg) !important;
             }
 
-            /* -------------------------- Top Menu Buttons ------------------------------ */
-            /* Swap the icon image directly using CSS content */
+            /* ========================== Top Menu Buttons ============================= */
+            /* ----------------------------- City Button ------------------------------- */
+            /* ----------------------------- Main Button
             body.ik-dark-mode div.iconBox.ib2 a img.icon {
                 content: var(--ik-theme-button-city-off) !important;
             }
-
             body.ik-dark-mode div.iconBox.ib2 a:hover img.icon {
                 content: var(--ik-theme-button-city-on) !important;
             }
+            /* ---------------------------- Castle Button
+            body.ik-dark-mode div.iconBox.ib2 a img.sIcon.sIcon1 {
+                content: var(--ik-theme-button-castle-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib2 a:hover img.sIcon.sIcon1 {
+                content: var(--ik-theme-button-castle-on) !important;
+            }
+            
 
             /* -------------------------- Next Events Widget ---------------------------- */
             body.ik-dark-mode .smallBorder {
