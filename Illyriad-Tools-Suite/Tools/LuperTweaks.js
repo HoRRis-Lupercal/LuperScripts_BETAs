@@ -130,17 +130,17 @@
                DARK MODE CUSTOM STYLES
                ========================================================================= */
                
-            // City screen header and background   
+            /*------------------- City screen header and background -------------------- */  
             body.ik-dark-mode #contentTD {
                 background-image: var(--ik-theme-header-texture) !important;
                 background-color: var(--ik-theme-content-bg) !important;
             }
             
-            // City screen subheader background
+            /* ------------------- City screen subheader background ---------------------*/
             body.ik-dark-mode .headlinks,
             body.ik-dark-mode .headLinks {
                 background-image: var(--ik-theme-headerO-texture) !important;
-            } // subheader selected tab
+            } /* ---------------------- Subheader selected tab */
             body.ik-dark-mode .headlinks a.selected,
             body.ik-dark-mode .headLinks a.selected {
                 background-image: var(--ik-theme-texture) !important;
