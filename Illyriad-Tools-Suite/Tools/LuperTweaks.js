@@ -251,11 +251,11 @@
                TEXT COLOR & PRIORITY RULES (LuperNotes Excluded)
                ========================================================================= */
 
-            /* Default Page Text (Excludes LuperNotes) */
+            /* Default Page Text (Excludes LuperNotes & Name elements) */
             body.ik-dark-mode p:not(#ikNotesPanel *), 
             body.ik-dark-mode td:not(#ikNotesPanel *), 
             body.ik-dark-mode th:not(#ikNotesPanel *), 
-            body.ik-dark-mode span:not(#ikNotesPanel *), 
+            body.ik-dark-mode span:not(#ikNotesPanel *):not(.name), 
             body.ik-dark-mode label:not(#ikNotesPanel *),
             body.ik-dark-mode #resbar, body.ik-dark-mode #resbar td, body.ik-dark-mode #resbar span, body.ik-dark-mode #resbar a {
                 color: var(--ik-theme-text) !important;
@@ -276,8 +276,11 @@
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
 
-            /* Entity Names */
-            body.ik-dark-mode .name, body.ik-dark-mode span.name, body.ik-dark-mode a.name {
+            /* Entity Names (Explicitly weighted to beat default span rule) */
+            body.ik-dark-mode .name, 
+            body.ik-dark-mode span.name, 
+            body.ik-dark-mode a.name,
+            body.ik-dark-mode span:not(#ikNotesPanel *).name {
                 color: var(--ik-theme-special-text6) !important;
             }
 
