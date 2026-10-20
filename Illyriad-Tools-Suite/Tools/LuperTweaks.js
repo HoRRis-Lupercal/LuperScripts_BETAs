@@ -80,6 +80,10 @@
                 --ik-theme-special-text5: #74b9ff;
                 /* ------ Name class text color ------ */
                 --ik-theme-special-text6: #55efc4;
+                /* ------ City Drop Down text color ------ */
+                --ik-theme-special-text7: #55efc4;
+                /* ------ City Drop Down Background color ------ */
+                --ik-theme-special-text8: #55efc4;
                 --ik-theme-link: #8ab4f8;
                 --ik-theme-link-hover: #aecbfa;
                 /* ------ Paper Background Image Link ------ */
@@ -237,6 +241,14 @@
                 background-repeat: no-repeat !important;
                 background-size: 100% 100% !important;
             }
+            /* ----------------------- dTownTD Container Styling -------------------- */
+            body.ik-dark-mode #dTownTD,
+            body.ik-dark-mode .dTownTD,
+            body.ik-dark-mode #dTownTD *,
+            body.ik-dark-mode .dTownTD * {
+                background-color: var(--ik-theme-special-text8) !important;
+                color: var(--ik-theme-special-text7) !important;
+            }
             /* ------------------------- UI Widget Content ----------------------------- */
             body.ik-dark-mode .ui-widget-content {
                 background-color: var(--ik-theme-content-bg) !important;
@@ -259,7 +271,7 @@
                 background-repeat: repeat !important;
             } 
             /* ----------------------- UI Progressbar Value Texture ------------------- */
-            body.ik-dark-mode .ui-progressbar-value {
+            body.ik-dark-mode .ui-widget-header.ui-progressbar-value {
                 background-image: var(--ik-theme-headerP-texture) !important;
                 background-repeat: repeat !important;
             }
@@ -466,7 +478,11 @@
             body.ik-dark-mode .ui-widget-content div.oddeven > div:not([id*="chat"]):nth-child(2n) {
                 background-color: var(--ik-theme-alt-bg) !important;
             }
-
+            /* ----------------------- Oddevencols Table Columns ---------------------- */
+            body.ik-dark-mode table.oddevencols > colgroup > col:nth-child(2n+1) {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
+            
             /* ----------------------- Notifications Tab ------------------------------ */
             body.ik-dark-mode #Notifications > div:nth-child(2n) {
                 background-color: var(--ik-theme-alt-bg) !important;
