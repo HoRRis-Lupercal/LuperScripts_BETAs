@@ -79,6 +79,9 @@
                 
                 /* ----------------- Custom Button Image Links ------------------ */
 
+                --ik-theme-button-short-off: url("https://assets.illyriad.net/img/buttons/short_off_rev.png");
+                --ik-theme-button-short-on: url("https://assets.illyriad.net/img/buttons/short_on_rev.png");
+
                 --ik-theme-button-world-off: url("https://i.imgur.com/n2x7KAg.png");
                 --ik-theme-button-world-on: url("https://i.imgur.com/RaBKZyN.png");
                 
@@ -178,29 +181,46 @@
                DARK MODE CUSTOM STYLES
                ========================================================================= */
 
-            /* ----------------------------- Main Content---- ------------------------- */
+            /* ============================= Main Content ============================== */
             /* --------------------------- Main Header Image */
             html body.ik-dark-mode {
                 background-image: var(--ik-theme-headermain-texture) !important;
                 background-repeat: no-repeat !important;
-            } /* ----------------------- Input & Textbox Controls */
+            } 
+            /* ----------------------- Input & Textbox Controls */
             body.ik-dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
             body.ik-dark-mode textarea,
             body.ik-dark-mode select {
                 background-color: var(--ik-theme-input-bg) !important;
                 color: var(--ik-theme-text) !important;
                 border: 1px solid var(--ik-theme-border) !important;
-            } /* ------------------- Accordian Headers Background */
+            } 
+            /* ------------------- Accordian Headers Background */
             body.ik-dark-mode .ui-state-default {
                 background-image: var(--ik-theme-header-texture) !important;
-            }/* ----------------------- UI State Default Links */
+            }
+            /* ----------------------- UI State Default Links */
             body.ik-dark-mode .ui-state-default a {
                 color: var(--ik-theme-special-text1) !important;
-            }/* ----------------------- UI State Active Links */
+            }
+            /* ----------------------- UI State Active Links */
             body.ik-dark-mode .ui-state-active a {
                 color: var(--ik-theme-special-text2) !important;
             }
-
+            /* ------------------ UI Dialog & Standard Short Buttons (Off/Default) */
+            body.ik-dark-mode .ui-dialog .ui-dialog-buttonpane button,
+            body.ik-dark-mode button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only {
+                background-image: var(--ik-theme-button-short-off) !important;
+                background-repeat: no-repeat !important;
+                background-size: 100% 100% !important;
+            }
+            /* ---------------- UI Dialog & Standard Short Buttons (On/Hover) */
+            body.ik-dark-mode .ui-dialog .ui-dialog-buttonpane button.ui-state-hover,
+            body.ik-dark-mode button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only.ui-state-hover {
+                background-image: var(--ik-theme-button-short-on) !important;
+                background-repeat: no-repeat !important;
+                background-size: 100% 100% !important;
+            }
            /* ----------------------- Default Page Text Color ------------------------ */
             body.ik-dark-mode, 
             body.ik-dark-mode p, 
@@ -214,7 +234,6 @@
             body.ik-dark-mode #resbar a {
                 color: var(--ik-theme-text) !important;
             }
-
             /* ----------------------- Resbar Status Color Overrides ------------------------ */
             /* 1. Explicitly preserve positive income (Green) - Safely excludes #000 black */
             body.ik-dark-mode #resbar .resPos,
@@ -239,7 +258,6 @@
             body.ik-dark-mode #resbar [style*="color:#00f"] {
                 color: #55ff55 !important;
             }
-
             /* 2. Explicitly preserve negative income & full capacity (Red) */
             body.ik-dark-mode #resbar .resNeg,
             body.ik-dark-mode #resbar .resFull,
@@ -253,19 +271,16 @@
             body.ik-dark-mode #resbar [style*="color:rgb(255"] {
                 color: #ff5555 !important;
             }
-
             /* 3. Explicitly preserve capacity max/overflow (Yellow/Orange) */
             body.ik-dark-mode #resbar .resMax,
             body.ik-dark-mode #resbar span[class*="max"] {
                 color: #ffaa00 !important;
-            }
-               
-            /* ------------------- City screen header and background -------------------- */  
+            }    
+            /* --------------------- Subheader Title and Background ----------------------- */  
             body.ik-dark-mode #contentTD {
                 background-image: var(--ik-theme-header-texture) !important;
                 background-color: var(--ik-theme-content-bg) !important;
-            }
-            
+            } 
             /* ------------------- City screen subheader background --------------------- */
             body.ik-dark-mode .headlinks,
             body.ik-dark-mode .headLinks {
