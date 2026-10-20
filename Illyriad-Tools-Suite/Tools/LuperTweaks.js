@@ -72,7 +72,7 @@
                 --ik-theme-special-text2: #fcd116;
                 --ik-theme-link: #8ab4f8;
                 --ik-theme-link-hover: #aecbfa;
-                --ik-theme-texture: url("https://i.imgur.com/7j2EhYr.jpeg");
+                --ik-theme-texture: url("https://i.imgur.com/jori7j2.jpeg");
                 --ik-theme-headerO-texture: url("https://i.imgur.com/yCH8seN.png");
                 --ik-theme-header-texture: url("https://i.imgur.com/0nDOLcG.jpeg");
                 --ik-theme-headermain-texture: url("https://i.imgur.com/TQ2SkKz.png");
