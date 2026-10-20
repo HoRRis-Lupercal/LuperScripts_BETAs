@@ -242,10 +242,10 @@
                 background-size: 100% 100% !important;
             }
             /* ----------------------- dTownTD Container Styling -------------------- */
-            body.ik-dark-mode #dTownTD,
-            body.ik-dark-mode .dTownTD,
             body.ik-dark-mode #dTownTD *,
-            body.ik-dark-mode .dTownTD * {
+            body.ik-dark-mode .dTownTD *,
+            body.ik-dark-mode #citiesMenu
+            {
                 background-color: var(--ik-theme-special-text8) !important;
                 color: var(--ik-theme-special-text7) !important;
             }
