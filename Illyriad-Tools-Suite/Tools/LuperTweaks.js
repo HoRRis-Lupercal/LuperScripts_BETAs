@@ -68,8 +68,12 @@
                 --ik-theme-input-bg: #2a2b2d;
                 --ik-theme-border: #333537;
                 --ik-theme-text: #e3e3e3;
+                /* ---- Accordian heading text color ---- */
                 --ik-theme-special-text1: #fcd116;
+                /* ---- Accordian selected text color ---- */
                 --ik-theme-special-text2: #fcd116;
+                /* ---- Tab header text color ---- */
+                --ik-theme-special-text3: #fcd116;
                 --ik-theme-link: #8ab4f8;
                 --ik-theme-link-hover: #aecbfa;
                 --ik-theme-texture: url("https://i.imgur.com/rcUBS5t.jpeg");
@@ -275,7 +279,13 @@
             body.ik-dark-mode #resbar .resMax,
             body.ik-dark-mode #resbar span[class*="max"] {
                 color: #ffaa00 !important;
-            }    
+            }
+            /* ------------- Special Text Color 3 (Visited, sideTabs, legend) ------------ */
+            body.ik-dark-mode a:visited,
+            body.ik-dark-mode .sideTab,
+            body.ik-dark-mode legend {
+                color: var(--ik-theme-special-text3) !important;
+            }
             /* --------------------- Subheader Title and Background ----------------------- */  
             body.ik-dark-mode #contentTD {
                 background-image: var(--ik-theme-header-texture) !important;
