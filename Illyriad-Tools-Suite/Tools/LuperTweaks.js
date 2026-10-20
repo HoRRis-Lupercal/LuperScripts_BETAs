@@ -248,10 +248,10 @@
             body.ik-dark-mode .sideTab.selected { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
 
             /* =========================================================================
-               TEXT COLOR & PRIORITY RULES (LuperNotes Excluded)
+               TEXT COLOR & PRIORITY RULES (LuperNotes & Names Excluded)
                ========================================================================= */
 
-            /* Default Page Text (Excludes LuperNotes & Name elements) */
+            /* Default Page Text (Excludes LuperNotes and Chat/Friend Names) */
             body.ik-dark-mode p:not(#ikNotesPanel *), 
             body.ik-dark-mode td:not(#ikNotesPanel *), 
             body.ik-dark-mode th:not(#ikNotesPanel *), 
@@ -276,11 +276,10 @@
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
 
-            /* Entity Names (Explicitly weighted to beat default span rule) */
+            /* Entity Names (Takes Priority over Default Text) */
             body.ik-dark-mode .name, 
             body.ik-dark-mode span.name, 
-            body.ik-dark-mode a.name,
-            body.ik-dark-mode span:not(#ikNotesPanel *).name {
+            body.ik-dark-mode a.name {
                 color: var(--ik-theme-special-text6) !important;
             }
 
