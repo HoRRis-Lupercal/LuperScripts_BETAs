@@ -72,8 +72,14 @@
                 --ik-theme-special-text1: #fcd116;
                 /* ---- Accordian selected text color ---- */
                 --ik-theme-special-text2: #fcd116;
-                /* ---- Tab header text color ---- */
+                /* ------- Tab header text color ------ */
                 --ik-theme-special-text3: #fcd116;
+                /* ------ Header 1 text color ------ */
+                --ik-theme-special-text4: #ff7675; 
+                /* ------ Header 2 text color ------ */
+                --ik-theme-special-text5: #74b9ff;
+                /* ------ Name class text color ------ */
+                --ik-theme-special-text6: #55efc4;
                 --ik-theme-link: #8ab4f8;
                 --ik-theme-link-hover: #aecbfa;
                 --ik-theme-texture: url("https://i.imgur.com/rcUBS5t.jpeg");
@@ -280,11 +286,21 @@
             body.ik-dark-mode #resbar span[class*="max"] {
                 color: #ffaa00 !important;
             }
-            /* ------------- Special Text Color 3 (Visited, sideTabs, legend) ------------ */
+            /* ---------------------- Special Text Colors ---------------------- */
+            /* ----- Tab title text color ----- */
             body.ik-dark-mode a:visited,
             body.ik-dark-mode .sideTab,
             body.ik-dark-mode legend {
                 color: var(--ik-theme-special-text3) !important;
+            }
+            body.ik-dark-mode h1 {
+                color: var(--ik-theme-special-text4) !important;
+            }
+            body.ik-dark-mode h2 {
+                color: var(--ik-theme-special-text5) !important;
+            }
+            body.ik-dark-mode .name {
+                color: var(--ik-theme-special-text6) !important;
             }
             /* --------------------- Subheader Title and Background ----------------------- */  
             body.ik-dark-mode #contentTD {
