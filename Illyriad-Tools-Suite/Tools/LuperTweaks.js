@@ -248,53 +248,54 @@
             body.ik-dark-mode .sideTab.selected { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
 
             /* =========================================================================
-               TEXT COLOR & PRIORITY RULES (LuperNotes & Indicators Excluded)
+               TEXT COLOR & PRIORITY RULES
                ========================================================================= */
 
-            /* Default Page Text (Excludes LuperNotes and Chat/Friend Names) */
-            body.ik-dark-mode p:not([id="ikNotesPanel"] *), 
-            body.ik-dark-mode td:not([id="ikNotesPanel"] *), 
-            body.ik-dark-mode th:not([id="ikNotesPanel"] *), 
-            body.ik-dark-mode span:not([id="ikNotesPanel"] *):not(.name), 
-            body.ik-dark-mode label:not([id="ikNotesPanel"] *),
+            /* 1. Default Page Text */
+            body.ik-dark-mode p:not([id*="Notes"] *), 
+            body.ik-dark-mode td:not([id*="Notes"] *), 
+            body.ik-dark-mode th:not([id*="Notes"] *), 
+            body.ik-dark-mode span:not([id*="Notes"] *):not(.name), 
+            body.ik-dark-mode label:not([id*="Notes"] *),
             body.ik-dark-mode #resbar, body.ik-dark-mode #resbar td, body.ik-dark-mode #resbar span, body.ik-dark-mode #resbar a {
                 color: var(--ik-theme-text) !important;
             }
 
-            /* Resbar Status Colors */
+            /* 2. Resbar Status Colors */
             body.ik-dark-mode #resbar .resPos, body.ik-dark-mode #resbar span[class*="pos"], body.ik-dark-mode #resbar [style*="color: green"], body.ik-dark-mode #resbar [style*="color:green"] { color: #55ff55 !important; }
             body.ik-dark-mode #resbar .resNeg, body.ik-dark-mode #resbar .resFull, body.ik-dark-mode #resbar span[class*="neg"], body.ik-dark-mode #resbar [style*="color: red"], body.ik-dark-mode #resbar [style*="color:red"] { color: #ff5555 !important; }
             body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
 
-            /* Links (Uses attribute selector [id="ikNotesPanel"] to keep specificity at class level) */
-            body.ik-dark-mode a:not([id="ikNotesPanel"] *), 
-            body.ik-dark-mode a:link:not([id="ikNotesPanel"] *), 
-            body.ik-dark-mode .link a:not([id="ikNotesPanel"] *) { 
+            /* 3. Global Links */
+            body.ik-dark-mode a:not([id*="Notes"] *), 
+            body.ik-dark-mode a:link:not([id*="Notes"] *), 
+            body.ik-dark-mode .link a:not([id*="Notes"] *) { 
                 color: var(--ik-theme-link) !important; 
             }
-            body.ik-dark-mode a:not([id="ikNotesPanel"] *):hover, 
-            body.ik-dark-mode .link a:not([id="ikNotesPanel"] *):hover { 
+            body.ik-dark-mode a:not([id*="Notes"] *):hover, 
+            body.ik-dark-mode .link a:not([id*="Notes"] *):hover { 
                 color: var(--ik-theme-link-hover) !important; 
             }
 
-            /* Visited Links Baseline (Uses [id="ikNotesPanel"] to stay at class-level specificity) */
-            body.ik-dark-mode a:visited:not([id="ikNotesPanel"] *) { 
+            /* 4. Visited Links Baseline (Restricted so it doesn't overpower indicators) */
+            body.ik-dark-mode .link a:visited,
+            body.ik-dark-mode div:not([class*="ind"]) > a:visited { 
                 color: var(--ik-theme-special-text3) !important; 
             }
 
-            /* Headers & Tabs */
+            /* 5. Headers & Tabs */
             body.ik-dark-mode .sideTab, body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
 
-            /* Entity Names */
+            /* 6. Entity Names */
             body.ik-dark-mode .name, 
             body.ik-dark-mode span.name, 
             body.ik-dark-mode a.name {
                 color: var(--ik-theme-special-text6) !important;
             }
 
-            /* Diplomatic & System Indicators (Overrides global visited links) */
+            /* 7. Diplomatic & System Popups (Absolute Highest Precedence) */
             body.ik-dark-mode .indOwn, body.ik-dark-mode .indOwn a, body.ik-dark-mode .indOwn a:link, body.ik-dark-mode .indOwn a:visited,
             body.ik-dark-mode .indHostile, body.ik-dark-mode .indHostile a, body.ik-dark-mode .indHostile a:link, body.ik-dark-mode .indHostile a:visited,
             body.ik-dark-mode .indFriendly, body.ik-dark-mode .indFriendly a, body.ik-dark-mode .indFriendly a:link, body.ik-dark-mode .indFriendly a:visited,
