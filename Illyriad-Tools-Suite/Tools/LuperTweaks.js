@@ -179,7 +179,7 @@
             body.ik-dark-mode .ui-state-default { background-image: var(--ik-theme-header-texture) !important; }
             body.ik-dark-mode .ui-state-default a { color: var(--ik-theme-special-text1) !important; }
             body.ik-dark-mode .ui-state-active a { color: var(--ik-theme-special-text2) !important; }
-            body.ik-dark-mode .ui-widget-content:not(#ikNotesPanel):not(#ikNotesPanel *) {
+            body.ik-dark-mode .ui-widget-content:not([id="ikNotesPanel"]):not([id="ikNotesPanel"] *) {
                 background-color: var(--ik-theme-content-bg) !important;
                 background-image: var(--ik-theme-texture) !important;
                 color: var(--ik-theme-text) !important;
@@ -248,15 +248,15 @@
             body.ik-dark-mode .sideTab.selected { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
 
             /* =========================================================================
-               TEXT COLOR & PRIORITY RULES (LuperNotes & Names Excluded)
+               TEXT COLOR & PRIORITY RULES (LuperNotes & Indicators Excluded)
                ========================================================================= */
 
             /* Default Page Text (Excludes LuperNotes and Chat/Friend Names) */
-            body.ik-dark-mode p:not(#ikNotesPanel *), 
-            body.ik-dark-mode td:not(#ikNotesPanel *), 
-            body.ik-dark-mode th:not(#ikNotesPanel *), 
-            body.ik-dark-mode span:not(#ikNotesPanel *):not(.name), 
-            body.ik-dark-mode label:not(#ikNotesPanel *),
+            body.ik-dark-mode p:not([id="ikNotesPanel"] *), 
+            body.ik-dark-mode td:not([id="ikNotesPanel"] *), 
+            body.ik-dark-mode th:not([id="ikNotesPanel"] *), 
+            body.ik-dark-mode span:not([id="ikNotesPanel"] *):not(.name), 
+            body.ik-dark-mode label:not([id="ikNotesPanel"] *),
             body.ik-dark-mode #resbar, body.ik-dark-mode #resbar td, body.ik-dark-mode #resbar span, body.ik-dark-mode #resbar a {
                 color: var(--ik-theme-text) !important;
             }
@@ -266,27 +266,40 @@
             body.ik-dark-mode #resbar .resNeg, body.ik-dark-mode #resbar .resFull, body.ik-dark-mode #resbar span[class*="neg"], body.ik-dark-mode #resbar [style*="color: red"], body.ik-dark-mode #resbar [style*="color:red"] { color: #ff5555 !important; }
             body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
 
-            /* Links */
-            body.ik-dark-mode a:not(#ikNotesPanel *), body.ik-dark-mode a:link:not(#ikNotesPanel *), body.ik-dark-mode .link a:not(#ikNotesPanel *) { color: var(--ik-theme-link) !important; }
-            body.ik-dark-mode a:not(#ikNotesPanel *):hover, body.ik-dark-mode .link a:not(#ikNotesPanel *):hover { color: var(--ik-theme-link-hover) !important; }
+            /* Links (Uses attribute selector [id="ikNotesPanel"] to keep specificity at class level) */
+            body.ik-dark-mode a:not([id="ikNotesPanel"] *), 
+            body.ik-dark-mode a:link:not([id="ikNotesPanel"] *), 
+            body.ik-dark-mode .link a:not([id="ikNotesPanel"] *) { 
+                color: var(--ik-theme-link) !important; 
+            }
+            body.ik-dark-mode a:not([id="ikNotesPanel"] *):hover, 
+            body.ik-dark-mode .link a:not([id="ikNotesPanel"] *):hover { 
+                color: var(--ik-theme-link-hover) !important; 
+            }
 
-            /* Special Text Defaults */
-            body.ik-dark-mode a:visited:not(#ikNotesPanel *) { color: var(--ik-theme-special-text3) !important; }
+            /* Visited Links Baseline (Uses [id="ikNotesPanel"] to stay at class-level specificity) */
+            body.ik-dark-mode a:visited:not([id="ikNotesPanel"] *) { 
+                color: var(--ik-theme-special-text3) !important; 
+            }
+
+            /* Headers & Tabs */
             body.ik-dark-mode .sideTab, body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
 
-            /* Entity Names (Takes Priority over Default Text) */
+            /* Entity Names */
             body.ik-dark-mode .name, 
             body.ik-dark-mode span.name, 
             body.ik-dark-mode a.name {
                 color: var(--ik-theme-special-text6) !important;
             }
 
-            /* Diplomatic & System Indicators (Highest Precedence) */
-            body.ik-dark-mode .indOwn, body.ik-dark-mode .indHostile, body.ik-dark-mode .indFriendly, body.ik-dark-mode .indCommunication,
-            body.ik-dark-mode .indOwn a, body.ik-dark-mode .indHostile a, body.ik-dark-mode .indFriendly a, body.ik-dark-mode .indCommunication a,
-            body.ik-dark-mode [class*="ind"], body.ik-dark-mode [class*="ind"] a, body.ik-dark-mode [class*="ind"] a:visited {
+            /* Diplomatic & System Indicators (Overrides global visited links) */
+            body.ik-dark-mode .indOwn, body.ik-dark-mode .indOwn a, body.ik-dark-mode .indOwn a:link, body.ik-dark-mode .indOwn a:visited,
+            body.ik-dark-mode .indHostile, body.ik-dark-mode .indHostile a, body.ik-dark-mode .indHostile a:link, body.ik-dark-mode .indHostile a:visited,
+            body.ik-dark-mode .indFriendly, body.ik-dark-mode .indFriendly a, body.ik-dark-mode .indFriendly a:link, body.ik-dark-mode .indFriendly a:visited,
+            body.ik-dark-mode .indCommunication, body.ik-dark-mode .indCommunication a, body.ik-dark-mode .indCommunication a:link, body.ik-dark-mode .indCommunication a:visited,
+            body.ik-dark-mode [class*="ind"], body.ik-dark-mode [class*="ind"] a, body.ik-dark-mode [class*="ind"] a:link, body.ik-dark-mode [class*="ind"] a:visited {
                 color: var(--ik-theme-special-text9) !important;
             }
         `;
