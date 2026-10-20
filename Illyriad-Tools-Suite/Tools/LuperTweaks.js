@@ -365,22 +365,19 @@
             /* ----------------------- Popup Indicator Text Colors ----------- */
             body.ik-dark-mode .indOwn,
             body.ik-dark-mode .indOwn a,
+            body.ik-dark-mode .indOwn a:link,
             body.ik-dark-mode .indOwn a:visited,
             body.ik-dark-mode .indHostile,
             body.ik-dark-mode .indHostile a,
+            body.ik-dark-mode .indHostile a:link,
             body.ik-dark-mode .indHostile a:visited,
             body.ik-dark-mode .indFriendly,
             body.ik-dark-mode .indFriendly a,
+            body.ik-dark-mode .indFriendly a:link,
             body.ik-dark-mode .indFriendly a:visited,
-            body.ik-dark-mode [class*="indOwn"],
-            body.ik-dark-mode [class*="indOwn"] a,
-            body.ik-dark-mode [class*="indOwn"] a:visited,
-            body.ik-dark-mode [class*="indHostile"],
-            body.ik-dark-mode [class*="indHostile"] a,
-            body.ik-dark-mode [class*="indHostile"] a:visited,
-            body.ik-dark-mode [class*="indFriendly"],
-            body.ik-dark-mode [class*="indFriendly"] a,
-            body.ik-dark-mode [class*="indFriendly"] a:visited {
+            body.ik-dark-mode [class*="ind"] a,
+            body.ik-dark-mode [class*="ind"] a:link,
+            body.ik-dark-mode [class*="ind"] a:visited {
                 color: var(--ik-theme-special-text9) !important;
             }
 
