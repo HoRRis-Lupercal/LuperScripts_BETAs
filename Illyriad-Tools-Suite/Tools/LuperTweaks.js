@@ -237,6 +237,27 @@
                 background-repeat: no-repeat !important;
                 background-size: 100% 100% !important;
             }
+            /* ------------------------- UI Widget Content ----------------------------- */
+            body.ik-dark-mode .ui-widget-content {
+                background-color: var(--ik-theme-content-bg) !important;
+                background-image: var(--ik-theme-texture) !important;
+                color: var(--ik-theme-text) !important;
+            } /* ---------------------- UI Widget Header */
+            body.ik-dark-mode .ui-widget-header {
+                background-image: var(--ik-theme-header-texture) !important;
+                background-repeat: repeat !important;
+            } /* ------------------ UI Dialog Titlebar */
+            body.ik-dark-mode .ui-dialog .ui-dialog-titlebar {
+                background-image: var(--ik-theme-headerO-texture) !important;
+                background-repeat: repeat !important;
+            } /* ------------------ UI Dialog Selected Title */
+            body.ik-dark-mode .ui-dialog .ui-dialog-title {
+                background-color: var(--ik-theme-content-bg) !important;
+            }/* ------------------------- UI State Active */
+            body.ik-dark-mode .ui-state-active {
+                background-image: var(--ik-theme-texture) !important;
+                background-repeat: repeat !important;
+            } 
             /* ----------------------- UI Progressbar Value Texture ------------------- */
             body.ik-dark-mode .ui-progressbar-value {
                 background-image: var(--ik-theme-headerP-texture) !important;
@@ -469,27 +490,6 @@
                 background-repeat: repeat !important;
             } 
             body.ik-dark-mode .sideTab.selected {
-                background-image: var(--ik-theme-texture) !important;
-                background-repeat: repeat !important;
-            }
-            /* ------------------------- UI Widget Content ----------------------------- */
-            body.ik-dark-mode .ui-widget-content {
-                background-color: var(--ik-theme-content-bg) !important;
-                background-image: var(--ik-theme-texture) !important;
-                color: var(--ik-theme-text) !important;
-            } /* ---------------------- UI Widget Header */
-            body.ik-dark-mode .ui-widget-header {
-                background-image: var(--ik-theme-header-texture) !important;
-                background-repeat: repeat !important;
-            } /* ------------------ UI Dialog Titlebar */
-            body.ik-dark-mode .ui-dialog .ui-dialog-titlebar {
-                background-image: var(--ik-theme-headerO-texture) !important;
-                background-repeat: repeat !important;
-            } /* ------------------ UI Dialog Selected Title */
-            body.ik-dark-mode .ui-dialog .ui-dialog-title {
-                background-color: var(--ik-theme-content-bg) !important;
-            }/* ------------------------- UI State Active */
-            body.ik-dark-mode .ui-state-active {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
             }
