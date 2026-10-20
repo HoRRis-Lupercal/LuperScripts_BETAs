@@ -78,6 +78,24 @@
                 --ik-theme-headermain-texture: url("https://i.imgur.com/TQ2SkKz.png");
                 
                 /* ----------------- Custom Button Image Links ------------------ */
+
+                --ik-theme-button-world-off: url("https://i.imgur.com/n2x7KAg.png");
+                --ik-theme-button-world-on: url("https://i.imgur.com/RaBKZyN.png");
+                
+                --ik-theme-button-region-off: url("https://i.imgur.com/BIyjHR4.png");
+                --ik-theme-button-region-on: url("https://i.imgur.com/4HbMmbd.png");
+                
+                --ik-theme-button-quest-off: url("https://i.imgur.com/PKZpNP1.png");
+                --ik-theme-button-quest-on: url("https://i.imgur.com/tjPip3r.png");
+                
+                --ik-theme-button-tourney-off: url("https://i.imgur.com/yMXHy7o.png");
+                --ik-theme-button-tourney-on: url("https://i.imgur.com/1PlkChY.png");
+                
+                --ik-theme-button-stats-off: url("https://i.imgur.com/JAl4zQO.png");
+                --ik-theme-button-stats-on: url("https://i.imgur.com/L5erQO5.png");
+
+                --ik-theme-button-herald-off: url("https://i.imgur.com/49AC6eF.png");
+                --ik-theme-button-herald-on: url("https://i.imgur.com/RPscrs2.png");
                 
                 --ik-theme-button-city-off: url("https://i.imgur.com/m28vfLz.png");
                 --ik-theme-button-city-on: url("https://i.imgur.com/fdNOBi5.png");
@@ -265,6 +283,48 @@
             }
 
             /* ========================== Top Menu Buttons ============================= */
+            /* ----------------------------- World Button ------------------------------- */
+            body.ik-dark-mode div.iconBox.ib1 a img.icon {
+                content: var(--ik-theme-button-world-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib1 a:hover img.icon {
+                content: var(--ik-theme-button-world-on) !important;
+            }
+            /* ------------------------- World - Region Button -------------------------- */
+            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon1 {
+                content: var(--ik-theme-button-region-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon1 {
+                content: var(--ik-theme-button-region-on) !important;
+            }
+            /* ------------------------ World - Quests Button ------------------------- */
+            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon2 {
+                content: var(--ik-theme-button-quest-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon2 {
+                content: var(--ik-theme-button-quest-on) !important;
+            }
+            /* ------------------------ World - Tournament Button ------------------------- */
+            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon3 {
+                content: var(--ik-theme-button-tourney-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon3 {
+                content: var(--ik-theme-button-tourney-on) !important;
+            }
+            /* ------------------------ World - Stats Button ------------------------- */
+            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon4 {
+                content: var(--ik-theme-button-stats-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon4 {
+                content: var(--ik-theme-button-stats-on) !important;
+            }
+            /* ------------------------ World - Herald Button ------------------------- */
+            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon5 {
+                content: var(--ik-theme-button-herald-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon5 {
+                content: var(--ik-theme-button-herald-on) !important;
+            }
             /* ----------------------------- City Button ------------------------------- */
             body.ik-dark-mode div.iconBox.ib2 a img.icon {
                 content: var(--ik-theme-button-city-off) !important;
