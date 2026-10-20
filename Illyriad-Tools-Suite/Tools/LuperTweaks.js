@@ -69,15 +69,15 @@
                 --ik-theme-border: #333537;
                 --ik-theme-text: #e3e3e3;
                 /* ---- Accordian heading text color ---- */
-                --ik-theme-special-text1: ##ea882e;
+                --ik-theme-special-text1: #ea882e;
                 /* ---- Accordian selected text color ---- */
                 --ik-theme-special-text2: #e54e20;
                 /* ------- Tab header text color ------ */
-                --ik-theme-special-text3: ##ea882e;
+                --ik-theme-special-text3: #ea882e;
                 /* ------ Header 1 text color ------ */
-                --ik-theme-special-text4: ##ea882e; 
+                --ik-theme-special-text4: #ea882e; 
                 /* ------ Header 2 text color ------ */
-                --ik-theme-special-text5: ##ea882e;
+                --ik-theme-special-text5: #ea882e;
                 /* ------ Name class text color ------ */
                 --ik-theme-special-text6: #e54e20;
                 /* ------ City Drop Down Selected color ------ */
@@ -85,7 +85,7 @@
                 /* ------ City Drop Down Background color ------ */
                 --ik-theme-special-text8: #1e1f20;
                 /* ------ Pop up Notif Text Color ------ */
-                --ik-theme-special-text9: ##434343;
+                --ik-theme-special-text9: #434343;
                 --ik-theme-link: #8ab4f8;
                 --ik-theme-link-hover: #aecbfa;
                 /* ------ Paper Background Image Link ------ */
@@ -279,13 +279,13 @@
                 background-image: var(--ik-theme-headerP-texture) !important;
                 background-repeat: repeat !important;
             }
-           /* ----------------------- Default Page Text Color ------------------------ */
-            body.ik-dark-mode, 
-            body.ik-dark-mode p, 
-            body.ik-dark-mode td, 
-            body.ik-dark-mode th, 
-            body.ik-dark-mode span, 
-            body.ik-dark-mode label,
+           /* ----------------------- Default Page Text Color (Excluding LuperNotes content) ------------------------ */
+            body.ik-dark-mode:not(#ikNotesPanel):not(#ikNotesPanel *), 
+            body.ik-dark-mode p:not(#ikNotesPanel *), 
+            body.ik-dark-mode td:not(#ikNotesPanel *), 
+            body.ik-dark-mode th:not(#ikNotesPanel *), 
+            body.ik-dark-mode span:not(#ikNotesPanel *), 
+            body.ik-dark-mode label:not(#ikNotesPanel *),
             body.ik-dark-mode #resbar,
             body.ik-dark-mode #resbar td,
             body.ik-dark-mode #resbar span,
@@ -371,17 +371,17 @@
             body.ik-dark-mode [class*="indFriendly"] a:visited {
                 color: var(--ik-theme-special-text9) !important;
             }
-            /* ----------------------- Link Colors -------------------- */
-            body.ik-dark-mode a,
-            body.ik-dark-mode a:link,
-            body.ik-dark-mode .link a,
-            body.ik-dark-mode .link a:link,
-            body.ik-dark-mode .link a:visited {
+            /* ----------------------- Link Colors (Excluding LuperNotes custom links) -------------------- */
+            body.ik-dark-mode a:not(#ikNotesPanel):not(#ikNotesPanel *),
+            body.ik-dark-mode a:link:not(#ikNotesPanel):not(#ikNotesPanel *),
+            body.ik-dark-mode .link a:not(#ikNotesPanel *),
+            body.ik-dark-mode .link a:link:not(#ikNotesPanel *),
+            body.ik-dark-mode .link a:visited:not(#ikNotesPanel *) {
                 color: var(--ik-theme-link) !important;
             }
 
-            body.ik-dark-mode a:hover,
-            body.ik-dark-mode .link a:hover {
+            body.ik-dark-mode a:not(#ikNotesPanel):not(#ikNotesPanel *):hover,
+            body.ik-dark-mode .link a:not(#ikNotesPanel *):hover {
                 color: var(--ik-theme-link-hover) !important;
             }
             /* --------------------- Subheader Title and Background ----------------------- */  
