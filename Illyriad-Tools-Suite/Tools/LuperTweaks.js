@@ -207,10 +207,22 @@
             html body.ik-dark-mode {
                 background-image: var(--ik-theme-headermain-texture) !important;
                 background-repeat: no-repeat !important;
-            } 
+            }
+            /* ----------------------- Link Colors (Excluding LuperNotes custom links) -------------------- */
+            body.ik-dark-mode a:not(#ikNotesPanel *),
+            body.ik-dark-mode a:link:not(#ikNotesPanel *),
+            body.ik-dark-mode .link a:not(#ikNotesPanel *),
+            body.ik-dark-mode .link a:link:not(#ikNotesPanel *),
+            body.ik-dark-mode .link a:visited:not(#ikNotesPanel *) {
+                color: var(--ik-theme-link) !important;
+            }
+            body.ik-dark-mode a:not(#ikNotesPanel *):hover,
+            body.ik-dark-mode .link a:not(#ikNotesPanel *):hover {
+                color: var(--ik-theme-link-hover) !important;
+            }
             /* ----------------------- Input & Textbox Controls */
             body.ik-dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
-            body.ik-dark-mode textarea,
+            body.ik-dark-mode textarea:not(#ikNotesTextarea),
             body.ik-dark-mode select {
                 background-color: var(--ik-theme-input-bg) !important;
                 color: var(--ik-theme-text) !important;
@@ -252,7 +264,7 @@
                 background-color: var(--ik-theme-special-text7) !important;
             }
             /* ------------------------- UI Widget Content ----------------------------- */
-            body.ik-dark-mode .ui-widget-content {
+            body.ik-dark-mode .ui-widget-content:not(#ikNotesPanel):not(#ikNotesPanel *) {
                 background-color: var(--ik-theme-content-bg) !important;
                 background-image: var(--ik-theme-texture) !important;
                 color: var(--ik-theme-text) !important;
@@ -282,12 +294,11 @@
                 background-repeat: repeat !important;
             }
 
-            /* ----------------------- Default Page Text Color (Excluding LuperNotes display content) ------------------------ */
-            body.ik-dark-mode, 
+            /* ----------------------- Default Page Text Color (Fully Excludes LuperNotes Content) ------------------------ */
             body.ik-dark-mode p:not(#ikNotesPanel *), 
             body.ik-dark-mode td:not(#ikNotesPanel *), 
             body.ik-dark-mode th:not(#ikNotesPanel *), 
-            body.ik-dark-mode span:not(#ikNotesPanel *):not(.name), 
+            body.ik-dark-mode span:not(#ikNotesPanel *), 
             body.ik-dark-mode label:not(#ikNotesPanel *),
             body.ik-dark-mode #resbar,
             body.ik-dark-mode #resbar td,
@@ -350,11 +361,6 @@
             body.ik-dark-mode h2 {
                 color: var(--ik-theme-special-text5) !important;
             }
-            body.ik-dark-mode .name,
-            body.ik-dark-mode span.name,
-            body.ik-dark-mode a.name {
-                color: var(--ik-theme-special-text6) !important;
-            }
 
             /* ----------------------- Popup Indicator Text Colors ----------- */
             body.ik-dark-mode .indOwn,
@@ -378,18 +384,11 @@
                 color: var(--ik-theme-special-text9) !important;
             }
 
-            /* ----------------------- Link Colors (Excluding LuperNotes custom links) -------------------- */
-            body.ik-dark-mode a:not(#ikNotesPanel *),
-            body.ik-dark-mode a:link:not(#ikNotesPanel *),
-            body.ik-dark-mode .link a:not(#ikNotesPanel *),
-            body.ik-dark-mode .link a:link:not(#ikNotesPanel *),
-            body.ik-dark-mode .link a:visited:not(#ikNotesPanel *) {
-                color: var(--ik-theme-link) !important;
-            }
-
-            body.ik-dark-mode a:not(#ikNotesPanel *):hover,
-            body.ik-dark-mode .link a:not(#ikNotesPanel *):hover {
-                color: var(--ik-theme-link-hover) !important;
+            /* ----------------------- Name Class Text Color (Placed at bottom for highest priority) --- */
+            body.ik-dark-mode .name,
+            body.ik-dark-mode span.name,
+            body.ik-dark-mode a.name {
+                color: var(--ik-theme-special-text6) !important;
             }
 
             /* --------------------- Subheader Title and Background ----------------------- */  
@@ -474,4 +473,325 @@
             body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon2 {
                 content: var(--ik-theme-button-res-off) !important;
             }
-            body.ik-dark-mode div.iconBox.ib
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon2 {
+                content: var(--ik-theme-button-res-on) !important;
+            }
+            /* ------------------------ City - Production Button ------------------------- */
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon3 {
+                content: var(--ik-theme-button-prod-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon3 {
+                content: var(--ik-theme-button-prod-on) !important;
+            }
+            /* ------------------------ City - Sovereignty Button ------------------------- */
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon4 {
+                content: var(--ik-theme-button-sov-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon4 {
+                content: var(--ik-theme-button-sov-on) !important;
+            }
+            /* ------------------------ City - Inventory Button ------------------------- */
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon5 {
+                content: var(--ik-theme-button-inv-off) !important;
+            }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon5 {
+                content: var(--ik-theme-button-inv-on) !important;
+            }
+            /* --------------------------- Character Button ----------------------------- */
+            body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] {
+                content: var(--ik-theme-char-ring2-off) !important;
+            }
+
+            body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] {
+                content: var(--ik-theme-char-ring2-on) !important;
+            }
+            /* ========================= End of Buttons ================================== */
+            
+            /* ----------------------- Widget & Panel Alternating Rows ------------------ */
+            /* Table rows tagged with .odd */
+            body.ik-dark-mode tr.odd {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
+
+            /* Next Events & Docked Friends Widgets */
+            body.ik-dark-mode table.oddeven > tbody > tr:nth-child(2n),
+            body.ik-dark-mode table.evenodd > tbody > tr:nth-child(2n+1) {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
+
+            /* UI Widget Content Divs (excluding chat containers) */
+            body.ik-dark-mode .ui-widget-content div.oddeven > div:not([id*="chat"]):nth-child(2n) {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
+            /* ----------------------- Oddevencols Table Columns ---------------------- */
+            body.ik-dark-mode table.oddevencols > colgroup > col:nth-child(2n+1) {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
+            
+            /* ----------------------- Notifications Tab ------------------------------ */
+            body.ik-dark-mode #Notifications > div:nth-child(2n) {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
+            
+            /* -------------------------- Next Events Widget ---------------------------- */
+            body.ik-dark-mode .smallBorder {
+                background-image: var(--ik-theme-texture) !important;
+                background-repeat: repeat !important;
+            }
+
+            /* ----------------------- Docked Friends Widget --------------------------- */
+            body.ik-dark-mode #DockedFriends {
+                background-image: var(--ik-theme-texture) !important;
+                background-repeat: repeat !important;
+            } 
+            
+            /* ---------------------------- Widget Tabs ------------------------------- */
+            body.ik-dark-mode .sideTab {
+                background-image: var(--ik-theme-headerO-texture) !important;
+                background-repeat: repeat !important;
+            } 
+            body.ik-dark-mode .sideTab.selected {
+                background-image: var(--ik-theme-texture) !important;
+                background-repeat: repeat !important;
+            }
+        `;
+    }
+
+    function applySettings() {
+        if (settings.darkMode) {
+            document.body.classList.add("ik-dark-mode");
+        } else {
+            document.body.classList.remove("ik-dark-mode");
+        }
+    }
+
+    function saveSettings() {
+        const darkCheckbox = document.querySelector("#ikltDarkCheckbox");
+        if (darkCheckbox) {
+            settings.darkMode = darkCheckbox.checked;
+        }
+        saveJSON(STORAGE.SETTINGS, settings);
+        applySettings();
+    }
+
+    function restoreSettings() {
+        const saved = loadJSON(STORAGE.SETTINGS, null);
+        if (saved) {
+            settings = Object.assign({}, settings, saved);
+        }
+        const darkCheckbox = document.querySelector("#ikltDarkCheckbox");
+        if (darkCheckbox) {
+            darkCheckbox.checked = !!settings.darkMode;
+        }
+        applySettings();
+    }
+
+
+    // =========================================================================
+    // UI BUILDER
+    // =========================================================================
+
+    function createTweaksContents() {
+        if (document.querySelector("#ikLuperTweaks")) return;
+
+        const content = document.createElement("div");
+        content.id = "ikLuperTweaks";
+        content.innerHTML = `
+            <div class="iklt-flex-wrapper">
+                <div class="iklt-section">
+                    <div class="iklt-section-title">Theme Preferences</div>
+                    <label class="iklt-option-row">
+                        <input type="checkbox" id="ikltDarkCheckbox" />
+                        <span>Enable Global Dark Mode</span>
+                    </label>
+                    <div style="font-size: 11px; opacity: 0.7; margin-left: 20px; margin-top: 2px;">
+                        Applies a modern dark theme across the webpage, game panels, chat windows, and script tools.
+                    </div>
+                </div>
+
+                <!-- Extensible placeholder for future customization options -->
+                <div class="iklt-section" style="opacity: 0.6;">
+                    <div class="iklt-section-title">Future Customizations</div>
+                    <div style="font-size: 11px; font-style: italic;">
+                        Additional modular tweak options will appear here in future updates.
+                    </div>
+                </div>
+
+                <div class="iklt-footer">
+                    LuperTweaks v1.9
+                </div>
+            </div>
+        `;
+        document.body.appendChild(content);
+
+        const checkbox = content.querySelector("#ikltDarkCheckbox");
+        checkbox.addEventListener("change", saveSettings);
+    }
+
+
+    // =========================================================================
+    // GEOMETRY & DIALOG MANAGEMENT
+    // =========================================================================
+
+    function saveTweaksGeometry() {
+        if (!$tweaks) return;
+        try {
+            const widget = $tweaks.dialog("widget");
+            if (!widget?.length) return;
+            const offset = widget.offset();
+            saveJSON(STORAGE.GEOMETRY, {
+                left: Math.round(offset.left),
+                top: Math.round(offset.top),
+                width: Math.round(widget.outerWidth()),
+                height: Math.round(widget.outerHeight())
+            });
+        } catch (e) {
+            console.warn("LuperTweaks could not save geometry.", e);
+        }
+    }
+
+    function clampTweaks() {
+        if (!$tweaks) return;
+        const widget = $tweaks.dialog("widget");
+        if (!widget?.length) return;
+
+        const width = widget.outerWidth();
+        const height = widget.outerHeight();
+        const current = widget.offset();
+
+        const maxLeft = Math.max(0, window.innerWidth - width);
+        const maxTop = Math.max(0, window.innerHeight - height);
+
+        widget.css({
+            left: Math.max(0, Math.min(current.left, maxLeft)) + "px",
+            top: Math.max(0, Math.min(current.top, maxTop)) + "px"
+        });
+    }
+
+    function restoreTweaksGeometry() {
+        if (!$tweaks) return;
+        const geometry = loadJSON(STORAGE.GEOMETRY, null);
+        if (!geometry) return;
+
+        try {
+            if (geometry.width && geometry.height) {
+                $tweaks.dialog("option", "width", Math.max(340, geometry.width));
+                $tweaks.dialog("option", "height", Math.max(260, geometry.height));
+            }
+
+            const widget = $tweaks.dialog("widget");
+            widget.css({
+                left: Number(geometry.left || 0) + "px",
+                top: Number(geometry.top || 0) + "px"
+            });
+
+            clampTweaks();
+        } catch (e) {
+            console.warn("LuperTweaks geometry restore failed.", e);
+        }
+    }
+
+    function createTweaksDialog() {
+        if (!window.jQuery || !jQuery.fn || typeof jQuery.fn.dialog !== "function") {
+            return false;
+        }
+
+        createTweaksContents();
+        const saved = loadJSON(STORAGE.GEOMETRY, {});
+
+        $tweaks = jQuery("#ikLuperTweaks");
+
+        $tweaks.dialog({
+            title: "LuperTweaks",
+            autoOpen: false,
+            width: Math.max(340, Number(saved.width) || 380),
+            height: Math.max(260, Number(saved.height) || 320),
+            minWidth: 300,
+            minHeight: 220,
+            draggable: true,
+            resizable: true,
+            closeOnEscape: false,
+            dragStop: saveTweaksGeometry,
+            resizeStop: saveTweaksGeometry,
+            open: function () {
+                saveJSON(STORAGE.OPEN, true);
+                const widget = $tweaks.dialog("widget");
+                widget.addClass("flora");
+                widget.css("z-index", 11000);
+
+                restoreTweaksGeometry();
+                restoreSettings();
+                setTimeout(clampTweaks, 0);
+            },
+            close: function () {
+                saveTweaksGeometry();
+                saveJSON(STORAGE.OPEN, false);
+            }
+        });
+
+        const widget = $tweaks.dialog("widget");
+        widget.addClass("flora");
+        return true;
+    }
+
+    function openLuperTweaks() {
+        if (!$tweaks) {
+            if (!initLuperTweaks()) return;
+        }
+
+        if (!$tweaks.dialog("isOpen")) {
+            $tweaks.dialog("open");
+        } else {
+            try {
+                $tweaks.dialog("moveToTop");
+            } catch (e) {}
+        }
+    }
+
+
+    // =========================================================================
+    // INITIALIZATION & REGISTRATION
+    // =========================================================================
+
+    function initLuperTweaks() {
+        if (tweaksInitialized) return true;
+
+        if (!window.jQuery || !jQuery.fn || typeof jQuery.fn.dialog !== "function") {
+            return false;
+        }
+
+        injectTweaksStyles();
+        restoreSettings(); // Apply saved settings immediately on startup
+
+        if (!createTweaksDialog()) return false;
+
+        if (!resizeBound) {
+            resizeBound = true;
+            window.addEventListener("resize", () => {
+                if ($tweaks &&$tweaks.dialog("isOpen")) {
+                    clampTweaks();
+                    saveTweaksGeometry();
+                }
+            });
+        }
+
+        tweaksInitialized = true;
+
+        if (loadJSON(STORAGE.OPEN, false)) {
+            setTimeout(openLuperTweaks, 100);
+        }
+
+        console.log("IKnights LuperTweaks module loaded.");
+        return true;
+    }
+
+    IKTools.registerTool({
+        id: "lupertweaks",
+        name: "Tweaks",
+        description: "UI and page customization settings",
+        order: 25,
+        init: initLuperTweaks,
+        open: openLuperTweaks
+    });
+
+})();
