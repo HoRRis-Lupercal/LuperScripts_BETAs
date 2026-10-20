@@ -294,11 +294,11 @@
                 background-repeat: repeat !important;
             }
 
-            /* ----------------------- Default Page Text Color (Fully Excludes LuperNotes Content) ------------------------ */
+            /* ----------------------- Default Page Text Color ------------------------ */
             body.ik-dark-mode p:not(#ikNotesPanel *), 
             body.ik-dark-mode td:not(#ikNotesPanel *), 
             body.ik-dark-mode th:not(#ikNotesPanel *), 
-            body.ik-dark-mode span:not(#ikNotesPanel *), 
+            body.ik-dark-mode span:not(#ikNotesPanel *):not(.name), 
             body.ik-dark-mode label:not(#ikNotesPanel *),
             body.ik-dark-mode #resbar,
             body.ik-dark-mode #resbar td,
