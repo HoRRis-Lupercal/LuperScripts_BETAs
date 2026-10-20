@@ -82,9 +82,15 @@
                 --ik-theme-special-text6: #55efc4;
                 --ik-theme-link: #8ab4f8;
                 --ik-theme-link-hover: #aecbfa;
+                /* ------ Paper Background Image Link ------ */
                 --ik-theme-texture: url("https://i.imgur.com/rcUBS5t.jpeg");
+                /* ------ Progress Bar Image Link ------ */
+                --ik-theme-headerP-texture: url("https://i.imgur.com/cozCMCU.jpeg");
+                /* ------ Lighter Header Image Link ------ */
                 --ik-theme-headerO-texture: url("https://i.imgur.com/yCH8seN.png");
+                /* ------ Dark Header Image Link ------ */
                 --ik-theme-header-texture: url("https://i.imgur.com/0nDOLcG.jpeg");
+                /* ------ Large Header Image Link ------ */
                 --ik-theme-headermain-texture: url("https://i.imgur.com/TQ2SkKz.png");
                 
                 /* ----------------- Custom Button Image Links ------------------ */
@@ -230,6 +236,11 @@
                 background-image: var(--ik-theme-button-short-on) !important;
                 background-repeat: no-repeat !important;
                 background-size: 100% 100% !important;
+            }
+            /* ----------------------- UI Progressbar Value Texture ------------------- */
+            body.ik-dark-mode .ui-progressbar-value {
+                background-image: var(--ik-theme-headerP-texture) !important;
+                background-repeat: repeat !important;
             }
            /* ----------------------- Default Page Text Color ------------------------ */
             body.ik-dark-mode, 
