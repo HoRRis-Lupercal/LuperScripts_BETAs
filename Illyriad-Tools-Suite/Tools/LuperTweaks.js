@@ -209,15 +209,15 @@
                 background-repeat: no-repeat !important;
             }
             /* ----------------------- Link Colors (Excluding LuperNotes custom links) -------------------- */
-            body.ik-dark-mode a:not(#ikNotesPanel *),
-            body.ik-dark-mode a:link:not(#ikNotesPanel *),
-            body.ik-dark-mode .link a:not(#ikNotesPanel *),
-            body.ik-dark-mode .link a:link:not(#ikNotesPanel *),
-            body.ik-dark-mode .link a:visited:not(#ikNotesPanel *) {
+            body.ik-dark-mode a:not([id*="Notes"] *),
+            body.ik-dark-mode a:link:not([id*="Notes"] *),
+            body.ik-dark-mode .link a:not([id*="Notes"] *),
+            body.ik-dark-mode .link a:link:not([id*="Notes"] *),
+            body.ik-dark-mode .link a:visited:not([id*="Notes"] *) {
                 color: var(--ik-theme-link) !important;
             }
-            body.ik-dark-mode a:not(#ikNotesPanel *):hover,
-            body.ik-dark-mode .link a:not(#ikNotesPanel *):hover {
+            body.ik-dark-mode a:not([id*="Notes"] *):hover,
+            body.ik-dark-mode .link a:not([id*="Notes"] *):hover {
                 color: var(--ik-theme-link-hover) !important;
             }
             /* ----------------------- Input & Textbox Controls */
@@ -294,12 +294,12 @@
                 background-repeat: repeat !important;
             }
 
-            /* ----------------------- Default Page Text Color ------------------------ */
-            body.ik-dark-mode p:not(#ikNotesPanel *), 
-            body.ik-dark-mode td:not(#ikNotesPanel *), 
+            /* ------------- Default Page Text Color (Excluding LuperNotes Content) --------------- */
+            body.ik-dark-mode p:not([id*="Notes"] *), 
+            body.ik-dark-mode td:not([id*="Notes"] *), 
             body.ik-dark-mode th:not(#ikNotesPanel *), 
-            body.ik-dark-mode span:not(#ikNotesPanel *):not(.name), 
-            body.ik-dark-mode label:not(#ikNotesPanel *),
+            body.ik-dark-mode span:not([id*="Notes"] *), 
+            body.ik-dark-mode label:not([id*="Notes"] *),
             body.ik-dark-mode #resbar,
             body.ik-dark-mode #resbar td,
             body.ik-dark-mode #resbar span,
