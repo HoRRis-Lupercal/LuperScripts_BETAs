@@ -63,29 +63,29 @@
             :root {
                 --ik-theme-text: #e3e3e3;
                 --ik-theme-bg: #131314;
-                --ik-theme-content-bg: #1e1f20;
-                --ik-theme-alt-bg: #2d2e30;
-                --ik-theme-input-bg: #2a2b2d;
+                --ik-theme-content-bg: #151516;
+                --ik-theme-alt-bg: #202021;
+                --ik-theme-input-bg: #515252;
                 --ik-theme-border: #333537;
                 --ik-theme-text: #e3e3e3;
                 /* ---- Accordian heading text color ---- */
-                --ik-theme-special-text1: #fcd116;
+                --ik-theme-special-text1: ##ea882e;
                 /* ---- Accordian selected text color ---- */
-                --ik-theme-special-text2: #fcd116;
+                --ik-theme-special-text2: #e54e20;
                 /* ------- Tab header text color ------ */
-                --ik-theme-special-text3: #fcd116;
+                --ik-theme-special-text3: ##ea882e;
                 /* ------ Header 1 text color ------ */
-                --ik-theme-special-text4: #ff7675; 
+                --ik-theme-special-text4: ##ea882e; 
                 /* ------ Header 2 text color ------ */
-                --ik-theme-special-text5: #74b9ff;
+                --ik-theme-special-text5: ##ea882e;
                 /* ------ Name class text color ------ */
-                --ik-theme-special-text6: #55efc4;
+                --ik-theme-special-text6: #e54e20;
                 /* ------ City Drop Down Selected color ------ */
                 --ik-theme-special-text7: #2d2e30;
                 /* ------ City Drop Down Background color ------ */
                 --ik-theme-special-text8: #1e1f20;
                 /* ------ Pop up Notif Text Color ------ */
-                --ik-theme-special-text9: #000;
+                --ik-theme-special-text9: ##434343;
                 --ik-theme-link: #8ab4f8;
                 --ik-theme-link-hover: #aecbfa;
                 /* ------ Paper Background Image Link ------ */
@@ -350,7 +350,7 @@
             body.ik-dark-mode .name {
                 color: var(--ik-theme-special-text6) !important;
             }
-            /* ----------------------- Diplomatic Indicator Text Colors ----------- */
+            /* ----------------------- Popup Indicator Text Colors ----------- */
             body.ik-dark-mode .indOwn,
             body.ik-dark-mode .indOwn a,
             body.ik-dark-mode .indOwn a:visited,
@@ -370,6 +370,19 @@
             body.ik-dark-mode [class*="indFriendly"] a,
             body.ik-dark-mode [class*="indFriendly"] a:visited {
                 color: var(--ik-theme-special-text9) !important;
+            }
+            /* ----------------------- Link Colors -------------------- */
+            body.ik-dark-mode a,
+            body.ik-dark-mode a:link,
+            body.ik-dark-mode .link a,
+            body.ik-dark-mode .link a:link,
+            body.ik-dark-mode .link a:visited {
+                color: var(--ik-theme-link) !important;
+            }
+
+            body.ik-dark-mode a:hover,
+            body.ik-dark-mode .link a:hover {
+                color: var(--ik-theme-link-hover) !important;
             }
             /* --------------------- Subheader Title and Background ----------------------- */  
             body.ik-dark-mode #contentTD {
