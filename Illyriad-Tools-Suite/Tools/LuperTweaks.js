@@ -81,9 +81,9 @@
                 /* ------ Name class text color ------ */
                 --ik-theme-special-text6: #55efc4;
                 /* ------ City Drop Down Selected color ------ */
-                --ik-theme-special-text7: #55efc4;
+                --ik-theme-special-text7: #2d2e30;
                 /* ------ City Drop Down Background color ------ */
-                --ik-theme-special-text8: #55efc4;
+                --ik-theme-special-text8: #1e1f20;
                 /* ------ Pop up Notif Text Color ------ */
                 --ik-theme-special-text9: #000;
                 --ik-theme-link: #8ab4f8;
@@ -352,11 +352,23 @@
             }
             /* ----------------------- Diplomatic Indicator Text Colors ----------- */
             body.ik-dark-mode .indOwn,
+            body.ik-dark-mode .indOwn a,
+            body.ik-dark-mode .indOwn a:visited,
             body.ik-dark-mode .indHostile,
+            body.ik-dark-mode .indHostile a,
+            body.ik-dark-mode .indHostile a:visited,
             body.ik-dark-mode .indFriendly,
+            body.ik-dark-mode .indFriendly a,
+            body.ik-dark-mode .indFriendly a:visited,
             body.ik-dark-mode [class*="indOwn"],
+            body.ik-dark-mode [class*="indOwn"] a,
+            body.ik-dark-mode [class*="indOwn"] a:visited,
             body.ik-dark-mode [class*="indHostile"],
-            body.ik-dark-mode [class*="indFriendly"] {
+            body.ik-dark-mode [class*="indHostile"] a,
+            body.ik-dark-mode [class*="indHostile"] a:visited,
+            body.ik-dark-mode [class*="indFriendly"],
+            body.ik-dark-mode [class*="indFriendly"] a,
+            body.ik-dark-mode [class*="indFriendly"] a:visited {
                 color: var(--ik-theme-special-text9) !important;
             }
             /* --------------------- Subheader Title and Background ----------------------- */  
