@@ -247,7 +247,7 @@
             body.ik-dark-mode .sideTab { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; } 
             body.ik-dark-mode .sideTab.selected { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
 
-            /* =========================================================================
+           /* =========================================================================
                TEXT COLOR & PRIORITY RULES
                ========================================================================= */
 
@@ -266,11 +266,12 @@
             body.ik-dark-mode #resbar .resNeg, body.ik-dark-mode #resbar .resFull, body.ik-dark-mode #resbar span[class*="neg"], body.ik-dark-mode #resbar [style*="color: red"], body.ik-dark-mode #resbar [style*="color:red"] { color: #ff5555 !important; }
             body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
 
-            /* 3. Global Links (Includes :visited so clicked and unclicked links are identical) */
+            /* 3. Global Links (Unvisited and Visited share the exact same color) */
             body.ik-dark-mode a:not([id*="Notes"] *), 
             body.ik-dark-mode a:link:not([id*="Notes"] *), 
             body.ik-dark-mode a:visited:not([id*="Notes"] *),
             body.ik-dark-mode .link a:not([id*="Notes"] *),
+            body.ik-dark-mode .link a:link:not([id*="Notes"] *),
             body.ik-dark-mode .link a:visited:not([id*="Notes"] *) { 
                 color: var(--ik-theme-link) !important; 
             }
@@ -279,18 +280,12 @@
                 color: var(--ik-theme-link-hover) !important; 
             }
 
-            /* 4. Visited Links Baseline (Restricted so it doesn't overpower indicators) */
-            body.ik-dark-mode .link a:visited,
-            body.ik-dark-mode div:not([class*="ind"]) > a:visited { 
-                color: var(--ik-theme-special-text3) !important; 
-            }
-
-            /* 5. Headers & Tabs */
+            /* 4. Headers & Tabs */
             body.ik-dark-mode .sideTab, body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
 
-            /* 6. Explicit .headLinks & .subLinks rules */
+            /* 5. Explicit .headLinks & .subLinks rules (Covers all states including :visited) */
             body.ik-dark-mode .headLinks,
             body.ik-dark-mode .headlinks,
             body.ik-dark-mode .headLinks a,
@@ -313,14 +308,15 @@
                 color: var(--ik-theme-special-text5) !important;
             }
 
-            /* 7. Entity Names */
+            /* 6. Entity Names */
             body.ik-dark-mode .name, 
             body.ik-dark-mode span.name, 
-            body.ik-dark-mode a.name {
+            body.ik-dark-mode a.name,
+            body.ik-dark-mode a:visited.name {
                 color: var(--ik-theme-special-text6) !important;
             }
 
-            /* 8. Diplomatic & System Popups (Absolute Highest Precedence) */
+            /* 7. Diplomatic & System Popups (Highest Precedence) */
             body.ik-dark-mode .indOwn, body.ik-dark-mode .indOwn a, body.ik-dark-mode .indOwn a:link, body.ik-dark-mode .indOwn a:visited,
             body.ik-dark-mode .indHostile, body.ik-dark-mode .indHostile a, body.ik-dark-mode .indHostile a:link, body.ik-dark-mode .indHostile a:visited,
             body.ik-dark-mode .indFriendly, body.ik-dark-mode .indFriendly a, body.ik-dark-mode .indFriendly a:link, body.ik-dark-mode .indFriendly a:visited,
