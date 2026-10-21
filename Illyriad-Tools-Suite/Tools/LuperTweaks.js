@@ -291,8 +291,8 @@
             body.ik-dark-mode #resbar, body.ik-dark-mode #resbar td, body.ik-dark-mode #resbar span, body.ik-dark-mode #resbar a {
                 color: var(--ik-theme-text) !important;
             }
-            body.ik-dark-mode .ui-dialog .ui-dialog-title,
-            body.ik-dark-mode span.ui-dialog-title { 
+            body.ik-dark-mode .ui-dialog .ui-dialog-title:not([id*="Notes"] *),
+            body.ik-dark-mode span.ui-dialog-title:not([id*="Notes"] *) { 
                 background-color: var(--ik-theme-content-bg) !important; 
                 color: var(--ik-theme-special-text3) !important;
             }
