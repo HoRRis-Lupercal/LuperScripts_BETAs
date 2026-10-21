@@ -157,11 +157,24 @@
                 opacity: 0.7;
             }
 
+            
+
             /* =========================================================================
-               DARK MODE THEME RULES
+               TEXT COLOR & PRIORITY RULES
                ========================================================================= */
 
-            /* Global Links (Low Priotity, likely overriden) */
+            
+            /* 1. Default Page Text */
+            body.ik-dark-mode p:not([id*="Notes"] *), 
+            body.ik-dark-mode td:not([id*="Notes"] *), 
+            body.ik-dark-mode th:not([id*="Notes"] *), 
+            body.ik-dark-mode span:not([id*="Notes"] *):not(.name), 
+            body.ik-dark-mode label:not([id*="Notes"] *),
+            body.ik-dark-mode #resbar, body.ik-dark-mode #resbar td, body.ik-dark-mode #resbar span, body.ik-dark-mode #resbar a {
+                color: var(--ik-theme-text) !important;
+            }
+
+            /* 2. Global Links */
             body.ik-dark-mode a[href]:not([id*="Notes"] *),
             body.ik-dark-mode .link a[href]:not([id*="Notes"] *) { 
                 color: var(--ik-theme-link) !important; 
@@ -169,6 +182,76 @@
             body.ik-dark-mode a[href]:not([id*="Notes"] *):hover, 
             body.ik-dark-mode .link a[href]:not([id*="Notes"] *):hover { 
                 color: var(--ik-theme-link-hover) !important; 
+            }
+
+            /* 3. Resbar Status Colors */
+            body.ik-dark-mode #resbar .resPos, body.ik-dark-mode #resbar span[class*="pos"], body.ik-dark-mode #resbar [style*="color: green"], body.ik-dark-mode #resbar [style*="color:green"] { color: #55ff55 !important; }
+            body.ik-dark-mode #resbar .resNeg, body.ik-dark-mode #resbar .resFull, body.ik-dark-mode #resbar span[class*="neg"], body.ik-dark-mode #resbar [style*="color: red"], body.ik-dark-mode #resbar [style*="color:red"] { color: #ff5555 !important; }
+            body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
+
+            /* 4. Headers & Tabs */
+            body.ik-dark-mode .sideTab, body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
+            body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
+            body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
+
+            /* 5. Explicit .headLinks & .subLinks rules */
+            body.ik-dark-mode .headLinks,
+            body.ik-dark-mode .headlinks,
+            body.ik-dark-mode .headLinks a[href],
+            body.ik-dark-mode .headlinks a[href] {
+                color: var(--ik-theme-special-text4) !important;
+            }
+
+            body.ik-dark-mode .subLinks,
+            body.ik-dark-mode .sublinks,
+            body.ik-dark-mode .subLinks a[href],
+            body.ik-dark-mode .sublinks a[href] {
+                color: var(--ik-theme-special-text5) !important;
+            }
+
+            /* 6. Entity Names */
+            body.ik-dark-mode .name, 
+            body.ik-dark-mode span.name, 
+            body.ik-dark-mode a.name {
+                color: var(--ik-theme-special-text6) !important;
+            }
+
+            /* 7. Diplomatic & System Popups (Highest Precedence) */
+            body.ik-dark-mode .indOwn, body.ik-dark-mode .indOwn a[href],
+            body.ik-dark-mode .indHostile, body.ik-dark-mode .indHostile a[href],
+            body.ik-dark-mode .indFriendly, body.ik-dark-mode .indFriendly a[href],
+            body.ik-dark-mode .indCommunication, body.ik-dark-mode .indCommunication a[href],
+            body.ik-dark-mode [class*="ind"], body.ik-dark-mode [class*="ind"] a[href] {
+                color: var(--ik-theme-special-text9) !important;
+            }
+
+            /* 8. UI Dialog Custom Catalogue Tabs */
+            /* Inactive Catalogue Tabs */
+            body.ik-dark-mode .ui-dialog-tab,
+            body.ik-dark-mode .ui-dialog-titlebar .ui-dialog-tab {
+                background-color: transparent !important;
+                color: var(--ik-theme-special-text3) !important;
+            }
+
+            /* =========================================================================
+               DARK MODE THEME RULES
+               ========================================================================= */
+               
+            /* ------------------ Active Catalogue Tab Override ------------------ */
+            body.ik-dark-mode .ikcat-dialog-tab.active,
+            body.ik-dark-mode span.ikcat-dialog-tab.active {
+                background-color: var(--ik-theme-content-bg) !important;
+                background-image: var(--ik-theme-texture) !important;
+                color: var(--ik-theme-special-text2) !important;
+                border: 1px solid var(--ik-theme-border) !important;
+            }
+            /* ------------------ Selected State Color Override ------------------ */
+            body.ik-dark-mode .selected,
+            body.ik-dark-mode a.selected,
+            body.ik-dark-mode a:link.selected,
+            body.ik-dark-mode a:visited.selected,
+            body.ik-dark-mode span.selected {
+                color: var(--ik-theme-special-text2) !important;
             }
 
             html body.ik-dark-mode {
@@ -290,85 +373,6 @@
             body.ik-dark-mode .smallBorder, body.ik-dark-mode #DockedFriends { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .sideTab { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; } 
             body.ik-dark-mode .sideTab.selected { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
-
-            /* =========================================================================
-               TEXT COLOR & PRIORITY RULES (Uniform Link Styling via a[href])
-               ========================================================================= */
-
-            /* 1. Default Page Text */
-            body.ik-dark-mode p:not([id*="Notes"] *), 
-            body.ik-dark-mode td:not([id*="Notes"] *), 
-            body.ik-dark-mode th:not([id*="Notes"] *), 
-            body.ik-dark-mode span:not([id*="Notes"] *):not(.name), 
-            body.ik-dark-mode label:not([id*="Notes"] *),
-            body.ik-dark-mode #resbar, body.ik-dark-mode #resbar td, body.ik-dark-mode #resbar span, body.ik-dark-mode #resbar a {
-                color: var(--ik-theme-text) !important;
-            }
-
-            /* 2. Resbar Status Colors */
-            body.ik-dark-mode #resbar .resPos, body.ik-dark-mode #resbar span[class*="pos"], body.ik-dark-mode #resbar [style*="color: green"], body.ik-dark-mode #resbar [style*="color:green"] { color: #55ff55 !important; }
-            body.ik-dark-mode #resbar .resNeg, body.ik-dark-mode #resbar .resFull, body.ik-dark-mode #resbar span[class*="neg"], body.ik-dark-mode #resbar [style*="color: red"], body.ik-dark-mode #resbar [style*="color:red"] { color: #ff5555 !important; }
-            body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
-
-            /* 4. Headers & Tabs */
-            body.ik-dark-mode .sideTab, body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
-            body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
-            body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
-
-            /* 5. Explicit .headLinks & .subLinks rules */
-            body.ik-dark-mode .headLinks,
-            body.ik-dark-mode .headlinks,
-            body.ik-dark-mode .headLinks a[href],
-            body.ik-dark-mode .headlinks a[href] {
-                color: var(--ik-theme-special-text4) !important;
-            }
-
-            body.ik-dark-mode .subLinks,
-            body.ik-dark-mode .sublinks,
-            body.ik-dark-mode .subLinks a[href],
-            body.ik-dark-mode .sublinks a[href] {
-                color: var(--ik-theme-special-text5) !important;
-            }
-
-            /* 6. Entity Names */
-            body.ik-dark-mode .name, 
-            body.ik-dark-mode span.name, 
-            body.ik-dark-mode a.name {
-                color: var(--ik-theme-special-text6) !important;
-            }
-
-            /* 7. Diplomatic & System Popups (Highest Precedence) */
-            body.ik-dark-mode .indOwn, body.ik-dark-mode .indOwn a[href],
-            body.ik-dark-mode .indHostile, body.ik-dark-mode .indHostile a[href],
-            body.ik-dark-mode .indFriendly, body.ik-dark-mode .indFriendly a[href],
-            body.ik-dark-mode .indCommunication, body.ik-dark-mode .indCommunication a[href],
-            body.ik-dark-mode [class*="ind"], body.ik-dark-mode [class*="ind"] a[href] {
-                color: var(--ik-theme-special-text9) !important;
-            }
-
-            /* 8. UI Dialog Custom Catalogue Tabs */
-            /* Inactive Catalogue Tabs */
-            body.ik-dark-mode .ui-dialog-tab,
-            body.ik-dark-mode .ui-dialog-titlebar .ui-dialog-tab {
-                background-color: transparent !important;
-                color: var(--ik-theme-special-text3) !important;
-            }
-            /* ------------------ Active Catalogue Tab Override ------------------ */
-            body.ik-dark-mode .ikcat-dialog-tab.active,
-            body.ik-dark-mode span.ikcat-dialog-tab.active {
-                background-color: var(--ik-theme-content-bg) !important;
-                background-image: var(--ik-theme-texture) !important;
-                color: var(--ik-theme-special-text2) !important;
-                border: 1px solid var(--ik-theme-border) !important;
-            }
-            /* ------------------ Selected State Color Override ------------------ */
-            body.ik-dark-mode .selected,
-            body.ik-dark-mode a.selected,
-            body.ik-dark-mode a:link.selected,
-            body.ik-dark-mode a:visited.selected,
-            body.ik-dark-mode span.selected {
-                color: var(--ik-theme-special-text2) !important;
-            }
         `;
     }
 
