@@ -801,6 +801,11 @@
             )
             .forEach(
                 button => {
+                    // Skip footer notes buttons so inline styles don't conflict with hover
+                    if (button.closest("#ikNotesFooter")) {
+                        return;
+                    }
+
                     Object.assign(
                         button.style,
                         nativeFallbackSkin
@@ -1067,14 +1072,14 @@
                 outline: none !important;
             }
 
-            /* Custom hover image change */
+            /* Custom hover image change without pixel shifts */
             #ikNotesFooter .ik-game-button:hover {
                 background-image: url("https://assets.illyriad.net/img/buttons/regular_on_rev.png") !important;
                 background-size: 100% 100% !important;
                 background-position: center !important;
             }
 
-            /* Neutralize click/active/focus sprite jumps so buttons don't trigger together */
+            /* Neutralize click/active/focus sprite jumps */
             #ikNotesFooter .ik-game-button:active,
             #ikNotesFooter .ik-game-button:focus {
                 background-position: center top !important;
