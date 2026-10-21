@@ -311,6 +311,22 @@
             body.ik-dark-mode [class*="ind"], body.ik-dark-mode [class*="ind"] a[href] {
                 color: var(--ik-theme-special-text9) !important;
             }
+
+            /* 8. UI Dialog Custom Catalogue Tabs */
+            /* Inactive Catalogue Tabs */
+            body.ik-dark-mode .ui-dialog-tab,
+            body.ik-dark-mode .ui-dialog-titlebar .ui-dialog-tab {
+                background-color: transparent !important;
+                color: var(--ik-theme-special-text3) !important;
+            }
+            /* Active Catalogue Tab */
+            body.ik-dark-mode .ui-dialog-tab-active,
+            body.ik-dark-mode .ui-dialog-titlebar .ui-dialog-tab-active {
+                background-image: var(--ik-theme-texture) !important;
+                background-color: var(--ik-theme-content-bg) !important;
+                color: var(--ik-theme-special-text2) !important;
+                border: 1px solid var(--ik-theme-border) !important;
+            }
         `;
     }
 
