@@ -288,14 +288,37 @@
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
 
-            /* 6. Entity Names */
+            /* 6. Explicit .headLinks & .subLinks rules */
+            body.ik-dark-mode .headLinks,
+            body.ik-dark-mode .headlinks,
+            body.ik-dark-mode .headLinks a,
+            body.ik-dark-mode .headlinks a,
+            body.ik-dark-mode .headLinks a:link,
+            body.ik-dark-mode .headlinks a:link,
+            body.ik-dark-mode .headLinks a:visited,
+            body.ik-dark-mode .headlinks a:visited {
+                color: var(--ik-theme-special-text4) !important;
+            }
+
+            body.ik-dark-mode .subLinks,
+            body.ik-dark-mode .sublinks,
+            body.ik-dark-mode .subLinks a,
+            body.ik-dark-mode .sublinks a,
+            body.ik-dark-mode .subLinks a:link,
+            body.ik-dark-mode .sublinks a:link,
+            body.ik-dark-mode .subLinks a:visited,
+            body.ik-dark-mode .sublinks a:visited {
+                color: var(--ik-theme-special-text5) !important;
+            }
+
+            /* 7. Entity Names */
             body.ik-dark-mode .name, 
             body.ik-dark-mode span.name, 
             body.ik-dark-mode a.name {
                 color: var(--ik-theme-special-text6) !important;
             }
 
-            /* 7. Diplomatic & System Popups (Absolute Highest Precedence) */
+            /* 8. Diplomatic & System Popups (Absolute Highest Precedence) */
             body.ik-dark-mode .indOwn, body.ik-dark-mode .indOwn a, body.ik-dark-mode .indOwn a:link, body.ik-dark-mode .indOwn a:visited,
             body.ik-dark-mode .indHostile, body.ik-dark-mode .indHostile a, body.ik-dark-mode .indHostile a:link, body.ik-dark-mode .indHostile a:visited,
             body.ik-dark-mode .indFriendly, body.ik-dark-mode .indFriendly a, body.ik-dark-mode .indFriendly a:link, body.ik-dark-mode .indFriendly a:visited,
