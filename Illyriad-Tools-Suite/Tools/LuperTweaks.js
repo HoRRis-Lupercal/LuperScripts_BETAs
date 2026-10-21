@@ -59,10 +59,10 @@
                 --ik-theme-alt-bg: #202021;
                 --ik-theme-input-bg: #515252;
                 --ik-theme-border: #333537;
-                --ik-theme-special-text1: #ea882e;
-                --ik-theme-special-text2: #e54e20;
-                --ik-theme-special-text3: #ea882e;
-                --ik-theme-special-text4: #ea882e; 
+                --ik-theme-special-text1: #e54e20;
+                --ik-theme-special-text2: #ea882e;
+                --ik-theme-special-text3: #e54e20;
+                --ik-theme-special-text4: #e54e20; 
                 --ik-theme-special-text5: #ea882e;
                 --ik-theme-special-text6: #e54e20;
                 --ik-theme-special-text7: #2d2e30;
@@ -350,7 +350,10 @@
                 background-color: transparent !important;
                 color: var(--ik-theme-special-text3) !important;
             }
-            body.ik-dark-mode .ui-dialog .ui-dialog-title { background-color: var(--ik-theme-content-bg) !important; }
+            body.ik-dark-mode .ui-dialog .ui-dialog-title { 
+                background-color: var(--ik-theme-content-bg) !important; 
+                color: var(--ik-theme-special-text3) !important;
+            }
             /* ------------------ Active Catalogue Tab Override ------------------ */
             body.ik-dark-mode .ikcat-dialog-tab.active,
             body.ik-dark-mode span.ikcat-dialog-tab.active {
