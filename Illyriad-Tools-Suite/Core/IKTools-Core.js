@@ -1063,6 +1063,7 @@
                 justify-content: center !important;
                 overflow: hidden !important;
                 border: none !important;
+                background-image: var(--ik-native-btn-bg) !important;
                 background-color: transparent !important;
                 color: var(--ik-btn-color, #fff5d6) !important;
                 font-size: 11px !important;
