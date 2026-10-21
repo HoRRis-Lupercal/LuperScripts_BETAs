@@ -319,11 +319,11 @@
                 background-color: transparent !important;
                 color: var(--ik-theme-special-text3) !important;
             }
-            /* Active Catalogue Tab */
-            body.ik-dark-mode .ui-dialog-tab-active,
-            body.ik-dark-mode .ui-dialog-titlebar .ui-dialog-tab-active {
-                background-image: var(--ik-theme-texture) !important;
+            /* ------------------ Active Catalogue Tab Override ------------------ */
+            body.ik-dark-mode .ikcat-dialog-tab.active,
+            body.ik-dark-mode span.ikcat-dialog-tab.active {
                 background-color: var(--ik-theme-content-bg) !important;
+                background-image: var(--ik-theme-texture) !important;
                 color: var(--ik-theme-special-text2) !important;
                 border: 1px solid var(--ik-theme-border) !important;
             }
