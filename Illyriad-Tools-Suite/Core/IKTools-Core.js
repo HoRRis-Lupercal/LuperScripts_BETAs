@@ -1068,6 +1068,17 @@
                 height: 38px !important;
                 min-height: 38px !important;
                 max-height: 38px !important;
+                background-size: 100% 100% !important;
+                background-position: center !important;
+                background-repeat: no-repeat !important;
+                border: none !important;
+                background-color: transparent !important;
+                color: var(--ik-btn-color, #fff5d6) !important;
+                font-size: 11px !important;
+                font-weight: bold !important;
+                padding: 0 !important;
+                text-shadow: 1px 1px 1px rgba(0,0,0,0.8) !important;
+                outline: none !important;
             }
 
         `;
