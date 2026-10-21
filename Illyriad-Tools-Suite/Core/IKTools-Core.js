@@ -766,6 +766,13 @@
                 `${nativeButtonHeight}px`
             );
 
+        document.documentElement
+            .style
+            .setProperty(
+                "--ik-native-btn-bg",
+                computed.backgroundImage
+            );
+
 
         if (
             temporary
@@ -1021,17 +1028,10 @@
                 display: none;
                 border: 1px inset rgba(0,0,0,0.2);
             }
-            #ikNotesFooter {
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                gap: 4px !important;
-                padding-top: 4px !important;
-                flex-shrink: 0 !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
-            }
-            
+            /* =============================================================
+               NOTES FOOTER & BUTTONS
+               ============================================================= */
+
             #ikNotesFooter {
                 display: flex !important;
                 flex-direction: row !important;
@@ -1041,17 +1041,52 @@
                 flex-shrink: 0 !important;
                 width: 100% !important;
                 box-sizing: border-box !important;
-                
-                /* Shrinks the entire footer so the 158px buttons fit naturally */
                 zoom: 0.72 !important;
             }
             
             #ikNotesFooter .ik-game-button {
-                /* Prevents the black text flash mid-click */
-                color: var(--ik-btn-color, #fff5d6) !important;
-                outline: none !important;
+                flex: 0 0 calc(50% - 2px) !important; 
+                width: calc(50% - 2px) !important;
+                min-width: 0 !important;
+                max-width: none !important;
+                height: 28px !important;
+                min-height: 28px !important;
+                max-height: 28px !important;
                 margin: 0 !important;
-                background-size: auto !important; 
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                overflow: hidden !important;
+                
+                /* Native Illyriad sprite background */
+                background-image: var(--ik-native-btn-bg) !important;
+                background-size: auto 200% !important;
+                background-position: center top !important;
+                background-repeat: no-repeat !important;
+                
+                border: none !important;
+                background-color: transparent !important;
+                color: var(--ik-btn-color, #fff5d6) !important;
+                font-size: 11px !important;
+                font-weight: bold !important;
+                padding: 0 !important;
+                text-shadow: 1px 1px 1px rgba(0,0,0,0.8) !important;
+                outline: none !important;
+            }
+
+            /* Custom hover image change */
+            #ikNotesFooter .ik-game-button:hover {
+                background-image: url("https://assets.illyriad.net/img/buttons/regular_on_rev.png") !important;
+                background-size: 100% 100% !important;
+                background-repeat: no-repeat !important;
+            }
+
+            /* Neutralize click/active/focus sprite jumps so buttons don't trigger together */
+            #ikNotesFooter .ik-game-button:active,
+            #ikNotesFooter .ik-game-button:focus {
+                background-position: center top !important;
+                outline: none !important;
+                box-shadow: none !important;
             }
 
         `;
