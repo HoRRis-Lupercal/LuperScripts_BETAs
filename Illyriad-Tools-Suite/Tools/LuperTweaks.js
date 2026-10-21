@@ -161,6 +161,16 @@
                DARK MODE THEME RULES
                ========================================================================= */
 
+            /* Global Links (Low Priotity, likely overriden) */
+            body.ik-dark-mode a[href]:not([id*="Notes"] *),
+            body.ik-dark-mode .link a[href]:not([id*="Notes"] *) { 
+                color: var(--ik-theme-link) !important; 
+            }
+            body.ik-dark-mode a[href]:not([id*="Notes"] *):hover, 
+            body.ik-dark-mode .link a[href]:not([id*="Notes"] *):hover { 
+                color: var(--ik-theme-link-hover) !important; 
+            }
+
             html body.ik-dark-mode {
                 background-image: var(--ik-theme-headermain-texture) !important;
                 background-repeat: no-repeat !important;
@@ -297,16 +307,6 @@
             body.ik-dark-mode #resbar .resPos, body.ik-dark-mode #resbar span[class*="pos"], body.ik-dark-mode #resbar [style*="color: green"], body.ik-dark-mode #resbar [style*="color:green"] { color: #55ff55 !important; }
             body.ik-dark-mode #resbar .resNeg, body.ik-dark-mode #resbar .resFull, body.ik-dark-mode #resbar span[class*="neg"], body.ik-dark-mode #resbar [style*="color: red"], body.ik-dark-mode #resbar [style*="color:red"] { color: #ff5555 !important; }
             body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
-
-            /* 3. Global Links (Using a[href] to style all links uniformly regardless of visited state) */
-            body.ik-dark-mode a[href]:not([id*="Notes"] *),
-            body.ik-dark-mode .link a[href]:not([id*="Notes"] *) { 
-                color: var(--ik-theme-link) !important; 
-            }
-            body.ik-dark-mode a[href]:not([id*="Notes"] *):hover, 
-            body.ik-dark-mode .link a[href]:not([id*="Notes"] *):hover { 
-                color: var(--ik-theme-link-hover) !important; 
-            }
 
             /* 4. Headers & Tabs */
             body.ik-dark-mode .sideTab, body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
