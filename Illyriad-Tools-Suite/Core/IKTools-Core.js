@@ -1070,8 +1070,6 @@
             /* Custom hover image change */
             #ikNotesFooter .ik-game-button:hover {
                 background-image: url("https://assets.illyriad.net/img/buttons/regular_on_rev.png") !important;
-                background-size: 100% 100% !important;
-                background-repeat: no-repeat !important;
             }
 
             /* Neutralize click/active/focus sprite jumps so buttons don't trigger together */
