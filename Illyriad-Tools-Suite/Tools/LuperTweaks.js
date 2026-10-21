@@ -327,6 +327,14 @@
                 color: var(--ik-theme-special-text2) !important;
                 border: 1px solid var(--ik-theme-border) !important;
             }
+            /* ------------------ Selected State Color Override ------------------ */
+            body.ik-dark-mode .selected,
+            body.ik-dark-mode a.selected,
+            body.ik-dark-mode a:link.selected,
+            body.ik-dark-mode a:visited.selected,
+            body.ik-dark-mode span.selected {
+                color: var(--ik-theme-special-text2) !important;
+            }
         `;
     }
 
