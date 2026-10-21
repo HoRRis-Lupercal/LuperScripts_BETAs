@@ -1049,21 +1049,14 @@
                 width: calc(50% - 2px) !important;
                 min-width: 0 !important;
                 max-width: none !important;
-                height: 28px !important;
-                min-height: 28px !important;
-                max-height: 28px !important;
+                height: 38px !important;
+                min-height: 38px !important;
+                max-height: 38px !important;
                 margin: 0 !important;
                 display: flex !important;
                 align-items: center !important;
                 justify-content: center !important;
                 overflow: hidden !important;
-                
-                /* Native Illyriad sprite background */
-                background-image: var(--ik-native-btn-bg) !important;
-                background-size: auto 200% !important;
-                background-position: center top !important;
-                background-repeat: no-repeat !important;
-                
                 border: none !important;
                 background-color: transparent !important;
                 color: var(--ik-btn-color, #fff5d6) !important;
