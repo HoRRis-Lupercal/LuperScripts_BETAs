@@ -60,16 +60,16 @@
                 --ik-theme-input-bg: #515252;
                 --ik-theme-border: #333537;
                 --ik-theme-special-text1: #ea882e;
-                --ik-theme-special-text2: #e54e20;
+                --ik-theme-special-text2: #ea882e;
                 --ik-theme-special-text3: #ea882e;
-                --ik-theme-special-text4: #ea882e; 
+                --ik-theme-special-text4: #e54e20; 
                 --ik-theme-special-text5: #ea882e;
-                --ik-theme-special-text6: #e54e20;
+                --ik-theme-special-text6: #ea882e;
                 --ik-theme-special-text7: #2d2e30;
                 --ik-theme-special-text8: #1e1f20;
                 --ik-theme-special-text9: #434343;
-                --ik-theme-link: #8ab4f8;
-                --ik-theme-link-hover: #aecbfa;
+                --ik-theme-link: #e54e20;
+                --ik-theme-link-hover: #ea882e;
                 --ik-theme-texture: url("https://i.imgur.com/rcUBS5t.jpeg");
                 --ik-theme-headerP-texture: url("https://i.imgur.com/cozCMCU.jpeg");
                 --ik-theme-headerO-texture: url("https://i.imgur.com/yCH8seN.png");
@@ -194,6 +194,7 @@
                 background-image: var(--ik-theme-texture) !important;
                 color: var(--ik-theme-text) !important;
             }
+            
             /* ------------------ Accordion & Active Tab Headers ------------------ */
             body.ik-dark-mode .ui-state-active,
             body.ik-dark-mode .ui-state-active a,
@@ -312,6 +313,7 @@
             body.ik-dark-mode .sideTab, body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
+            body.ik-dark-mode ui-dialog-title { color: var(--ik-theme-special-text2) !important; }
 
             /* 5. Explicit .headLinks & .subLinks rules */
             body.ik-dark-mode .headLinks,
