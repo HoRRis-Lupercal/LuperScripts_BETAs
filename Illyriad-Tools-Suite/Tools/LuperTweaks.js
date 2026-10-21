@@ -184,6 +184,23 @@
                 background-image: var(--ik-theme-texture) !important;
                 color: var(--ik-theme-text) !important;
             }
+            /* ------------------ Accordion & Active Tab Headers ------------------ */
+            body.ik-dark-mode .ui-state-active,
+            body.ik-dark-mode .ui-state-active a,
+            body.ik-dark-mode .ui-state-active a[href],
+            body.ik-dark-mode .ui-accordion-header.ui-state-active a,
+            body.ik-dark-mode .ui-accordion-header.ui-state-active a[href] {
+                color: var(--ik-theme-special-text2) !important;
+            }
+
+            body.ik-dark-mode .ui-state-default,
+            body.ik-dark-mode .ui-state-default a,
+            body.ik-dark-mode .ui-state-default a[href],
+            body.ik-dark-mode .ui-accordion-header.ui-state-default a,
+            body.ik-dark-mode .ui-accordion-header.ui-state-default a[href] {
+                color: var(--ik-theme-special-text1) !important;
+            }
+            
             body.ik-dark-mode .ui-widget-header { background-image: var(--ik-theme-header-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .ui-dialog .ui-dialog-titlebar { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .ui-dialog .ui-dialog-title { background-color: var(--ik-theme-content-bg) !important; }
