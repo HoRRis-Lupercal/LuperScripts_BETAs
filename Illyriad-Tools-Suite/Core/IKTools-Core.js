@@ -849,7 +849,7 @@
         style.textContent = `
 
             /* =============================================================
-               SAFE ILLYRIAD-STYLE BUTTON
+               SAFE ILLYRIAD-STYLE BUTTON (SUITE-WIDE)
                ============================================================= */
 
             .ik-game-button {
@@ -900,6 +900,14 @@
 
                 float: none !important;
                 margin: 0 !important;
+
+                /* Explicit Default Off-State Image Suite-Wide */
+                background-image: url("https://assets.illyriad.net/img/buttons/regular_off_rev.png") !important;
+            }
+
+            /* Suite-Wide Hover On-State Image */
+            .ik-game-button:hover {
+                background-image: url("https://assets.illyriad.net/img/buttons/regular_on_rev.png") !important;
             }
 
 
@@ -1060,43 +1068,6 @@
                 height: 38px !important;
                 min-height: 38px !important;
                 max-height: 38px !important;
-                margin: 0 !important;
-                display: flex !important;
-                align-items: center !important;
-                justify-content: center !important;
-                overflow: hidden !important;
-                border: none !important;
-                background-color: transparent !important;
-                
-                /* Explicit Default Off-State Image */
-                background-image: url("https://assets.illyriad.net/img/buttons/regular_off_rev.png") !important;
-                background-size: 100% 100% !important;
-                background-position: center !important;
-                background-repeat: no-repeat !important;
-                
-                color: var(--ik-btn-color, #fff5d6) !important;
-                font-size: 11px !important;
-                font-weight: bold !important;
-                padding: 0 !important;
-                text-shadow: 1px 1px 1px rgba(0,0,0,0.8) !important;
-                outline: none !important;
-            }
-
-            /* Explicit Hover On-State Image */
-            #ikNotesFooter .ik-game-button:hover {
-                background-image: url("https://assets.illyriad.net/img/buttons/regular_on_rev.png") !important;
-                background-size: 100% 100% !important;
-                background-position: center !important;
-            }
-
-            /* Neutralize click/active/focus shifts */
-            #ikNotesFooter .ik-game-button:active,
-            #ikNotesFooter .ik-game-button:focus {
-                background-image: url("https://assets.illyriad.net/img/buttons/regular_off_rev.png") !important;
-                background-size: 100% 100% !important;
-                background-position: center !important;
-                outline: none !important;
-                box-shadow: none !important;
             }
 
         `;
