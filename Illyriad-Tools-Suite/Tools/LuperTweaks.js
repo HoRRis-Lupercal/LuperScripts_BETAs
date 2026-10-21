@@ -266,10 +266,12 @@
             body.ik-dark-mode #resbar .resNeg, body.ik-dark-mode #resbar .resFull, body.ik-dark-mode #resbar span[class*="neg"], body.ik-dark-mode #resbar [style*="color: red"], body.ik-dark-mode #resbar [style*="color:red"] { color: #ff5555 !important; }
             body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
 
-            /* 3. Global Links */
+            /* 3. Global Links (Includes :visited so clicked and unclicked links are identical) */
             body.ik-dark-mode a:not([id*="Notes"] *), 
             body.ik-dark-mode a:link:not([id*="Notes"] *), 
-            body.ik-dark-mode .link a:not([id*="Notes"] *) { 
+            body.ik-dark-mode a:visited:not([id*="Notes"] *),
+            body.ik-dark-mode .link a:not([id*="Notes"] *),
+            body.ik-dark-mode .link a:visited:not([id*="Notes"] *) { 
                 color: var(--ik-theme-link) !important; 
             }
             body.ik-dark-mode a:not([id*="Notes"] *):hover, 
