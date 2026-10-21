@@ -229,7 +229,8 @@
             }
             body.ik-dark-mode .ui-widget-header { background-image: var(--ik-theme-header-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .ui-dialog .ui-dialog-titlebar { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; }
-            body.ik-dark-mode .ui-dialog .ui-dialog-title { background-color: var(--ik-theme-content-bg) !important, color: var(--ik-theme-special-text2) !important; }
+            body.ik-dark-mode .ui-dialog .ui-dialog-title { background-color: var(--ik-theme-content-bg) !important; }
+            body.ik-dark-mode .ui-dialog #ui-dialog-title { color: var(--ik-theme-special-text2) !important; }
             body.ik-dark-mode .ui-state-active { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .ui-widget-header.ui-progressbar-value { background-image: var(--ik-theme-headerP-texture) !important; background-repeat: repeat !important; }
 
