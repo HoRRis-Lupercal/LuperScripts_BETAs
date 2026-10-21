@@ -247,8 +247,8 @@
             body.ik-dark-mode .sideTab { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; } 
             body.ik-dark-mode .sideTab.selected { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
 
-           /* =========================================================================
-               TEXT COLOR & PRIORITY RULES
+            /* =========================================================================
+               TEXT COLOR & PRIORITY RULES (Uniform Link Styling via a[href])
                ========================================================================= */
 
             /* 1. Default Page Text */
@@ -266,17 +266,13 @@
             body.ik-dark-mode #resbar .resNeg, body.ik-dark-mode #resbar .resFull, body.ik-dark-mode #resbar span[class*="neg"], body.ik-dark-mode #resbar [style*="color: red"], body.ik-dark-mode #resbar [style*="color:red"] { color: #ff5555 !important; }
             body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
 
-            /* 3. Global Links (Unvisited and Visited share the exact same color) */
-            body.ik-dark-mode a:not([id*="Notes"] *), 
-            body.ik-dark-mode a:link:not([id*="Notes"] *), 
-            body.ik-dark-mode a:visited:not([id*="Notes"] *),
-            body.ik-dark-mode .link a:not([id*="Notes"] *),
-            body.ik-dark-mode .link a:link:not([id*="Notes"] *),
-            body.ik-dark-mode .link a:visited:not([id*="Notes"] *) { 
+            /* 3. Global Links (Using a[href] to style all links uniformly regardless of visited state) */
+            body.ik-dark-mode a[href]:not([id*="Notes"] *),
+            body.ik-dark-mode .link a[href]:not([id*="Notes"] *) { 
                 color: var(--ik-theme-link) !important; 
             }
-            body.ik-dark-mode a:not([id*="Notes"] *):hover, 
-            body.ik-dark-mode .link a:not([id*="Notes"] *):hover { 
+            body.ik-dark-mode a[href]:not([id*="Notes"] *):hover, 
+            body.ik-dark-mode .link a[href]:not([id*="Notes"] *):hover { 
                 color: var(--ik-theme-link-hover) !important; 
             }
 
@@ -285,43 +281,34 @@
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
 
-            /* 5. Explicit .headLinks & .subLinks rules (Covers all states including :visited) */
+            /* 5. Explicit .headLinks & .subLinks rules */
             body.ik-dark-mode .headLinks,
             body.ik-dark-mode .headlinks,
-            body.ik-dark-mode .headLinks a,
-            body.ik-dark-mode .headlinks a,
-            body.ik-dark-mode .headLinks a:link,
-            body.ik-dark-mode .headlinks a:link,
-            body.ik-dark-mode .headLinks a:visited,
-            body.ik-dark-mode .headlinks a:visited {
+            body.ik-dark-mode .headLinks a[href],
+            body.ik-dark-mode .headlinks a[href] {
                 color: var(--ik-theme-special-text4) !important;
             }
 
             body.ik-dark-mode .subLinks,
             body.ik-dark-mode .sublinks,
-            body.ik-dark-mode .subLinks a,
-            body.ik-dark-mode .sublinks a,
-            body.ik-dark-mode .subLinks a:link,
-            body.ik-dark-mode .sublinks a:link,
-            body.ik-dark-mode .subLinks a:visited,
-            body.ik-dark-mode .sublinks a:visited {
+            body.ik-dark-mode .subLinks a[href],
+            body.ik-dark-mode .sublinks a[href] {
                 color: var(--ik-theme-special-text5) !important;
             }
 
             /* 6. Entity Names */
             body.ik-dark-mode .name, 
             body.ik-dark-mode span.name, 
-            body.ik-dark-mode a.name,
-            body.ik-dark-mode a:visited.name {
+            body.ik-dark-mode a.name {
                 color: var(--ik-theme-special-text6) !important;
             }
 
             /* 7. Diplomatic & System Popups (Highest Precedence) */
-            body.ik-dark-mode .indOwn, body.ik-dark-mode .indOwn a, body.ik-dark-mode .indOwn a:link, body.ik-dark-mode .indOwn a:visited,
-            body.ik-dark-mode .indHostile, body.ik-dark-mode .indHostile a, body.ik-dark-mode .indHostile a:link, body.ik-dark-mode .indHostile a:visited,
-            body.ik-dark-mode .indFriendly, body.ik-dark-mode .indFriendly a, body.ik-dark-mode .indFriendly a:link, body.ik-dark-mode .indFriendly a:visited,
-            body.ik-dark-mode .indCommunication, body.ik-dark-mode .indCommunication a, body.ik-dark-mode .indCommunication a:link, body.ik-dark-mode .indCommunication a:visited,
-            body.ik-dark-mode [class*="ind"], body.ik-dark-mode [class*="ind"] a, body.ik-dark-mode [class*="ind"] a:link, body.ik-dark-mode [class*="ind"] a:visited {
+            body.ik-dark-mode .indOwn, body.ik-dark-mode .indOwn a[href],
+            body.ik-dark-mode .indHostile, body.ik-dark-mode .indHostile a[href],
+            body.ik-dark-mode .indFriendly, body.ik-dark-mode .indFriendly a[href],
+            body.ik-dark-mode .indCommunication, body.ik-dark-mode .indCommunication a[href],
+            body.ik-dark-mode [class*="ind"], body.ik-dark-mode [class*="ind"] a[href] {
                 color: var(--ik-theme-special-text9) !important;
             }
         `;
