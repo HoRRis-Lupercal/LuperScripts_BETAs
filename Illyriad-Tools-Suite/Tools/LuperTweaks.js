@@ -200,7 +200,22 @@
             body.ik-dark-mode .ui-accordion-header.ui-state-default a[href] {
                 color: var(--ik-theme-special-text1) !important;
             }
-            
+            /* ------------------ Selected Inner UI Tabs Override ------------------ */
+            body.ik-dark-mode .ui-tabs-selected,
+            body.ik-dark-mode .ui-tabs-active,
+            body.ik-dark-mode .ui-tabs-selected a,
+            body.ik-dark-mode .ui-tabs-active a,
+            body.ik-dark-mode .ui-tabs-selected a[href],
+            body.ik-dark-mode .ui-tabs-active a[href],
+            body.ik-dark-mode .ui-tabs-nav li.ui-tabs-selected a,
+            body.ik-dark-mode .ui-tabs-nav li.ui-tabs-selected a[href] {
+                color: var(--ik-theme-special-text2) !important;
+            }
+
+            body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a,
+            body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a[href] {
+                color: var(--ik-theme-special-text1) !important;
+            }
             body.ik-dark-mode .ui-widget-header { background-image: var(--ik-theme-header-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .ui-dialog .ui-dialog-titlebar { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .ui-dialog .ui-dialog-title { background-color: var(--ik-theme-content-bg) !important; }
