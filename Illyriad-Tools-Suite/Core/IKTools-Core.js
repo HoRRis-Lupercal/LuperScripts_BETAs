@@ -1023,6 +1023,9 @@
                 overflow-y: auto;
                 background: transparent;
                 border: none;
+                white-space: pre-wrap !important;
+                word-break: break-word !important;
+                color: inherit !important; 
             }
             #ikNotesDisplay {
                 white-space: pre-wrap;
@@ -1206,7 +1209,8 @@
         if(textarea) { 
             textarea.style.backgroundColor = uiBodyBg; 
             textarea.style.borderColor = uiBorderColor; 
-            textarea.style.color = (text.match(/!TextColour\(([^)]+)\)/i) || [])[1] || ''; 
+            const customTextColor = (text.match(/!TextColour\(([^)]+)\)/i) || [])[1];
+            textarea.style.color = customTextColor || uiTextColor || 'inherit'; 
         }
         buttons.forEach(btn => {
             btn.style.backgroundColor = uiBtnBg;
