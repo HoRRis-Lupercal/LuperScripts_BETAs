@@ -395,7 +395,7 @@
             body.ik-dark-mode span.selected {
                 color: var(--ik-theme-special-text2) !important;
             }
-            body.ik-dark-mode span.ui-widget-header.ui-corner-top {
+            body.ik-dark-mode span.ui-widget-header.ui-corner-top:not([id*="Notes"] *):not(.name):not(.ui-dialog-title) {
                 color: var(--ik-theme-special-text4) !important; 
             }
         `;
