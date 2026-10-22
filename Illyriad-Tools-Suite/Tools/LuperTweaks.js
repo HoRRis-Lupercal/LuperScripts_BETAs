@@ -335,7 +335,7 @@
             body.ik-dark-mode .sideTab, body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
-            body.ik-dark-mode span.ui-widget-header.ui-corner-top { color: var(--ik-theme-special-text4) !important; }
+            body.ik-dark-mode h3 { color: var(--ik-theme-special-text5) !important; }
 
             /* 5. Explicit .headLinks & .subLinks rules */
             body.ik-dark-mode .headLinks,
@@ -394,6 +394,9 @@
             body.ik-dark-mode a:visited.selected,
             body.ik-dark-mode span.selected {
                 color: var(--ik-theme-special-text2) !important;
+            }
+            body.ik-dark-mode span.ui-widget-header.ui-corner-top {
+                color: var(--ik-theme-special-text4) !important; 
             }
         `;
     }
