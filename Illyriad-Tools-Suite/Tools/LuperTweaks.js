@@ -81,9 +81,9 @@
                 --ik-theme-headerO-texture: url("https://i.imgur.com/yCH8seN.png");
                 --ik-theme-header-texture: url("https://i.imgur.com/0nDOLcG.jpeg");
                 --ik-theme-headermain-texture: url("https://i.imgur.com/TQ2SkKz.png");
-                --ik-theme-popup-top: url("https://i.imgur.com/vTL4vwl.png");
-                --ik-theme-popup-mid: url("https://i.imgur.com/HOaF3MO.png");
-                --ik-theme-popup-bot: url("https://i.imgur.com/olO6lVP.png");
+                --ik-theme-popup-top: url("https://i.imgur.com/FlehLqQ.png");
+                --ik-theme-popup-mid: url("https://i.imgur.com/Aslo09q.png");
+                --ik-theme-popup-bot: url("https://i.imgur.com/MwbBS3B.png");
 
                 /* =================================== Top Button Row Images ============================= */
                 --ik-theme-button-short-off: url("https://assets.illyriad.net/img/buttons/short_off_rev.png");
@@ -293,6 +293,9 @@
             body.ik-dark-mode .smallBorder, body.ik-dark-mode #DockedFriends { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .sideTab { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; } 
             body.ik-dark-mode .sideTab.selected { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
+            body.ik-dark-mode .globalChat
+            body.ik-dark-mode div div.content table.generic tbody tr td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#globalChatTab div.globalChatHldr div.globalChat.oddeven div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
+            body.ik-dark-mode div div.content table.generic tbody tr td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#allianceChatTab div.allianceChatHldr div.allianceChat.oddeven div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
 
             /* =========================================================================
                TEXT COLOR & PRIORITY RULES (Uniform Link Styling via a[href])
