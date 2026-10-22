@@ -313,6 +313,7 @@
             body.ik-dark-mode div div.content table.generic tbody tr td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#globalChatTab div.globalChatHldr div.globalChat.oddeven div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#allianceChatTab div.allianceChatHldr div.allianceChat.oddeven div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
             html body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div.odd { background-color: var(--ik-theme-alt-bg) !important; }
+            html body.ik-dark-mode #MainContentDiv table td:nth-of-type(5) { background-color: var(--ik-theme-alt-bg) !important; } /* Regional Bonuses 5th Column Styling */
 
             /* =========================================================================
                TEXT COLOR & PRIORITY RULES (Uniform Link Styling via a[href])
