@@ -53,12 +53,16 @@
         }
         style.textContent = `
             :root {
-                --ik-theme-text: #e3e3e3;
+
+                /* ==================================== Background Colors ==================================== */
                 --ik-theme-bg: #131314;
                 --ik-theme-content-bg: #151516;
                 --ik-theme-alt-bg: #202021;
                 --ik-theme-input-bg: #515252;
                 --ik-theme-border: #333537;
+
+                /* ======================================= Text Colors ======================================= */
+                --ik-theme-text: #e3e3e3;
                 --ik-theme-special-text1: #e54e20;
                 --ik-theme-special-text2: #ea882e;
                 --ik-theme-special-text3: #e54e20;
@@ -70,12 +74,18 @@
                 --ik-theme-special-text9: #434343;
                 --ik-theme-link: #8ab4f8;
                 --ik-theme-link-hover: #aecbfa;
+
+                /* =================================== Background Texture Images ============================= */
                 --ik-theme-texture: url("https://i.imgur.com/rcUBS5t.jpeg");
                 --ik-theme-headerP-texture: url("https://i.imgur.com/cozCMCU.jpeg");
                 --ik-theme-headerO-texture: url("https://i.imgur.com/yCH8seN.png");
                 --ik-theme-header-texture: url("https://i.imgur.com/0nDOLcG.jpeg");
                 --ik-theme-headermain-texture: url("https://i.imgur.com/TQ2SkKz.png");
-                
+                --ik-theme-popup-top: url("https://i.imgur.com/vTL4vwl.png");
+                --ik-theme-popup-mid: url("https://i.imgur.com/HOaF3MO.png");
+                --ik-theme-popup-bot: url("https://i.imgur.com/olO6lVP.png");
+
+                /* =================================== Top Button Row Images ============================= */
                 --ik-theme-button-short-off: url("https://assets.illyriad.net/img/buttons/short_off_rev.png");
                 --ik-theme-button-short-on: url("https://assets.illyriad.net/img/buttons/short_on_rev.png");
                 --ik-theme-button-world-off: url("https://i.imgur.com/n2x7KAg.png");
@@ -240,6 +250,12 @@
             body.ik-dark-mode button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only.ui-state-hover {
                 background-image: var(--ik-theme-button-short-on) !important; background-repeat: no-repeat !important; background-size: 100% 100% !important;
             }
+
+
+            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.t { background-image: var(--ik-theme-popup-top) !important; }
+            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m { background-image: var(--ik-theme-popup-mid) !important; }
+            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.b { background-image: var(--ik-theme-popup-bot) !important; }
+            
             body.ik-dark-mode div.iconBox.ib1 a img.icon { content: var(--ik-theme-button-world-off) !important; }
             body.ik-dark-mode div.iconBox.ib1 a:hover img.icon { content: var(--ik-theme-button-world-on) !important; }
             body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-region-off) !important; }
