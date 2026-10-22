@@ -41,6 +41,22 @@
     };
 
     // =========================================================================
+    // DYNAMIC VALUE HIGHLIGHTER (Zero-Value City Menu Spans)
+    // =========================================================================
+
+    function highlightZeroCityValues() {
+        if (!document.body.classList.contains("ik-dark-mode")) return;
+
+        // Target spans inside the selected city menu hierarchy
+        const spans = document.querySelectorAll("div#citiesMenu div.cityMenu.selected div span, div#citiesMenu.closed div div.cityMenu.selected div span");
+        spans.forEach(span => {
+            if (span.textContent.trim() === "0") {
+                span.style.setProperty("color", "#ff5555", "important");
+            }
+        });
+    }
+
+    // =========================================================================
     // CSS INJECTION & GLOBAL STYLING
     // =========================================================================
 
@@ -503,6 +519,9 @@
         injectTweaksStyles();
         restoreSettings();
         if (!createTweaksDialog()) return false;
+
+        // Start dynamic value scanner loop for zero-value city spans
+        setInterval(highlightZeroCityValues, 1000);
 
         if (!resizeBound) {
             resizeBound = true;
