@@ -316,7 +316,10 @@
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info table.generic.middle tbody tr td:nth-of-type(5) { background-color: var(--ik-theme-alt-bg) !important; } /* Regional Bonuses 5th Column Styling */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div table.generic.middle.oddeven tbody tr th { background-color: var(--ik-theme-alt-bg) !important; } /* Tournament Rankings Heading Styling */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div table.generic.middle.oddeven tbody tr td:nth-of-type(2) { background-color: var(--ik-theme-alt-bg) !important; } /* Tournament Standings Styling */
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#recentEvents.center.evenodd div.combat:nth-child(2n+1) { background-color: var(--ik-theme-alt-bg) !important; } /* Recent Combats Odd Styling */
             
+            /* Legends and Charts */
+            body.ik-dark-mode div.flotr-legend { background-color: var(--ik-theme-alt-bg) !important; }
 
             /* =========================================================================
                TEXT COLOR & PRIORITY RULES (Uniform Link Styling via a[href])
@@ -357,6 +360,7 @@
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
             body.ik-dark-mode h3 { color: var(--ik-theme-special-text5) !important; }
+            body.ik-dark-mode h4 { color: var(--ik-theme-special-text5) !important; }
 
             /* 5. Explicit .headLinks & .subLinks rules */
             body.ik-dark-mode .headLinks,
