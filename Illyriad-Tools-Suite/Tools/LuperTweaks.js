@@ -247,6 +247,8 @@
             body.ik-dark-mode .ui-dialog .ui-dialog-titlebar { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .ui-state-active { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .ui-widget-header.ui-progressbar-value { background-image: var(--ik-theme-headerP-texture) !important; background-repeat: repeat !important; }
+            body.ik-dark-mode #slider-taxation.ui-slider.ui-slider-horizontal.ui-widget.ui-widget-content.ui-corner-all { background-image: var(--ik-theme-headerP-texture) !important; background-repeat: repeat !important; }
+            body.ik-dark-mode #slider-production { background-image: var(--ik-theme-headerP-texture) !important; background-repeat: repeat !important; }
 
             /* Containers */
             body.ik-dark-mode #dTownTD *, body.ik-dark-mode .dTownTD *, body.ik-dark-mode #citiesMenu {
