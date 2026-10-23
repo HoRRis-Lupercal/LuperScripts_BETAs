@@ -247,7 +247,6 @@
             body.ik-dark-mode .ui-dialog .ui-dialog-titlebar { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .ui-state-active { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .ui-widget-header.ui-progressbar-value { background-image: var(--ik-theme-headerP-texture) !important; background-repeat: repeat !important; }
-            body.ik-dark-mode div.ui-slider-range.ui-widget-header.ui-slider-range-min { background-image: var(--ik-theme-headerP-texture) !important; background-repeat: repeat !important; }
 
             /* Containers */
             body.ik-dark-mode #dTownTD *, body.ik-dark-mode .dTownTD *, body.ik-dark-mode #citiesMenu {
@@ -404,6 +403,11 @@
             body.ik-dark-mode .ui-dialog .ui-dialog-title { 
                 background-color: var(--ik-theme-content-bg) !important; 
                 color: var(--ik-theme-special-text3) !important;
+            }
+            /* ------------------ Slider Background Override ------------------ */
+            body.ik-dark-mode div.ui-slider-range.ui-widget-header.ui-slider-range-min { 
+                background-image: var(--ik-theme-headerP-texture) !important;
+                background-repeat: repeat !important;
             }
             /* ------------------ Active Catalogue Tab Override ------------------ */
             body.ik-dark-mode .ikcat-dialog-tab.active,
