@@ -48,7 +48,7 @@
         if (!document.body.classList.contains("ik-dark-mode")) return;
 
         // Target spans inside the selected city menu hierarchy
-        const spans = document.querySelectorAll("div#citiesMenu div.cityMenu.selected div span, div#citiesMenu div div.cityMenu div span");
+        const spans = document.querySelectorAll("div#citiesMenu div.cityMenu.selected div span, div#citiesMenu div div.cityMenu div span, ");
         spans.forEach(span => {
             if (span.textContent.trim() === "0") {
                 span.style.setProperty("color", "#ff5555", "important");
@@ -133,7 +133,10 @@
                 --ik-theme-char-ring2-on: url("https://i.imgur.com/9Ijy5Vv.png");
             }
 
-            /* Dialog & UI Container Layout */
+            /* =========================================================================
+               Dialog & UI Container Layout
+               ========================================================================= */
+
             #ikLuperTweaks {
                 padding: 0 !important;
                 overflow: hidden !important;
@@ -269,11 +272,12 @@
                 background-image: var(--ik-theme-button-short-on) !important; background-repeat: no-repeat !important; background-size: 100% 100% !important;
             }
 
-
+            /* Scroll Popup */
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.t { background-image: var(--ik-theme-popup-top) !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m { background-image: var(--ik-theme-popup-mid) !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.b { background-image: var(--ik-theme-popup-bot) !important; }
-            
+
+            /* Top Row Buttons */
             body.ik-dark-mode div.iconBox.ib1 a img.icon { content: var(--ik-theme-button-world-off) !important; }
             body.ik-dark-mode div.iconBox.ib1 a:hover img.icon { content: var(--ik-theme-button-world-on) !important; }
             body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-region-off) !important; }
@@ -350,7 +354,7 @@
             body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
 
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m div div b span [style*="860008"] { color: #ff5555 !important; }
-            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m div div b span [style*="004B00"] { color: #ff5555 !important; }
+            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m div div b span [style*="004B00"] { color: #55ff55 !important; }
 
             /* 3. Global Links (Using a[href] to style all links uniformly regardless of visited state) */
             body.ik-dark-mode a[href]:not([id*="Notes"] *),
