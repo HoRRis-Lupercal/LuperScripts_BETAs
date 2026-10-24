@@ -349,6 +349,9 @@
             body.ik-dark-mode #resbar .resNeg, body.ik-dark-mode #resbar .resFull, body.ik-dark-mode #resbar span[class*="neg"], body.ik-dark-mode #resbar [style*="color: red"], body.ik-dark-mode #resbar [style*="color:red"] { color: #ff5555 !important; }
             body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
 
+            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m div div b span [style*="860008"] { color: #ff5555 !important; }
+            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m div div b span [style*="004B00"] { color: #ff5555 !important; }
+
             /* 3. Global Links (Using a[href] to style all links uniformly regardless of visited state) */
             body.ik-dark-mode a[href]:not([id*="Notes"] *),
             body.ik-dark-mode .link a[href]:not([id*="Notes"] *) { 
