@@ -203,6 +203,7 @@
             }
 
             /* UI Widgets & Headers */
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div div#radio.center.ui-buttonset { background-image: var(--ik-theme-header-texture) !important; } /* Relocation button header */
             body.ik-dark-mode .ui-state-default { background-image: var(--ik-theme-header-texture) !important; }
             body.ik-dark-mode .ui-state-default a { color: var(--ik-theme-special-text1) !important; }
             body.ik-dark-mode .ui-state-active a { color: var(--ik-theme-special-text2) !important; }
@@ -313,10 +314,13 @@
             body.ik-dark-mode div div.content table.generic tbody tr td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#globalChatTab div.globalChatHldr div.globalChat.oddeven div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#allianceChatTab div.allianceChatHldr div.allianceChat.oddeven div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div.odd { background-color: var(--ik-theme-alt-bg) !important; }
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv table.generic tbody tr td div.odd { background-color: var(--ik-theme-alt-bg) !important; }
+            body.ik-dark-mode colgroup.odd { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info table.generic.middle tbody tr td:nth-of-type(5) { background-color: var(--ik-theme-alt-bg) !important; } /* Regional Bonuses 5th Column Styling */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div table.generic.middle.oddeven tbody tr th { background-color: var(--ik-theme-alt-bg) !important; } /* Tournament Rankings Heading Styling */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div table.generic.middle.oddeven tbody tr td:nth-of-type(2) { background-color: var(--ik-theme-alt-bg) !important; } /* Tournament Standings Styling */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#recentEvents.center.evenodd div.combat:nth-child(2n+1) { background-color: var(--ik-theme-alt-bg) !important; } /* Recent Combats Odd Styling */
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info ul#townList.image-grid li div.ui-state-hover { background-color: var(--ik-theme-alt-bg) !important; } /* City list hover background */
             
             /* Legends and Charts */
             body.ik-dark-mode div.flotr-legend { background-color: var(--ik-theme-alt-bg) !important; }
