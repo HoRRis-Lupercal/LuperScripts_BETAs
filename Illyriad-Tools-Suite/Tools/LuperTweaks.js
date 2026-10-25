@@ -346,13 +346,13 @@
                 color: var(--ik-theme-special-text5) !important;
             } /* --------------------------------------------------------------------------------------------------------------------------------------------------- ^ Accordion Commander Tab Headers ^ */
             body.ik-dark-mode .sideTab,
-            body.ik-dark-mode span.ikcat-dialog-tab {
+            body.ik-dark-mode span.ikcat-dialog-tab:not([id*="Notes"] *) {
                 background-image: var(--ik-theme-headerO-texture) !important;
                 background-repeat: repeat !important;
                 color: var(--ik-theme-special-text4) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------ ^  LuperNotes/LuperList Tab Headings ^ */
             body.ik-dark-mode .sideTab.selected, 
-            body.ik-dark-mode span.ikcat-dialog-tab.active { 
+            body.ik-dark-mode span.ikcat-dialog-tab.active:not([id*="Notes"] *) { 
                 background-image: var(--ik-theme-texture) !important; 
                 background-repeat: repeat !important; 
                 color: var(--ik-theme-special-text5) !important; 
