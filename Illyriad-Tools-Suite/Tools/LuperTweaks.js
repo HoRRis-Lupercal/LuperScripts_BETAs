@@ -135,7 +135,7 @@
                 --ik-theme-xp-bar: #f26723;             /*  */
                 --ik-theme-link: #ea882e;               /*  */
                 --ik-theme-link-hover: #e54e20;         /*  */
-                --ik-theme-warning-highlight: ff000042  /*  */
+                --ik-theme-warning-highlight: ff000042; /*  */
 
                 /* =================================== Background Texture Images ============================= */
                 --ik-theme-texture: url("https://i.imgur.com/rcUBS5t.jpeg");
@@ -592,11 +592,16 @@
         } else {
             document.body.classList.remove("ik-dark-mode");
         }
+        SovImbalanceCheck();
     }
 
     function saveSettings() {
         const darkCheckbox = document.querySelector("#ikltDarkCheckbox");
+        const sovCheckbox = document.querySelector("#ikltSovCheckbox");
+
         if (darkCheckbox) settings.darkMode = darkCheckbox.checked;
+        if (sovCheckbox) settings.sovHighlight = sovCheckbox.checked;
+
         saveJSON(STORAGE.SETTINGS, settings);
         applySettings();
     }
@@ -604,8 +609,13 @@
     function restoreSettings() {
         const saved = loadJSON(STORAGE.SETTINGS, null);
         if (saved) settings = Object.assign({}, settings, saved);
+
         const darkCheckbox = document.querySelector("#ikltDarkCheckbox");
+        const sovCheckbox = document.querySelector("#ikltSovCheckbox");
+
         if (darkCheckbox) darkCheckbox.checked = !!settings.darkMode;
+        if (sovCheckbox) sovCheckbox.checked = !!settings.sovHighlight;
+
         applySettings();
     }
 
@@ -698,16 +708,16 @@
         restoreSettings();
         if (!createTweaksDialog()) return false;
 
-        // Start dynamic value scanner loop for zero-value city spans
+        // Start dynamic value scanner loop
         setInterval(() => {
             highlightZeroCityValues();
             SovImbalanceCheck();
-        } , 1000);
+        }, 1000);
 
         if (!resizeBound) {
             resizeBound = true;
             window.addEventListener("resize", () => {
-                if ($tweaks &&$tweaks.dialog("isOpen")) { clampTweaks(); saveTweaksGeometry(); }
+                if ($tweaks && $tweaks.dialog("isOpen")) { clampTweaks(); saveTweaksGeometry(); }
             });
         }
         tweaksInitialized = true;
