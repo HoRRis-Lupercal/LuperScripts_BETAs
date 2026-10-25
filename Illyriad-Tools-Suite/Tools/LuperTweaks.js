@@ -157,21 +157,26 @@
                 --ik-theme-herald-title: url("https://i.imgur.com/GWSmxmu.jpeg");
                 --ik-theme-herald-book: url("https://i.imgur.com/5wmEX8r.jpeg");
 
-                /* =================================== Top Button Row Images ============================= */
+                /* ======================================= Button Images ================================= */
+
                 --ik-theme-button-short-off: url("https://assets.illyriad.net/img/buttons/short_off_rev.png");
                 --ik-theme-button-short-on: url("https://assets.illyriad.net/img/buttons/short_on_rev.png");
-                --ik-theme-button-world-off: url("https://i.imgur.com/n2x7KAg.png");
-                --ik-theme-button-world-on: url("https://i.imgur.com/RaBKZyN.png");
-                --ik-theme-button-region-off: url("https://i.imgur.com/BIyjHR4.png");
-                --ik-theme-button-region-on: url("https://i.imgur.com/4HbMmbd.png");
-                --ik-theme-button-quest-off: url("https://i.imgur.com/PKZpNP1.png");
-                --ik-theme-button-quest-on: url("https://i.imgur.com/tjPip3r.png");
-                --ik-theme-button-tourney-off: url("https://i.imgur.com/yMXHy7o.png");
-                --ik-theme-button-tourney-on: url("https://i.imgur.com/1PlkChY.png");
-                --ik-theme-button-stats-off: url("https://i.imgur.com/JAl4zQO.png");
-                --ik-theme-button-stats-on: url("https://i.imgur.com/L5erQO5.png");
-                --ik-theme-button-herald-off: url("https://i.imgur.com/49AC6eF.png");
-                --ik-theme-button-herald-on: url("https://i.imgur.com/RPscrs2.png");
+
+                /* =================================== Top Button Row Images ============================= */
+                
+                --ik-theme-button-world-off: url("https://i.imgur.com/JFzM27f.png");
+                --ik-theme-button-world-on: url("https://i.imgur.com/DeinIVP.png");
+                --ik-theme-button-region-off: url("https://i.imgur.com/Hm1YmGo.png");
+                --ik-theme-button-region-on: url("https://i.imgur.com/U0s8RLQ.png");
+                --ik-theme-button-quest-off: url("https://i.imgur.com/6Vf66Bl.png");
+                --ik-theme-button-quest-on: url("https://i.imgur.com/QXGDRaE.png");
+                --ik-theme-button-tourney-off: url("https://i.imgur.com/aoYMc2u.png");
+                --ik-theme-button-tourney-on: url("https://i.imgur.com/MUiE2dX.png");
+                --ik-theme-button-stats-off: url("https://i.imgur.com/pBTmIFY.png");
+                --ik-theme-button-stats-on: url("https://i.imgur.com/1XLTZpA.png");
+                --ik-theme-button-herald-off: url("https://i.imgur.com/OIiImD8.png");
+                --ik-theme-button-herald-on: url("https://i.imgur.com/xQnBkvS.png");
+                
                 --ik-theme-button-city-off: url("https://i.imgur.com/m28vfLz.png");
                 --ik-theme-button-city-on: url("https://i.imgur.com/fdNOBi5.png");
                 --ik-theme-button-castle-off: url("https://i.imgur.com/pfGAKIG.png");
@@ -184,6 +189,20 @@
                 --ik-theme-button-sov-on: url("https://i.imgur.com/LQMvpD5.png");
                 --ik-theme-button-inv-off: url("https://i.imgur.com/B8omxkJ.png");
                 --ik-theme-button-inv-on: url("https://i.imgur.com/mOpruAO.png");
+
+                --ik-theme-button-military-off: url("https://i.imgur.com/WogeJW4.png");
+                --ik-theme-button-military-on: url("https://i.imgur.com/42cX1vD.png");
+                --ik-theme-button-moves-off: url("https://i.imgur.com/xs29aaS.png");
+                --ik-theme-button-moves-on: url("https://i.imgur.com/87Oc0NL.png");
+                --ik-theme-button-orders-off: url("https://i.imgur.com/DSzzFCg.png");
+                --ik-theme-button-orders-on: url("https://i.imgur.com/50xv7JI.png");
+                --ik-theme-button-armies-off: url("https://i.imgur.com/UwdTC3v.png");
+                --ik-theme-button-armies-on: url("https://i.imgur.com/UTABW2g.png");
+                --ik-theme-button-command-off: url("https://i.imgur.com/iR9V0wt.png");
+                --ik-theme-button-command-on: url("https://i.imgur.com/Gy78Fy5.png");
+                --ik-theme-button-troops-off: url("https://i.imgur.com/AIjJDt9.png");
+                --ik-theme-button-troops-on: url("https://i.imgur.com/YdKdl9X.png");
+                
                 --ik-theme-char-ring2-off: url("https://i.imgur.com/scbj2y9.png");
                 --ik-theme-char-ring2-on: url("https://i.imgur.com/9Ijy5Vv.png");
             }
@@ -562,6 +581,19 @@
             body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-inv-off) !important; }
             body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-inv-on) !important; }
             /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row City Buttons ^ */
+            body.ik-dark-mode div.iconBox.ib3 a img.icon { content: var(--ik-theme-button-military-off) !important; }
+            body.ik-dark-mode div.iconBox.ib3 a:hover img.icon { content: var(--ik-theme-button-military-on) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-off) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-on) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-orders-off) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-orders-on) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon3 { content: var(--ik-theme-button-armies-off) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-button-armies-on) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-command-off) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-command-on) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-troops-off) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-troops-on) !important; }
+            /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Military Buttons ^ */
             body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] { content: var(--ik-theme-char-ring2-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] { content: var(--ik-theme-char-ring2-on) !important; }
             /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Character Buttons ^ */       
