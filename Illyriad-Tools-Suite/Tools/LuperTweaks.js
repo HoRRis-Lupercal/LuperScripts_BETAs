@@ -508,7 +508,8 @@
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
             }
-            body.ik-dark-mode .headlinks a.selected {
+            body.ik-dark-mode .headlinks a.selected,
+            body.ik-dark-mode .headLinks a.selected {
                 display: inline-block !important;
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
