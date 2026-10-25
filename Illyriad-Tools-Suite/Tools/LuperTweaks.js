@@ -110,6 +110,8 @@
                 --ik-theme-special-text7: #2d2e30;
                 --ik-theme-special-text8: #1e1f20;
                 --ik-theme-special-text9: #434343;
+                --ik-theme-health-bar: #f00;
+                --ik-theme-xp-bar: #f26723;
                 --ik-theme-link: #ea882e;
                 --ik-theme-link-hover: #e54e20;
 
@@ -231,6 +233,19 @@
             body.ik-dark-mode [style*="font-weight:bold;color:#0000B0"] { 
                 color: var(--ik-theme-special-text4) !important; 
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Medal Character Title ^ */
+            body.ik-dark-mode div.skillBar,
+            body.ik-dark-mode div [style*="background-color: #860008"],
+            body.ik-dark-mode div [style*="background-color: ##d3b994"],
+            body.ik-dark-mode form.odd, {
+                background-color: var(--ik-theme-alt-bg) !important;
+            } /* Skill, Health, Level, Header Background */
+            body.ik-dark-mode div [style*="background-color: #a37342"], {
+                background-color: var(--ik-theme-xp-bar) !important;
+            } /* Skill and Level Bar Color */
+            body.ik-dark-mode div [style*="background-color: #004B00"] {
+                background-color: var(--ik-theme-special-text3) !important;
+            } /* Max Level Text */
+            /* ----------------------------------------------------------------------------------------------------------------------------------------- ^ Commander Header, Skill Bars, and Equipment ^ */
             body.ik-dark-mode div.b-page { 
                 background-color: var(--ik-theme-alt-bg) !important; 
             } /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Herald Page Drag Colour ^ */
@@ -291,12 +306,13 @@
             } /* -------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Selected Header Color ^ */
             body.ik-dark-mode .ui-accordion-header h3 a span:not([id*="Notes"] *),
             body.ik-dark-mode .ui-accordion-header.ui-state-active a,
-            body.ik-dark-mode .ui-accordion-header.ui-state-active a[href] {
+            body.ik-dark-mode .ui-accordion-header.ui-state-active a[href],
+            body.ik-dark-mode div.accordionCommand h3.ui-accordion-header a table.generic tbody tr td:not([id*="Notes"] *) {
                 color: var(--ik-theme-special-text5) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Accordion Active Tab Headers ^ */
-            body.ik-dark-mode div.accordionCommand.ui-accordion.ui-widget.ui-helper-reset.ui-accordion-icons h3.ui-accordion-header.ui-helper-reset.ui-state-default.ui-corner-all a table.generic tbody tr:not([id*="Notes"] *) {
-                color: var(--ik-theme-special-text5) !important;
-            } /* --------------------------------------------------------------------------------------------------------------------------------------------------- ^ Accordian Commander Tab Headers ^ */
+            body.ik-dark-mode div.accordionCommand h3.ui-accordion-header.ui-state-active a table.generic tbody tr td:not([id*="Notes"] *) {
+                color: var(--ik-theme-special-text4) !important;
+            } /* --------------------------------------------------------------------------------------------------------------------------------------------------- ^ Accordion Commander Tab Headers ^ */
 
             /* ==================== Format Below ================================ */
             /* ------------------ Selected Inner UI Tabs Override ------------------ */
@@ -375,6 +391,7 @@
 
             /* Tables & Alternating Rows */
             body.ik-dark-mode tr.odd { background-color: var(--ik-theme-alt-bg) !important; }
+            body.ik-dark-mode form.odd { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode table.oddeven > tbody > tr:nth-child(2n),
             body.ik-dark-mode table.evenodd > tbody > tr:nth-child(2n+1) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode .ui-widget-content div.oddeven > div:not([id*="chat"]):nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
