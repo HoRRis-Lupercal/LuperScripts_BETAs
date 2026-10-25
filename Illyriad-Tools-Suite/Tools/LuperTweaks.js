@@ -208,6 +208,7 @@
             /* UI Widgets & Headers */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div div#radio.center.ui-buttonset { background-image: var(--ik-theme-header-texture) !important; } /* Relocation button header */
             body.ik-dark-mode .ui-state-default { background-image: var(--ik-theme-header-texture) !important; }
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder div { background-image: var(--ik-theme-header-texture) !important; } /* Medal headers */
             body.ik-dark-mode .ui-state-default a { color: var(--ik-theme-special-text1) !important; }
             body.ik-dark-mode .ui-state-active a { color: var(--ik-theme-special-text2) !important; }
             body.ik-dark-mode .ui-widget-content:not([id="ikNotesPanel"]):not([id="ikNotesPanel"] *) {
