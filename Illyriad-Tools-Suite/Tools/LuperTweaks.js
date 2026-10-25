@@ -217,7 +217,7 @@
                ========================================================================= */
             
             body.ik-dark-mode p:not([id*="Notes"] *), 
-            body.ik-dark-mode td:not([id*="Notes"] *):not(.accordionCommand *), 
+            body.ik-dark-mode td:not([id*="Notes"] *), 
             body.ik-dark-mode th:not([id*="Notes"] *), 
             body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title):not(.ui-accordion-header *), 
             body.ik-dark-mode label:not([id*="Notes"] *),
@@ -294,6 +294,9 @@
             body.ik-dark-mode .ui-accordion-header.ui-state-active a[href] {
                 color: var(--ik-theme-special-text5) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Accordion Active Tab Headers ^ */
+            body.ik-dark-mode div.accordionCommand.ui-accordion.ui-widget.ui-helper-reset.ui-accordion-icons h3.ui-accordion-header.ui-helper-reset.ui-state-default.ui-corner-all a table.generic tbody tr:not([id*="Notes"] *) {
+                color: var(--ik-theme-special-text5) !important;
+            } /* --------------------------------------------------------------------------------------------------------------------------------------------------- ^ Accordian Commander Tab Headers ^ */
 
             /* ==================== Format Below ================================ */
             /* ------------------ Selected Inner UI Tabs Override ------------------ */
