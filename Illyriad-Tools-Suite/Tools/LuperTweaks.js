@@ -208,7 +208,9 @@
             body.ik-dark-mode div.b-wrap.b-wrap-left { background-image: var(--ik-theme-herald-left) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#book.booklet div.b-page.b-page-0.b-p1 div.b-wrap.b-wrap-left { background-image: var(--ik-theme-herald-title) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#hidePage { background-image: var(--ik-theme-herald-book) !important; }
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#book.booklet div.b-page.b-page-0.b-p1 div.b-wrap.b-wrap-left div.article div div div [style*="color: black"] { color: var(--ik-theme-special-text4) !important; }
+            body.ik-dark-mode #book [style*="color: black"] {
+                color: var(--ik-theme-special-text4) !important;
+            }
 
             /* Inputs & Selects */
             body.ik-dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
