@@ -102,6 +102,8 @@
                 --ik-theme-popup-top: url("https://i.imgur.com/FlehLqQ.png");
                 --ik-theme-popup-mid: url("https://i.imgur.com/Aslo09q.png");
                 --ik-theme-popup-bot: url("https://i.imgur.com/MwbBS3B.png");
+                --ik-theme-herald-right: url("https://i.imgur.com/QbNEhg6.jpeg");
+                --ik-theme-herald-left: url("https://i.imgur.com/DiMUiBi.jpeg");
 
                 /* =================================== Top Button Row Images ============================= */
                 --ik-theme-button-short-off: url("https://assets.illyriad.net/img/buttons/short_off_rev.png");
@@ -196,6 +198,10 @@
                 background-image: var(--ik-theme-headermain-texture) !important;
                 background-repeat: no-repeat !important;
             }
+
+            /* Herald Pages */
+            body.ik-dark-mode div.b-wrap.b-wrap-right { background-image: var(--ik-theme-herald-right) !important; }
+            body.ik-dark-mode div.b-wrap.b-wrap-left { background-image: var(--ik-theme-herald-left) !important; }
 
             /* Inputs & Selects */
             body.ik-dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
