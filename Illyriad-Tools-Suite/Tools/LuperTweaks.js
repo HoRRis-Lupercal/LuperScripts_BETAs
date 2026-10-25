@@ -199,7 +199,7 @@
             body.ik-dark-mode p:not([id*="Notes"] *), 
             body.ik-dark-mode td:not([id*="Notes"] *), 
             body.ik-dark-mode th:not([id*="Notes"] *), 
-            body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title):not(#ui-accordion-header), 
+            body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title), 
             body.ik-dark-mode label:not([id*="Notes"] *),
             body.ik-dark-mode #resbar, body.ik-dark-mode #resbar td, body.ik-dark-mode #resbar span, body.ik-dark-mode #resbar a {
                 color: var(--ik-theme-text) !important;
@@ -269,7 +269,7 @@
                 background-image: var(--ik-theme-texture) !important;
                 color: var(--ik-theme-text) !important;
             } /* -------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Selected Header Color ^ */
-            body.ik-dark-mode .ui-accordion-header h3 a span,
+            body.ik-dark-mode .ui-accordion-header h3 a span:not([id*="Notes"] *),
             body.ik-dark-mode .ui-accordion-header.ui-state-active a,
             body.ik-dark-mode .ui-accordion-header.ui-state-active a[href] {
                 color: var(--ik-theme-special-text2) !important;
