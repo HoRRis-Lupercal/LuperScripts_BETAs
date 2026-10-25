@@ -60,20 +60,16 @@
     function highlightTotemColumn() {
         if (!document.body.classList.contains("ik-dark-mode")) return;
 
-        // Find all generic tables inside MainContentDiv
         const tables = document.querySelectorAll("#MainContentDiv table");
         tables.forEach(table => {
-            // Check if this table contains a "Totem" or "Square (Combat Type)" header
             const headerText = table.textContent || "";
             if (headerText.includes("Square (Combat Type)") || headerText.includes("Totem")) {
-                // Target all data cells in the table and find the Totem column cells
                 const rows = table.querySelectorAll("tr");
                 rows.forEach(row => {
-                    // Grab all cells in this row
                     const cells = row.querySelectorAll("td");
-                    // In Regional Bonuses, the Totem column is consistently the last/5th data cell
+                    // Totem is consistently the 4th column (index 3)
                     if (cells.length >= 4) {
-                        const totemCell = cells[cells.length - 1]; // Totem is always the final column here
+                        const totemCell = cells[3]; 
                         if (totemCell) {
                             totemCell.style.setProperty("background-color", "var(--ik-theme-alt-bg)", "important");
                         }
@@ -459,12 +455,6 @@
                 color: var(--ik-theme-special-text6) !important;
             }
 
-
-
-
-            body.ik-dark-mode #MainContentDiv table:has(tr:first-child > th:nth-child(4):last-child) td:nth-of-type(5) {
-                background-color: var(--ik-theme-alt-bg) !important;
-            } /* Tournament Totem Column Color */
 
 
 
