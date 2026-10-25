@@ -196,10 +196,18 @@
                DARK MODE MAIN THEME RULES
                ========================================================================= */
             
+            body.ik-dark-mode p:not([id*="Notes"] *), 
+            body.ik-dark-mode td:not([id*="Notes"] *), 
+            body.ik-dark-mode th:not([id*="Notes"] *), 
+            body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title), 
+            body.ik-dark-mode label:not([id*="Notes"] *),
+            body.ik-dark-mode #resbar, body.ik-dark-mode #resbar td, body.ik-dark-mode #resbar span, body.ik-dark-mode #resbar a {
+                color: var(--ik-theme-text) !important;
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Default Page Text ^ */
             html body.ik-dark-mode { 
                 background-image: var(--ik-theme-headermain-texture) !important;
                 background-repeat: no-repeat !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Top  Header Image ^ */
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Top Header Image ^ */
             body.ik-dark-mode [style*="font-weight:bold;color:#0000B0"] { 
                 color: var(--ik-theme-special-text4) !important; 
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Medal Character Title ^ */
@@ -235,45 +243,38 @@
                 background-image: var(--ik-theme-header-texture) !important; 
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Relocation Header ^ */
             body.ik-dark-mode .ui-state-default { 
+                color: var(--ik-theme-special-text1) !important;
                 background-image: var(--ik-theme-header-texture) !important;
-            } /* -------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Widget and Popup Background ^ */
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Widget and Popup Header ^ */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder > div:first-of-type { 
                 background-image: var(--ik-theme-header-texture) !important; 
             } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Medal Header Image ^ */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder div#medalCost div {
                 background-image: var(--ik-theme-header-texture) !important; 
             }  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Alliance Medal headers ^ */
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#AwardMedalHTML div.smallBorder div form div div {
+            body.ik-dark-mode div#AwardMedalHTML div.smallBorder div form div div {
                 background-color: var(--ik-theme-alt-bg) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Medal Player List Even ^ */
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#AwardMedalHTML div.smallBorder div form div div div.odd { 
+            body.ik-dark-mode div#AwardMedalHTML div.smallBorder div form div div div.odd { 
             background-color: var(--ik-theme-light-alt-bg) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Award Medal Player List Odd ^ */
-
-            /* ============ Need formating below ============ */
-            body.ik-dark-mode .ui-state-default a { color: var(--ik-theme-special-text1) !important; }
-            body.ik-dark-mode .ui-state-active a { color: var(--ik-theme-special-text2) !important; }
+            body.ik-dark-mode .ui-state-default a[href], body.ik-dark-mode .ui-state-default a {
+                color: var(--ik-theme-special-text1) !important;
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Unselected Header Color ^ */
+            body.ik-dark-mode .ui-state-active, body.ik-dark-mode .ui-state-active a, body.ik-dark-mode .ui-state-active a[href] {
+                color: var(--ik-theme-special-text2) !important;
+            } /* -------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Selected Header Color ^ */
             body.ik-dark-mode .ui-widget-content:not([id="ikNotesPanel"]):not([id="ikNotesPanel"] *) {
                 background-color: var(--ik-theme-content-bg) !important;
                 background-image: var(--ik-theme-texture) !important;
                 color: var(--ik-theme-text) !important;
-            }
-            /* ------------------ Accordion & Active Tab Headers ------------------ */
-            body.ik-dark-mode .ui-state-active,
-            body.ik-dark-mode .ui-state-active a,
-            body.ik-dark-mode .ui-state-active a[href],
+            } /* -------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Selected Header Color ^ */
             body.ik-dark-mode .ui-accordion-header.ui-state-active a,
             body.ik-dark-mode .ui-accordion-header.ui-state-active a[href] {
                 color: var(--ik-theme-special-text2) !important;
-            }
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Accordion Active Tab Headers ^ */
 
-            body.ik-dark-mode .ui-state-default,
-            body.ik-dark-mode .ui-state-default a,
-            body.ik-dark-mode .ui-state-default a[href],
-            body.ik-dark-mode .ui-accordion-header.ui-state-default a,
-            body.ik-dark-mode .ui-accordion-header.ui-state-default a[href] {
-                color: var(--ik-theme-special-text1) !important;
-            }
+            /* ==================== Format Below ================================ */
             /* ------------------ Selected Inner UI Tabs Override ------------------ */
             body.ik-dark-mode .ui-tabs-selected,
             body.ik-dark-mode .ui-tabs-active,
@@ -376,15 +377,7 @@
                TEXT COLOR & PRIORITY RULES (Uniform Link Styling via a[href])
                ========================================================================= */
 
-            /* 1. Default Page Text */
-            body.ik-dark-mode p:not([id*="Notes"] *), 
-            body.ik-dark-mode td:not([id*="Notes"] *), 
-            body.ik-dark-mode th:not([id*="Notes"] *), 
-            body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title), 
-            body.ik-dark-mode label:not([id*="Notes"] *),
-            body.ik-dark-mode #resbar, body.ik-dark-mode #resbar td, body.ik-dark-mode #resbar span, body.ik-dark-mode #resbar a {
-                color: var(--ik-theme-text) !important;
-            }
+            
             body.ik-dark-mode .ui-dialog .ui-dialog-title:not([id*="Notes"] *),
             body.ik-dark-mode span.ui-dialog-title:not([id*="Notes"] *) { 
                 background-color: var(--ik-theme-content-bg) !important; 
