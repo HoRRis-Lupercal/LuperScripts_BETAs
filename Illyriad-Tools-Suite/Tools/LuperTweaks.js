@@ -480,7 +480,7 @@
 
 
             
-            /* ==================== Format Below ================================ */
+            /* ================================================================================================================================================================================
 
             body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a,
             body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a[href] {
@@ -500,7 +500,6 @@
             body.ik-dark-mode .headlinks a.selected, body.ik-dark-mode .headLinks a.selected { background-image: var(--ik-theme-texture) !important; }
 
 
-            /* Containers */
             body.ik-dark-mode #dTownTD *, body.ik-dark-mode .dTownTD *, body.ik-dark-mode #citiesMenu { background-color: var(--ik-theme-special-text8) !important; }
             
             body.ik-dark-mode .cityMenu.selected { background-color: var(--ik-theme-special-text7) !important; }
@@ -518,7 +517,7 @@
                 color: var(--ik-theme-special-text3) !important;
             }
 
-            /* ==================== Format Above ================================ */
+            ================================================================================================================================================================================= */
 
             /* ======================================================================================================================================================
                                                                                DARK MODE DEFAULT OVERRIDES
