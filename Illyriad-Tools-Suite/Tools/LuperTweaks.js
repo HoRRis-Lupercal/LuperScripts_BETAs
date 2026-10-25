@@ -252,7 +252,7 @@
             body.ik-dark-mode #resbar td, 
             body.ik-dark-mode #resbar span, 
             body.ik-dark-mode #resbar a,
-            html body.ik-dark-mode div#friendActivity.smallBorder div,
+            html body.ik-dark-mode div#friendActivity.smallBorder div
             {
                 color: var(--ik-theme-text);
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Default Page Text ^ */
