@@ -450,6 +450,7 @@
             body.ik-dark-mode td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#allianceChatTab div.allianceChatHldr div.allianceChat.oddeven div:nth-child(2n) { 
                 background-color: var(--ik-theme-alt-bg) !important;
             } /* --------------------------------------------------------------------------- PROBABLY BROKEN!!!!!!! ------------------------------------------------------------------------------ ^ Tables & Alternating Rows ^ */
+            
             body.ik-dark-mode .ui-dialog .ui-dialog-buttonpane button,
             body.ik-dark-mode button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only {
                 background-image: var(--ik-theme-button-short-off) !important;
@@ -462,6 +463,7 @@
                 background-repeat: no-repeat !important;
                 background-size: 100% 100% !important;
             } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- Buttons */
+            
             body.ik-dark-mode div.ui-state-hover, 
             body.ik-dark-mode a#ui-active-menuitem, 
             body.ik-dark-mode a.ui-state-hover,
@@ -471,7 +473,17 @@
             body.ik-dark-mode a.jstree-hovered { 
                 background-color: var(--ik-theme-alt-bg) !important;
                 background-image: none !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ City list hover background */
+            } /* ----------------------------------------------------------------------------------------------------------------------------------------------- City and trade list hover background */
+            
+            body.ik-dark-mode .topBar {
+                background-color: var(--ik-theme-content-bg) !important;
+                color: var(--ik-theme-text) !important;
+            }
+            body.ik-dark-mode .ui-dialog .ui-dialog-title:not([id*="Notes"] *),
+            body.ik-dark-mode span.ui-dialog-title:not([id*="Notes"] *) { 
+                background-color: var(--ik-theme-content-bg) !important; 
+                color: var(--ik-theme-special-text3) !important;
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ Main page background */
             
             body.ik-dark-mode div.flotr-legend { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
@@ -481,15 +493,6 @@
 
             
             /* ================================================================================================================================================================================
-
-            
-            body.ik-dark-mode .ui-widget-header { background-image: var(--ik-theme-header-texture) !important; background-repeat: repeat !important; }
-            body.ik-dark-mode #contentTD { background-image: var(--ik-theme-header-texture) !important; background-color: var(--ik-theme-content-bg) !important; }
-            
-
-            body.ik-dark-mode .ui-dialog .ui-dialog-titlebar { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; }
-            body.ik-dark-mode .headlinks, body.ik-dark-mode .headLinks { background-image: var(--ik-theme-headerO-texture) !important; }
-
             
             body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a,
             body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a[href] {
@@ -500,14 +503,6 @@
             
             body.ik-dark-mode .cityMenu.selected { background-color: var(--ik-theme-special-text7) !important; }
             
-            body.ik-dark-mode .topBar { background-color: var(--ik-theme-content-bg) !important; color: var(--ik-theme-text) !important; }
-
-            body.ik-dark-mode .ui-dialog .ui-dialog-title:not([id*="Notes"] *),
-            body.ik-dark-mode span.ui-dialog-title:not([id*="Notes"] *) { 
-                background-color: var(--ik-theme-content-bg) !important; 
-                color: var(--ik-theme-special-text3) !important;
-            }
-
             ================================================================================================================================================================================= */
 
             /* ======================================================================================================================================================
@@ -520,7 +515,23 @@
             body.ik-dark-mode .ui-state-active {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------- ^ Paper Background ^ */
+            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------- ^ Paper Background ^ */
+            body.ik-dark-mode .ui-widget-header { 
+                background-image: var(--ik-theme-header-texture) !important;
+                background-repeat: repeat !important;
+            }
+            body.ik-dark-mode #contentTD {
+                background-image: var(--ik-theme-header-texture) !important;
+                background-color: var(--ik-theme-content-bg) !important;
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ Dark Header background */
+            body.ik-dark-mode .ui-dialog .ui-dialog-titlebar {
+                background-image: var(--ik-theme-headerO-texture) !important;
+                background-repeat: repeat !important;
+            } 
+            body.ik-dark-mode .headlinks,
+            body.ik-dark-mode .headLinks {
+                background-image: var(--ik-theme-headerO-texture) !important;
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ Light header background */
             body.ik-dark-mode div.iconBox.ib1 a img.icon { content: var(--ik-theme-button-world-off) !important; }
             body.ik-dark-mode div.iconBox.ib1 a:hover img.icon { content: var(--ik-theme-button-world-on) !important; }
             body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-region-off) !important; }
