@@ -252,7 +252,7 @@
             body.ik-dark-mode #resbar span, 
             body.ik-dark-mode #resbar a,
             body.ik-dark-mode div#friendActivity.smallBorder div,
-            body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title):not(.ui-accordion-header *):not(.ikcat-dialog-tab *) {
+            body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title):not(.ui-accordion-header *):not(.ikcat-dialog-tab):not(.ikcat-dialog-tab *) {
                 color: var(--ik-theme-text) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Default Page Text ^ */
             html body.ik-dark-mode { 
