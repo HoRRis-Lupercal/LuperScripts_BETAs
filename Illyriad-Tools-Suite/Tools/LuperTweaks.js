@@ -101,12 +101,12 @@
 
                 /* ======================================= Text Colors ======================================= */
                 --ik-theme-text: #e3e3e3;
-                --ik-theme-special-text1: #e54e20;
-                --ik-theme-special-text2: #ea882e;
+                --ik-theme-special-text1: #e5b420;
+                --ik-theme-special-text2: #f00;
                 --ik-theme-special-text3: #e54e20;
                 --ik-theme-special-text4: #ea882e; 
                 --ik-theme-special-text5: #e54e20;
-                --ik-theme-special-text6: #e54e20;
+                --ik-theme-special-text6: #ea882e;
                 --ik-theme-special-text7: #2d2e30;
                 --ik-theme-special-text8: #1e1f20;
                 --ik-theme-special-text9: #434343;
@@ -450,7 +450,17 @@
             body.ik-dark-mode span.name, 
             body.ik-dark-mode a.name {
                 color: var(--ik-theme-special-text6) !important;
-            }
+            } /* General Names */
+            body.ik-dark-mode .name.nameYou, 
+            body.ik-dark-mode span.name.nameYou, 
+            body.ik-dark-mode a.name.nameYou {
+                color: var(--ik-theme-special-text1) !important;
+            } /* Your Name */
+            body.ik-dark-mode .name.nameYou, 
+            body.ik-dark-mode span.name.nameYou, 
+            body.ik-dark-mode a.name.nameYou {
+                color: var(--ik-theme-special-text2) !important;
+            } /* System's Names */
 
 
             /* Preserve Item Popup Stat Colors (Positive Green & Negative Red) */
