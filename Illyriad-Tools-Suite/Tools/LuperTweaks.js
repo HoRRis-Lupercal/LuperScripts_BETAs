@@ -201,6 +201,8 @@
                 background-repeat: no-repeat !important;
             }
 
+            body.ik-dark-mode [style*="font-weight:bold;color:#0000B0"] { color: var(--ik-theme-special-text4) !important; } /* Character Medal Title */
+
             /* Herald Pages */
             body.ik-dark-mode div.b-page { color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div.headline { color: var(--ik-theme-special-text4) !important; }
@@ -208,7 +210,7 @@
             body.ik-dark-mode div.b-wrap.b-wrap-left { background-image: var(--ik-theme-herald-left) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#book.booklet div.b-page.b-page-0.b-p1 div.b-wrap.b-wrap-left { background-image: var(--ik-theme-herald-title) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#hidePage { background-image: var(--ik-theme-herald-book) !important; }
-            body.ik-dark-mode #book [style*="color: black"] {
+            body.ik-dark-mode #book [style*="color:black"] {
                 color: var(--ik-theme-special-text4) !important;
             }
 
@@ -372,6 +374,7 @@
             body.ik-dark-mode #resbar .resPos, body.ik-dark-mode #resbar span[class*="pos"], body.ik-dark-mode #resbar [style*="color: green"], body.ik-dark-mode #resbar [style*="color:green"] { color: #55ff55 !important; }
             body.ik-dark-mode #resbar .resNeg, body.ik-dark-mode #resbar .resFull, body.ik-dark-mode #resbar span[class*="neg"], body.ik-dark-mode #resbar [style*="color: red"], body.ik-dark-mode #resbar [style*="color:red"] { color: #ff5555 !important; }
             body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
+            body.ik-dark-mode div#advRes { background-color: var(--ik-theme-alt-bg) !important; } /* T2 res dropdown background */
 
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m div div b span [style*="860008"] { color: #ff5555 !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m div div b span [style*="004B00"] { color: #55ff55 !important; }
