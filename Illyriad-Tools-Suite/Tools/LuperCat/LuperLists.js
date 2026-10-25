@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Illyriad Tools Suite - LuperCat
+// @name         Illyriad Tools Suite - LuperLists
 // @namespace    http://tampermonkey.net/
 // @version      1.0
 // @match        https://*.illyriad.co.uk/*
@@ -306,7 +306,13 @@
         }, 4000);
     }
 
-function populateTypeDropdown() {
+    function updateSearchPlaceholder() {
+        const searchInput = document.querySelector("#ikCatSearch");
+        if (!searchInput) return;
+        searchInput.placeholder = `Search ${currentTab} or ID...`;
+    }
+
+    function populateTypeDropdown() {
         const select = document.querySelector("#ikCatTypeSelect");
         if (!select) return;
 
@@ -341,12 +347,10 @@ function populateTypeDropdown() {
         });
 
         filtered.forEach(item => {
-            // Determine sheet info: support direct URLs for units while falling back to SPRITE_SHEETS keys
             const sheetInfo = (item.spriteSheet && item.spriteSheet.startsWith("http"))
                 ? { url: item.spriteSheet, iconWidth: 48, iconHeight: 48 }
                 : (SPRITE_SHEETS[item.spriteSheet] || SPRITE_SHEETS.default);
             
-            // Extract the correct parameter string (e.g., "c=33" or "i=3|5") from after the "@" symbol
             const dataMatch = item.id.match(/@([^\]]+)/);
             const dataQuery = dataMatch ? dataMatch[1].trim() : "";
 
@@ -361,13 +365,11 @@ function populateTypeDropdown() {
 
             card.appendChild(icon);
 
-            // Handle the click logic to trigger the game's native popup engine
             card.addEventListener("click", (e) => {
                 e.stopPropagation(); 
                 closeActiveTooltip(); 
                 activeTooltipItem = item;
                 
-                // Call the game's native data extractor and popup generator directly using the dynamic query
                 if (typeof window.ExtractData === "function") {
                     try {
                         const gameData = window.ExtractData(dataQuery);
@@ -425,6 +427,7 @@ function populateTypeDropdown() {
         `;
 
         document.body.appendChild(content);
+        updateSearchPlaceholder();
         populateTypeDropdown();
         bindCatalogueEvents();
     }
@@ -441,7 +444,6 @@ function populateTypeDropdown() {
 
         const searchInput = content.querySelector("#ikCatSearch");
         const typeSelect = content.querySelector("#ikCatTypeSelect");
-        const tabs = content.querySelectorAll(".ikcat-tab");
 
         searchInput?.addEventListener("input", () => {
             renderCatalogueGrid();
@@ -470,7 +472,6 @@ function populateTypeDropdown() {
             currentTab = state.tab;
         }
 
-        // Apply active class to the correct title bar tab
         if ($catalogue) {
             const widget = $catalogue.dialog("widget");
             const tabs = widget.find(".ikcat-dialog-tab");
@@ -480,7 +481,9 @@ function populateTypeDropdown() {
             }
         }
 
-        if (!state) return; // Exit if no state saved for search/dropdown
+        updateSearchPlaceholder();
+
+        if (!state) return;
 
         const searchInput = document.querySelector("#ikCatSearch");
         const typeSelect = document.querySelector("#ikCatTypeSelect");
@@ -553,7 +556,7 @@ function populateTypeDropdown() {
         }
     }
 
-function createCatalogueDialog() {
+    function createCatalogueDialog() {
         if (!window.jQuery || !jQuery.fn || typeof jQuery.fn.dialog !== "function") {
             return false;
         }
@@ -565,7 +568,7 @@ function createCatalogueDialog() {
         $catalogue = jQuery("#ikCatalogue");
 
         $catalogue.dialog({
-            title: "Catalogue", // Keep for screen readers/internals
+            title: "Catalogue",
             autoOpen: false,
             width: Math.max(380, Number(saved.width) || 420),
             height: Math.max(320, Number(saved.height) || 480),
@@ -597,9 +600,8 @@ function createCatalogueDialog() {
         const widget = $catalogue.dialog("widget");
         widget.addClass("flora");
 
-        // --- NEW TITLE BAR INJECTION ---
         const titleBar = widget.find(".ui-dialog-titlebar");
-        titleBar.find(".ui-dialog-title").hide(); // Hide the default "Catalogue" text
+        titleBar.find(".ui-dialog-title").hide();
 
         if (!titleBar.find(".ikcat-dialog-tabs").length) {
             const tabsHtml = `
@@ -611,7 +613,6 @@ function createCatalogueDialog() {
             `;
             titleBar.prepend(tabsHtml);
 
-            // Bind click events directly on the new title tabs
             titleBar.find(".ikcat-dialog-tab").on("click", function(e) {
                 const clickedTab = e.target.dataset.tab;
                 if (currentTab === clickedTab) return;
@@ -623,6 +624,7 @@ function createCatalogueDialog() {
                 const searchInput = document.querySelector("#ikCatSearch");
                 if (searchInput) searchInput.value = ""; 
                 
+                updateSearchPlaceholder();
                 populateTypeDropdown();
                 renderCatalogueGrid();
                 saveSettings();
@@ -658,15 +660,13 @@ function createCatalogueDialog() {
         marker.id = "ikTooltipObserver";
         document.body.appendChild(marker);
 
-        // Watch the DOM for changes to the wz_tooltip container
         const observer = new MutationObserver(() => {
             const wz = document.getElementById("WzTtDiV");
             
-            // Check if tooltip is currently visible, we have an active item, and our button isn't there
             if (wz && wz.style.visibility === "visible" && activeTooltipItem && !document.getElementById("ikCatCopyBtn")) {
                 const popupBody = document.getElementById("WzBoDyI");
 
-            if (popupBody) {
+                if (popupBody) {
                     const middleSection = popupBody.querySelector(".m");
                     const targetContainer = middleSection || popupBody;
 
@@ -698,11 +698,9 @@ function createCatalogueDialog() {
                     btnContainer.appendChild(btn);
                     targetContainer.appendChild(btnContainer);
                 }
-
             }
         });
 
-        // CRITICAL: We must watch for attribute modifications because wz_tooltip toggles CSS visibility
         observer.observe(document.body, { 
             childList: true, 
             subtree: true, 
@@ -710,7 +708,6 @@ function createCatalogueDialog() {
             attributeFilter: ["style"] 
         });
 
-        // Close the tooltip if the user clicks anywhere else on the screen
         document.addEventListener("click", (e) => {
             const wz = document.getElementById("WzTtDiV");
             if (wz && activeTooltipItem && !wz.contains(e.target)) {
@@ -720,11 +717,9 @@ function createCatalogueDialog() {
     }
 
     function closeActiveTooltip() {
-        // wz_tooltip's native global hide function
         if (typeof window.tt_Hide === "function") {
             window.tt_Hide();
         } else {
-            // Fallback manual hide
             const wz = document.getElementById("WzTtDiV");
             if (wz) wz.style.visibility = "hidden";
         }
@@ -751,7 +746,7 @@ function createCatalogueDialog() {
         if (!resizeBound) {
             resizeBound = true;
             window.addEventListener("resize", () => {
-                if ($catalogue &&$catalogue.dialog("isOpen")) {
+                if ($catalogue && $catalogue.dialog("isOpen")) {
                     clampCatalogue();
                     saveCatalogueGeometry();
                 }
