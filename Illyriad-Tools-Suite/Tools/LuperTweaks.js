@@ -101,20 +101,20 @@
                 --ik-theme-border: #333537;
 
                 /* ======================================= Text Colors ======================================= */
-                --ik-theme-text: #e3e3e3;
-                --ik-theme-special-text1: #e5b420;
-                --ik-theme-special-text2: #f00;
-                --ik-theme-special-text3: #e54e20;
-                --ik-theme-special-text4: #ea882e; 
-                --ik-theme-special-text5: #e54e20;
-                --ik-theme-special-text6: #ea882e;
-                --ik-theme-special-text7: #2d2e30;
-                --ik-theme-special-text8: #1e1f20;
-                --ik-theme-special-text9: #434343;
-                --ik-theme-health-bar: #f00;
-                --ik-theme-xp-bar: #f26723;
-                --ik-theme-link: #ea882e;
-                --ik-theme-link-hover: #e54e20;
+                --ik-theme-text: #e3e3e3;           /* Default text color */
+                --ik-theme-special-text1: #e5b420;  /* Self Name color */
+                --ik-theme-special-text2: #f00;     /* System Name color */
+                --ik-theme-special-text3: #e54e20;  /*  */
+                --ik-theme-special-text4: #ea882e;  /*  */ 
+                --ik-theme-special-text5: #e54e20;  /*  */
+                --ik-theme-special-text6: #ea882e;  /*  */
+                --ik-theme-special-text7: #2d2e30;  /*  */
+                --ik-theme-special-text8: #1e1f20;  /*  */
+                --ik-theme-special-text9: #434343;  /*  */
+                --ik-theme-health-bar: #d0110e;        /*  */
+                --ik-theme-xp-bar: #f26723;         /*  */
+                --ik-theme-link: #ea882e;           /*  */
+                --ik-theme-link-hover: #e54e20;     /*  */
 
                 /* =================================== Background Texture Images ============================= */
                 --ik-theme-texture: url("https://i.imgur.com/rcUBS5t.jpeg");
@@ -236,14 +236,21 @@
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Medal Character Title ^ */
             body.ik-dark-mode div.skillBar,
             body.ik-dark-mode div [style*="background-color:#860008"],
-            body.ik-dark-mode div [style*="background-color:##d3b994"],
+            body.ik-dark-mode div [style*="background-color:#d3b994"],
+            body.ik-dark-mode [data-type="1"],
+            body.ik-dark-mode [data-type="2"],
+            body.ik-dark-mode [data-type="3"],
             body.ik-dark-mode form.odd {
                 background-color: var(--ik-theme-alt-bg) !important;
-            } /* Skill, Health, Level, Header Background */
-            body.ik-dark-mode div [style*="background-color:#a37342"] {
+            } /* Skill, Health, Level, Equipment, Header Background */
+            body.ik-dark-mode div [style*="background-color:#a37342"],
+            body.ik-dark-mode div.skillBarFill {
                 background-color: var(--ik-theme-xp-bar) !important;
             } /* Skill and Level Bar Color */
-            body.ik-dark-mode div [style*="background-color:#004B00"] {
+            body.ik-dark-mode div [style*="background-color:#950b09"] {
+                background-color: var(--ik-theme-health-bar) !important;
+            } /* Health Bar Color */
+            body.ik-dark-mode div [style*="color: #004B00"] {
                 color: var(--ik-theme-special-text3) !important;
             } /* Max Level Text */
             /* ----------------------------------------------------------------------------------------------------------------------------------------- ^ Commander Header, Skill Bars, and Equipment ^ */
