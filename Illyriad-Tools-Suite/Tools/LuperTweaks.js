@@ -37,7 +37,8 @@
     let resizeBound = false;
 
     let settings = {
-        darkMode: false
+        darkMode: false,
+        sovHighlight: false
     };
 
     // =========================================================================
@@ -57,25 +58,44 @@
         });
     }
 
-    /*
-    function highlightTotemColumn() {
-        if (!document.body.classList.contains("ik-dark-mode")) return;
+    function SovImbalanceCheck() {
+        // Runs independently of dark mode based on settings.sovHighlight
+        const accordions = document.querySelectorAll("#sovAccordion h3");
 
-        const tables = document.querySelectorAll("#MainContentDiv table");
-        tables.forEach(table => {
-            const headerText = table.textContent || "";
-            // Verify this is the Regional Bonuses table
-            if (headerText.includes("Square (Combat Type)") || headerText.includes("Totem")) {
-                const cells = table.querySelectorAll("td");
-                cells.forEach(cell => {
-                    // Totem cells uniquely contain percentage-based regional bonuses
-                    if (cell.textContent.includes("%")) {
-                        cell.style.setProperty("background-color", "var(--ik-theme-alt-bg)", "important");
+        if (!settings.sovHighlight) {
+            // If disabled, clear any existing highlights
+            accordions.forEach(h3 => {
+                const parentA = h3.querySelector("a");
+                if (parentA) parentA.style.removeProperty("background-color");
+            });
+            return;
+        }
+
+        const romanMap = { "I": 1, "II": 2, "III": 3, "IV": 4, "V": 5 };
+
+        function parseRoman(text) {
+            const match = text.match(/\b(I{1,3}|IV|V|IIII)\b/);
+            if (!match) return 0;
+            return romanMap[match[0]] || 0;
+        }
+
+        accordions.forEach(h3 => {
+            const spans = h3.querySelectorAll("a > span, a span");
+            if (spans.length >= 2) {
+                const firstVal = parseRoman(spans[0].textContent);
+                const secondVal = parseRoman(spans[1].textContent);
+                const parentA = h3.querySelector("a");
+
+                if (parentA) {
+                    if (secondVal > 0 && secondVal < firstVal) {
+                        parentA.style.setProperty("background-color", "var(--ik-theme-warning-highlight)", "important");
+                    } else {
+                        parentA.style.removeProperty("background-color");
                     }
-                });
+                }
             }
         });
-    }*/
+    }
     
 
     // =========================================================================
@@ -101,20 +121,21 @@
                 --ik-theme-border: #333537;
 
                 /* ======================================= Text Colors ======================================= */
-                --ik-theme-text: #e3e3e3;           /* Default text color */
-                --ik-theme-special-text1: #e5b420;  /* Self Name color */
-                --ik-theme-special-text2: #f00;     /* System Name color */
-                --ik-theme-special-text3: #e54e20;  /*  */
-                --ik-theme-special-text4: #ea882e;  /*  */ 
-                --ik-theme-special-text5: #e54e20;  /*  */
-                --ik-theme-special-text6: #ea882e;  /*  */
-                --ik-theme-special-text7: #2d2e30;  /*  */
-                --ik-theme-special-text8: #1e1f20;  /*  */
-                --ik-theme-special-text9: #434343;  /*  */
-                --ik-theme-health-bar: #d0110e;        /*  */
-                --ik-theme-xp-bar: #f26723;         /*  */
-                --ik-theme-link: #ea882e;           /*  */
-                --ik-theme-link-hover: #e54e20;     /*  */
+                --ik-theme-text: #e3e3e3;               /* Default text color */
+                --ik-theme-special-text1: #e5b420;      /* Self Name color */
+                --ik-theme-special-text2: #f00;         /* System Name color */
+                --ik-theme-special-text3: #e54e20;      /*  */
+                --ik-theme-special-text4: #ea882e;      /*  */ 
+                --ik-theme-special-text5: #e54e20;      /*  */
+                --ik-theme-special-text6: #ea882e;      /*  */
+                --ik-theme-special-text7: #2d2e30;      /*  */
+                --ik-theme-special-text8: #1e1f20;      /*  */
+                --ik-theme-special-text9: #434343;      /*  */
+                --ik-theme-health-bar: #d0110e;         /*  */
+                --ik-theme-xp-bar: #f26723;             /*  */
+                --ik-theme-link: #ea882e;               /*  */
+                --ik-theme-link-hover: #e54e20;         /*  */
+                --ik-theme-warning-highlight: ff000042  /*  */
 
                 /* =================================== Background Texture Images ============================= */
                 --ik-theme-texture: url("https://i.imgur.com/rcUBS5t.jpeg");
@@ -601,11 +622,20 @@
                         <span>Enable Global Dark Mode</span>
                     </label>
                 </div>
-                <div class="iklt-footer">LuperTweaks v1.9</div>
+                <div class="iklt-section">
+                    <div class="iklt-section-title">Sovereignty Helper</div>
+                    <label class="iklt-option-row">
+                        <input type="checkbox" id="ikltSovCheckbox" />
+                        <span>Highlight Sov Level Imbalance</span>
+                    </label>
+                </div>
+                <div class="iklt-footer">LuperTweaks v2.0</div>
             </div>
         `;
         document.body.appendChild(content);
+
         content.querySelector("#ikltDarkCheckbox").addEventListener("change", saveSettings);
+        content.querySelector("#ikltSovCheckbox").addEventListener("change", saveSettings);
     }
 
     function saveTweaksGeometry() {
@@ -671,7 +701,7 @@
         // Start dynamic value scanner loop for zero-value city spans
         setInterval(() => {
             highlightZeroCityValues();
-            /* highlightTotemColumn(); */
+            SovImbalanceCheck();
         } , 1000);
 
         if (!resizeBound) {
