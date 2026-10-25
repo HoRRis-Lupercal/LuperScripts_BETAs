@@ -236,14 +236,14 @@
             body.ik-dark-mode div.skillBar,
             body.ik-dark-mode div [style*="background-color: #860008"],
             body.ik-dark-mode div [style*="background-color: ##d3b994"],
-            body.ik-dark-mode form.odd, {
+            body.ik-dark-mode form.odd {
                 background-color: var(--ik-theme-alt-bg) !important;
             } /* Skill, Health, Level, Header Background */
-            body.ik-dark-mode div [style*="background-color: #a37342"], {
+            body.ik-dark-mode div [style*="background-color: #a37342"] {
                 background-color: var(--ik-theme-xp-bar) !important;
             } /* Skill and Level Bar Color */
             body.ik-dark-mode div [style*="background-color: #004B00"] {
-                background-color: var(--ik-theme-special-text3) !important;
+                color: var(--ik-theme-special-text3) !important;
             } /* Max Level Text */
             /* ----------------------------------------------------------------------------------------------------------------------------------------- ^ Commander Header, Skill Bars, and Equipment ^ */
             body.ik-dark-mode div.b-page { 
