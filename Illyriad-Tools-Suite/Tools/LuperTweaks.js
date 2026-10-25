@@ -365,7 +365,6 @@
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div.odd { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv table.generic tbody tr td div.odd { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode colgroup.odd { background-color: var(--ik-theme-alt-bg) !important; }
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info table.generic.middle tbody tr td:nth-of-type(5) { background-color: var(--ik-theme-alt-bg) !important; } /* Regional Bonuses 5th Column Styling */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div table.generic.middle.oddeven tbody tr th { background-color: var(--ik-theme-alt-bg) !important; } /* Tournament Rankings Heading Styling */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div table.generic.middle.oddeven tbody tr td:nth-of-type(2) { background-color: var(--ik-theme-alt-bg) !important; } /* Tournament Standings Styling */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#recentEvents.center.evenodd div.combat:nth-child(2n+1) { background-color: var(--ik-theme-alt-bg) !important; } /* Recent Combats Odd Styling */
@@ -433,6 +432,17 @@
                 color: var(--ik-theme-special-text6) !important;
             }
 
+
+
+
+            body.ik-dark-mode #MainContentDiv table:has(tr:first-child > th:nth-child(4):last-child) td:nth-of-type(5) {
+                background-color: var(--ik-theme-alt-bg) !important;
+            } /* Tournament Totem Column Color */
+
+
+
+            
+
             /* 7. Diplomatic & System Popups (Highest Precedence) */
             body.ik-dark-mode .indOwn, body.ik-dark-mode .indOwn a[href],
             body.ik-dark-mode .indHostile, body.ik-dark-mode .indHostile a[href],
@@ -477,6 +487,8 @@
             body.ik-dark-mode span.ui-widget-header.ui-corner-top:not([id*="Notes"] *):not(.name):not(.ui-dialog-title) {
                 color: var(--ik-theme-special-text4) !important; 
             }
+
+            
         `;
     }
 
