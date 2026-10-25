@@ -75,6 +75,7 @@
                 --ik-theme-bg: #131314;
                 --ik-theme-content-bg: #151516;
                 --ik-theme-alt-bg: #202021;
+                --ik-theme-light-alt-bg: #515252;
                 --ik-theme-input-bg: #515252;
                 --ik-theme-border: #333537;
 
@@ -209,6 +210,9 @@
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div div#radio.center.ui-buttonset { background-image: var(--ik-theme-header-texture) !important; } /* Relocation button header */
             body.ik-dark-mode .ui-state-default { background-image: var(--ik-theme-header-texture) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder > div:first-of-type { background-image: var(--ik-theme-header-texture) !important; } /* Medal headers */
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder div#medalCost div { background-image: var(--ik-theme-header-texture) !important; } /* Alliance Medal headers */
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#AwardMedalHTML div.smallBorder div form div div { background-color: var(--ik-theme-alt-bg) !important; } /* Award Medal Player List Even */
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#AwardMedalHTML div.smallBorder div form div div div.odd { background-color: var(--ik-theme-light-alt-bg) !important; } /* Award Medal Player List Even */
             body.ik-dark-mode .ui-state-default a { color: var(--ik-theme-special-text1) !important; }
             body.ik-dark-mode .ui-state-active a { color: var(--ik-theme-special-text2) !important; }
             body.ik-dark-mode .ui-widget-content:not([id="ikNotesPanel"]):not([id="ikNotesPanel"] *) {
