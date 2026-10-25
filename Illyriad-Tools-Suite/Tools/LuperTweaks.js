@@ -60,17 +60,23 @@
     function highlightTotemColumn() {
         if (!document.body.classList.contains("ik-dark-mode")) return;
 
-        // Find tables inside MainContentDiv
+        // Find all generic tables inside MainContentDiv
         const tables = document.querySelectorAll("#MainContentDiv table");
         tables.forEach(table => {
-            const firstHeader = table.querySelector("th");
-            // Check if this table belongs to Regional Bonuses by its header text
-            if (firstHeader && firstHeader.textContent.includes("Square")) {
+            // Check if this table contains a "Totem" or "Square (Combat Type)" header
+            const headerText = table.textContent || "";
+            if (headerText.includes("Square (Combat Type)") || headerText.includes("Totem")) {
+                // Target all data cells in the table and find the Totem column cells
                 const rows = table.querySelectorAll("tr");
                 rows.forEach(row => {
-                    const cell = row.querySelector("td:nth-of-type(5)");
-                    if (cell) {
-                        cell.style.setProperty("background-color", "var(--ik-theme-alt-bg)", "important");
+                    // Grab all cells in this row
+                    const cells = row.querySelectorAll("td");
+                    // In Regional Bonuses, the Totem column is consistently the last/5th data cell
+                    if (cells.length >= 4) {
+                        const totemCell = cells[cells.length - 1]; // Totem is always the final column here
+                        if (totemCell) {
+                            totemCell.style.setProperty("background-color", "var(--ik-theme-alt-bg)", "important");
+                        }
                     }
                 });
             }
