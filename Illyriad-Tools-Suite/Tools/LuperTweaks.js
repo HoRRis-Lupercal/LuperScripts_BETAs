@@ -63,16 +63,13 @@
         const tables = document.querySelectorAll("#MainContentDiv table");
         tables.forEach(table => {
             const headerText = table.textContent || "";
+            // Verify this is the Regional Bonuses table
             if (headerText.includes("Square (Combat Type)") || headerText.includes("Totem")) {
-                const rows = table.querySelectorAll("tr");
-                rows.forEach(row => {
-                    const cells = row.querySelectorAll("td");
-                    // Totem is consistently the 4th column (index 3)
-                    if (cells.length >= 4) {
-                        const totemCell = cells[4]; 
-                        if (totemCell) {
-                            totemCell.style.setProperty("background-color", "var(--ik-theme-alt-bg)", "important");
-                        }
+                const cells = table.querySelectorAll("td");
+                cells.forEach(cell => {
+                    // Totem cells uniquely contain percentage-based regional bonuses
+                    if (cell.textContent.includes("%")) {
+                        cell.style.setProperty("background-color", "var(--ik-theme-alt-bg)", "important");
                     }
                 });
             }
