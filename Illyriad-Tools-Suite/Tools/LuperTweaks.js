@@ -128,11 +128,11 @@
                 --ik-theme-special-text1: #e5b420;      /* Self Name color */
                 --ik-theme-special-text2: #f00;         /* System Name color */
                 --ik-theme-special-text3: #e54e20;      /*  */
-                --ik-theme-special-text4: #ea882e;      /*  */ 
-                --ik-theme-special-text5: #e54e20;      /*  */
+                --ik-theme-special-text4: #ea882e;      /* Main Headers */ 
+                --ik-theme-special-text5: #e54e20;      /* Selected Tabs */
                 --ik-theme-special-text6: #ea882e;      /*  */
-                --ik-theme-special-text7: #2d2e30;      /*  */
-                --ik-theme-special-text8: #1e1f20;      /*  */
+                --ik-theme-special-text7: #2d2e30;      /* City Menu Selected Drop Down Color */
+                --ik-theme-special-text8: #1e1f20;      /* City Menu Drop Down Color */
                 --ik-theme-special-text9: #434343;      /*  */
                 --ik-theme-health-bar: #d0110e;         /*  */
                 --ik-theme-xp-bar: #f26723;             /*  */
@@ -393,7 +393,10 @@
             background-color: var(--ik-theme-light-alt-bg) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Award Medal Player List Odd ^ */
             
-            body.ik-dark-mode .ui-state-default a[href], body.ik-dark-mode .ui-state-default a {
+            body.ik-dark-mode .ui-state-default a[href],
+            body.ik-dark-mode .ui-state-default a,
+            body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a,
+            body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a[href] {
                 color: var(--ik-theme-special-text4) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Unselected Header Color ^ */
             
@@ -449,7 +452,7 @@
             body.ik-dark-mode tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#recentEvents.center.evenodd div.combat:nth-child(2n+1),
             body.ik-dark-mode td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#allianceChatTab div.allianceChatHldr div.allianceChat.oddeven div:nth-child(2n) { 
                 background-color: var(--ik-theme-alt-bg) !important;
-            } /* --------------------------------------------------------------------------- PROBABLY BROKEN!!!!!!! ------------------------------------------------------------------------------ ^ Tables & Alternating Rows ^ */
+            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Tables & Alternating Rows ^ */
             
             body.ik-dark-mode .ui-dialog .ui-dialog-buttonpane button,
             body.ik-dark-mode button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only {
@@ -462,7 +465,7 @@
                 background-image: var(--ik-theme-button-short-on) !important;
                 background-repeat: no-repeat !important;
                 background-size: 100% 100% !important;
-            } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- Buttons */
+            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Buttons ^ */
             
             body.ik-dark-mode div.ui-state-hover, 
             body.ik-dark-mode a#ui-active-menuitem, 
@@ -473,7 +476,7 @@
             body.ik-dark-mode a.jstree-hovered { 
                 background-color: var(--ik-theme-alt-bg) !important;
                 background-image: none !important;
-            } /* ----------------------------------------------------------------------------------------------------------------------------------------------- City and trade list hover background */
+            } /* ----------------------------------------------------------------------------------------------------------------------------------------------- ^ City and trade list hover background ^ */
             
             body.ik-dark-mode .topBar {
                 background-color: var(--ik-theme-content-bg) !important;
@@ -483,31 +486,21 @@
             body.ik-dark-mode span.ui-dialog-title:not([id*="Notes"] *) { 
                 background-color: var(--ik-theme-content-bg) !important; 
                 color: var(--ik-theme-special-text3) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ Main page background */
+            } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main page background ^ */
             
             body.ik-dark-mode div.flotr-legend { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
 
-            /* --------------------------------------------------------------------------------------------------------------------------------------------------------- Legends and Charts */
-
-
-            
-            /* ================================================================================================================================================================================
-            
-            body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a,
-            body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a[href] {
-                color: var(--ik-theme-special-text4) !important;
-            }
+            /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Legends and Charts ^ */
 
             body.ik-dark-mode #dTownTD *, body.ik-dark-mode .dTownTD *, body.ik-dark-mode #citiesMenu { background-color: var(--ik-theme-special-text8) !important; }
-            
             body.ik-dark-mode .cityMenu.selected { background-color: var(--ik-theme-special-text7) !important; }
-            
-            ================================================================================================================================================================================= */
+ 
+            /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ City Menu Background Color ^ */
 
-            /* ======================================================================================================================================================
-                                                                         DARK MODE IMAGE HANDLING
-            ========================================================================================================================================================= */
+            /* ============================================================================================================================================================================================
+                                                                                         DARK MODE IMAGE HANDLING
+            =============================================================================================================================================================================================== */
 
             body.ik-dark-mode .headlinks a.selected,
             body.ik-dark-mode .smallBorder,
@@ -515,7 +508,7 @@
             body.ik-dark-mode .ui-state-active {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
-            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------- ^ Paper Background ^ */
+            } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Paper Background ^ */
             body.ik-dark-mode .ui-widget-header { 
                 background-image: var(--ik-theme-header-texture) !important;
                 background-repeat: repeat !important;
@@ -523,7 +516,7 @@
             body.ik-dark-mode #contentTD {
                 background-image: var(--ik-theme-header-texture) !important;
                 background-color: var(--ik-theme-content-bg) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ Dark Header background */
+            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Dark Header background ^ */
             body.ik-dark-mode .ui-dialog .ui-dialog-titlebar {
                 background-image: var(--ik-theme-headerO-texture) !important;
                 background-repeat: repeat !important;
@@ -531,7 +524,7 @@
             body.ik-dark-mode .headlinks,
             body.ik-dark-mode .headLinks {
                 background-image: var(--ik-theme-headerO-texture) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ Light header background */
+            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Light header background ^ */
             body.ik-dark-mode div.iconBox.ib1 a img.icon { content: var(--ik-theme-button-world-off) !important; }
             body.ik-dark-mode div.iconBox.ib1 a:hover img.icon { content: var(--ik-theme-button-world-on) !important; }
             body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-region-off) !important; }
@@ -544,7 +537,7 @@
             body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-stats-on) !important; }
             body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-herald-off) !important; }
             body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-herald-on) !important; }
-            /* ---------------------------------------------------------------------------------------------------------------------------- ^ Top Row World Buttons ^ */
+            /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row World Buttons ^ */
             body.ik-dark-mode div.iconBox.ib2 a img.icon { content: var(--ik-theme-button-city-off) !important; }
             body.ik-dark-mode div.iconBox.ib2 a:hover img.icon { content: var(--ik-theme-button-city-on) !important; }
             body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-castle-off) !important; }
@@ -557,23 +550,23 @@
             body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-sov-on) !important; }
             body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-inv-off) !important; }
             body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-inv-on) !important; }
-            /* ----------------------------------------------------------------------------------------------------------------------------- ^ Top Row City Buttons ^ */
+            /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row City Buttons ^ */
             body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] { content: var(--ik-theme-char-ring2-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] { content: var(--ik-theme-char-ring2-on) !important; }
-            /* ------------------------------------------------------------------------------------------------------------------------- ^ Top Row Character Buttons ^ */       
+            /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Character Buttons ^ */       
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.t { background-image: var(--ik-theme-popup-top) !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m { background-image: var(--ik-theme-popup-mid) !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.b { background-image: var(--ik-theme-popup-bot) !important; }
-            /* -------------------------------------------------------------------------------------------------------------------------------------- ^ Scroll Popup ^ */
+            /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Scroll Popup ^ */
             body.ik-dark-mode .ui-widget-header.ui-progressbar-value {
                 background-image: var(--ik-theme-headerP-texture) !important;
                 background-repeat: repeat !important;
             }
-            /* -------------------------------------------------------------------------------------------------------------- ^ City Research and Build Progress Bar ^ */
+            /* -------------------------------------------------------------------------------------------------------------------------------------------------------- ^ City Research and Build Progress Bar ^ */
             
-            /* ======================================================================================================================================================
-                                                                               DARK MODE DEFAULT OVERRIDES
-            ========================================================================================================================================================= */
+            /* ==================================================================================================================================================================================================
+                                                                                                       DARK MODE DEFAULT OVERRIDES
+            ===================================================================================================================================================================================================== */
                        
             body.ik-dark-mode .ui-tabs-selected,
             body.ik-dark-mode .ui-tabs-active,
@@ -584,7 +577,7 @@
             body.ik-dark-mode .ui-tabs-nav li.ui-tabs-selected a,
             body.ik-dark-mode .ui-tabs-nav li.ui-tabs-selected a[href] {
                 color: var(--ik-theme-special-text5) !important;
-            } /* ---------------------------------------------------------------------------------- Selected Tabs Override ------------------ */
+            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Selected Tabs Override ^ */
             body.ik-dark-mode #resbar .resPos, body.ik-dark-mode #resbar span[class*="pos"],
             body.ik-dark-mode #resbar [style*="color: green"],
             body.ik-dark-mode #resbar [style*="color:green"] {
@@ -604,38 +597,38 @@
             body.ik-dark-mode div#WzTtDiV [style*="color:#004B00"],
             body.ik-dark-mode div#WzTtDiV span[style*="004B00"] {
                 color: #55ff55 !important;
-            } /* ---------------------------------------------------------------------------------------------------------------------------- ^ Resbar Stat Colors ^ */                      
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Resbar Stat Colors ^ */                      
             body.ik-dark-mode div#WzTtDiV [style*="color: #860008"],
             body.ik-dark-mode div#WzTtDiV [style*="color:#860008"],
             body.ik-dark-mode div#WzTtDiV span[style*="860008"] {
                 color: #ff5555 !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------ ^ Item Popup Stat Colors ^ */
+            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Item Popup Stat Colors ^ */
             body.ik-dark-mode .indOwn, body.ik-dark-mode .indOwn a[href],
             body.ik-dark-mode .indHostile, body.ik-dark-mode .indHostile a[href],
             body.ik-dark-mode .indFriendly, body.ik-dark-mode .indFriendly a[href],
             body.ik-dark-mode .indCommunication, body.ik-dark-mode .indCommunication a[href],
             body.ik-dark-mode [class*="ind"], body.ik-dark-mode [class*="ind"] a[href] {
                 color: var(--ik-theme-special-text9) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------ ^ 7. Diplomatic & System Popups ^ */
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Diplomatic & System Popups ^ */
             body.ik-dark-mode div.ui-slider-range.ui-widget-header.ui-slider-range-min { 
                 background-image: var(--ik-theme-headerP-texture) !important;
                 background-repeat: repeat !important;
-            } /* --------------------------------------------------------------------------------------------------------------------- ^ Slider Background Override ^ */
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Slider Background Override ^ */
             body.ik-dark-mode .selected,
             body.ik-dark-mode a.selected,
             body.ik-dark-mode a:link.selected,
             body.ik-dark-mode a:visited.selected,
             body.ik-dark-mode span.selected {
                 color: var(--ik-theme-special-text5) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------ ^ Selected State Color Override ^ */
+            } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Selected State Color Override ^ */
             body.ik-dark-mode span.ikcat-dialog-tab {
                 color: var(--ik-theme-special-text4) !important;
-            } /* ----------------------------------------------------------------------------------------------------------- ^ Inactive LuperLists / Catalogue Tabs ^ */
+            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Inactive LuperLists / Catalogue Tabs ^ */
             body.ik-dark-mode span.ikcat-dialog-tab.active,
             body.ik-dark-mode span.ikcat-dialog-tab.data-tab,
             body.ik-dark-mode span.ikcat-dialog-tab.active.data-tab {
                 color: var(--ik-theme-special-text5) !important;
-            } /* -------------------------------------------------------------------------------------------------- ^ Active / Selected LuperLists / Catalogue Tabs ^ */
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------ ^ Active / Selected LuperLists / Catalogue Tabs ^ */
    
         `;
     }
