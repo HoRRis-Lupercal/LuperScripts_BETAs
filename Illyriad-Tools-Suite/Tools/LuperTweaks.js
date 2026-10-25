@@ -482,34 +482,25 @@
             
             /* ================================================================================================================================================================================
 
+            
+            body.ik-dark-mode .ui-widget-header { background-image: var(--ik-theme-header-texture) !important; background-repeat: repeat !important; }
+            body.ik-dark-mode #contentTD { background-image: var(--ik-theme-header-texture) !important; background-color: var(--ik-theme-content-bg) !important; }
+            
+
+            body.ik-dark-mode .ui-dialog .ui-dialog-titlebar { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; }
+            body.ik-dark-mode .headlinks, body.ik-dark-mode .headLinks { background-image: var(--ik-theme-headerO-texture) !important; }
+
+            
             body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a,
             body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a[href] {
                 color: var(--ik-theme-special-text4) !important;
             }
-            
-            body.ik-dark-mode .ui-widget-header { background-image: var(--ik-theme-header-texture) !important; background-repeat: repeat !important; }
-            
-            body.ik-dark-mode .ui-dialog .ui-dialog-titlebar { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; }
-            
-            body.ik-dark-mode .ui-state-active { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
-            
-            body.ik-dark-mode .ui-widget-header.ui-progressbar-value { background-image: var(--ik-theme-headerP-texture) !important; background-repeat: repeat !important; }
-            
-            body.ik-dark-mode .headlinks, body.ik-dark-mode .headLinks { background-image: var(--ik-theme-headerO-texture) !important; }
-            
-            body.ik-dark-mode .headlinks a.selected, body.ik-dark-mode .headLinks a.selected { background-image: var(--ik-theme-texture) !important; }
-
 
             body.ik-dark-mode #dTownTD *, body.ik-dark-mode .dTownTD *, body.ik-dark-mode #citiesMenu { background-color: var(--ik-theme-special-text8) !important; }
             
             body.ik-dark-mode .cityMenu.selected { background-color: var(--ik-theme-special-text7) !important; }
             
-            body.ik-dark-mode #contentTD { background-image: var(--ik-theme-header-texture) !important; background-color: var(--ik-theme-content-bg) !important; }
-            
             body.ik-dark-mode .topBar { background-color: var(--ik-theme-content-bg) !important; color: var(--ik-theme-text) !important; }
-
-
-            body.ik-dark-mode .smallBorder, body.ik-dark-mode #DockedFriends { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
 
             body.ik-dark-mode .ui-dialog .ui-dialog-title:not([id*="Notes"] *),
             body.ik-dark-mode span.ui-dialog-title:not([id*="Notes"] *) { 
@@ -519,6 +510,56 @@
 
             ================================================================================================================================================================================= */
 
+            /* ======================================================================================================================================================
+                                                                         DARK MODE IMAGE HANDLING
+            ========================================================================================================================================================= */
+
+            body.ik-dark-mode .headlinks a.selected,
+            body.ik-dark-mode .smallBorder,
+            body.ik-dark-mode #DockedFriends,
+            body.ik-dark-mode .ui-state-active {
+                background-image: var(--ik-theme-texture) !important;
+                background-repeat: repeat !important;
+            } /* ------------------------------------------------------------------------------------------------------------------------------- ^ Paper Background ^ */
+            body.ik-dark-mode div.iconBox.ib1 a img.icon { content: var(--ik-theme-button-world-off) !important; }
+            body.ik-dark-mode div.iconBox.ib1 a:hover img.icon { content: var(--ik-theme-button-world-on) !important; }
+            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-region-off) !important; }
+            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-region-on) !important; }
+            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-quest-off) !important; }
+            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-quest-on) !important; }
+            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon3 { content: var(--ik-theme-button-tourney-off) !important; }
+            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-button-tourney-on) !important; }
+            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-stats-off) !important; }
+            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-stats-on) !important; }
+            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-herald-off) !important; }
+            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-herald-on) !important; }
+            /* ---------------------------------------------------------------------------------------------------------------------------- ^ Top Row World Buttons ^ */
+            body.ik-dark-mode div.iconBox.ib2 a img.icon { content: var(--ik-theme-button-city-off) !important; }
+            body.ik-dark-mode div.iconBox.ib2 a:hover img.icon { content: var(--ik-theme-button-city-on) !important; }
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-castle-off) !important; }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-castle-on) !important; }
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-res-off) !important; }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-res-on) !important; }
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon3 { content: var(--ik-theme-button-prod-off) !important; }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-button-prod-on) !important; }
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-sov-off) !important; }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-sov-on) !important; }
+            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-inv-off) !important; }
+            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-inv-on) !important; }
+            /* ----------------------------------------------------------------------------------------------------------------------------- ^ Top Row City Buttons ^ */
+            body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] { content: var(--ik-theme-char-ring2-off) !important; }
+            body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] { content: var(--ik-theme-char-ring2-on) !important; }
+            /* ------------------------------------------------------------------------------------------------------------------------- ^ Top Row Character Buttons ^ */       
+            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.t { background-image: var(--ik-theme-popup-top) !important; }
+            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m { background-image: var(--ik-theme-popup-mid) !important; }
+            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.b { background-image: var(--ik-theme-popup-bot) !important; }
+            /* -------------------------------------------------------------------------------------------------------------------------------------- ^ Scroll Popup ^ */
+            body.ik-dark-mode .ui-widget-header.ui-progressbar-value {
+                background-image: var(--ik-theme-headerP-texture) !important;
+                background-repeat: repeat !important;
+            }
+            /* -------------------------------------------------------------------------------------------------------------- ^ City Research and Build Progress Bar ^ */
+            
             /* ======================================================================================================================================================
                                                                                DARK MODE DEFAULT OVERRIDES
             ========================================================================================================================================================= */
@@ -584,44 +625,6 @@
             body.ik-dark-mode span.ikcat-dialog-tab.active.data-tab {
                 color: var(--ik-theme-special-text5) !important;
             } /* -------------------------------------------------------------------------------------------------- ^ Active / Selected LuperLists / Catalogue Tabs ^ */
-            
-            /* ======================================================================================================================================================
-                                                                         DARK MODE IMAGE HANDLING
-            ========================================================================================================================================================= */
-            
-            body.ik-dark-mode div.iconBox.ib1 a img.icon { content: var(--ik-theme-button-world-off) !important; }
-            body.ik-dark-mode div.iconBox.ib1 a:hover img.icon { content: var(--ik-theme-button-world-on) !important; }
-            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-region-off) !important; }
-            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-region-on) !important; }
-            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-quest-off) !important; }
-            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-quest-on) !important; }
-            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon3 { content: var(--ik-theme-button-tourney-off) !important; }
-            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-button-tourney-on) !important; }
-            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-stats-off) !important; }
-            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-stats-on) !important; }
-            body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-herald-off) !important; }
-            body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-herald-on) !important; }
-            /* ---------------------------------------------------------------------------------------------------------------------------- ^ Top Row World Buttons ^ */
-            body.ik-dark-mode div.iconBox.ib2 a img.icon { content: var(--ik-theme-button-city-off) !important; }
-            body.ik-dark-mode div.iconBox.ib2 a:hover img.icon { content: var(--ik-theme-button-city-on) !important; }
-            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-castle-off) !important; }
-            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-castle-on) !important; }
-            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-res-off) !important; }
-            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-res-on) !important; }
-            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon3 { content: var(--ik-theme-button-prod-off) !important; }
-            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-button-prod-on) !important; }
-            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-sov-off) !important; }
-            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-sov-on) !important; }
-            body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-inv-off) !important; }
-            body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-inv-on) !important; }
-            /* ----------------------------------------------------------------------------------------------------------------------------- ^ Top Row City Buttons ^ */
-            body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] { content: var(--ik-theme-char-ring2-off) !important; }
-            body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] { content: var(--ik-theme-char-ring2-on) !important; }
-            /* ------------------------------------------------------------------------------------------------------------------------- ^ Top Row Character Buttons ^ */       
-            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.t { background-image: var(--ik-theme-popup-top) !important; }
-            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m { background-image: var(--ik-theme-popup-mid) !important; }
-            body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.b { background-image: var(--ik-theme-popup-bot) !important; }
-            /* -------------------------------------------------------------------------------------------------------------------------------------- ^ Scroll Popup ^ */
    
         `;
     }
