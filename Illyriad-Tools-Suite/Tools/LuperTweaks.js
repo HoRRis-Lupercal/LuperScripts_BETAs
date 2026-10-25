@@ -110,6 +110,9 @@
         if (!style) {
             style = document.createElement("style");
             style.id = "ikLuperTweaksStyles";
+            document.head.appendChild(style); // Moves/appends to bottom of head
+        } else {
+            // Re-append to make sure it stays at the bottom of <head>
             document.head.appendChild(style);
         }
         style.textContent = `
