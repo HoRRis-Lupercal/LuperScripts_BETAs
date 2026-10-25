@@ -41,7 +41,7 @@
     };
 
     // =========================================================================
-    // DYNAMIC VALUE HIGHLIGHTER (Zero-Value City Menu Spans)
+    //  REQUIRED HELPER FUNCTIONS
     // =========================================================================
 
     function highlightZeroCityValues() {
@@ -56,6 +56,27 @@
             }
         });
     }
+    
+    function highlightTotemColumn() {
+        if (!document.body.classList.contains("ik-dark-mode")) return;
+
+        // Find tables inside MainContentDiv
+        const tables = document.querySelectorAll("#MainContentDiv table");
+        tables.forEach(table => {
+            const firstHeader = table.querySelector("th");
+            // Check if this table belongs to Regional Bonuses by its header text
+            if (firstHeader && firstHeader.textContent.includes("Square")) {
+                const rows = table.querySelectorAll("tr");
+                rows.forEach(row => {
+                    const cell = row.querySelector("td:nth-of-type(5)");
+                    if (cell) {
+                        cell.style.setProperty("background-color", "var(--ik-theme-alt-bg)", "important");
+                    }
+                });
+            }
+        });
+    }
+    
 
     // =========================================================================
     // CSS INJECTION & GLOBAL STYLING
@@ -596,7 +617,10 @@
         if (!createTweaksDialog()) return false;
 
         // Start dynamic value scanner loop for zero-value city spans
-        setInterval(highlightZeroCityValues, 1000);
+        setInterval(() => {
+            highlightZeroCityValues();
+            highlightTotemColumn();
+        } , 1000);
 
         if (!resizeBound) {
             resizeBound = true;
