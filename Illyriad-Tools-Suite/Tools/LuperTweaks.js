@@ -430,8 +430,8 @@
             body.ik-dark-mode table.oddevencols > colgroup > col:nth-child(2n+1) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode #Notifications > div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode .smallBorder, body.ik-dark-mode #DockedFriends { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
-            body.ik-dark-mode .sideTab { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; } 
-            body.ik-dark-mode .sideTab.selected { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
+            body.ik-dark-mode .sideTab, body.ik-dark-mode span.ikcat-dialog-tab { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; color: var(--ik-theme-special-text4) !important; } /* LuperNotes/LuperList Tab Headings */
+            body.ik-dark-mode .sideTab.selected, body.ik-dark-mode span.ikcat-dialog-tab.active { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; } /* LuperNotes/LuperList Selected Tab Headings */
             body.ik-dark-mode div div.content table.generic tbody tr td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#globalChatTab div.globalChatHldr div.globalChat.oddeven div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#allianceChatTab div.allianceChatHldr div.allianceChat.oddeven div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div.odd { background-color: var(--ik-theme-alt-bg) !important; }
@@ -486,7 +486,7 @@
             }
 
             /* 4. Headers & Tabs */
-            body.ik-dark-mode .sideTab, body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
+            body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
             body.ik-dark-mode h3 { color: var(--ik-theme-special-text5) !important; }
