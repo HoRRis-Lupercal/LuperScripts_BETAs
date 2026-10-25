@@ -193,43 +193,64 @@
             }
 
             /* =========================================================================
-               DARK MODE THEME RULES
+               DARK MODE MAIN THEME RULES
                ========================================================================= */
-
-            html body.ik-dark-mode {
+            
+            html body.ik-dark-mode { 
                 background-image: var(--ik-theme-headermain-texture) !important;
                 background-repeat: no-repeat !important;
-            }
-
-            body.ik-dark-mode [style*="font-weight:bold;color:#0000B0"] { color: var(--ik-theme-special-text4) !important; } /* Character Medal Title */
-
-            /* Herald Pages */
-            body.ik-dark-mode div.b-page { color: var(--ik-theme-alt-bg) !important; }
-            body.ik-dark-mode div.headline { color: var(--ik-theme-special-text4) !important; }
-            body.ik-dark-mode div.b-wrap.b-wrap-right { background-image: var(--ik-theme-herald-right) !important; }
-            body.ik-dark-mode div.b-wrap.b-wrap-left { background-image: var(--ik-theme-herald-left) !important; }
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#book.booklet div.b-page.b-page-0.b-p1 div.b-wrap.b-wrap-left { background-image: var(--ik-theme-herald-title) !important; }
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#hidePage { background-image: var(--ik-theme-herald-book) !important; }
-            body.ik-dark-mode #book [style*="color:black"] {
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Top  Header Image ^ */
+            body.ik-dark-mode [style*="font-weight:bold;color:#0000B0"] { 
+                color: var(--ik-theme-special-text4) !important; 
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Medal Character Title ^ */
+            body.ik-dark-mode div.b-page { 
+                background-color: var(--ik-theme-alt-bg) !important; 
+            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Herald Page Drag Colour ^ */
+            body.ik-dark-mode div.headline { 
+                color: var(--ik-theme-special-text4) !important; 
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Herald Article Titles ^ */
+            body.ik-dark-mode #book [style*="color:black"] { 
                 color: var(--ik-theme-special-text4) !important;
-            }
-
-            /* Inputs & Selects */
+            } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Herald Additional Titles ^ */
+            body.ik-dark-mode div.b-wrap.b-wrap-right { 
+                background-image: var(--ik-theme-herald-right) !important; 
+            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Herald Right Page Image ^ */
+            body.ik-dark-mode div.b-wrap.b-wrap-left { 
+                background-image: var(--ik-theme-herald-left) !important; 
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Herald Left Page Image ^ */
+            body.ik-dark-mode div.b-page.b-page-0.b-p1 div.b-wrap.b-wrap-left { 
+                background-image: var(--ik-theme-herald-title) !important; 
+            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Herald Title Page Image ^ */
+            body.ik-dark-mode div#hidePage { 
+                background-image: var(--ik-theme-herald-book) !important; 
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Herald Background Book Image ^ */
             body.ik-dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
             body.ik-dark-mode textarea:not(#ikNotesTextarea),
-            body.ik-dark-mode select {
+            body.ik-dark-mode select { 
                 background-color: var(--ik-theme-input-bg) !important;
                 color: var(--ik-theme-text) !important;
                 border: 1px solid var(--ik-theme-border) !important;
-            }
+            } /* --------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Input Fields and Textboxes ^ */
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div div#radio.center.ui-buttonset { 
+                background-image: var(--ik-theme-header-texture) !important; 
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Relocation Header ^ */
+            body.ik-dark-mode .ui-state-default { 
+                background-image: var(--ik-theme-header-texture) !important;
+            } /* -------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Widget and Popup Background ^ */
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder > div:first-of-type { 
+                background-image: var(--ik-theme-header-texture) !important; 
+            } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Medal Header Image ^ */
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder div#medalCost div {
+                background-image: var(--ik-theme-header-texture) !important; 
+            }  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Alliance Medal headers ^ */
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#AwardMedalHTML div.smallBorder div form div div {
+                background-color: var(--ik-theme-alt-bg) !important;
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Medal Player List Even ^ */
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#AwardMedalHTML div.smallBorder div form div div div.odd { 
+            background-color: var(--ik-theme-light-alt-bg) !important;
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Award Medal Player List Odd ^ */
 
-            /* UI Widgets & Headers */
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div div#radio.center.ui-buttonset { background-image: var(--ik-theme-header-texture) !important; } /* Relocation button header */
-            body.ik-dark-mode .ui-state-default { background-image: var(--ik-theme-header-texture) !important; }
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder > div:first-of-type { background-image: var(--ik-theme-header-texture) !important; } /* Medal headers */
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder div#medalCost div { background-image: var(--ik-theme-header-texture) !important; } /* Alliance Medal headers */
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#AwardMedalHTML div.smallBorder div form div div { background-color: var(--ik-theme-alt-bg) !important; } /* Award Medal Player List Even */
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#AwardMedalHTML div.smallBorder div form div div div.odd { background-color: var(--ik-theme-light-alt-bg) !important; } /* Award Medal Player List Even */
+            /* ============ Need formating below ============ */
             body.ik-dark-mode .ui-state-default a { color: var(--ik-theme-special-text1) !important; }
             body.ik-dark-mode .ui-state-active a { color: var(--ik-theme-special-text2) !important; }
             body.ik-dark-mode .ui-widget-content:not([id="ikNotesPanel"]):not([id="ikNotesPanel"] *) {
