@@ -337,11 +337,11 @@
                 color: var(--ik-theme-text) !important;
             } /* -------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Selected Header Color ^ */
             body.ik-dark-mode .ui-accordion-header h3 a span:not([id*="Notes"] *),
-            body.ik-dark-mode .ui-accordion-header.ui-state-active a,
-            body.ik-dark-mode .ui-accordion-header.ui-state-active a[href],
             body.ik-dark-mode div.accordionCommand h3.ui-accordion-header a table.generic tbody tr td:not([id*="Notes"] *) {
                 color: var(--ik-theme-special-text4) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Accordion Active Tab Headers ^ */
+            body.ik-dark-mode .ui-accordion-header.ui-state-active a,
+            body.ik-dark-mode .ui-accordion-header.ui-state-active a[href],
             body.ik-dark-mode div.accordionCommand h3.ui-accordion-header.ui-state-active a table.generic tbody tr td:not([id*="Notes"] *) {
                 color: var(--ik-theme-special-text5) !important;
             } /* --------------------------------------------------------------------------------------------------------------------------------------------------- ^ Accordion Commander Tab Headers ^ */
