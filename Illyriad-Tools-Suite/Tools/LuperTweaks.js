@@ -269,6 +269,7 @@
                 background-image: var(--ik-theme-texture) !important;
                 color: var(--ik-theme-text) !important;
             } /* -------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Selected Header Color ^ */
+            body.ik-dark-mode .ui-accordion-header h3 a span,
             body.ik-dark-mode .ui-accordion-header.ui-state-active a,
             body.ik-dark-mode .ui-accordion-header.ui-state-active a[href] {
                 color: var(--ik-theme-special-text2) !important;
