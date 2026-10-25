@@ -345,6 +345,18 @@
             body.ik-dark-mode div.accordionCommand h3.ui-accordion-header.ui-state-active a table.generic tbody tr td:not([id*="Notes"] *) {
                 color: var(--ik-theme-special-text5) !important;
             } /* --------------------------------------------------------------------------------------------------------------------------------------------------- ^ Accordion Commander Tab Headers ^ */
+            body.ik-dark-mode .sideTab,
+            body.ik-dark-mode span.ikcat-dialog-tab {
+                background-image: var(--ik-theme-headerO-texture) !important;
+                background-repeat: repeat !important;
+                color: var(--ik-theme-special-text4) !important;
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------ ^  LuperNotes/LuperList Tab Headings ^ */
+            body.ik-dark-mode .sideTab.selected, 
+            body.ik-dark-mode span.ikcat-dialog-tab.active { 
+                background-image: var(--ik-theme-texture) !important; 
+                background-repeat: repeat !important; 
+                color: var(--ik-theme-special-text5) !important; 
+            } /* ---------------------------------------------------------------------------------------------------------------------------------------- ^ LuperNotes/LuperList Selected Tab Headings ^ */
 
             /* ==================== Format Below ================================ */
             /* ------------------ Selected Inner UI Tabs Override ------------------ */
@@ -430,8 +442,6 @@
             body.ik-dark-mode table.oddevencols > colgroup > col:nth-child(2n+1) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode #Notifications > div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode .smallBorder, body.ik-dark-mode #DockedFriends { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; }
-            body.ik-dark-mode .sideTab, body.ik-dark-mode span.ikcat-dialog-tab { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; color: var(--ik-theme-special-text4) !important; } /* LuperNotes/LuperList Tab Headings */
-            body.ik-dark-mode .sideTab.selected, body.ik-dark-mode span.ikcat-dialog-tab.active { background-image: var(--ik-theme-texture) !important; background-repeat: repeat !important; } /* LuperNotes/LuperList Selected Tab Headings */
             body.ik-dark-mode div div.content table.generic tbody tr td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#globalChatTab div.globalChatHldr div.globalChat.oddeven div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#allianceChatTab div.allianceChatHldr div.allianceChat.oddeven div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div.odd { background-color: var(--ik-theme-alt-bg) !important; }
@@ -564,14 +574,6 @@
             body.ik-dark-mode div.ui-slider-range.ui-widget-header.ui-slider-range-min { 
                 background-image: var(--ik-theme-headerP-texture) !important;
                 background-repeat: repeat !important;
-            }
-            /* ------------------ Active Catalogue Tab Override ------------------ */
-            body.ik-dark-mode .ikcat-dialog-tab.active,
-            body.ik-dark-mode span.ikcat-dialog-tab.active {
-                background-color: var(--ik-theme-content-bg) !important;
-                background-image: var(--ik-theme-texture) !important;
-                color: var(--ik-theme-special-text5) !important;
-                border: 1px solid var(--ik-theme-border) !important;
             }
             /* ------------------ Selected State Color Override ------------------ */
             body.ik-dark-mode .selected,
