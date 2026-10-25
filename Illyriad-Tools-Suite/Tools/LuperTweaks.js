@@ -453,7 +453,18 @@
             }
 
 
+            /* Preserve Item Popup Stat Colors (Positive Green & Negative Red) */
+            body.ik-dark-mode div#WzTtDiV [style*="color: #004B00"],
+            body.ik-dark-mode div#WzTtDiV [style*="color:#004B00"],
+            body.ik-dark-mode div#WzTtDiV span[style*="004B00"] {
+                color: #55ff55 !important;
+            }
 
+            body.ik-dark-mode div#WzTtDiV [style*="color: #860008"],
+            body.ik-dark-mode div#WzTtDiV [style*="color:#860008"],
+            body.ik-dark-mode div#WzTtDiV span[style*="860008"] {
+                color: #ff5555 !important;
+            }
 
             
 
