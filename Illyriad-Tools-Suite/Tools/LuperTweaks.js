@@ -104,14 +104,14 @@
                 --ik-theme-special-text1: #e54e20;
                 --ik-theme-special-text2: #ea882e;
                 --ik-theme-special-text3: #e54e20;
-                --ik-theme-special-text4: #e54e20; 
-                --ik-theme-special-text5: #ea882e;
+                --ik-theme-special-text4: #ea882e; 
+                --ik-theme-special-text5: #e54e20;
                 --ik-theme-special-text6: #e54e20;
                 --ik-theme-special-text7: #2d2e30;
                 --ik-theme-special-text8: #1e1f20;
                 --ik-theme-special-text9: #434343;
-                --ik-theme-link: #8ab4f8;
-                --ik-theme-link-hover: #aecbfa;
+                --ik-theme-link: #ea882e;
+                --ik-theme-link-hover: #e54e20;
 
                 /* =================================== Background Texture Images ============================= */
                 --ik-theme-texture: url("https://i.imgur.com/rcUBS5t.jpeg");
@@ -263,7 +263,7 @@
                 background-image: var(--ik-theme-header-texture) !important; 
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Relocation Header ^ */
             body.ik-dark-mode .ui-state-default { 
-                color: var(--ik-theme-special-text1) !important;
+                color: var(--ik-theme-special-text4) !important;
                 background-image: var(--ik-theme-header-texture) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Widget and Popup Header ^ */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder > div:first-of-type { 
@@ -279,10 +279,10 @@
             background-color: var(--ik-theme-light-alt-bg) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Award Medal Player List Odd ^ */
             body.ik-dark-mode .ui-state-default a[href], body.ik-dark-mode .ui-state-default a {
-                color: var(--ik-theme-special-text1) !important;
+                color: var(--ik-theme-special-text4) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Unselected Header Color ^ */
             body.ik-dark-mode .ui-state-active, body.ik-dark-mode .ui-state-active a, body.ik-dark-mode .ui-state-active a[href] {
-                color: var(--ik-theme-special-text2) !important;
+                color: var(--ik-theme-special-text5) !important;
             } /* -------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Selected Header Color ^ */
             body.ik-dark-mode .ui-widget-content:not([id="ikNotesPanel"]):not([id="ikNotesPanel"] *) {
                 background-color: var(--ik-theme-content-bg) !important;
@@ -292,7 +292,7 @@
             body.ik-dark-mode .ui-accordion-header h3 a span:not([id*="Notes"] *),
             body.ik-dark-mode .ui-accordion-header.ui-state-active a,
             body.ik-dark-mode .ui-accordion-header.ui-state-active a[href] {
-                color: var(--ik-theme-special-text2) !important;
+                color: var(--ik-theme-special-text5) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Accordion Active Tab Headers ^ */
 
             /* ==================== Format Below ================================ */
@@ -305,12 +305,12 @@
             body.ik-dark-mode .ui-tabs-active a[href],
             body.ik-dark-mode .ui-tabs-nav li.ui-tabs-selected a,
             body.ik-dark-mode .ui-tabs-nav li.ui-tabs-selected a[href] {
-                color: var(--ik-theme-special-text2) !important;
+                color: var(--ik-theme-special-text5) !important;
             }
 
             body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a,
             body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a[href] {
-                color: var(--ik-theme-special-text1) !important;
+                color: var(--ik-theme-special-text4) !important;
             }
             body.ik-dark-mode .ui-widget-header { background-image: var(--ik-theme-header-texture) !important; background-repeat: repeat !important; }
             body.ik-dark-mode .ui-dialog .ui-dialog-titlebar { background-image: var(--ik-theme-headerO-texture) !important; background-repeat: repeat !important; }
@@ -498,7 +498,7 @@
             body.ik-dark-mode span.ikcat-dialog-tab.active {
                 background-color: var(--ik-theme-content-bg) !important;
                 background-image: var(--ik-theme-texture) !important;
-                color: var(--ik-theme-special-text2) !important;
+                color: var(--ik-theme-special-text5) !important;
                 border: 1px solid var(--ik-theme-border) !important;
             }
             /* ------------------ Selected State Color Override ------------------ */
@@ -507,7 +507,7 @@
             body.ik-dark-mode a:link.selected,
             body.ik-dark-mode a:visited.selected,
             body.ik-dark-mode span.selected {
-                color: var(--ik-theme-special-text2) !important;
+                color: var(--ik-theme-special-text5) !important;
             }
             body.ik-dark-mode span.ui-widget-header.ui-corner-top:not([id*="Notes"] *):not(.name):not(.ui-dialog-title) {
                 color: var(--ik-theme-special-text4) !important; 
