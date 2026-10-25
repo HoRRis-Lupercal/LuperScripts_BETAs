@@ -251,6 +251,7 @@
             body.ik-dark-mode #resbar td, 
             body.ik-dark-mode #resbar span, 
             body.ik-dark-mode #resbar a,
+            body.ik-dark-mode .ui-widget-content a,
             body.ik-dark-mode div#friendActivity.smallBorder div,
             body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title):not(.ui-accordion-header *):not([class*="ikcat-dialog-tab"]) {
                 color: var(--ik-theme-text) !important;
