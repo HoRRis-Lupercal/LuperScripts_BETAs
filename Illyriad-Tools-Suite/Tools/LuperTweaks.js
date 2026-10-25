@@ -502,10 +502,14 @@
                                                                                          DARK MODE IMAGE HANDLING
             =============================================================================================================================================================================================== */
 
-            body.ik-dark-mode .headlinks a.selected,
             body.ik-dark-mode .smallBorder,
             body.ik-dark-mode #DockedFriends,
             body.ik-dark-mode .ui-state-active {
+                background-image: var(--ik-theme-texture) !important;
+                background-repeat: repeat !important;
+            }
+            body.ik-dark-mode .headlinks a.selected {
+                display: inline-block !important;
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
             } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Paper Background ^ */
