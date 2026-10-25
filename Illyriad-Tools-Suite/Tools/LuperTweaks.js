@@ -69,7 +69,7 @@
                     const cells = row.querySelectorAll("td");
                     // Totem is consistently the 4th column (index 3)
                     if (cells.length >= 4) {
-                        const totemCell = cells[3]; 
+                        const totemCell = cells[4]; 
                         if (totemCell) {
                             totemCell.style.setProperty("background-color", "var(--ik-theme-alt-bg)", "important");
                         }
