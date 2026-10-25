@@ -246,14 +246,14 @@
             body.ik-dark-mode p:not([id*="Notes"] *), 
             body.ik-dark-mode td:not([id*="Notes"] *), 
             body.ik-dark-mode th:not([id*="Notes"] *), 
-            body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title):not(.ui-accordion-header *):not(.ikcat-dialog-tab *), 
+            body.ik-dark-mode div:not([id*="Notes"] *),
             body.ik-dark-mode label:not([id*="Notes"] *),
             body.ik-dark-mode #resbar, 
             body.ik-dark-mode #resbar td, 
             body.ik-dark-mode #resbar span, 
             body.ik-dark-mode #resbar a,
-            html body.ik-dark-mode div#friendActivity.smallBorder div
-            {
+            body.ik-dark-mode div#friendActivity.smallBorder div,
+            body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title):not(.ui-accordion-header *):not(.ikcat-dialog-tab *) {
                 color: var(--ik-theme-text);
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Default Page Text ^ */
             html body.ik-dark-mode { 
