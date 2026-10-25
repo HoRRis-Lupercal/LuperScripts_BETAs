@@ -592,6 +592,16 @@
                 color: var(--ik-theme-special-text4) !important; 
             }
 
+            /* Override for LuperLists Catalogue Tabs */
+            body.ik-dark-mode span.ikcat-dialog-tab:not(.active):not(.data-tab) {
+                color: var(--ik-theme-special-text4) !important;
+            }
+            body.ik-dark-mode span.ikcat-dialog-tab.active,
+            body.ik-dark-mode span.ikcat-dialog-tab.data-tab,
+            body.ik-dark-mode span.ikcat-dialog-tab.active.data-tab {
+                color: var(--ik-theme-special-text5) !important;
+            }
+
             
         `;
     }
