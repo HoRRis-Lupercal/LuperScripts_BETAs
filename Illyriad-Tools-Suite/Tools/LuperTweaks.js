@@ -217,7 +217,7 @@
                ========================================================================= */
             
             body.ik-dark-mode p:not([id*="Notes"] *), 
-            body.ik-dark-mode td:not([id*="Notes"]:not(.accordionCommand *), 
+            body.ik-dark-mode td:not([id*="Notes"] *):not(.accordionCommand *), 
             body.ik-dark-mode th:not([id*="Notes"] *), 
             body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title):not(.ui-accordion-header *), 
             body.ik-dark-mode label:not([id*="Notes"] *),
