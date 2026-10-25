@@ -104,7 +104,7 @@
                 --ik-theme-popup-bot: url("https://i.imgur.com/MwbBS3B.png");
                 --ik-theme-herald-right: url("https://i.imgur.com/QbNEhg6.jpeg");
                 --ik-theme-herald-left: url("https://i.imgur.com/DiMUiBi.jpeg");
-                --ik-theme-herald-title: url("https://i.imgur.com/DiMUiBi.jpeg");
+                --ik-theme-herald-title: url("https://i.imgur.com/GWSmxmu.jpeg");
                 --ik-theme-herald-book: url("https://i.imgur.com/5wmEX8r.jpeg");
 
                 /* =================================== Top Button Row Images ============================= */
@@ -202,10 +202,13 @@
             }
 
             /* Herald Pages */
+            body.ik-dark-mode div.b-page { color: var(--ik-theme-alt-bg) !important; }
+            body.ik-dark-mode div.headline { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode div.b-wrap.b-wrap-right { background-image: var(--ik-theme-herald-right) !important; }
             body.ik-dark-mode div.b-wrap.b-wrap-left { background-image: var(--ik-theme-herald-left) !important; }
-            html body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#book.booklet div.b-page.b-page-0.b-p1 div.b-wrap.b-wrap-left { background-image: var(--ik-theme-herald-title) !important; }
-            html body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#hidePage { background-image: var(--ik-theme-herald-book) !important; }
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#book.booklet div.b-page.b-page-0.b-p1 div.b-wrap.b-wrap-left { background-image: var(--ik-theme-herald-title) !important; }
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div#hidePage { background-image: var(--ik-theme-herald-book) !important; }
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#book.booklet div.b-page.b-page-0.b-p1 div.b-wrap.b-wrap-left div.article div div div [style*="color: black"] { color: var(--ik-theme-special-text4) !important; }
 
             /* Inputs & Selects */
             body.ik-dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
