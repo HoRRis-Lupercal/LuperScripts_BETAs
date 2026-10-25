@@ -57,13 +57,10 @@
             }
         });
     }
-
     function SovImbalanceCheck() {
-        // Runs independently of dark mode based on settings.sovHighlight
         const accordions = document.querySelectorAll("#sovAccordion h3");
 
         if (!settings.sovHighlight) {
-            // If disabled, clear any existing highlights
             accordions.forEach(h3 => {
                 const parentA = h3.querySelector("a");
                 if (parentA) parentA.style.removeProperty("background-color");
@@ -82,12 +79,18 @@
         accordions.forEach(h3 => {
             const spans = h3.querySelectorAll("a > span, a span");
             if (spans.length >= 2) {
-                const firstVal = parseRoman(spans[0].textContent);
-                const secondVal = parseRoman(spans[1].textContent);
+                const firstText = spans[0].textContent;
+                const secondText = spans[1].textContent;
+                
+                const firstVal = parseRoman(firstText);
+                const secondVal = parseRoman(secondText);
+                
+                const hasNoStructure = secondText.includes("No Structure Present");
                 const parentA = h3.querySelector("a");
 
                 if (parentA) {
-                    if (secondVal > 0 && secondVal < firstVal) {
+                    // Highlight if "No Structure Present" OR if second level is lower than first
+                    if (hasNoStructure || (secondVal > 0 && secondVal < firstVal)) {
                         parentA.style.setProperty("background-color", "var(--ik-theme-warning-highlight)", "important");
                     } else {
                         parentA.style.removeProperty("background-color");
@@ -135,7 +138,7 @@
                 --ik-theme-xp-bar: #f26723;             /*  */
                 --ik-theme-link: #ea882e;               /*  */
                 --ik-theme-link-hover: #e54e20;         /*  */
-                --ik-theme-warning-highlight: ff000042; /*  */
+                --ik-theme-warning-highlight: #ff000042; /*  */
 
                 /* =================================== Background Texture Images ============================= */
                 --ik-theme-texture: url("https://i.imgur.com/rcUBS5t.jpeg");
@@ -337,10 +340,10 @@
             body.ik-dark-mode .ui-accordion-header.ui-state-active a,
             body.ik-dark-mode .ui-accordion-header.ui-state-active a[href],
             body.ik-dark-mode div.accordionCommand h3.ui-accordion-header a table.generic tbody tr td:not([id*="Notes"] *) {
-                color: var(--ik-theme-special-text5) !important;
+                color: var(--ik-theme-special-text4) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Accordion Active Tab Headers ^ */
             body.ik-dark-mode div.accordionCommand h3.ui-accordion-header.ui-state-active a table.generic tbody tr td:not([id*="Notes"] *) {
-                color: var(--ik-theme-special-text4) !important;
+                color: var(--ik-theme-special-text5) !important;
             } /* --------------------------------------------------------------------------------------------------------------------------------------------------- ^ Accordion Commander Tab Headers ^ */
 
             /* ==================== Format Below ================================ */
