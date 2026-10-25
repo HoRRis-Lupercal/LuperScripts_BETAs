@@ -384,7 +384,7 @@
             body.ik-dark-mode div div.content table.generic tbody tr td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#allianceChatTab div.allianceChatHldr div.allianceChat.oddeven div:nth-child(2n) { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div.odd { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv table.generic tbody tr td div.odd { background-color: var(--ik-theme-alt-bg) !important; }
-            body.ik-dark-mode colgroup.odd, body.ik-dark-mode colgroup col.odd { background-color: var(--ik-theme-alt-bg) !important; }
+            body.ik-dark-mode colgroup.odd, body.ik-dark-mode colgroup col.odd, body.ik-dark-mode table.generic.odd { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div table.generic.middle.oddeven tbody tr th { background-color: var(--ik-theme-alt-bg) !important; } /* Tournament Rankings Heading Styling */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div table.generic.middle.oddeven tbody tr td:nth-of-type(2) { background-color: var(--ik-theme-alt-bg) !important; } /* Tournament Standings Styling */
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#recentEvents.center.evenodd div.combat:nth-child(2n+1) { background-color: var(--ik-theme-alt-bg) !important; } /* Recent Combats Odd Styling */
@@ -456,9 +456,9 @@
             body.ik-dark-mode a.name.nameYou {
                 color: var(--ik-theme-special-text1) !important;
             } /* Your Name */
-            body.ik-dark-mode .name.nameYou, 
-            body.ik-dark-mode span.name.nameYou, 
-            body.ik-dark-mode a.name.nameYou {
+            body.ik-dark-mode .name.nameSystem, 
+            body.ik-dark-mode span.name.nameSystem, 
+            body.ik-dark-mode a.name.nameSystem {
                 color: var(--ik-theme-special-text2) !important;
             } /* System's Names */
 
