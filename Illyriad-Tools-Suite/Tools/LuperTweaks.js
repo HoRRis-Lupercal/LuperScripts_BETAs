@@ -420,9 +420,12 @@
             body.ik-dark-mode div.ui-state-hover, 
             body.ik-dark-mode a#ui-active-menuitem, 
             body.ik-dark-mode a.ui-state-hover,
+            body.ik-dark-mode .ui-menu .ui-menu-item a.ui-state-hover,
+            body.ik-dark-mode .ui-autocomplete li a.ui-state-hover,
             body.ik-dark-mode a.jstree-clicked,
             body.ik-dark-mode a.jstree-hovered { 
                 background-color: var(--ik-theme-alt-bg) !important;
+                background-image: none !important;
             } /* City list hover background */
             
             /* Legends and Charts */
