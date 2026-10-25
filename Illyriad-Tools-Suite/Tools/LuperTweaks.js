@@ -48,7 +48,7 @@
         if (!document.body.classList.contains("ik-dark-mode")) return;
 
         // Target spans inside the selected city menu hierarchy
-        const spans = document.querySelectorAll("div#citiesMenu div.cityMenu.selected div span, div#citiesMenu div div.cityMenu div span, ");
+        const spans = document.querySelectorAll("div#citiesMenu div.cityMenu.selected div span, div#citiesMenu div div.cityMenu div span");
         spans.forEach(span => {
             if (span.textContent.trim() === "0") {
                 span.style.setProperty("color", "#ff5555", "important");
