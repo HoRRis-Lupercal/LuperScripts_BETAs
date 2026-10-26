@@ -208,8 +208,18 @@
                 --ik-theme-button-troops-off: url("https://i.imgur.com/AIjJDt9.png");
                 --ik-theme-button-troops-on: url("https://i.imgur.com/YdKdl9X.png");
                 
-                --ik-theme-char-ring2-off: url("https://i.imgur.com/scbj2y9.png");
-                --ik-theme-char-ring2-on: url("https://i.imgur.com/9Ijy5Vv.png");
+                --ik-theme-char-ring2-off: url("https://i.imgur.com/A0HcanB.png");
+                --ik-theme-char-ring2-on: url("https://i.imgur.com/e6K9WWv.png");
+                --ik-theme-button-darkbg-off: url("https://i.imgur.com/SZ2F31y.png");
+                --ik-theme-button-darkbg-on: url("https://i.imgur.com/QCulzt0.png");
+                --ik-theme-button-favourites-off: url("https://i.imgur.com/MTHSDKT.png");
+                --ik-theme-button-favourites-on: url("https://i.imgur.com/bKrrPTr.png");
+                --ik-theme-button-leaderboard-off: url("https://i.imgur.com/DLEy2UC.png");
+                --ik-theme-button-leaderboard-on: url("https://i.imgur.com/woJ5vdb.png");
+                --ik-theme-button-account-off: url("https://i.imgur.com/ZhQGSps.png");
+                --ik-theme-button-account-on: url("https://i.imgur.com/YIsonO2.png");
+                --ik-theme-button-support-off: url("https://i.imgur.com/fvHdVjU.png");
+                --ik-theme-button-support-on: url("https://i.imgur.com/Lnwiuwi.png");
             }
 
             /* =========================================================================
@@ -610,6 +620,16 @@
             /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Diplomacy Buttons ^ */
             body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] { content: var(--ik-theme-char-ring2-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] { content: var(--ik-theme-char-ring2-on) !important; }
+            body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="bg_off.png"] { content: var(--ik-theme-char-darkbg-off) !important; }
+            body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="bg_on.png"] { content: var(--ik-theme-darkbg-on) !important; }
+            body.ik-dark-mode div.iconBox.ib8.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-favourites-off) !important; }
+            body.ik-dark-mode div.iconBox.ib8.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-favourites-on) !important; }
+            body.ik-dark-mode div.iconBox.ib8.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-leaderboard-off) !important; }
+            body.ik-dark-mode div.iconBox.ib8.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-leaderboard-on) !important; }
+            body.ik-dark-mode div.iconBox.ib8.top a img.sIcon.sIcon3 { content: var(--ik-theme-button-account-off) !important; }
+            body.ik-dark-mode div.iconBox.ib8.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-account-diplo-on) !important; }
+            body.ik-dark-mode div.iconBox.ib8.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-support-off) !important; }
+            body.ik-dark-mode div.iconBox.ib8.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-support-on) !important; }
             /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Character Buttons ^ */       
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.t { background-image: var(--ik-theme-popup-top) !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m { background-image: var(--ik-theme-popup-mid) !important; }
