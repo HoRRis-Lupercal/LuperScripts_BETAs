@@ -683,6 +683,11 @@
                 border-color: var(--ik-theme-border) !important;
             }
 
+            /* Dialog text */
+            body.ik-dark-mode .cke_combo_text,
+            body.ik-dark-mode .cke_reset_all * {
+                color: var(--ik-theme-text) !important;
+            }
             body.ik-dark-mode .cke_reset_all {
                 background-color: var(--ik-theme-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
@@ -727,8 +732,9 @@
                 filter: invert(0.85) hue-rotate(180deg) !important;
             }
             
-            /* Dropdown menu buttons */
-            body.ik-dark-mode .cke_combo_button {
+            /* Gradient menu buttons */
+            body.ik-dark-mode .cke_combo_button,
+            body.ik-dark-mode .cke_dialog_ui_button {
                 background-image: -webkit-linear-gradient(top, var(--ik-theme-alt-bg), var(--ik-theme-alt-bg)) !important;
                 border-color: var(--ik-theme-border) !important;
                 outline: none !important;
@@ -746,15 +752,15 @@
                 background-color: var(--ik-theme-content-bg) !important;
             }
             body.ik-dark-mode .cke_dialog iframe.cke_pasteframe,
-            body.ik-dark-mode cke_pasteframe,
-            body.ik-dark-mode cke_panel {
+            body.ik-dark-mode .cke_pasteframe,
+            body.ik-dark-mode .cke_panel {
                 background-color: var(--ik-theme-alt-bg) !important;
             }
-            
-            body.ik-dark-mode .cke_combo_text,
-            body.ik-dark-mode .cke_reset_all * {
-                color: var(--ik-theme-text) !important;
+            body.ik-dark-mode .cke_dialog_background_cover {
+                background-color: var(--ik-theme-bg) !important;
             }
+            
+
             /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Mail Terminal Background Color ^ */
 
             /* ============================================================================================================================================================================================
