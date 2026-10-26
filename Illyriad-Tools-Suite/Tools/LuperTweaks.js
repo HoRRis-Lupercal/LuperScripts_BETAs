@@ -120,23 +120,35 @@
     
     function styleMailIframe() {
         if (!document.body.classList.contains("ik-dark-mode")) return;
-    
+
         const iframe = document.querySelector("#cke_MsgBodyEditor iframe, .cke_contents iframe");
         if (!iframe) return;
-    
+
         try {
+            const applyStyle = (targetDoc) => {
+                if (targetDoc && targetDoc.head && !targetDoc.querySelector("#ikDarkIframeStyle")) {
+                    const style = targetDoc.createElement("style");
+                    style.id = "ikDarkIframeStyle";
+                    style.textContent = `
+                        body.cke_editable {
+                            background-color: #151516 !important;
+                            color: #e3e3e3 !important;
+                        }
+                        a { color: #ea882e !important; }
+                    `;
+                    targetDoc.head.appendChild(style);
+                }
+            };
+
             const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            if (iframeDoc && iframeDoc.body && !iframeDoc.querySelector("#ikDarkIframeStyle")) {
-                const style = iframeDoc.createElement("style");
-                style.id = "ikDarkIframeStyle";
-                style.textContent = `
-                    body.cke_editable {
-                        background-color: #151516 !important;
-                        color: #e3e3e3 !important;
-                    }
-                    a { color: #ea882e !important; }
-                `;
-                iframeDoc.head.appendChild(style);
+            if (iframeDoc && iframeDoc.body) {
+                applyStyle(iframeDoc);
+            } else {
+                // If the iframe is still loading its internal doc, listen for the load event
+                iframe.addEventListener("load", () => {
+                    const loadedDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    applyStyle(loadedDoc);
+                }, { once: true });
             }
         } catch (e) {
             // Suppress cross-origin issues if any arise
@@ -1124,12 +1136,17 @@
         restoreSettings();
         if (!createTweaksDialog()) return false;
 
-        // Start dynamic value scanner loop
+        // Start dynamic value scanner loop (for city values & sov check)
         setInterval(() => {
             highlightZeroCityValues();
             SovImbalanceCheck();
-            styleMailIframe();
         }, 1000);
+
+        // Instant MutationObserver for the Mail Iframe (0ms delay)
+        const mailObserver = new MutationObserver(() => {
+            styleMailIframe();
+        });
+        mailObserver.observe(document.body, { childList: true, subtree: true });
 
         if (!resizeBound) {
             resizeBound = true;
