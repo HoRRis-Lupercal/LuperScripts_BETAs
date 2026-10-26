@@ -672,52 +672,42 @@
  
             /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ City Menu Background Color ^ */
             /* =========================================================================
-               CKEditor Fine-Tuning Fixes
+               CKEditor Precise Styling
                ========================================================================= */
             
-            /* 1. Remove light box-shadow / bevel lines from Top & Bottom bars */
-            body.ik-dark-mode .cke_top,
-            body.ik-dark-mode .cke_bottom {
-                box-shadow: none !important;
-                -webkit-box-shadow: none !important;
-            }
-            
-            /* 2. Remove white text-shadow from toolbar icons, text, and footer elements */
-            body.ik-dark-mode .cke_top *,
-            body.ik-dark-mode .cke_bottom *,
-            body.ik-dark-mode .cke_button_label,
-            body.ik-dark-mode .cke_combo_label,
-            body.ik-dark-mode .cke_path_item {
-                text-shadow: none !important;
-                color: var(--ik-theme-text) !important;
-            }
-            
-            /* 3. Style remaining dropdown boxes (Styles / Format) */
-            body.ik-dark-mode .cke_combo,
-            body.ik-dark-mode .cke_combo_button {
-                background-color: var(--ik-theme-input-bg) !important;
-                background-image: none !important;
-                border: 1px solid var(--ik-theme-border) !important;
-                box-shadow: none !important;
-            }
-            
-            body.ik-dark-mode .cke_combo_text {
-                color: var(--ik-theme-text) !important;
-                text-shadow: none !important;
-            }
-            
-            /* 4. Style all button containers & borders cleanly */
-            body.ik-dark-mode .cke_toolgroup,
-            body.ik-dark-mode a.cke_button {
+            /* Darken main outer editor container */
+            body.ik-dark-mode .cke_chrome {
+                background: var(--ik-theme-content-bg) !important;
                 border-color: var(--ik-theme-border) !important;
                 box-shadow: none !important;
             }
             
-            body.ik-dark-mode a.cke_button_off:hover,
-            body.ik-dark-mode a.cke_button_on {
-                background-color: var(--ik-theme-light-alt-bg) !important;
-                background-image: none !important;
+            /* Darken toolbar and footer headers without removing structure */
+            body.ik-dark-mode .cke_top,
+            body.ik-dark-mode .cke_bottom {
+                background: var(--ik-theme-alt-bg) !important;
+                border-color: var(--ik-theme-border) !important;
                 box-shadow: none !important;
+            }
+            
+            /* Darken dropdown combo boxes (Styles / Format) */
+            body.ik-dark-mode .cke_combo_button {
+                background: var(--ik-theme-input-bg) !important;
+                border-color: var(--ik-theme-border) !important;
+                box-shadow: none !important;
+            }
+            
+            body.ik-dark-mode .cke_combo_text,
+            body.ik-dark-mode .cke_path_item,
+            body.ik-dark-mode .cke_toolgroup a.cke_button {
+                color: var(--ik-theme-text) !important;
+                text-shadow: none !important;
+            }
+            
+            /* Soften light bevel lines */
+            body.ik-dark-mode .cke_toolgroup {
+                background: var(--ik-theme-content-bg) !important;
+                border-color: var(--ik-theme-border) !important;
             }
             /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Mail Terminal Background Color ^ */
 
