@@ -672,42 +672,61 @@
  
             /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ City Menu Background Color ^ */
             /* =========================================================================
-               CKEditor Precise Styling
+               CKEditor / Mail Container Dark Mode Styling
                ========================================================================= */
             
-            /* Darken main outer editor container */
-            body.ik-dark-mode .cke_chrome {
-                background: var(--ik-theme-content-bg) !important;
+            /* Main editor frame and wrapper */
+            body.ik-dark-mode #cke_MsgBodyEditor,
+            body.ik-dark-mode .cke_chrome,
+            body.ik-dark-mode .cke_inner {
+                background-color: var(--ik-theme-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
-                box-shadow: none !important;
             }
             
-            /* Darken toolbar and footer headers without removing structure */
-            body.ik-dark-mode .cke_top,
-            body.ik-dark-mode .cke_bottom {
+            /* Top toolbar / Header */
+            body.ik-dark-mode span.cke_top,
+            body.ik-dark-mode .cke_toolbox {
+                background-color: var(--ik-theme-content-bg) !important;
+                background-image: var(--ik-theme-header-texture) !important;
+                border-bottom: 1px solid var(--ik-theme-border) !important;
+            }
+            
+            /* Footer / Bottom status bar */
+            body.ik-dark-mode span.cke_bottom {
+                background-color: var(--ik-theme-content-bg) !important;
+                background-image: var(--ik-theme-header-texture) !important;
+                border-top: 1px solid var(--ik-theme-border) !important;
+            }
+            
+            /* Toolgroups and buttons */
+            body.ik-dark-mode .cke_toolgroup {
                 background: var(--ik-theme-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
-                box-shadow: none !important;
             }
             
-            /* Darken dropdown combo boxes (Styles / Format) */
+            body.ik-dark-mode a.cke_button {
+                background: transparent !important;
+            }
+            
+            body.ik-dark-mode a.cke_button:hover,
+            body.ik-dark-mode a.cke_button_on {
+                background-color: var(--ik-theme-light-alt-bg) !important;
+                border-color: var(--ik-theme-border) !important;
+            }
+            
+            /* Invert toolbar icons for visibility on dark backgrounds */
+            body.ik-dark-mode .cke_button_icon {
+                filter: invert(0.85) hue-rotate(180deg) !important;
+            }
+            
+            /* Dropdown menus (e.g., Format, Styles) */
             body.ik-dark-mode .cke_combo_button {
-                background: var(--ik-theme-input-bg) !important;
+                background-color: var(--ik-theme-input-bg) !important;
                 border-color: var(--ik-theme-border) !important;
-                box-shadow: none !important;
             }
             
-            body.ik-dark-mode .cke_combo_text,
-            body.ik-dark-mode .cke_path_item,
-            body.ik-dark-mode .cke_toolgroup a.cke_button {
+            body.ik-dark-mode .cke_combo_text {
                 color: var(--ik-theme-text) !important;
-                text-shadow: none !important;
-            }
-            
-            /* Soften light bevel lines */
-            body.ik-dark-mode .cke_toolgroup {
-                background: var(--ik-theme-content-bg) !important;
-                border-color: var(--ik-theme-border) !important;
             }
             /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Mail Terminal Background Color ^ */
 
