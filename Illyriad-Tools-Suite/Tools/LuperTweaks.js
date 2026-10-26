@@ -258,6 +258,7 @@
                 --ik-theme-herald-left: url("https://i.imgur.com/DiMUiBi.jpeg");
                 --ik-theme-herald-title: url("https://i.imgur.com/GWSmxmu.jpeg");
                 --ik-theme-herald-book: url("https://i.imgur.com/5wmEX8r.jpeg");
+                --ik-theme-darkmode-credits: url("https://i.imgur.com/L2TjMJF.png");
 
                 /* ======================================= Button Images ================================= */
 
@@ -733,6 +734,9 @@
                                                                                          DARK MODE IMAGE HANDLING
             =============================================================================================================================================================================================== */
 
+            html.ik-dark-mode {
+                background-image: var(--ik-theme-darkmode-credits) !important;
+            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Darkmode Credits ^ */
             body.ik-dark-mode .smallBorder,
             body.ik-dark-mode #DockedFriends,
             body.ik-dark-mode .ui-state-active {
@@ -956,8 +960,10 @@
 
     function applySettings() {
         if (settings.darkMode) {
+            document.documentElement.classList.add("ik-dark-mode");
             document.body.classList.add("ik-dark-mode");
         } else {
+            document.documentElement.classList.remove("ik-dark-mode");
             document.body.classList.remove("ik-dark-mode");
         }
         SovImbalanceCheck();
