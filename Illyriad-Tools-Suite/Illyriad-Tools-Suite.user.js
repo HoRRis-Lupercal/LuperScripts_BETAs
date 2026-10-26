@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite
 // @namespace    Developed by IKnights, modified by HoRRis
-// @version      0.2.2
+// @version      0.2.23
 // @description  Unified Illyriad tools suite.
 // @author       IKnights and HoRRis
 //
@@ -12,7 +12,8 @@
 // @require      https://github.com/HoRRis-Lupercal/LuperScripts_BETAs/raw/refs/heads/main/Illyriad-Tools-Suite/Tools/IKQuartermaster.js
 // @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/Illyriad-Tools-Suite/Tools/LuperCat/CatalogueData.js
 // @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/Illyriad-Tools-Suite/Tools/LuperCat/LuperLists.js
-// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/Illyriad-Tools-Suite/Tools/LuperTweaks.js
+// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/Illyriad-Tools-Suite/Tools/LuperTweaks/LuperStyles.js
+// @require      https://raw.githubusercontent.com/HoRRis-Lupercal/LuperScripts_BETAs/refs/heads/main/Illyriad-Tools-Suite/Tools/LuperTweaks/LuperTweaks.js
 //
 // @updateURL    https://github.com/HoRRis-Lupercal/LuperScripts_BETAs/raw/refs/heads/main/Illyriad-Tools-Suite/Illyriad-Tools-Suite.user.js
 // @downloadURL  https://github.com/HoRRis-Lupercal/LuperScripts_BETAs/raw/refs/heads/main/Illyriad-Tools-Suite/Illyriad-Tools-Suite.user.js
