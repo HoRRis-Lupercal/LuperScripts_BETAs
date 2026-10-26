@@ -687,7 +687,7 @@
                 border-color: var(--ik-theme-border) !important;
             }
 
-            /* Dialog text */
+            /* Dialog text & reset all */
             body.ik-dark-mode .cke_combo_text,
             body.ik-dark-mode .cke_reset_all * {
                 color: var(--ik-theme-text) !important;
@@ -731,7 +731,7 @@
                 border-color: var(--ik-theme-border) !important;
             }
             
-            /* Invert toolbar icons for visibility on dark backgrounds */
+            /* Invert toolbar icons */
             body.ik-dark-mode .cke_button_icon {
                 filter: invert(0.85) hue-rotate(180deg) !important;
             }
@@ -744,34 +744,13 @@
                 outline: none !important;
             }
 
-            /* Dialog Popup menus */
-            body.ik-dark-mode td.cke_dialog_footer,
-            body.ik-dark-mode div.cke_dialog_title {
-                box-shadow: none !important;
-                text-shadow:  none !important;
-                background-color: var(--ik-theme-content-bg) !important;
-                background-image: var(--ik-theme-header-texture) !important;
-                border-color: var(--ik-theme-border) !important;
-            }
-            body.ik-dark-mode div.cke_inner,
-            body.ik-dark-mode td.cke_dialog_contents_body,
-            body.ik-dark-mode .cke_dialog_contents,
-            body.ik-dark-mode .cke_menu {
-                background-color: var(--ik-theme-content-bg) !important;
-                border-color: var(--ik-theme-border) !important;
-                color: var(--ik-theme-text) !important;
-            }
-            body.ik-dark-mode .cke_dialog iframe.cke_pasteframe,
-            body.ik-dark-mode .cke_pasteframe,
+            /* Context Menu / Paste Popup Fixes */
+            body.ik-dark-mode .cke_menu,
             body.ik-dark-mode .cke_panel {
-                background-color: var(--ik-theme-alt-bg) !important;
+                background-color: var(--ik-theme-content-bg) !important;
                 border-color: var(--ik-theme-border) !important;
-            }
-            body.ik-dark-mode .cke_dialog_background_cover {
-                background-color: var(--ik-theme-bg) !important;
             }
 
-            /* Normal button state */
             body.ik-dark-mode .cke_menubutton {
                 background-color: transparent !important;
                 color: var(--ik-theme-text) !important;
@@ -782,10 +761,11 @@
                 text-shadow: none !important;
             }
             
-            /* Hover button state */
+            /* Fixed Hover rules for Paste Context Menu */
             body.ik-dark-mode .cke_menubutton:hover,
             body.ik-dark-mode .cke_menubutton_hover,
-            body.ik-dark-mode a.cke_menubutton:hover {
+            body.ik-dark-mode a.cke_menubutton:hover,
+            body.ik-dark-mode .cke_menu_item a:hover {
                 background-color: var(--ik-theme-light-alt-bg) !important;
                 background-image: none !important;
                 border-color: var(--ik-theme-border) !important;
@@ -793,11 +773,12 @@
             }
             
             body.ik-dark-mode .cke_menubutton:hover .cke_menubutton_label,
-            body.ik-dark-mode .cke_menubutton_hover .cke_menubutton_label {
+            body.ik-dark-mode .cke_menubutton_hover .cke_menubutton_label,
+            body.ik-dark-mode .cke_menu_item a:hover .cke_menubutton_label {
                 color: var(--ik-theme-text) !important;
             }
             
-            /* Icon filter for visibility on dark backgrounds */
+            /* Context menu icon filter */
             body.ik-dark-mode .cke_menubutton_icon {
                 filter: invert(0.85) hue-rotate(180deg) !important;
             }
@@ -1035,10 +1016,8 @@
 
     function applySettings() {
         if (settings.darkMode) {
-            document.documentElement.classList.add("ik-dark-mode");
             document.body.classList.add("ik-dark-mode");
         } else {
-            document.documentElement.classList.remove("ik-dark-mode");
             document.body.classList.remove("ik-dark-mode");
         }
         SovImbalanceCheck();
