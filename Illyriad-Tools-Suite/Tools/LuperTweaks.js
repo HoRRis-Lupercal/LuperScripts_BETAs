@@ -45,6 +45,61 @@
     //  REQUIRED HELPER FUNCTIONS
     // =========================================================================
 
+    function preloadDarkImages() {
+        const imageUrls = [
+            // Textures & Backgrounds
+            "https://i.imgur.com/rcUBS5t.jpeg", "https://i.imgur.com/cozCMCU.jpeg",
+            "https://i.imgur.com/yCH8seN.png", "https://i.imgur.com/0nDOLcG.jpeg",
+            "https://i.imgur.com/TQ2SkKz.png", "https://i.imgur.com/FlehLqQ.png",
+            "https://i.imgur.com/Aslo09q.png", "https://i.imgur.com/MwbBS3B.png",
+            "https://i.imgur.com/QbNEhg6.jpeg", "https://i.imgur.com/DiMUiBi.jpeg",
+            "https://i.imgur.com/GWSmxmu.jpeg", "https://i.imgur.com/5wmEX8r.jpeg",
+            
+            // World Buttons (Off / On)
+            "https://i.imgur.com/JFzM27f.png", "https://i.imgur.com/DeinIVP.png",
+            "https://i.imgur.com/Hm1YmGo.png", "https://i.imgur.com/U0s8RLQ.png",
+            "https://i.imgur.com/6Vf66Bl.png", "https://i.imgur.com/QXGDRaE.png",
+            "https://i.imgur.com/aoYMc2u.png", "https://i.imgur.com/MUiE2dX.png",
+            "https://i.imgur.com/pBTmIFY.png", "https://i.imgur.com/1XLTZpA.png",
+            "https://i.imgur.com/OIiImD8.png", "https://i.imgur.com/xQnBkvS.png",
+    
+            // City Buttons (Off / On)
+            "https://i.imgur.com/m28vfLz.png", "https://i.imgur.com/fdNOBi5.png",
+            "https://i.imgur.com/pfGAKIG.png", "https://i.imgur.com/ioWdmfh.png",
+            "https://i.imgur.com/Fy2aIFi.png", "https://i.imgur.com/CuUPvWZ.png",
+            "https://i.imgur.com/oTH90xz.png", "https://i.imgur.com/A5LQ7Ib.png",
+            "https://i.imgur.com/yuy2g5n.png", "https://i.imgur.com/LQMvpD5.png",
+            "https://i.imgur.com/B8omxkJ.png", "https://i.imgur.com/mOpruAO.png",
+    
+            // Diplomacy & Military Buttons (Off / On)
+            "https://i.imgur.com/gLJkolH.png", "https://i.imgur.com/NRrGZy8.png",
+            "https://i.imgur.com/XHnkzln.png", "https://i.imgur.com/As5hJLV.png",
+            "https://i.imgur.com/WogeJW4.png", "https://i.imgur.com/42cX1vD.png",
+            "https://i.imgur.com/xs29aaS.png", "https://i.imgur.com/87Oc0NL.png",
+            "https://i.imgur.com/DSzzFCg.png", "https://i.imgur.com/50xv7JI.png",
+            "https://i.imgur.com/UwdTC3v.png", "https://i.imgur.com/UTABW2g.png",
+            "https://i.imgur.com/iR9V0wt.png", "https://i.imgur.com/Gy78Fy5.png",
+            "https://i.imgur.com/AIjJDt9.png", "https://i.imgur.com/YdKdl9X.png",
+    
+            // Character & Account Buttons (Off / On)
+            "https://i.imgur.com/A0HcanB.png", "https://i.imgur.com/e6K9WWv.png",
+            "https://i.imgur.com/SZ2F31y.png", "https://i.imgur.com/QCulzt0.png",
+            "https://i.imgur.com/MTHSDKT.png", "https://i.imgur.com/bKrrPTr.png",
+            "https://i.imgur.com/DLEy2UC.png", "https://i.imgur.com/woJ5vdb.png",
+            "https://i.imgur.com/ZhQGSps.png", "https://i.imgur.com/YIsonO2.png",
+            "https://i.imgur.com/fvHdVjU.png", "https://i.imgur.com/Lnwiuwi.png"
+        ];
+    
+        imageUrls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+        });
+    }
+    
+    // =========================================================================
+    //  ADDITIONAL HELPER FUNCTIONS
+    // =========================================================================
+
     function highlightZeroCityValues() {
         if (!document.body.classList.contains("ik-dark-mode")) return;
 
@@ -57,6 +112,7 @@
             }
         });
     }
+    
     function SovImbalanceCheck() {
         const accordions = document.querySelectorAll("#sovAccordion h3");
 
@@ -706,6 +762,11 @@
             body.ik-dark-mode span.ikcat-dialog-tab.active.data-tab {
                 color: var(--ik-theme-special-text5) !important;
             } /* ------------------------------------------------------------------------------------------------------------------------------------------------ ^ Active / Selected LuperLists / Catalogue Tabs ^ */
+            body.ik-dark-mode div.iconBox img.icon,
+            body.ik-dark-mode div.iconBox img.sIcon {
+                color: transparent !important;
+                text-indent: -9999px;
+            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Alt Text Suprression ^ */
    
         `;
     }
@@ -828,6 +889,7 @@
     function initLuperTweaks() {
         if (tweaksInitialized) return true;
         if (!window.jQuery || !jQuery.fn || typeof jQuery.fn.dialog !== "function") return false;
+        preloadDarkImages();
         injectTweaksStyles();
         restoreSettings();
         if (!createTweaksDialog()) return false;
