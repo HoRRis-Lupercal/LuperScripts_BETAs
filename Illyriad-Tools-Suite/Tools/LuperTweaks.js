@@ -689,6 +689,7 @@
                 background-color: var(--ik-theme-content-bg) !important;
                 background-image: var(--ik-theme-header-texture) !important;
                 border-bottom: 1px solid var(--ik-theme-border) !important;
+                box-shadow: none !important;
             }
             
             /* Footer / Bottom status bar */
@@ -696,6 +697,7 @@
                 background-color: var(--ik-theme-content-bg) !important;
                 background-image: var(--ik-theme-header-texture) !important;
                 border-top: 1px solid var(--ik-theme-border) !important;
+                box-shadow: none !important;
             }
             
             /* Toolgroups and buttons */
@@ -721,8 +723,7 @@
             
             /* Dropdown menus (e.g., Format, Styles) */
             body.ik-dark-mode .cke_combo_button {
-                background-color: var(--ik-theme-input-bg) !important;
-                border-color: var(--ik-theme-border) !important;
+                filter: invert(1) hue-rotate(180deg) !important;
             }
             
             body.ik-dark-mode .cke_combo_text {
