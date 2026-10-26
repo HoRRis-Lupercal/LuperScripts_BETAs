@@ -672,61 +672,52 @@
  
             /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ City Menu Background Color ^ */
             /* =========================================================================
-               CKEditor / Mail Container Dark Mode Styling
+               CKEditor Fine-Tuning Fixes
                ========================================================================= */
             
-            /* Main editor frame and wrapper */
-            body.ik-dark-mode #cke_MsgBodyEditor,
-            body.ik-dark-mode .cke_chrome,
-            body.ik-dark-mode .cke_inner {
-                background-color: var(--ik-theme-alt-bg) !important;
-                border-color: var(--ik-theme-border) !important;
+            /* 1. Remove light box-shadow / bevel lines from Top & Bottom bars */
+            body.ik-dark-mode .cke_top,
+            body.ik-dark-mode .cke_bottom {
+                box-shadow: none !important;
+                -webkit-box-shadow: none !important;
             }
             
-            /* Top toolbar / Header */
-            body.ik-dark-mode span.cke_top,
-            body.ik-dark-mode .cke_toolbox {
-                background-color: var(--ik-theme-content-bg) !important;
-                background-image: var(--ik-theme-header-texture) !important;
-                border-bottom: 1px solid var(--ik-theme-border) !important;
+            /* 2. Remove white text-shadow from toolbar icons, text, and footer elements */
+            body.ik-dark-mode .cke_top *,
+            body.ik-dark-mode .cke_bottom *,
+            body.ik-dark-mode .cke_button_label,
+            body.ik-dark-mode .cke_combo_label,
+            body.ik-dark-mode .cke_path_item {
+                text-shadow: none !important;
+                color: var(--ik-theme-text) !important;
             }
             
-            /* Footer / Bottom status bar */
-            body.ik-dark-mode span.cke_bottom {
-                background-color: var(--ik-theme-content-bg) !important;
-                background-image: var(--ik-theme-header-texture) !important;
-                border-top: 1px solid var(--ik-theme-border) !important;
-            }
-            
-            /* Toolgroups and buttons */
-            body.ik-dark-mode .cke_toolgroup {
-                background: var(--ik-theme-alt-bg) !important;
-                border-color: var(--ik-theme-border) !important;
-            }
-            
-            body.ik-dark-mode a.cke_button {
-                background: transparent !important;
-            }
-            
-            body.ik-dark-mode a.cke_button:hover,
-            body.ik-dark-mode a.cke_button_on {
-                background-color: var(--ik-theme-light-alt-bg) !important;
-                border-color: var(--ik-theme-border) !important;
-            }
-            
-            /* Invert toolbar icons for visibility on dark backgrounds */
-            body.ik-dark-mode .cke_button_icon {
-                filter: invert(0.85) hue-rotate(180deg) !important;
-            }
-            
-            /* Dropdown menus (e.g., Format, Styles) */
+            /* 3. Style remaining dropdown boxes (Styles / Format) */
+            body.ik-dark-mode .cke_combo,
             body.ik-dark-mode .cke_combo_button {
                 background-color: var(--ik-theme-input-bg) !important;
-                border-color: var(--ik-theme-border) !important;
+                background-image: none !important;
+                border: 1px solid var(--ik-theme-border) !important;
+                box-shadow: none !important;
             }
             
             body.ik-dark-mode .cke_combo_text {
                 color: var(--ik-theme-text) !important;
+                text-shadow: none !important;
+            }
+            
+            /* 4. Style all button containers & borders cleanly */
+            body.ik-dark-mode .cke_toolgroup,
+            body.ik-dark-mode a.cke_button {
+                border-color: var(--ik-theme-border) !important;
+                box-shadow: none !important;
+            }
+            
+            body.ik-dark-mode a.cke_button_off:hover,
+            body.ik-dark-mode a.cke_button_on {
+                background-color: var(--ik-theme-light-alt-bg) !important;
+                background-image: none !important;
+                box-shadow: none !important;
             }
             /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Mail Terminal Background Color ^ */
 
