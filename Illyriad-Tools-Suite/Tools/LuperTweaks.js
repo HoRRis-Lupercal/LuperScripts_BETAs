@@ -71,17 +71,38 @@
             "https://i.imgur.com/yuy2g5n.png", "https://i.imgur.com/LQMvpD5.png",
             "https://i.imgur.com/B8omxkJ.png", "https://i.imgur.com/mOpruAO.png",
     
-            // Diplomacy & Military Buttons (Off / On)
-            "https://i.imgur.com/gLJkolH.png", "https://i.imgur.com/NRrGZy8.png",
-            "https://i.imgur.com/XHnkzln.png", "https://i.imgur.com/As5hJLV.png",
+            // Military Buttons (Off / On)
             "https://i.imgur.com/WogeJW4.png", "https://i.imgur.com/42cX1vD.png",
             "https://i.imgur.com/xs29aaS.png", "https://i.imgur.com/87Oc0NL.png",
             "https://i.imgur.com/DSzzFCg.png", "https://i.imgur.com/50xv7JI.png",
             "https://i.imgur.com/UwdTC3v.png", "https://i.imgur.com/UTABW2g.png",
             "https://i.imgur.com/iR9V0wt.png", "https://i.imgur.com/Gy78Fy5.png",
             "https://i.imgur.com/AIjJDt9.png", "https://i.imgur.com/YdKdl9X.png",
+
+            // Diplomacy Buttons (Off / On)
+            "https://i.imgur.com/gLJkolH.png", "https://i.imgur.com/NRrGZy8.png",
+            "https://i.imgur.com/XHnkzln.png", "https://i.imgur.com/As5hJLV.png",
+
+            // Trade Buttons (Off / On)
+            "https://i.imgur.com/zQjSBB3.png", "https://i.imgur.com/WKMeVQf.png",
+            "https://i.imgur.com/IpgklHw.png", "https://i.imgur.com/zyzC0LY.png",
+            "https://i.imgur.com/NnwAIu3.png", "https://i.imgur.com/ez3tjr7.png",
+            "https://i.imgur.com/bVu08BZ.png", "https://i.imgur.com/NJTjkkl.png",
+
+            // Research Buttons (Off / On)
+            "https://i.imgur.com/DRKzyix.png", "https://i.imgur.com/MeGsVOh.png",
+            "https://i.imgur.com/MYJpkFr.png", "https://i.imgur.com/peLkTTe.png",
+            "https://i.imgur.com/2c7vO7J.png", "https://i.imgur.com/hThbH33.png",
+            "https://i.imgur.com/28XZQzJ.png", "https://i.imgur.com/du17d4L.png",
+            "https://i.imgur.com/Iwlvpfp.png", "https://i.imgur.com/Sksjc6L.png",
+
+            // Magic Buttons (Off / On)
+            "https://i.imgur.com/MBLGBC6.png", "https://i.imgur.com/tpi5hpJ.png",
+            "https://i.imgur.com/xo4GpRH.png", "https://i.imgur.com/dB9yeye.png",
+            "https://i.imgur.com/Z2E3SsS.png", "https://i.imgur.com/GRbIo9S.png",
+            "https://i.imgur.com/MhguUCq.png", "https://i.imgur.com/cGXlYgb.png",
     
-            // Character & Account Buttons (Off / On)
+            // Character Buttons (Off / On)
             "https://i.imgur.com/A0HcanB.png", "https://i.imgur.com/e6K9WWv.png",
             "https://i.imgur.com/SZ2F31y.png", "https://i.imgur.com/QCulzt0.png",
             "https://i.imgur.com/MTHSDKT.png", "https://i.imgur.com/bKrrPTr.png",
@@ -263,6 +284,35 @@
                 --ik-theme-button-command-on: url("https://i.imgur.com/Gy78Fy5.png");
                 --ik-theme-button-troops-off: url("https://i.imgur.com/AIjJDt9.png");
                 --ik-theme-button-troops-on: url("https://i.imgur.com/YdKdl9X.png");
+
+                --ik-theme-button-trade-off: url("https://i.imgur.com/zQjSBB3.png");
+                --ik-theme-button-trade-on: url("https://i.imgur.com/WKMeVQf.png");
+                --ik-theme-button-markets-off: url("https://i.imgur.com/IpgklHw.png");
+                --ik-theme-button-markets-on: url("https://i.imgur.com/zyzC0LY.png");
+                --ik-theme-button-factions-off: url("https://i.imgur.com/NnwAIu3.png");
+                --ik-theme-button-factions-on: url("https://i.imgur.com/ez3tjr7.png");
+                --ik-theme-button-tradeunits-off: url("https://i.imgur.com/bVu08BZ.png");
+                --ik-theme-button-tradeunits-on: url("https://i.imgur.com/NJTjkkl.png");
+
+                --ik-theme-button-research-off: url("https://i.imgur.com/DRKzyix.png");
+                --ik-theme-button-research-on: url("https://i.imgur.com/MeGsVOh.png");
+                --ik-theme-button-available-off: url("https://i.imgur.com/MYJpkFr.png");
+                --ik-theme-button-available-on: url("https://i.imgur.com/peLkTTe.png");
+                --ik-theme-button-tree-off: url("https://i.imgur.com/2c7vO7J.png");
+                --ik-theme-button-tree-on: url("https://i.imgur.com/hThbH33.png");
+                --ik-theme-button-discovery-off: url("https://i.imgur.com/28XZQzJ.png");
+                --ik-theme-button-discovery-on: url("https://i.imgur.com/du17d4L.png");
+                --ik-theme-button-reading-off: url("https://i.imgur.com/Iwlvpfp.png");
+                --ik-theme-button-reading-on: url("https://i.imgur.com/Sksjc6L.png");
+
+                --ik-theme-button-magic-off: url("https://i.imgur.com/MBLGBC6.png");
+                --ik-theme-button-magic-on: url("https://i.imgur.com/tpi5hpJ.png");
+                --ik-theme-button-active-off: url("https://i.imgur.com/xo4GpRH.png");
+                --ik-theme-button-active-on: url("https://i.imgur.com/dB9yeye.png");
+                --ik-theme-button-cast-off: url("https://i.imgur.com/Z2E3SsS.png");
+                --ik-theme-button-cast-on: url("https://i.imgur.com/GRbIo9S.png");
+                --ik-theme-button-transmog-off: url("https://i.imgur.com/MhguUCq.png");
+                --ik-theme-button-transmog-on: url("https://i.imgur.com/cGXlYgb.png");
                 
                 --ik-theme-char-ring2-off: url("https://i.imgur.com/A0HcanB.png");
                 --ik-theme-char-ring2-on: url("https://i.imgur.com/e6K9WWv.png");
@@ -276,6 +326,7 @@
                 --ik-theme-button-account-on: url("https://i.imgur.com/YIsonO2.png");
                 --ik-theme-button-support-off: url("https://i.imgur.com/fvHdVjU.png");
                 --ik-theme-button-support-on: url("https://i.imgur.com/Lnwiuwi.png");
+                
             }
 
             /* =========================================================================
@@ -674,6 +725,39 @@
             body.ik-dark-mode div.iconBox.ib4.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-diplo-off) !important; }
             body.ik-dark-mode div.iconBox.ib4.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-diplo-on) !important; }
             /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Diplomacy Buttons ^ */
+            body.ik-dark-mode div.iconBox.ib5 a img.icon { content: var(--ik-theme-button-trade-off) !important; }
+            body.ik-dark-mode div.iconBox.ib5 a:hover img.icon { content: var(--ik-theme-button-trade-on) !important; }
+            body.ik-dark-mode div.iconBox.ib5.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-off) !important; }
+            body.ik-dark-mode div.iconBox.ib5.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-on) !important; }
+            body.ik-dark-mode div.iconBox.ib5.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-orders-off) !important; }
+            body.ik-dark-mode div.iconBox.ib5.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-orders-on) !important; }
+            body.ik-dark-mode div.iconBox.ib5.top a img.sIcon.sIcon3 { content: var(--ik-theme-button-markets-off) !important; }
+            body.ik-dark-mode div.iconBox.ib5.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-button-markets-on) !important; }
+            body.ik-dark-mode div.iconBox.ib5.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-factions-off) !important; }
+            body.ik-dark-mode div.iconBox.ib5.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-factions-on) !important; }
+            body.ik-dark-mode div.iconBox.ib5.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-tradeunits-off) !important; }
+            body.ik-dark-mode div.iconBox.ib5.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-tradeunits-on) !important; }
+            /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Trade Buttons ^ */
+            body.ik-dark-mode div.iconBox.ib6 a img.icon { content: var(--ik-theme-button-research-off) !important; }
+            body.ik-dark-mode div.iconBox.ib6 a:hover img.icon { content: var(--ik-theme-button-research-on) !important; }
+            body.ik-dark-mode div.iconBox.ib6.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-available-off) !important; }
+            body.ik-dark-mode div.iconBox.ib6.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-available-on) !important; }
+            body.ik-dark-mode div.iconBox.ib6.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-tree-off) !important; }
+            body.ik-dark-mode div.iconBox.ib6.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-tree-on) !important; }
+            body.ik-dark-mode div.iconBox.ib6.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-discovery-off) !important; }
+            body.ik-dark-mode div.iconBox.ib6.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-discovery-on) !important; }
+            body.ik-dark-mode div.iconBox.ib6.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-reading-off) !important; }
+            body.ik-dark-mode div.iconBox.ib6.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-reading-on) !important; }
+            /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Research Buttons ^ */
+            body.ik-dark-mode div.iconBox.ib7 a img.icon { content: var(--ik-theme-button-magic-off) !important; }
+            body.ik-dark-mode div.iconBox.ib7 a:hover img.icon { content: var(--ik-theme-button-magic-on) !important; }
+            body.ik-dark-mode div.iconBox.ib7.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-active-off) !important; }
+            body.ik-dark-mode div.iconBox.ib7.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-active-on) !important; }
+            body.ik-dark-mode div.iconBox.ib7.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-cast-off) !important; }
+            body.ik-dark-mode div.iconBox.ib7.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-cast-on) !important; }
+            body.ik-dark-mode div.iconBox.ib7.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-transmog-off) !important; }
+            body.ik-dark-mode div.iconBox.ib7.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-transmog-on) !important; }
+            /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Magic Buttons ^ */
             body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] { content: var(--ik-theme-char-ring2-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] { content: var(--ik-theme-char-ring2-on) !important; }
             body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="bg_off.png"] { content: var(--ik-theme-char-darkbg-off) !important; }
