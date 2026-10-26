@@ -645,6 +645,9 @@
             body.ik-dark-mode .cityMenu.selected { background-color: var(--ik-theme-special-text7) !important; }
  
             /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ City Menu Background Color ^ */
+            body.ik-dark-mode div#cke_MsgBodyEditor.cke_1.cke.cke_reset.cke_chrome.cke_editor_MsgBodyEditor.cke_ltr.cke_browser_gecko { background-color: var(--ik-theme-alt-bg) !important; }
+
+            /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Mail Terminal Background Color ^ */
 
             /* ============================================================================================================================================================================================
                                                                                          DARK MODE IMAGE HANDLING
@@ -764,8 +767,8 @@
             /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Magic Buttons ^ */
             body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] { content: var(--ik-theme-char-ring2-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] { content: var(--ik-theme-char-ring2-on) !important; }
-            body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="bg_off.png"] { content: var(--ik-theme-darkbg-off) !important; }
-            body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="bg_on.png"] { content: var(--ik-theme-darkbg-on) !important; }
+            body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="bg_off.png"] { content: var(--ik-theme-button-darkbg-off) !important; }
+            body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="bg_on.png"] { content: var(--ik-theme-button-darkbg-on) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-favourites-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-favourites-on) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-leaderboard-off) !important; }
