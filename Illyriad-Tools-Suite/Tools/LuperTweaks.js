@@ -584,6 +584,7 @@
             } /* ---------------------------------------------------------------------------------------------------------------------------------------- ^ LuperNotes/LuperList Selected Tab Headings ^ */
             
             body.ik-dark-mode tr.odd, 
+            body.ik-dark-mode li.odd,
             body.ik-dark-mode form.odd, 
             body.ik-dark-mode table.oddeven > tbody > tr:nth-child(2n),
             body.ik-dark-mode table.evenodd > tbody > tr:nth-child(2n+1), 
