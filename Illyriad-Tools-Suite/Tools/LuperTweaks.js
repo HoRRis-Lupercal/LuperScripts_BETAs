@@ -599,14 +599,14 @@
             body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-troops-off) !important; }
             body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-troops-on) !important; }
             /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Military Buttons ^ */
-            body.ik-dark-mode div.iconBox.ib3 a img.icon { content: var(--ik-theme-button-diplomacy-off) !important; }
-            body.ik-dark-mode div.iconBox.ib3 a:hover img.icon { content: var(--ik-theme-button-diplomacy-on) !important; }
-            body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-off) !important; }
-            body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-on) !important; }
-            body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-orders-off) !important; }
-            body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-orders-on) !important; }
-            body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-diplo-off) !important; }
-            body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-diplo-on) !important; }
+            body.ik-dark-mode div.iconBox.ib4 a img.icon { content: var(--ik-theme-button-diplomacy-off) !important; }
+            body.ik-dark-mode div.iconBox.ib4 a:hover img.icon { content: var(--ik-theme-button-diplomacy-on) !important; }
+            body.ik-dark-mode div.iconBox.ib4.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-off) !important; }
+            body.ik-dark-mode div.iconBox.ib4.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-on) !important; }
+            body.ik-dark-mode div.iconBox.ib4.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-orders-off) !important; }
+            body.ik-dark-mode div.iconBox.ib4.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-orders-on) !important; }
+            body.ik-dark-mode div.iconBox.ib4.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-diplo-off) !important; }
+            body.ik-dark-mode div.iconBox.ib4.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-diplo-on) !important; }
             /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Diplomacy Buttons ^ */
             body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] { content: var(--ik-theme-char-ring2-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] { content: var(--ik-theme-char-ring2-on) !important; }
