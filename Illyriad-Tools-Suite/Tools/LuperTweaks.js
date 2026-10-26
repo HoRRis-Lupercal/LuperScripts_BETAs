@@ -680,8 +680,11 @@
                ========================================================================= */
             
             /* Main editor frame and wrapper */
+            html.ik-dark-mode #cke_MsgBodyEditor,
             body.ik-dark-mode #cke_MsgBodyEditor,
+            html.ik-dark-mode .cke_chrome,
             body.ik-dark-mode .cke_chrome,
+            html.ik-dark-mode .cke_inner,
             body.ik-dark-mode .cke_inner {
                 background-color: var(--ik-theme-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
