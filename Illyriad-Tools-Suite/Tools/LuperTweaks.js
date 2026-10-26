@@ -682,6 +682,8 @@
                 background-color: var(--ik-theme-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
             }
+
+            
             
             /* Top toolbar / Header */
             body.ik-dark-mode span.cke_top,
@@ -723,23 +725,28 @@
             
             /* Dropdown menu buttons */
             body.ik-dark-mode .cke_combo_button {
-                background-image: -webkit-linear-gradient(top, var(--ik-theme-alt-bg), var(--ik-content-bg)) !important;
+                background-image: -webkit-linear-gradient(top, var(--ik-theme-alt-bg), var(--ik-theme-content-bg)) !important;
                 border-color: var(--ik-theme-border) !important;
                 outline: none !important;
             }
 
             /* Dialog Popup menus */
-            td.cke_dialog_footer,
-            div.cke_dialog_title {
+            body.ik-dark-mode td.cke_dialog_footer,
+            body.ik-dark-mode div.cke_dialog_title {
                 box-shadow: none !important;;
                 background-color: var(--ik-theme-content-bg) !important;
                 background-image: var(--ik-theme-header-texture) !important;
             }
-            td.cke_dialog_contents_body {
+            body.ik-dark-mode td.cke_dialog_contents_body {
                 background-color: var(--ik-theme-content-bg) !important;
             }
+            body.ik-dark-mode cke_pasteframe,
+            body.ik-dark-mode cke_panel {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
             
-            body.ik-dark-mode .cke_combo_text {
+            body.ik-dark-mode .cke_combo_text,
+            body.ik-dark-mode .cke_reset_all * {
                 color: var(--ik-theme-text) !important;
             }
             /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Mail Terminal Background Color ^ */
