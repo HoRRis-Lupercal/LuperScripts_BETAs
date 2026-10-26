@@ -744,7 +744,10 @@
                 outline: none !important;
             }
 
-            /* Context Menu / Paste Popup Fixes */
+            /* =========================================================================
+               CKEditor Context Menu / Paste Popup Hover Fixes
+               ========================================================================= */
+
             body.ik-dark-mode .cke_menu,
             body.ik-dark-mode .cke_panel {
                 background-color: var(--ik-theme-content-bg) !important;
@@ -761,19 +764,22 @@
                 text-shadow: none !important;
             }
             
-            /* Fixed Hover rules for Paste Context Menu */
+            /* Target CKEditor's active focus and hover classes explicitly */
             body.ik-dark-mode .cke_menubutton:hover,
             body.ik-dark-mode .cke_menubutton_hover,
-            body.ik-dark-mode a.cke_menubutton:hover,
+            body.ik-dark-mode .cke_menubutton_focus,
+            body.ik-dark-mode .cke_menubutton_on,
             body.ik-dark-mode .cke_menu_item a:hover {
                 background-color: var(--ik-theme-light-alt-bg) !important;
                 background-image: none !important;
+                background: var(--ik-theme-light-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
                 color: var(--ik-theme-text) !important;
             }
             
             body.ik-dark-mode .cke_menubutton:hover .cke_menubutton_label,
             body.ik-dark-mode .cke_menubutton_hover .cke_menubutton_label,
+            body.ik-dark-mode .cke_menubutton_focus .cke_menubutton_label,
             body.ik-dark-mode .cke_menu_item a:hover .cke_menubutton_label {
                 color: var(--ik-theme-text) !important;
             }
@@ -1016,8 +1022,10 @@
 
     function applySettings() {
         if (settings.darkMode) {
+            document.documentElement.classList.add("ik-dark-mode");
             document.body.classList.add("ik-dark-mode");
         } else {
+            document.documentElement.classList.remove("ik-dark-mode");
             document.body.classList.remove("ik-dark-mode");
         }
         SovImbalanceCheck();
