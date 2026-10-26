@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      0.2.1
+// @version      0.2.23
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -38,7 +38,8 @@
 
     let settings = {
         darkMode: false,
-        sovHighlight: false
+        sovHighlight: false,
+        activeTheme: "Dark-mode"
     };
 
     // =========================================================================
@@ -118,56 +119,130 @@
     }
 
     
-    function initMailEditorHook() {
-        // Helper function to style a specific CKEditor instance
-        const applyEditorStyle = (editor) => {
+function initMailEditorHook() {
+        // Function to inject styles via CKEditor's native API
+        const applyCKEditorGlobalStyles = () => {
+            if (!window.CKEDITOR || window.__IK_CK_STYLED__) return;
+            window.__IK_CK_STYLED__ = true;
+
             try {
-                const iframeDoc = editor.document.$;
-                if (iframeDoc && iframeDoc.head && !iframeDoc.querySelector("#ikDarkIframeStyle")) {
-                    const style = iframeDoc.createElement("style");
-                    style.id = "ikDarkIframeStyle";
-                    style.textContent = `
-                        body.cke_editable {
-                            background-color: #151516 !important;
-                            color: #e3e3e3 !important;
-                        }
-                        a { color: #ea882e !important; }
-                    `;
-                    iframeDoc.head.appendChild(style);
-                }
+                window.CKEDITOR.addCss(`
+                    /* 1. Main Text Editing Area */
+                    body.cke_editable {
+                        background-color: #151516 !important;
+                        color: #e3e3e3 !important;
+                    }
+                    body.cke_editable a {
+                        color: #ea882e !important;
+                    }
+
+                    /* 2. Context Menu & Popup Panels Background */
+                    body.cke_ltr div.cke_panel_block,
+                    body.cke_ltr .cke_menu,
+                    .cke_reset_all .cke_menuitem {
+                        background-color: #151516 !important;
+                        border-color: #333537 !important;
+                    }
+
+                    /* 3. Context Menu Items & Hover States */
+                    .cke_reset_all .cke_menuitem a.cke_menubutton,
+                    .cke_reset_all .cke_menuitem a.cke_menubutton * {
+                        color: #e3e3e3 !important;
+                        text-shadow: none !important;
+                    }
+
+                    .cke_reset_all .cke_menuitem a.cke_menubutton:hover,
+                    .cke_reset_all .cke_menuitem a.cke_menubutton:focus,
+                    .cke_reset_all .cke_menubutton_hover,
+                    .cke_reset_all .cke_menubutton_focus {
+                        background-color: #515252 !important;
+                        background-image: none !important;
+                        border-color: #333537 !important;
+                        color: #e3e3e3 !important;
+                    }
+
+                `);
             } catch (e) {
-                // Suppress cross-origin issues
+                // Suppress errors if CKEditor isn't fully ready
             }
         };
 
-        // 1. Check if CKEditor is already loaded; if not, poll briefly until it is available
+        // Poll briefly until CKEDITOR is available, then apply global styles
         if (!window.CKEDITOR) {
             const checkCK = setInterval(() => {
                 if (window.CKEDITOR) {
                     clearInterval(checkCK);
-                    initMailEditorHook(); // Re-run once available
+                    applyCKEditorGlobalStyles();
                 }
             }, 200);
-            return;
+        } else {
+            applyCKEditorGlobalStyles();
         }
 
-        // 2. Style any instances that might already exist on the page
-        if (window.CKEDITOR.instances) {
-            for (let name in window.CKEDITOR.instances) {
-                if (window.CKEDITOR.instances.hasOwnProperty(name)) {
-                    applyEditorStyle(window.CKEDITOR.instances[name]);
-                }
-            }
-        }
-
-        // 3. Listen for any future instances being created (handles AJAX page switches)
-        if (!window.__IK_CK_HOOKED__) {
+        // Also catch any future instances
+        if (window.CKEDITOR && !window.__IK_CK_HOOKED__) {
             window.__IK_CK_HOOKED__ = true;
-            window.CKEDITOR.on('instanceReady', function(evt) {
-                if (!document.body.classList.contains("ik-dark-mode")) return;
-                applyEditorStyle(evt.editor);
+            window.CKEDITOR.on('instanceReady', () => {
+                applyCKEditorGlobalStyles();
             });
         }
+    }
+
+    function styleCKEditorPanels() {
+        if (!document.body.classList.contains("ik-dark-mode")) return;
+
+        const panelIframes = document.querySelectorAll("iframe.cke_panel_frame");
+        const themes = window.IKLuperThemes || {};
+        const activeThemeObj = themes[settings.activeTheme] || themes["Dark-mode"] || {};
+
+        let rootVarsCSS = ":root {\n";
+        for (const [key, value] of Object.entries(activeThemeObj)) {
+            rootVarsCSS += `  ${key}: ${value};\n`;
+        }
+        rootVarsCSS += "}\n";
+
+        panelIframes.forEach(iframe => {
+            try {
+                const doc = iframe.contentDocument || iframe.contentWindow.document;
+                if (doc && doc.head && !doc.querySelector("#ikDarkPanelStyle")) {
+                    const style = doc.createElement("style");
+                    style.id = "ikDarkPanelStyle";
+                    style.textContent = `
+                        ${rootVarsCSS}
+
+                        body, html {
+                            background-color: var(--ik-theme-content-bg) !important;
+                            color: var(--ik-theme-text) !important;
+                        }
+                        .cke_menu {
+                            background-color: var(--ik-theme-content-bg) !important;
+                            border-color: var(--ik-theme-border) !important;
+                        }
+                        .cke_menuitem a.cke_menubutton {
+                            background-color: var(--ik-theme-content-bg) !important;
+                            color: var(--ik-theme-text) !important;
+                        }
+                        .cke_menuitem a.cke_menubutton:hover,
+                        .cke_menuitem a.cke_menubutton:focus,
+                        .cke_menubutton_hover,
+                        .cke_menubutton_focus {
+                            background-color: var(--ik-theme-light-alt-bg) !important;
+                            background-image: none !important;
+                            border-color: var(--ik-theme-border) !important;
+                            color: var(--ik-theme-text) !important;
+                        }
+                        .cke_menuitem a.cke_menubutton *,
+                        .cke_menubutton_hover * {
+                            color: var(--ik-theme-text) !important;
+                            text-shadow: none !important;
+                        }
+                    `;
+                    doc.head.appendChild(style);
+                }
+            } catch (e) {
+                // Suppress cross-origin issues
+            }
+        });
     }
     
     // =========================================================================
@@ -699,10 +774,11 @@
             body.ik-dark-mode .cityMenu.selected { background-color: var(--ik-theme-special-text7) !important; }
  
             /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ City Menu Background Color ^ */
+
             /* =========================================================================
                CKEditor / Mail Container Dark Mode Styling
                ========================================================================= */
-            
+
             /* Main editor frame and wrapper */
             body.ik-dark-mode #cke_MsgBodyEditor,
             body.ik-dark-mode .cke_chrome,
@@ -721,7 +797,7 @@
                 border-color: var(--ik-theme-border) !important;
                 color: var(--ik-theme-text) !important;
             }
-            
+
             /* Top toolbar / Header */
             body.ik-dark-mode span.cke_top,
             body.ik-dark-mode .cke_toolbox {
@@ -730,7 +806,7 @@
                 border-bottom: 1px solid var(--ik-theme-border) !important;
                 box-shadow: none !important;
             }
-            
+
             /* Footer / Bottom status bar */
             body.ik-dark-mode span.cke_bottom {
                 background-color: var(--ik-theme-content-bg) !important;
@@ -738,28 +814,28 @@
                 border-top: 1px solid var(--ik-theme-border) !important;
                 box-shadow: none !important;
             }
-            
+
             /* Toolgroups and buttons */
             body.ik-dark-mode .cke_toolgroup {
                 background: var(--ik-theme-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
             }
-            
+
             body.ik-dark-mode a.cke_button {
                 background: transparent !important;
             }
-            
+
             body.ik-dark-mode a.cke_button:hover,
             body.ik-dark-mode a.cke_button_on {
                 background-color: var(--ik-theme-light-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
             }
-            
+
             /* Invert toolbar icons for visibility on dark backgrounds */
             body.ik-dark-mode .cke_button_icon {
                 filter: invert(0.85) hue-rotate(180deg) !important;
             }
-            
+
             /* Gradient menu buttons */
             body.ik-dark-mode .cke_combo_button,
             body.ik-dark-mode .cke_dialog_ui_button {
@@ -797,7 +873,7 @@
             /* =========================================================================
                CKEditor Context Menu / Right-Click Popup Hover Fixes
                ========================================================================= */
-            
+
             /* Target menu item containers and buttons on hover/focus */
             body.ik-dark-mode .cke_menubutton:hover,
             body.ik-dark-mode .cke_menubutton:focus,
@@ -810,7 +886,7 @@
                 border-color: var(--ik-theme-border) !important;
                 color: var(--ik-theme-text) !important;
             }
-            
+
             /* Ensure text and icons inside the hovered menu button don't retain old colors or shadows */
             body.ik-dark-mode .cke_menubutton:hover *,
             body.ik-dark-mode .cke_menubutton:focus *,
@@ -819,15 +895,12 @@
                 color: var(--ik-theme-text) !important;
                 text-shadow: none !important;
             }
-            
+
             /* Style the outer context menu panel container itself */
             body.ik-dark-mode .cke_menu {
                 background-color: var(--ik-theme-content-bg) !important;
                 border: 1px solid var(--ik-theme-border) !important;
             }
-            
-
-            /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Mail Terminal Background Color ^ */
 
             /* ============================================================================================================================================================================================
                                                                                          DARK MODE IMAGE HANDLING
@@ -1061,6 +1134,15 @@
         if (settings.darkMode) {
             document.documentElement.classList.add("ik-dark-mode");
             document.body.classList.add("ik-dark-mode");
+
+            // Apply selected theme variables dynamically to main document root
+            const themes = window.IKLuperThemes || {};
+            const activeThemeObj = themes[settings.activeTheme] || themes["Dark-mode"] || {};
+            
+            const root = document.documentElement;
+            for (const [key, value] of Object.entries(activeThemeObj)) {
+                root.style.setProperty(key, value);
+            }
         } else {
             document.documentElement.classList.remove("ik-dark-mode");
             document.body.classList.remove("ik-dark-mode");
@@ -1071,9 +1153,11 @@
     function saveSettings() {
         const darkCheckbox = document.querySelector("#ikltDarkCheckbox");
         const sovCheckbox = document.querySelector("#ikltSovCheckbox");
+        const themeSelect = document.querySelector("#ikltThemeSelect");
 
         if (darkCheckbox) settings.darkMode = darkCheckbox.checked;
         if (sovCheckbox) settings.sovHighlight = sovCheckbox.checked;
+        if (themeSelect) settings.activeTheme = themeSelect.value;
 
         saveJSON(STORAGE.SETTINGS, settings);
         applySettings();
@@ -1085,9 +1169,11 @@
 
         const darkCheckbox = document.querySelector("#ikltDarkCheckbox");
         const sovCheckbox = document.querySelector("#ikltSovCheckbox");
+        const themeSelect = document.querySelector("#ikltThemeSelect");
 
         if (darkCheckbox) darkCheckbox.checked = !!settings.darkMode;
         if (sovCheckbox) sovCheckbox.checked = !!settings.sovHighlight;
+        if (themeSelect) themeSelect.value = settings.activeTheme || "Dark-mode";
 
         applySettings();
     }
@@ -1100,10 +1186,16 @@
             <div class="iklt-flex-wrapper">
                 <div class="iklt-section">
                     <div class="iklt-section-title">Theme Preferences</div>
-                    <label class="iklt-option-row">
-                        <input type="checkbox" id="ikltDarkCheckbox" />
-                        <span>Enable Global Dark Mode</span>
-                    </label>
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                        <label class="iklt-option-row" style="margin-bottom: 0;">
+                            <input type="checkbox" id="ikltDarkCheckbox" />
+                            <span>Enable Global Dark Mode</span>
+                        </label>
+                        <select id="ikltThemeSelect" style="padding: 2px 6px; font-size: 11px;">
+                            <option value="Dark-mode">Dark-mode</option>
+                            <option value="Custom">Custom</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="iklt-section">
                     <div class="iklt-section-title">Sovereignty Helper</div>
@@ -1112,12 +1204,13 @@
                         <span>Highlight Sov Level Imbalance</span>
                     </label>
                 </div>
-                <div class="iklt-footer">LuperTweaks v2.0</div>
+                <div class="iklt-footer">LuperTweaks v2.22</div>
             </div>
         `;
         document.body.appendChild(content);
 
         content.querySelector("#ikltDarkCheckbox").addEventListener("change", saveSettings);
+        content.querySelector("#ikltThemeSelect").addEventListener("change", saveSettings);
         content.querySelector("#ikltSovCheckbox").addEventListener("change", saveSettings);
     }
 
@@ -1188,8 +1281,12 @@
             SovImbalanceCheck();
         }, 1000);
 
-        // Hook directly into CKEditor instance creation (0ms flash elimination)
-        initMailEditorHook();
+        // Instant MutationObserver for Mail Iframe & Context Menu Panels
+        const uiObserver = new MutationObserver(() => {
+            initMailEditorHook();
+            styleCKEditorPanels();
+        });
+        uiObserver.observe(document.body, { childList: true, subtree: true });
 
         if (!resizeBound) {
             resizeBound = true;
