@@ -190,6 +190,11 @@
                 --ik-theme-button-inv-off: url("https://i.imgur.com/B8omxkJ.png");
                 --ik-theme-button-inv-on: url("https://i.imgur.com/mOpruAO.png");
 
+                --ik-theme-button-diplomacy-off: url("https://i.imgur.com/gLJkolH.png");
+                --ik-theme-button-diplomacy-on: url("https://i.imgur.com/NRrGZy8.png");
+                --ik-theme-button-diplo-off: url("https://i.imgur.com/XHnkzln.png");
+                --ik-theme-button-diplo-on: url("https://i.imgur.com/As5hJLV.png");
+
                 --ik-theme-button-military-off: url("https://i.imgur.com/WogeJW4.png");
                 --ik-theme-button-military-on: url("https://i.imgur.com/42cX1vD.png");
                 --ik-theme-button-moves-off: url("https://i.imgur.com/xs29aaS.png");
@@ -594,6 +599,15 @@
             body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-troops-off) !important; }
             body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-troops-on) !important; }
             /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Military Buttons ^ */
+            body.ik-dark-mode div.iconBox.ib3 a img.icon { content: var(--ik-theme-button-diplomacy-off) !important; }
+            body.ik-dark-mode div.iconBox.ib3 a:hover img.icon { content: var(--ik-theme-button-diplomacy-on) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-off) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-on) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-orders-off) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-orders-on) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-diplo-off) !important; }
+            body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-diplo-on) !important; }
+            /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Diplomacy Buttons ^ */
             body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] { content: var(--ik-theme-char-ring2-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] { content: var(--ik-theme-char-ring2-on) !important; }
             /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Character Buttons ^ */       
