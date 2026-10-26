@@ -119,13 +119,8 @@
 
     
     function initMailEditorHook() {
-        if (!window.CKEDITOR) return;
-
-        // Listen for when any CKEditor instance is created
-        window.CKEDITOR.on('instanceReady', function(evt) {
-            if (!document.body.classList.contains("ik-dark-mode")) return;
-            
-            const editor = evt.editor;
+        // Helper function to style a specific CKEditor instance
+        const applyEditorStyle = (editor) => {
             try {
                 const iframeDoc = editor.document.$;
                 if (iframeDoc && iframeDoc.head && !iframeDoc.querySelector("#ikDarkIframeStyle")) {
@@ -141,9 +136,38 @@
                     iframeDoc.head.appendChild(style);
                 }
             } catch (e) {
-                // Suppress cross-origin issues if any arise
+                // Suppress cross-origin issues
             }
-        });
+        };
+
+        // 1. Check if CKEditor is already loaded; if not, poll briefly until it is available
+        if (!window.CKEDITOR) {
+            const checkCK = setInterval(() => {
+                if (window.CKEDITOR) {
+                    clearInterval(checkCK);
+                    initMailEditorHook(); // Re-run once available
+                }
+            }, 200);
+            return;
+        }
+
+        // 2. Style any instances that might already exist on the page
+        if (window.CKEDITOR.instances) {
+            for (let name in window.CKEDITOR.instances) {
+                if (window.CKEDITOR.instances.hasOwnProperty(name)) {
+                    applyEditorStyle(window.CKEDITOR.instances[name]);
+                }
+            }
+        }
+
+        // 3. Listen for any future instances being created (handles AJAX page switches)
+        if (!window.__IK_CK_HOOKED__) {
+            window.__IK_CK_HOOKED__ = true;
+            window.CKEDITOR.on('instanceReady', function(evt) {
+                if (!document.body.classList.contains("ik-dark-mode")) return;
+                applyEditorStyle(evt.editor);
+            });
+        }
     }
     
     // =========================================================================
@@ -769,6 +793,37 @@
             }
             body.ik-dark-mode .cke_dialog_background_cover {
                 background-color: var(--ik-theme-bg) !important;
+            }
+            /* =========================================================================
+               CKEditor Context Menu / Right-Click Popup Hover Fixes
+               ========================================================================= */
+            
+            /* Target menu item containers and buttons on hover/focus */
+            body.ik-dark-mode .cke_menubutton:hover,
+            body.ik-dark-mode .cke_menubutton:focus,
+            body.ik-dark-mode .cke_menubutton_hover,
+            body.ik-dark-mode .cke_menubutton_focus,
+            body.ik-dark-mode .cke_menuitem a:hover,
+            body.ik-dark-mode .cke_menuitem a:focus {
+                background-color: var(--ik-theme-light-alt-bg) !important;
+                background-image: none !important;
+                border-color: var(--ik-theme-border) !important;
+                color: var(--ik-theme-text) !important;
+            }
+            
+            /* Ensure text and icons inside the hovered menu button don't retain old colors or shadows */
+            body.ik-dark-mode .cke_menubutton:hover *,
+            body.ik-dark-mode .cke_menubutton:focus *,
+            body.ik-dark-mode .cke_menubutton_hover *,
+            body.ik-dark-mode .cke_menubutton_focus * {
+                color: var(--ik-theme-text) !important;
+                text-shadow: none !important;
+            }
+            
+            /* Style the outer context menu panel container itself */
+            body.ik-dark-mode .cke_menu {
+                background-color: var(--ik-theme-content-bg) !important;
+                border: 1px solid var(--ik-theme-border) !important;
             }
             
 
