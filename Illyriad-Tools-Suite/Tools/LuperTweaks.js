@@ -723,7 +723,7 @@
             
             /* Dropdown menus (e.g., Format, Styles) */
             body.ik-dark-mode .cke_combo_button {
-                filter: invert(1) hue-rotate(180deg) !important;
+                background-image: -webkit-linear-gradient(top, var(--ik-theme-input-bg), var(--ik-theme-alt-bg)) !important;
             }
             
             body.ik-dark-mode .cke_combo_text {
