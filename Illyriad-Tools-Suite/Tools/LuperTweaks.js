@@ -721,9 +721,22 @@
                 filter: invert(0.85) hue-rotate(180deg) !important;
             }
             
-            /* Dropdown menus (e.g., Format, Styles) */
+            /* Dropdown menu buttons */
             body.ik-dark-mode .cke_combo_button {
-                background-image: -webkit-linear-gradient(top, var(--ik-theme-input-bg), var(--ik-theme-alt-bg)) !important;
+                background-image: -webkit-linear-gradient(top, var(--ik-theme-alt-bg), var(--ik-content-bg)) !important;
+                border-color: var(--ik-theme-border) !important;
+                outline: none !important;
+            }
+
+            /* Dialog Popup menus */
+            td.cke_dialog_footer,
+            div.cke_dialog_title {
+                box-shadow: none !important;;
+                background-color: var(--ik-theme-content-bg) !important;
+                background-image: var(--ik-theme-header-texture) !important;
+            }
+            td.cke_dialog_contents_body {
+                background-color: var(--ik-theme-content-bg) !important;
             }
             
             body.ik-dark-mode .cke_combo_text {
