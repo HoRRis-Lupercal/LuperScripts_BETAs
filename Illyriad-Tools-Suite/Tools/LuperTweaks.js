@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      1.9
+// @version      0.2
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
