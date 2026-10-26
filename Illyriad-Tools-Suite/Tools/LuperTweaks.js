@@ -770,6 +770,37 @@
             body.ik-dark-mode .cke_dialog_background_cover {
                 background-color: var(--ik-theme-bg) !important;
             }
+
+            /* Normal button state */
+            body.ik-dark-mode .cke_menubutton {
+                background-color: transparent !important;
+                color: var(--ik-theme-text) !important;
+            }
+            
+            body.ik-dark-mode .cke_menubutton_label {
+                color: var(--ik-theme-text) !important;
+                text-shadow: none !important;
+            }
+            
+            /* Hover button state */
+            body.ik-dark-mode .cke_menubutton:hover,
+            body.ik-dark-mode .cke_menubutton_hover,
+            body.ik-dark-mode a.cke_menubutton:hover {
+                background-color: var(--ik-theme-light-alt-bg) !important;
+                background-image: none !important;
+                border-color: var(--ik-theme-border) !important;
+                color: var(--ik-theme-text) !important;
+            }
+            
+            body.ik-dark-mode .cke_menubutton:hover .cke_menubutton_label,
+            body.ik-dark-mode .cke_menubutton_hover .cke_menubutton_label {
+                color: var(--ik-theme-text) !important;
+            }
+            
+            /* Icon filter for visibility on dark backgrounds */
+            body.ik-dark-mode .cke_menubutton_icon {
+                filter: invert(0.85) hue-rotate(180deg) !important;
+            }
             
 
             /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Mail Terminal Background Color ^ */
