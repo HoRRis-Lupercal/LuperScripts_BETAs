@@ -117,6 +117,7 @@
         });
     }
 
+    /*
     function styleMailIframe() {
         if (!document.body.classList.contains("ik-dark-mode")) return;
     
@@ -140,7 +141,7 @@
         } catch (e) {
             // Suppress cross-origin issues if any arise
         }
-    }
+    } */
     
     // =========================================================================
     //  ADDITIONAL HELPER FUNCTIONS
@@ -751,7 +752,6 @@
             }
             body.ik-dark-mode div.cke_inner,
             body.ik-dark-mode td.cke_dialog_contents_body,
-            body.ik-dark-mode .cke_dialog_contents,
             body.ik-dark-mode .cke_dialog_contents {
                 background-color: var(--ik-theme-content-bg) !important;
                 border-color: var(--ik-theme-border) !important;
@@ -1126,7 +1126,7 @@
         setInterval(() => {
             highlightZeroCityValues();
             SovImbalanceCheck();
-            styleMailIframe();
+            /* styleMailIframe(); */
         }, 1000);
 
         if (!resizeBound) {
