@@ -116,6 +116,31 @@
             img.src = url;
         });
     }
+
+    function styleMailIframe() {
+        if (!document.body.classList.contains("ik-dark-mode")) return;
+    
+        const iframe = document.querySelector("#cke_MsgBodyEditor iframe, .cke_contents iframe");
+        if (!iframe) return;
+    
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (iframeDoc && iframeDoc.body && !iframeDoc.querySelector("#ikDarkIframeStyle")) {
+                const style = iframeDoc.createElement("style");
+                style.id = "ikDarkIframeStyle";
+                style.textContent = `
+                    body.cke_editable {
+                        background-color: #151516 !important;
+                        color: #e3e3e3 !important;
+                    }
+                    a { color: #ea882e !important; }
+                `;
+                iframeDoc.head.appendChild(style);
+            }
+        } catch (e) {
+            // Suppress cross-origin issues if any arise
+        }
+    }
     
     // =========================================================================
     //  ADDITIONAL HELPER FUNCTIONS
@@ -645,8 +670,63 @@
             body.ik-dark-mode .cityMenu.selected { background-color: var(--ik-theme-special-text7) !important; }
  
             /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ City Menu Background Color ^ */
-            body.ik-dark-mode div#cke_MsgBodyEditor.cke_1.cke.cke_reset.cke_chrome.cke_editor_MsgBodyEditor.cke_ltr.cke_browser_gecko { background-color: var(--ik-theme-alt-bg) !important; }
-
+            /* =========================================================================
+               CKEditor / Mail Container Dark Mode Styling
+               ========================================================================= */
+            
+            /* Main editor frame and wrapper */
+            body.ik-dark-mode #cke_MsgBodyEditor,
+            body.ik-dark-mode .cke_chrome,
+            body.ik-dark-mode .cke_inner {
+                background-color: var(--ik-theme-alt-bg) !important;
+                border-color: var(--ik-theme-border) !important;
+            }
+            
+            /* Top toolbar / Header */
+            body.ik-dark-mode span.cke_top,
+            body.ik-dark-mode .cke_toolbox {
+                background-color: var(--ik-theme-content-bg) !important;
+                background-image: var(--ik-theme-header-texture) !important;
+                border-bottom: 1px solid var(--ik-theme-border) !important;
+            }
+            
+            /* Footer / Bottom status bar */
+            body.ik-dark-mode span.cke_bottom {
+                background-color: var(--ik-theme-content-bg) !important;
+                background-image: var(--ik-theme-header-texture) !important;
+                border-top: 1px solid var(--ik-theme-border) !important;
+            }
+            
+            /* Toolgroups and buttons */
+            body.ik-dark-mode .cke_toolgroup {
+                background: var(--ik-theme-alt-bg) !important;
+                border-color: var(--ik-theme-border) !important;
+            }
+            
+            body.ik-dark-mode a.cke_button {
+                background: transparent !important;
+            }
+            
+            body.ik-dark-mode a.cke_button:hover,
+            body.ik-dark-mode a.cke_button_on {
+                background-color: var(--ik-theme-light-alt-bg) !important;
+                border-color: var(--ik-theme-border) !important;
+            }
+            
+            /* Invert toolbar icons for visibility on dark backgrounds */
+            body.ik-dark-mode .cke_button_icon {
+                filter: invert(0.85) hue-rotate(180deg) !important;
+            }
+            
+            /* Dropdown menus (e.g., Format, Styles) */
+            body.ik-dark-mode .cke_combo_button {
+                background-color: var(--ik-theme-input-bg) !important;
+                border-color: var(--ik-theme-border) !important;
+            }
+            
+            body.ik-dark-mode .cke_combo_text {
+                color: var(--ik-theme-text) !important;
+            }
             /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Mail Terminal Background Color ^ */
 
             /* ============================================================================================================================================================================================
@@ -1001,6 +1081,7 @@
         setInterval(() => {
             highlightZeroCityValues();
             SovImbalanceCheck();
+            styleMailIframe();
         }, 1000);
 
         if (!resizeBound) {
