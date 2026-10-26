@@ -760,7 +760,7 @@
             /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Magic Buttons ^ */
             body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] { content: var(--ik-theme-char-ring2-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] { content: var(--ik-theme-char-ring2-on) !important; }
-            body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="bg_off.png"] { content: var(--ik-theme-char-darkbg-off) !important; }
+            body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="bg_off.png"] { content: var(--ik-theme-darkbg-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="bg_on.png"] { content: var(--ik-theme-darkbg-on) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-favourites-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-favourites-on) !important; }
@@ -770,7 +770,19 @@
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-account-diplo-on) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-support-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-support-on) !important; }
-            /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Character Buttons ^ */       
+            /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Character Buttons ^ */
+            body.ik-dark-mode h1 img.h1Icon[src*="world_64x64_off.png"] { content: var(--ik-theme-button-world-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="regionalbonus_32x32_off.png"] { content: var(--ik-theme-button-region-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="quests_32x32_off.png"] { content: var(--ik-theme-button-quest-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="tournaments_32x32_off.png"] { content: var(--ik-theme-button-tourney-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="notes_32x32_off.png"] { content: var(--ik-theme-button-stats-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="city_64x64_off.png"] { content: var(--ik-theme-button-city-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="castle_32x32_off.png"] { content: var(--ik-theme-button-castle-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="town_summary_32x32_off.png"] { content: var(--ik-theme-button-res-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="production_summary_32x32_off.png"] { content: var(--ik-theme-button-prod-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="sovereignty_32x32_off.png"] { content: var(--ik-theme-button-sov-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="inventory_32x32_off.png"] { content: var(--ik-theme-button-inv-off) !important; }
+            /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Header Title Images ^ */  
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.t { background-image: var(--ik-theme-popup-top) !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m { background-image: var(--ik-theme-popup-mid) !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.b { background-image: var(--ik-theme-popup-bot) !important; }
