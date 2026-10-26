@@ -753,8 +753,6 @@
             body.ik-dark-mode div.cke_inner,
             body.ik-dark-mode td.cke_dialog_contents_body,
             body.ik-dark-mode .cke_dialog_contents,
-            body.ik-dark-mode .cke_editable,
-            body.ik-dark-mode iframe.cke_wysiwyg_frame html,
             body.ik-dark-mode .cke_menu {
                 background-color: var(--ik-theme-content-bg) !important;
                 border-color: var(--ik-theme-border) !important;
