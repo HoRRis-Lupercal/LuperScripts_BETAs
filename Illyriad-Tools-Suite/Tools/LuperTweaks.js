@@ -118,16 +118,18 @@
     }
 
     
-    function styleMailIframe() {
-        if (!document.body.classList.contains("ik-dark-mode")) return;
+    function initMailEditorHook() {
+        if (!window.CKEDITOR) return;
 
-        const iframe = document.querySelector("#cke_MsgBodyEditor iframe, .cke_contents iframe");
-        if (!iframe) return;
-
-        try {
-            const applyStyle = (targetDoc) => {
-                if (targetDoc && targetDoc.head && !targetDoc.querySelector("#ikDarkIframeStyle")) {
-                    const style = targetDoc.createElement("style");
+        // Listen for when any CKEditor instance is created
+        window.CKEDITOR.on('instanceReady', function(evt) {
+            if (!document.body.classList.contains("ik-dark-mode")) return;
+            
+            const editor = evt.editor;
+            try {
+                const iframeDoc = editor.document.$;
+                if (iframeDoc && iframeDoc.head && !iframeDoc.querySelector("#ikDarkIframeStyle")) {
+                    const style = iframeDoc.createElement("style");
                     style.id = "ikDarkIframeStyle";
                     style.textContent = `
                         body.cke_editable {
@@ -136,23 +138,12 @@
                         }
                         a { color: #ea882e !important; }
                     `;
-                    targetDoc.head.appendChild(style);
+                    iframeDoc.head.appendChild(style);
                 }
-            };
-
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-            if (iframeDoc && iframeDoc.body) {
-                applyStyle(iframeDoc);
-            } else {
-                // If the iframe is still loading its internal doc, listen for the load event
-                iframe.addEventListener("load", () => {
-                    const loadedDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    applyStyle(loadedDoc);
-                }, { once: true });
+            } catch (e) {
+                // Suppress cross-origin issues if any arise
             }
-        } catch (e) {
-            // Suppress cross-origin issues if any arise
-        }
+        });
     }
     
     // =========================================================================
@@ -1142,11 +1133,8 @@
             SovImbalanceCheck();
         }, 1000);
 
-        // Instant MutationObserver for the Mail Iframe (0ms delay)
-        const mailObserver = new MutationObserver(() => {
-            styleMailIframe();
-        });
-        mailObserver.observe(document.body, { childList: true, subtree: true });
+        // Hook directly into CKEditor instance creation (0ms flash elimination)
+        initMailEditorHook();
 
         if (!resizeBound) {
             resizeBound = true;
