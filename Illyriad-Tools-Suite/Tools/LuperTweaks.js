@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.2.1
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -748,30 +748,39 @@
             }
 
             /* =========================================================================
-               CKEditor Context Menu / Paste Popup Hover Fixes
+               CKEditor Context Menu / Paste Popup Hover Fixes (Dual Scope)
                ========================================================================= */
 
+            html.ik-dark-mode .cke_menu,
             body.ik-dark-mode .cke_menu,
+            html.ik-dark-mode .cke_panel,
             body.ik-dark-mode .cke_panel {
                 background-color: var(--ik-theme-content-bg) !important;
                 border-color: var(--ik-theme-border) !important;
             }
 
+            html.ik-dark-mode .cke_menubutton,
             body.ik-dark-mode .cke_menubutton {
                 background-color: transparent !important;
                 color: var(--ik-theme-text) !important;
             }
             
+            html.ik-dark-mode .cke_menubutton_label,
             body.ik-dark-mode .cke_menubutton_label {
                 color: var(--ik-theme-text) !important;
                 text-shadow: none !important;
             }
             
-            /* Target CKEditor's active focus and hover classes explicitly */
+            /* Comprehensive hover, focus, and active states */
+            html.ik-dark-mode .cke_menubutton:hover,
             body.ik-dark-mode .cke_menubutton:hover,
+            html.ik-dark-mode .cke_menubutton_hover,
             body.ik-dark-mode .cke_menubutton_hover,
+            html.ik-dark-mode .cke_menubutton_focus,
             body.ik-dark-mode .cke_menubutton_focus,
+            html.ik-dark-mode .cke_menubutton_on,
             body.ik-dark-mode .cke_menubutton_on,
+            html.ik-dark-mode .cke_menu_item a:hover,
             body.ik-dark-mode .cke_menu_item a:hover {
                 background-color: var(--ik-theme-light-alt-bg) !important;
                 background-image: none !important;
@@ -780,14 +789,18 @@
                 color: var(--ik-theme-text) !important;
             }
             
+            html.ik-dark-mode .cke_menubutton:hover .cke_menubutton_label,
             body.ik-dark-mode .cke_menubutton:hover .cke_menubutton_label,
+            html.ik-dark-mode .cke_menubutton_hover .cke_menubutton_label,
             body.ik-dark-mode .cke_menubutton_hover .cke_menubutton_label,
+            html.ik-dark-mode .cke_menubutton_focus .cke_menubutton_label,
             body.ik-dark-mode .cke_menubutton_focus .cke_menubutton_label,
+            html.ik-dark-mode .cke_menu_item a:hover .cke_menubutton_label,
             body.ik-dark-mode .cke_menu_item a:hover .cke_menubutton_label {
                 color: var(--ik-theme-text) !important;
             }
             
-            /* Context menu icon filter */
+            html.ik-dark-mode .cke_menubutton_icon,
             body.ik-dark-mode .cke_menubutton_icon {
                 filter: invert(0.85) hue-rotate(180deg) !important;
             }
