@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite
 // @namespace    Developed by IKnights, modified by HoRRis
-// @version      0.1.5
+// @version      0.2.2
 // @description  Unified Illyriad tools suite.
 // @author       IKnights and HoRRis
 //
