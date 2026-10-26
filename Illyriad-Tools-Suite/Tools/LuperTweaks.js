@@ -680,17 +680,14 @@
                ========================================================================= */
             
             /* Main editor frame and wrapper */
-            html.ik-dark-mode #cke_MsgBodyEditor,
             body.ik-dark-mode #cke_MsgBodyEditor,
-            html.ik-dark-mode .cke_chrome,
             body.ik-dark-mode .cke_chrome,
-            html.ik-dark-mode .cke_inner,
             body.ik-dark-mode .cke_inner {
                 background-color: var(--ik-theme-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
             }
 
-            /* Dialog text & reset all */
+            /* Dialog text */
             body.ik-dark-mode .cke_combo_text,
             body.ik-dark-mode .cke_reset_all * {
                 color: var(--ik-theme-text) !important;
@@ -734,7 +731,7 @@
                 border-color: var(--ik-theme-border) !important;
             }
             
-            /* Invert toolbar icons */
+            /* Invert toolbar icons for visibility on dark backgrounds */
             body.ik-dark-mode .cke_button_icon {
                 filter: invert(0.85) hue-rotate(180deg) !important;
             }
@@ -747,62 +744,31 @@
                 outline: none !important;
             }
 
-            /* =========================================================================
-               CKEditor Context Menu / Paste Popup Hover Fixes (Dual Scope)
-               ========================================================================= */
-
-            html.ik-dark-mode .cke_menu,
-            body.ik-dark-mode .cke_menu,
-            html.ik-dark-mode .cke_panel,
-            body.ik-dark-mode .cke_panel {
+            /* Dialog Popup menus */
+            body.ik-dark-mode td.cke_dialog_footer,
+            body.ik-dark-mode div.cke_dialog_title {
+                box-shadow: none !important;
+                text-shadow:  none !important;
+                background-color: var(--ik-theme-content-bg) !important;
+                background-image: var(--ik-theme-header-texture) !important;
+                border-color: var(--ik-theme-border) !important;
+            }
+            body.ik-dark-mode div.cke_inner,
+            body.ik-dark-mode td.cke_dialog_contents_body,
+            body.ik-dark-mode .cke_dialog_contents,
+            body.ik-dark-mode .cke_menu {
                 background-color: var(--ik-theme-content-bg) !important;
                 border-color: var(--ik-theme-border) !important;
-            }
-
-            html.ik-dark-mode .cke_menubutton,
-            body.ik-dark-mode .cke_menubutton {
-                background-color: transparent !important;
                 color: var(--ik-theme-text) !important;
             }
-            
-            html.ik-dark-mode .cke_menubutton_label,
-            body.ik-dark-mode .cke_menubutton_label {
-                color: var(--ik-theme-text) !important;
-                text-shadow: none !important;
-            }
-            
-            /* Comprehensive hover, focus, and active states */
-            html.ik-dark-mode .cke_menubutton:hover,
-            body.ik-dark-mode .cke_menubutton:hover,
-            html.ik-dark-mode .cke_menubutton_hover,
-            body.ik-dark-mode .cke_menubutton_hover,
-            html.ik-dark-mode .cke_menubutton_focus,
-            body.ik-dark-mode .cke_menubutton_focus,
-            html.ik-dark-mode .cke_menubutton_on,
-            body.ik-dark-mode .cke_menubutton_on,
-            html.ik-dark-mode .cke_menu_item a:hover,
-            body.ik-dark-mode .cke_menu_item a:hover {
-                background-color: var(--ik-theme-light-alt-bg) !important;
-                background-image: none !important;
-                background: var(--ik-theme-light-alt-bg) !important;
+            body.ik-dark-mode .cke_dialog iframe.cke_pasteframe,
+            body.ik-dark-mode .cke_pasteframe,
+            body.ik-dark-mode .cke_panel {
+                background-color: var(--ik-theme-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
-                color: var(--ik-theme-text) !important;
             }
-            
-            html.ik-dark-mode .cke_menubutton:hover .cke_menubutton_label,
-            body.ik-dark-mode .cke_menubutton:hover .cke_menubutton_label,
-            html.ik-dark-mode .cke_menubutton_hover .cke_menubutton_label,
-            body.ik-dark-mode .cke_menubutton_hover .cke_menubutton_label,
-            html.ik-dark-mode .cke_menubutton_focus .cke_menubutton_label,
-            body.ik-dark-mode .cke_menubutton_focus .cke_menubutton_label,
-            html.ik-dark-mode .cke_menu_item a:hover .cke_menubutton_label,
-            body.ik-dark-mode .cke_menu_item a:hover .cke_menubutton_label {
-                color: var(--ik-theme-text) !important;
-            }
-            
-            html.ik-dark-mode .cke_menubutton_icon,
-            body.ik-dark-mode .cke_menubutton_icon {
-                filter: invert(0.85) hue-rotate(180deg) !important;
+            body.ik-dark-mode .cke_dialog_background_cover {
+                background-color: var(--ik-theme-bg) !important;
             }
             
 
