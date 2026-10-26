@@ -743,18 +743,24 @@
             /* Dialog Popup menus */
             body.ik-dark-mode td.cke_dialog_footer,
             body.ik-dark-mode div.cke_dialog_title {
-                box-shadow: none !important;;
+                box-shadow: none !important;
+                text-shadow:  none !important;
                 background-color: var(--ik-theme-content-bg) !important;
                 background-image: var(--ik-theme-header-texture) !important;
+                border-color: var(--ik-theme-border) !important;
             }
             body.ik-dark-mode div.cke_inner,
-            body.ik-dark-mode td.cke_dialog_contents_body {
+            body.ik-dark-mode td.cke_dialog_contents_body,
+            body.ik-dark-mode .cke_dialog_contents,
+            body.ik-dark-mode .cke_dialog_contents {
                 background-color: var(--ik-theme-content-bg) !important;
+                border-color: var(--ik-theme-border) !important;
             }
             body.ik-dark-mode .cke_dialog iframe.cke_pasteframe,
             body.ik-dark-mode .cke_pasteframe,
             body.ik-dark-mode .cke_panel {
                 background-color: var(--ik-theme-alt-bg) !important;
+                border-color: var(--ik-theme-border) !important;
             }
             body.ik-dark-mode .cke_dialog_background_cover {
                 background-color: var(--ik-theme-bg) !important;
