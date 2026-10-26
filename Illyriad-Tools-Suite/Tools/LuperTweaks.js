@@ -426,8 +426,11 @@
             body.ik-dark-mode .sublinks,
             body.ik-dark-mode .subLinks a[href],
             body.ik-dark-mode .sublinks a[href] {
+                color: var(--ik-theme-special-text4) !important;
+            } 
+            body.ik-dark-mode .subLinks a.selected {
                 color: var(--ik-theme-special-text5) !important;
-            } /* -------------------------------------------------------------------------------------------------------------------------------------------------- ^ .headLinks & .subLinks Text Colors ^ */
+            }/* -------------------------------------------------------------------------------------------------------------------------------------------------- ^ .headLinks & .subLinks Text Colors ^ */
 
             body.ik-dark-mode .name, 
             body.ik-dark-mode span.name, 
