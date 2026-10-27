@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      0.2.23
+// @version      0.2.26
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -49,7 +49,7 @@
     function preloadCustomImages() {
         const themes = window.IKLuperThemes || {};
         const activeThemeObj = themes[settings.activeTheme] || themes["Dark-mode"] || {};
-        
+
         Object.values(activeThemeObj).forEach(val => {
             if (typeof val === "string" && val.includes("url(")) {
                 const match = val.match(/url\(['"]?(.*?)['"]?\)/);
@@ -61,80 +61,22 @@
         });
     }
 
-    
-function initMailEditorHook() {
-        // Function to inject styles via CKEditor's native API
-        const applyCKEditorGlobalStyles = () => {
-            if (!window.CKEDITOR || window.__IK_CK_STYLED__) return;
-            window.__IK_CK_STYLED__ = true;
-
-            try {
-                window.CKEDITOR.addCss(`
-                    /* 1. Main Text Editing Area */
-                    body.cke_editable {
-                        background-color: #151516 !important;
-                        color: #e3e3e3 !important;
-                    }
-                    body.cke_editable a {
-                        color: #ea882e !important;
-                    }
-
-                    /* 2. Context Menu & Popup Panels Background */
-                    body.cke_ltr div.cke_panel_block,
-                    body.cke_ltr .cke_menu,
-                    .cke_reset_all .cke_menuitem {
-                        background-color: #151516 !important;
-                        border-color: #333537 !important;
-                    }
-
-                    /* 3. Context Menu Items & Hover States */
-                    .cke_reset_all .cke_menuitem a.cke_menubutton,
-                    .cke_reset_all .cke_menuitem a.cke_menubutton * {
-                        color: #e3e3e3 !important;
-                        text-shadow: none !important;
-                    }
-
-                    .cke_reset_all .cke_menuitem a.cke_menubutton:hover,
-                    .cke_reset_all .cke_menuitem a.cke_menubutton:focus,
-                    .cke_reset_all .cke_menubutton_hover,
-                    .cke_reset_all .cke_menubutton_focus {
-                        background-color: #515252 !important;
-                        background-image: none !important;
-                        border-color: #333537 !important;
-                        color: #e3e3e3 !important;
-                    }
-
-                `);
-            } catch (e) {
-                // Suppress errors if CKEditor isn't fully ready
-            }
-        };
-
-        // Poll briefly until CKEDITOR is available, then apply global styles
-        if (!window.CKEDITOR) {
-            const checkCK = setInterval(() => {
-                if (window.CKEDITOR) {
-                    clearInterval(checkCK);
-                    applyCKEditorGlobalStyles();
-                }
-            }, 200);
-        } else {
-            applyCKEditorGlobalStyles();
-        }
-
-        // Also catch any future instances
-        if (window.CKEDITOR && !window.__IK_CK_HOOKED__) {
-            window.__IK_CK_HOOKED__ = true;
-            window.CKEDITOR.on('instanceReady', () => {
-                applyCKEditorGlobalStyles();
-            });
-        }
-    }
-
     function styleCKEditorPanels() {
-        if (!document.body.classList.contains("ik-dark-mode")) return;
+        const iframes = document.querySelectorAll("iframe.cke_panel_frame, iframe.cke_wysiwyg_frame");
+        const isDark = document.body.classList.contains("ik-dark-mode");
 
-        const panelIframes = document.querySelectorAll("iframe.cke_panel_frame");
+        // If dark mode is disabled, strip injected styles from all editor iframes immediately
+        if (!isDark) {
+            iframes.forEach(iframe => {
+                try {
+                    const doc = iframe.contentDocument || iframe.contentWindow.document;
+                    const existingStyle = doc && doc.querySelector("#ikDarkPanelStyle");
+                    if (existingStyle) existingStyle.remove();
+                } catch (e) {}
+            });
+            return;
+        }
+
         const themes = window.IKLuperThemes || {};
         const activeThemeObj = themes[settings.activeTheme] || themes["Dark-mode"] || {};
 
@@ -144,7 +86,7 @@ function initMailEditorHook() {
         }
         rootVarsCSS += "}\n";
 
-        panelIframes.forEach(iframe => {
+        iframes.forEach(iframe => {
             try {
                 const doc = iframe.contentDocument || iframe.contentWindow.document;
                 if (doc && doc.head && !doc.querySelector("#ikDarkPanelStyle")) {
@@ -153,10 +95,16 @@ function initMailEditorHook() {
                     style.textContent = `
                         ${rootVarsCSS}
 
-                        body, html {
+                        /* 1. Main Text Editing Area (WYSIWYG iframe) */
+                        body, html, body.cke_editable {
                             background-color: var(--ik-theme-content-bg) !important;
                             color: var(--ik-theme-text) !important;
                         }
+                        body.cke_editable a {
+                            color: var(--ik-theme-link) !important;
+                        }
+
+                        /* 2. Context Menus & Popups */
                         .cke_menu {
                             background-color: var(--ik-theme-content-bg) !important;
                             border-color: var(--ik-theme-border) !important;
@@ -179,23 +127,68 @@ function initMailEditorHook() {
                             color: var(--ik-theme-text) !important;
                             text-shadow: none !important;
                         }
+                        .cke_menubutton:hover .cke_menubutton_icon,
+                        .cke_menubutton_icon {
+                            filter: invert(0.85) hue-rotate(180deg) !important;
+                        }
+
+                        /* 3. Toolbar & Button Fixes */
+                        .cke_button_icon {
+                            filter: invert(0.85) hue-rotate(180deg) !important;
+                        }
+                        .cke_combo_button,
+                        .cke_dialog_ui_button {
+                            background-image: -webkit-linear-gradient(top, var(--ik-theme-alt-bg), var(--ik-theme-alt-bg)) !important;
+                            border-color: var(--ik-theme-border) !important;
+                            outline: none !important;
+                            text-shadow: none !important;
+                        }
+
+                        /* 4. CKEditor Dropdown Lists (Paragraph Format, Styles, etc.) */
+                        .cke_panel_block,
+                        .cke_panel_list {
+                            background-color: var(--ik-theme-content-bg) !important;
+                            border-color: var(--ik-theme-border) !important;
+                        }
+                        .cke_panel_grouptitle {
+                            background-color: var(--ik-theme-alt-bg) !important;
+                            background-image: -webkit-linear-gradient(top, var(--ik-theme-alt-bg), var(--ik-theme-alt-bg)) !important;
+                            color: var(--ik-theme-text) !important;
+                            border-bottom: 1px solid var(--ik-theme-border) !important;
+                            text-shadow: none !important;
+                        }
+                        .cke_panel_listItem a {
+                            color: var(--ik-theme-text) !important;
+                            background-color: transparent !important;
+                            border-color: var(--ik-theme-border) !important;
+                        }
+                        .cke_panel_listItem a:hover,
+                        .cke_panel_listItem:hover a,
+                        .cke_panel_listItem a:focus {
+                            background-color: var(--ik-theme-light-alt-bg) !important;
+                            color: var(--ik-theme-text) !important;
+                        }
+                        li.cke_panel_listItem.cke_selected,
+                        li.cke_panel_listItem.cke_selected a {
+                            background-color: var(--ik-theme-light-alt-bg) !important;
+                            color: var(--ik-theme-text) !important;
+                        }
+                        .cke_panel_listItem a[href*="Marker"], .cke_panel_listItem a[href*="Special Container"] {
+                            color: #000 !important;
+                        } /* Marker and Special Container Override */
                     `;
                     doc.head.appendChild(style);
                 }
-            } catch (e) {
-                // Suppress cross-origin issues
-            }
+            } catch (e) {}
         });
     }
-    
+
     // =========================================================================
     //  ADDITIONAL HELPER FUNCTIONS
     // =========================================================================
 
     function highlightZeroCityValues() {
         if (!document.body.classList.contains("ik-dark-mode")) return;
-
-        // Target spans inside the selected city menu hierarchy
         const spans = document.querySelectorAll("div#citiesMenu div.cityMenu.selected div span, div#citiesMenu div div.cityMenu div span");
         spans.forEach(span => {
             if (span.textContent.trim() === "0") {
@@ -204,7 +197,7 @@ function initMailEditorHook() {
             }
         });
     }
-    
+
     function SovImbalanceCheck() {
         const accordions = document.querySelectorAll("#sovAccordion h3");
 
@@ -229,15 +222,14 @@ function initMailEditorHook() {
             if (spans.length >= 2) {
                 const firstText = spans[0].textContent;
                 const secondText = spans[1].textContent;
-                
+
                 const firstVal = parseRoman(firstText);
                 const secondVal = parseRoman(secondText);
-                
+
                 const hasNoStructure = secondText.includes("No Structure Present");
                 const parentA = h3.querySelector("a");
 
                 if (parentA) {
-                    // Highlight if "No Structure Present" OR if second level is lower than first
                     if (hasNoStructure || (secondVal > 0 && secondVal < firstVal)) {
                         parentA.style.setProperty("background-color", "var(--ik-theme-warning-highlight)", "important");
                     } else {
@@ -247,7 +239,6 @@ function initMailEditorHook() {
             }
         });
     }
-    
 
     // =========================================================================
     // CSS INJECTION & GLOBAL STYLING
@@ -258,16 +249,11 @@ function initMailEditorHook() {
         if (!style) {
             style = document.createElement("style");
             style.id = "ikLuperTweaksStyles";
-            document.head.appendChild(style); // Moves/appends to bottom of head
+            document.head.appendChild(style);
         } else {
-            // Re-append to make sure it stays at the bottom of <head>
             document.head.appendChild(style);
         }
         style.textContent = `
-            /* =========================================================================
-               Dialog & UI Container Layout
-               ========================================================================= */
-
             #ikLuperTweaks {
                 padding: 0 !important;
                 overflow: hidden !important;
@@ -318,38 +304,37 @@ function initMailEditorHook() {
                 opacity: 0.7;
             }
 
-            /* ==========================================================================================================================================================================================
-                                                                                            DARK MODE DEFAULT THEME RULES
-            ============================================================================================================================================================================================= */
-            
-            body.ik-dark-mode p:not([id*="Notes"] *), 
-            body.ik-dark-mode td:not([id*="Notes"] *), 
-            body.ik-dark-mode th:not([id*="Notes"] *), 
+            /* =========================================================================
+               DARK MODE DEFAULT THEME RULES
+               ========================================================================= */
+
+            body.ik-dark-mode p:not([id*="Notes"] *),
+            body.ik-dark-mode td:not([id*="Notes"] *),
+            body.ik-dark-mode th:not([id*="Notes"] *),
             body.ik-dark-mode label:not([id*="Notes"] *),
-            body.ik-dark-mode #resbar, 
-            body.ik-dark-mode #resbar td, 
-            body.ik-dark-mode #resbar span, 
+            body.ik-dark-mode #resbar,
+            body.ik-dark-mode #resbar td,
+            body.ik-dark-mode #resbar span,
             body.ik-dark-mode #resbar a,
             body.ik-dark-mode .ui-widget-content a,
             body.ik-dark-mode div#friendActivity.smallBorder div,
             body.ik-dark-mode span:not([id*="Notes"] *):not(.name):not(.ui-dialog-title):not(.ui-accordion-header *):not([class*="ikcat-dialog-tab"]) {
                 color: var(--ik-theme-text) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Default Page Text ^ */
+            }
 
             body.ik-dark-mode a[href]:not([id*="Notes"] *),
-            body.ik-dark-mode .link a[href]:not([id*="Notes"] *) { 
-                color: var(--ik-theme-link) !important; 
+            body.ik-dark-mode .link a[href]:not([id*="Notes"] *) {
+                color: var(--ik-theme-link) !important;
             }
-            body.ik-dark-mode a[href]:not([id*="Notes"] *):hover, 
-            body.ik-dark-mode .link a[href]:not([id*="Notes"] *):hover { 
-                color: var(--ik-theme-link-hover) !important; 
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Link Text Colors ^ */
+            body.ik-dark-mode a[href]:not([id*="Notes"] *):hover,
+            body.ik-dark-mode .link a[href]:not([id*="Notes"] *):hover {
+                color: var(--ik-theme-link-hover) !important;
+            }
 
             body.ik-dark-mode h1 { color: var(--ik-theme-special-text4) !important; }
             body.ik-dark-mode h2 { color: var(--ik-theme-special-text5) !important; }
             body.ik-dark-mode h3 { color: var(--ik-theme-special-text5) !important; }
             body.ik-dark-mode h4 { color: var(--ik-theme-special-text5) !important; }
-            /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Heading Text Colors ^ */
 
             body.ik-dark-mode .headLinks,
             body.ik-dark-mode .headlinks,
@@ -362,37 +347,36 @@ function initMailEditorHook() {
             body.ik-dark-mode .subLinks a[href],
             body.ik-dark-mode .sublinks a[href] {
                 color: var(--ik-theme-special-text4) !important;
-            } 
+            }
             body.ik-dark-mode .subLinks a.selected {
                 color: var(--ik-theme-special-text5) !important;
-            }/* -------------------------------------------------------------------------------------------------------------------------------------------------- ^ .headLinks & .subLinks Text Colors ^ */
+            }
 
-            body.ik-dark-mode .name, 
-            body.ik-dark-mode span.name, 
+            body.ik-dark-mode .name,
+            body.ik-dark-mode span.name,
             body.ik-dark-mode a.name {
                 color: var(--ik-theme-special-text6) !important;
-            } /* ------------------------------------------------------------------------------- General Names */
-            body.ik-dark-mode .name.nameYou, 
-            body.ik-dark-mode span.name.nameYou, 
+            }
+            body.ik-dark-mode .name.nameYou,
+            body.ik-dark-mode span.name.nameYou,
             body.ik-dark-mode a.name.nameYou {
                 color: var(--ik-theme-special-text1) !important;
-            } /* ----------------------------------------------------------------------------------- Your Name */
-            body.ik-dark-mode .name.nameSystem, 
-            body.ik-dark-mode span.name.nameSystem, 
+            }
+            body.ik-dark-mode .name.nameSystem,
+            body.ik-dark-mode span.name.nameSystem,
             body.ik-dark-mode a.name.nameSystem {
                 color: var(--ik-theme-special-text2) !important;
-            } /* ------------------------------------------------------------------------------ System's Names */
-            /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Name Text Colors ^ */
-            
-            html body.ik-dark-mode { 
+            }
+
+            html body.ik-dark-mode {
                 background-image: var(--ik-theme-headermain-texture) !important;
                 background-repeat: no-repeat !important;
-            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Top Header Image ^ */
-            
-            body.ik-dark-mode [style*="font-weight:bold;color:#0000B0"] { 
-                color: var(--ik-theme-special-text4) !important; 
-            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Medal Character Title ^ */
-            
+            }
+
+            body.ik-dark-mode [style*="font-weight:bold;color:#0000B0"] {
+                color: var(--ik-theme-special-text4) !important;
+            }
+
             body.ik-dark-mode div.skillBar,
             body.ik-dark-mode div [style*="background-color:#860008"],
             body.ik-dark-mode div [style*="background-color:#d3b994"],
@@ -401,142 +385,126 @@ function initMailEditorHook() {
             body.ik-dark-mode [data-type="3"],
             body.ik-dark-mode form.odd {
                 background-color: var(--ik-theme-alt-bg) !important;
-            } /* ------------------------------------------------------------------ Skill, Health, Level, Equipment, Header Background */
+            }
             body.ik-dark-mode div [style*="background-color:#a37342"],
             body.ik-dark-mode div.skillBarFill {
                 background-color: var(--ik-theme-xp-bar) !important;
-            } /* ------------------------------------------------------------------------------------------- Skill and Level Bar Color */
+            }
             body.ik-dark-mode div [style*="background-color:#950b09"] {
                 background-color: var(--ik-theme-health-bar) !important;
-            } /* ---------------------------------------------------------------------------------------------------- Health Bar Color */
+            }
             body.ik-dark-mode div [style*="color: #004B00"] {
                 color: var(--ik-theme-special-text3) !important;
-            } /* ------------------------------------------------------------------------------------------------------ Max Level Text */
-            /* ----------------------------------------------------------------------------------------------------------------------------------------- ^ Commander Header, Skill Bars, and Equipment ^ */
-            
-            body.ik-dark-mode div.b-page { 
-                background-color: var(--ik-theme-alt-bg) !important; 
-            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Herald Page Drag Colour ^ */
-            
-            body.ik-dark-mode div.headline { 
-                color: var(--ik-theme-special-text4) !important; 
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Herald Article Titles ^ */
-            
-            body.ik-dark-mode #book [style*="color:black"] { 
+            }
+
+            body.ik-dark-mode div.b-page {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
+            body.ik-dark-mode div.headline {
                 color: var(--ik-theme-special-text4) !important;
-            } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Herald Additional Titles ^ */
-            
-            body.ik-dark-mode div.b-wrap.b-wrap-right { 
-                background-image: var(--ik-theme-herald-right) !important; 
-            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Herald Right Page Image ^ */
-            
-            body.ik-dark-mode div.b-wrap.b-wrap-left { 
-                background-image: var(--ik-theme-herald-left) !important; 
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Herald Left Page Image ^ */
-            
-            body.ik-dark-mode div.b-page.b-page-0.b-p1 div.b-wrap.b-wrap-left { 
-                background-image: var(--ik-theme-herald-title) !important; 
-            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Herald Title Page Image ^ */
-            
-            body.ik-dark-mode div#hidePage { 
-                background-image: var(--ik-theme-herald-book) !important; 
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Herald Background Book Image ^ */
-            
+            }
+            body.ik-dark-mode #book [style*="color:black"] {
+                color: var(--ik-theme-special-text4) !important;
+            }
+            body.ik-dark-mode div.b-wrap.b-wrap-right {
+                background-image: var(--ik-theme-herald-right) !important;
+            }
+            body.ik-dark-mode div.b-wrap.b-wrap-left {
+                background-image: var(--ik-theme-herald-left) !important;
+            }
+            body.ik-dark-mode div.b-page.b-page-0.b-p1 div.b-wrap.b-wrap-left {
+                background-image: var(--ik-theme-herald-title) !important;
+            }
+            body.ik-dark-mode div#hidePage {
+                background-image: var(--ik-theme-herald-book) !important;
+            }
+
             body.ik-dark-mode input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
             body.ik-dark-mode textarea:not(#ikNotesTextarea),
-            body.ik-dark-mode select { 
+            body.ik-dark-mode select {
                 background-color: var(--ik-theme-input-bg) !important;
                 color: var(--ik-theme-text) !important;
                 border: 1px solid var(--ik-theme-border) !important;
-            } /* --------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Input Fields and Textboxes ^ */
-            
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div div#radio.center.ui-buttonset { 
-                background-image: var(--ik-theme-header-texture) !important; 
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Relocation Header ^ */
-            
-            body.ik-dark-mode .ui-state-default { 
+            }
+
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div div#radio.center.ui-buttonset {
+                background-image: var(--ik-theme-header-texture) !important;
+            }
+            body.ik-dark-mode .ui-state-default {
                 color: var(--ik-theme-special-text4) !important;
                 background-image: var(--ik-theme-header-texture) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Widget and Popup Header ^ */
-            
-            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder > div:first-of-type { 
-                background-image: var(--ik-theme-header-texture) !important; 
-            } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Medal Header Image ^ */
-            
+            }
+            body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder > div:first-of-type {
+                background-image: var(--ik-theme-header-texture) !important;
+            }
             body.ik-dark-mode div div.content table.generic tbody tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div div.smallBorder div#medalCost div {
-                background-image: var(--ik-theme-header-texture) !important; 
-            }  /* ----------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Alliance Medal headers ^ */
-            
+                background-image: var(--ik-theme-header-texture) !important;
+            }
             body.ik-dark-mode div#AwardMedalHTML div.smallBorder div form div div {
                 background-color: var(--ik-theme-alt-bg) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Medal Player List Even ^ */
-            
-            body.ik-dark-mode div#AwardMedalHTML div.smallBorder div form div div div.odd { 
-            background-color: var(--ik-theme-light-alt-bg) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Award Medal Player List Odd ^ */
-            
+            }
+            body.ik-dark-mode div#AwardMedalHTML div.smallBorder div form div div div.odd {
+                background-color: var(--ik-theme-light-alt-bg) !important;
+            }
+
             body.ik-dark-mode .ui-state-default a[href],
             body.ik-dark-mode .ui-state-default a,
             body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a,
             body.ik-dark-mode .ui-tabs-nav li:not(.ui-tabs-selected):not(.ui-tabs-active) a[href] {
                 color: var(--ik-theme-special-text4) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Main Unselected Header Color ^ */
-            
+            }
             body.ik-dark-mode .ui-state-active, body.ik-dark-mode .ui-state-active a, body.ik-dark-mode .ui-state-active a[href] {
                 color: var(--ik-theme-special-text5) !important;
-            } /* -------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Selected Header Color ^ */
-            
+            }
             body.ik-dark-mode .ui-widget-content:not([id="ikNotesPanel"]):not([id="ikNotesPanel"] *) {
                 background-color: var(--ik-theme-content-bg) !important;
                 background-image: var(--ik-theme-texture) !important;
                 color: var(--ik-theme-text) !important;
-            } /* -------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main Selected Header Color ^ */
-            
+            }
+
             body.ik-dark-mode .ui-accordion-header h3 a span:not([id*="Notes"] *),
             body.ik-dark-mode div.accordionCommand h3.ui-accordion-header a table.generic tbody tr td:not([id*="Notes"] *) {
                 color: var(--ik-theme-special-text4) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Accordion Active Tab Headers ^ */
-            
+            }
             body.ik-dark-mode .ui-accordion-header.ui-state-active a,
             body.ik-dark-mode .ui-accordion-header.ui-state-active a[href],
             body.ik-dark-mode div.accordionCommand h3.ui-accordion-header.ui-state-active a table.generic tbody tr td:not([id*="Notes"] *) {
                 color: var(--ik-theme-special-text5) !important;
-            } /* --------------------------------------------------------------------------------------------------------------------------------------------------- ^ Accordion Commander Tab Headers ^ */
-            
+            }
+
             body.ik-dark-mode .sideTab,
             body.ik-dark-mode span.ikcat-dialog-tab:not([id*="Notes"] *) {
                 background-image: var(--ik-theme-headerO-texture) !important;
                 background-repeat: repeat !important;
                 color: var(--ik-theme-special-text4) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------ ^  LuperNotes/LuperList Tab Headings ^ */
-            
-            body.ik-dark-mode .sideTab.selected, 
+            }
+            body.ik-dark-mode .sideTab.selected,
             body.ik-dark-mode span.ikcat-dialog-tab.data-tab:not([id*="Notes"] *),
-            body.ik-dark-mode span.ikcat-dialog-tab.selected:not([id*="Notes"] *) { 
-                background-image: var(--ik-theme-texture) !important; 
-                background-repeat: repeat !important; 
-                color: var(--ik-theme-special-text5) !important; 
-            } /* ---------------------------------------------------------------------------------------------------------------------------------------- ^ LuperNotes/LuperList Selected Tab Headings ^ */
-            
-            body.ik-dark-mode tr.odd, 
+            body.ik-dark-mode span.ikcat-dialog-tab.selected:not([id*="Notes"] *) {
+                background-image: var(--ik-theme-texture) !important;
+                background-repeat: repeat !important;
+                color: var(--ik-theme-special-text5) !important;
+            }
+
+            body.ik-dark-mode tr.odd,
             body.ik-dark-mode li.odd,
-            body.ik-dark-mode form.odd, 
+            body.ik-dark-mode form.odd,
             body.ik-dark-mode table.oddeven > tbody > tr:nth-child(2n),
-            body.ik-dark-mode table.evenodd > tbody > tr:nth-child(2n+1), 
-            body.ik-dark-mode .ui-widget-content div.oddeven > div:not([id*="chat"]):nth-child(2n), 
-            body.ik-dark-mode table.oddevencols > colgroup > col:nth-child(2n+1), 
-            body.ik-dark-mode #Notifications > div:nth-child(2n), 
-            body.ik-dark-mode td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#globalChatTab div.globalChatHldr div.globalChat.oddeven div:nth-child(2n), 
-            body.ik-dark-mode td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div.odd, 
-            body.ik-dark-mode td#contentTD div.largeBorder div.scrollContent div#MainContentDiv table.generic tbody tr td div.odd, 
-            body.ik-dark-mode colgroup.odd, body.ik-dark-mode colgroup col.odd, body.ik-dark-mode table.generic.odd, 
-            body.ik-dark-mode td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div table.generic.middle.oddeven tbody tr th,  
+            body.ik-dark-mode table.evenodd > tbody > tr:nth-child(2n+1),
+            body.ik-dark-mode .ui-widget-content div.oddeven > div:not([id*="chat"]):nth-child(2n),
+            body.ik-dark-mode table.oddevencols > colgroup > col:nth-child(2n+1),
+            body.ik-dark-mode #Notifications > div:nth-child(2n),
+            body.ik-dark-mode td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#globalChatTab div.globalChatHldr div.globalChat.oddeven div:nth-child(2n),
+            body.ik-dark-mode td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div.odd,
+            body.ik-dark-mode td#contentTD div.largeBorder div.scrollContent div#MainContentDiv table.generic tbody tr td div.odd,
+            body.ik-dark-mode colgroup.odd, body.ik-dark-mode colgroup col.odd, body.ik-dark-mode table.generic.odd,
+            body.ik-dark-mode td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div table.generic.middle.oddeven tbody tr th,
             body.ik-dark-mode td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div table.generic.middle.oddeven tbody tr td:nth-of-type(2),
             body.ik-dark-mode tr td#contentTD div.largeBorder div.scrollContent div#MainContentDiv div.info div#recentEvents.center.evenodd div.combat:nth-child(2n+1),
-            body.ik-dark-mode td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#allianceChatTab div.allianceChatHldr div.allianceChat.oddeven div:nth-child(2n) { 
+            body.ik-dark-mode td.rhsPanel div#sideBar.smallScrollContent div#DockedChat.smallBorder div#allianceChatTab div.allianceChatHldr div.allianceChat.oddeven div:nth-child(2n) {
                 background-color: var(--ik-theme-alt-bg) !important;
-            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Tables & Alternating Rows ^ */
-            
+            }
+
             body.ik-dark-mode .ui-dialog .ui-dialog-buttonpane button,
             body.ik-dark-mode button.ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-only {
                 background-image: var(--ik-theme-button-short-off) !important;
@@ -548,44 +516,39 @@ function initMailEditorHook() {
                 background-image: var(--ik-theme-button-short-on) !important;
                 background-repeat: no-repeat !important;
                 background-size: 100% 100% !important;
-            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Buttons ^ */
-            
-            body.ik-dark-mode div.ui-state-hover, 
-            body.ik-dark-mode a#ui-active-menuitem, 
+            }
+
+            body.ik-dark-mode div.ui-state-hover,
+            body.ik-dark-mode a#ui-active-menuitem,
             body.ik-dark-mode a.ui-state-hover,
             body.ik-dark-mode .ui-menu .ui-menu-item a.ui-state-hover,
             body.ik-dark-mode .ui-autocomplete li a.ui-state-hover,
             body.ik-dark-mode a.jstree-clicked,
-            body.ik-dark-mode a.jstree-hovered { 
+            body.ik-dark-mode a.jstree-hovered {
                 background-color: var(--ik-theme-alt-bg) !important;
                 background-image: none !important;
-            } /* ----------------------------------------------------------------------------------------------------------------------------------------------- ^ City and trade list hover background ^ */
-            
+            }
+
             body.ik-dark-mode .topBar {
                 background-color: var(--ik-theme-content-bg) !important;
                 color: var(--ik-theme-text) !important;
             }
             body.ik-dark-mode .ui-dialog .ui-dialog-title:not([id*="Notes"] *),
-            body.ik-dark-mode span.ui-dialog-title:not([id*="Notes"] *) { 
-                background-color: var(--ik-theme-content-bg) !important; 
+            body.ik-dark-mode span.ui-dialog-title:not([id*="Notes"] *) {
+                background-color: var(--ik-theme-content-bg) !important;
                 color: var(--ik-theme-special-text3) !important;
-            } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Main page background ^ */
-            
+            }
+
             body.ik-dark-mode div.flotr-legend { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode legend { color: var(--ik-theme-special-text3) !important; }
 
-            /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Legends and Charts ^ */
-
             body.ik-dark-mode #dTownTD *, body.ik-dark-mode .dTownTD *, body.ik-dark-mode #citiesMenu { background-color: var(--ik-theme-special-text8) !important; }
             body.ik-dark-mode .cityMenu.selected { background-color: var(--ik-theme-special-text7) !important; }
- 
-            /* ------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ City Menu Background Color ^ */
 
             /* =========================================================================
                CKEditor / Mail Container Dark Mode Styling
                ========================================================================= */
 
-            /* Main editor frame and wrapper */
             body.ik-dark-mode #cke_MsgBodyEditor,
             body.ik-dark-mode .cke_chrome,
             body.ik-dark-mode .cke_inner {
@@ -593,10 +556,11 @@ function initMailEditorHook() {
                 border-color: var(--ik-theme-border) !important;
             }
 
-            /* Dialog text */
             body.ik-dark-mode .cke_combo_text,
+            body.ik-dark-mode .cke_button_label,
             body.ik-dark-mode .cke_reset_all * {
                 color: var(--ik-theme-text) !important;
+                text-shadow: none !important;
             }
             body.ik-dark-mode .cke_reset_all {
                 background-color: var(--ik-theme-alt-bg) !important;
@@ -604,7 +568,6 @@ function initMailEditorHook() {
                 color: var(--ik-theme-text) !important;
             }
 
-            /* Top toolbar / Header */
             body.ik-dark-mode span.cke_top,
             body.ik-dark-mode .cke_toolbox {
                 background-color: var(--ik-theme-content-bg) !important;
@@ -613,7 +576,6 @@ function initMailEditorHook() {
                 box-shadow: none !important;
             }
 
-            /* Footer / Bottom status bar */
             body.ik-dark-mode span.cke_bottom {
                 background-color: var(--ik-theme-content-bg) !important;
                 background-image: var(--ik-theme-header-texture) !important;
@@ -621,7 +583,6 @@ function initMailEditorHook() {
                 box-shadow: none !important;
             }
 
-            /* Toolgroups and buttons */
             body.ik-dark-mode .cke_toolgroup {
                 background: var(--ik-theme-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
@@ -629,6 +590,10 @@ function initMailEditorHook() {
 
             body.ik-dark-mode a.cke_button {
                 background: transparent !important;
+                text-shadow: none !important;
+            }
+            body.ik-dark-mode a.cke_dialog_ui_button span {
+                text-shadow: none !important;
             }
 
             body.ik-dark-mode a.cke_button:hover,
@@ -637,24 +602,44 @@ function initMailEditorHook() {
                 border-color: var(--ik-theme-border) !important;
             }
 
-            /* Invert toolbar icons for visibility on dark backgrounds */
             body.ik-dark-mode .cke_button_icon {
                 filter: invert(0.85) hue-rotate(180deg) !important;
             }
 
-            /* Gradient menu buttons */
             body.ik-dark-mode .cke_combo_button,
             body.ik-dark-mode .cke_dialog_ui_button {
                 background-image: -webkit-linear-gradient(top, var(--ik-theme-alt-bg), var(--ik-theme-alt-bg)) !important;
                 border-color: var(--ik-theme-border) !important;
                 outline: none !important;
+                text-shadow: none !important;
             }
 
-            /* Dialog Popup menus */
+            body.ik-dark-mode .cke_dialog .ImagePreviewBox {
+                background-color: var(--ik-theme-input-bg) !important;
+                border-color: var(--ik-theme-border) !important;
+                color: var(--ik-theme-text) !important;
+            }
+
+            body.ik-dark-mode .cke_dialog .cke_dark_background {
+                background-color: var(--ik-theme-alt-bg) !important;
+                border-color: var(--ik-theme-border) !important;
+                color: var(--ik-theme-text) !important;
+            }
+            body.ik-dark-mode a.cke_specialchar:focus {
+                background-color: var(--ik-theme-alt-bg) !important;
+                border-color: transparent !important;
+                color: var(--ik-theme-text) !important;
+            }
+            body.ik-dark-mode a.cke_specialchar:hover {
+                background-color: var(--ik-theme-light-alt-bg) !important;
+                border-color: var(--ik-theme-border) !important;
+                color: var(--ik-theme-text) !important;
+            }
+
             body.ik-dark-mode td.cke_dialog_footer,
             body.ik-dark-mode div.cke_dialog_title {
                 box-shadow: none !important;
-                text-shadow:  none !important;
+                text-shadow: none !important;
                 background-color: var(--ik-theme-content-bg) !important;
                 background-image: var(--ik-theme-header-texture) !important;
                 border-color: var(--ik-theme-border) !important;
@@ -673,48 +658,26 @@ function initMailEditorHook() {
                 background-color: var(--ik-theme-alt-bg) !important;
                 border-color: var(--ik-theme-border) !important;
             }
+            body.ik-dark-mode .cke_dialog_body {
+                background-color: var(--ik-theme-alt-bg) !important;
+            }
+            body.ik-dark-mode .cke_dialog_tab {
+                background-image: -webkit-linear-gradient(top, var(--ik-theme-alt-bg), var(--ik-theme-alt-bg)) !important;
+            }
+            body.ik-dark-mode .cke_dialog_tab_selected {
+                background-image: -webkit-linear-gradient(top, var(--ik-theme-content-bg), var(--ik-theme-content-bg)) !important;
+            }
             body.ik-dark-mode .cke_dialog_background_cover {
                 background-color: var(--ik-theme-bg) !important;
             }
+
             /* =========================================================================
-               CKEditor Context Menu / Right-Click Popup Hover Fixes
+               DARK MODE IMAGE HANDLING
                ========================================================================= */
-
-            /* Target menu item containers and buttons on hover/focus */
-            body.ik-dark-mode .cke_menubutton:hover,
-            body.ik-dark-mode .cke_menubutton:focus,
-            body.ik-dark-mode .cke_menubutton_hover,
-            body.ik-dark-mode .cke_menubutton_focus,
-            body.ik-dark-mode .cke_menuitem a:hover,
-            body.ik-dark-mode .cke_menuitem a:focus {
-                background-color: var(--ik-theme-light-alt-bg) !important;
-                background-image: none !important;
-                border-color: var(--ik-theme-border) !important;
-                color: var(--ik-theme-text) !important;
-            }
-
-            /* Ensure text and icons inside the hovered menu button don't retain old colors or shadows */
-            body.ik-dark-mode .cke_menubutton:hover *,
-            body.ik-dark-mode .cke_menubutton:focus *,
-            body.ik-dark-mode .cke_menubutton_hover *,
-            body.ik-dark-mode .cke_menubutton_focus * {
-                color: var(--ik-theme-text) !important;
-                text-shadow: none !important;
-            }
-
-            /* Style the outer context menu panel container itself */
-            body.ik-dark-mode .cke_menu {
-                background-color: var(--ik-theme-content-bg) !important;
-                border: 1px solid var(--ik-theme-border) !important;
-            }
-
-            /* ============================================================================================================================================================================================
-                                                                                         DARK MODE IMAGE HANDLING
-            =============================================================================================================================================================================================== */
 
             html.ik-dark-mode {
                 background-image: var(--ik-theme-darkmode-credits) !important;
-            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Darkmode Credits ^ */
+            }
             body.ik-dark-mode .smallBorder,
             body.ik-dark-mode #DockedFriends,
             body.ik-dark-mode .ui-state-active {
@@ -729,23 +692,25 @@ function initMailEditorHook() {
                 background-image: var(--ik-theme-texture) !important;
                 background-repeat: repeat !important;
                 background-size: auto !important;
-            } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Paper Background ^ */
-            body.ik-dark-mode .ui-widget-header { 
+            }
+            body.ik-dark-mode .ui-widget-header {
                 background-image: var(--ik-theme-header-texture) !important;
                 background-repeat: repeat !important;
             }
             body.ik-dark-mode #contentTD {
                 background-image: var(--ik-theme-header-texture) !important;
                 background-color: var(--ik-theme-content-bg) !important;
-            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Dark Header background ^ */
+            }
             body.ik-dark-mode .ui-dialog .ui-dialog-titlebar {
                 background-image: var(--ik-theme-headerO-texture) !important;
                 background-repeat: repeat !important;
-            } 
+            }
             body.ik-dark-mode .headlinks,
             body.ik-dark-mode .headLinks {
                 background-image: var(--ik-theme-headerO-texture) !important;
-            } /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Light header background ^ */
+            }
+
+            /* Icon Replacements */
             body.ik-dark-mode div.iconBox.ib1 a img.icon { content: var(--ik-theme-button-world-off) !important; }
             body.ik-dark-mode div.iconBox.ib1 a:hover img.icon { content: var(--ik-theme-button-world-on) !important; }
             body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-region-off) !important; }
@@ -758,7 +723,7 @@ function initMailEditorHook() {
             body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-stats-on) !important; }
             body.ik-dark-mode div.iconBox.ib1.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-herald-off) !important; }
             body.ik-dark-mode div.iconBox.ib1.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-herald-on) !important; }
-            /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row World Buttons ^ */
+
             body.ik-dark-mode div.iconBox.ib2 a img.icon { content: var(--ik-theme-button-city-off) !important; }
             body.ik-dark-mode div.iconBox.ib2 a:hover img.icon { content: var(--ik-theme-button-city-on) !important; }
             body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-castle-off) !important; }
@@ -771,7 +736,7 @@ function initMailEditorHook() {
             body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-sov-on) !important; }
             body.ik-dark-mode div.iconBox.ib2.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-inv-off) !important; }
             body.ik-dark-mode div.iconBox.ib2.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-inv-on) !important; }
-            /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row City Buttons ^ */
+
             body.ik-dark-mode div.iconBox.ib3 a img.icon { content: var(--ik-theme-button-military-off) !important; }
             body.ik-dark-mode div.iconBox.ib3 a:hover img.icon { content: var(--ik-theme-button-military-on) !important; }
             body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-off) !important; }
@@ -784,7 +749,7 @@ function initMailEditorHook() {
             body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-command-on) !important; }
             body.ik-dark-mode div.iconBox.ib3.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-troops-off) !important; }
             body.ik-dark-mode div.iconBox.ib3.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-troops-on) !important; }
-            /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Military Buttons ^ */
+
             body.ik-dark-mode div.iconBox.ib4 a img.icon { content: var(--ik-theme-button-diplomacy-off) !important; }
             body.ik-dark-mode div.iconBox.ib4 a:hover img.icon { content: var(--ik-theme-button-diplomacy-on) !important; }
             body.ik-dark-mode div.iconBox.ib4.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-off) !important; }
@@ -793,7 +758,7 @@ function initMailEditorHook() {
             body.ik-dark-mode div.iconBox.ib4.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-orders-on) !important; }
             body.ik-dark-mode div.iconBox.ib4.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-diplo-off) !important; }
             body.ik-dark-mode div.iconBox.ib4.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-diplo-on) !important; }
-            /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Diplomacy Buttons ^ */
+
             body.ik-dark-mode div.iconBox.ib5 a img.icon { content: var(--ik-theme-button-trade-off) !important; }
             body.ik-dark-mode div.iconBox.ib5 a:hover img.icon { content: var(--ik-theme-button-trade-on) !important; }
             body.ik-dark-mode div.iconBox.ib5.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-moves-off) !important; }
@@ -806,7 +771,7 @@ function initMailEditorHook() {
             body.ik-dark-mode div.iconBox.ib5.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-factions-on) !important; }
             body.ik-dark-mode div.iconBox.ib5.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-tradeunits-off) !important; }
             body.ik-dark-mode div.iconBox.ib5.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-tradeunits-on) !important; }
-            /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Trade Buttons ^ */
+
             body.ik-dark-mode div.iconBox.ib6 a img.icon { content: var(--ik-theme-button-research-off) !important; }
             body.ik-dark-mode div.iconBox.ib6 a:hover img.icon { content: var(--ik-theme-button-research-on) !important; }
             body.ik-dark-mode div.iconBox.ib6.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-available-off) !important; }
@@ -817,7 +782,7 @@ function initMailEditorHook() {
             body.ik-dark-mode div.iconBox.ib6.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-discovery-on) !important; }
             body.ik-dark-mode div.iconBox.ib6.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-reading-off) !important; }
             body.ik-dark-mode div.iconBox.ib6.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-reading-on) !important; }
-            /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Research Buttons ^ */
+
             body.ik-dark-mode div.iconBox.ib7 a img.icon { content: var(--ik-theme-button-magic-off) !important; }
             body.ik-dark-mode div.iconBox.ib7 a:hover img.icon { content: var(--ik-theme-button-magic-on) !important; }
             body.ik-dark-mode div.iconBox.ib7.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-active-off) !important; }
@@ -826,7 +791,7 @@ function initMailEditorHook() {
             body.ik-dark-mode div.iconBox.ib7.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-cast-on) !important; }
             body.ik-dark-mode div.iconBox.ib7.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-transmog-off) !important; }
             body.ik-dark-mode div.iconBox.ib7.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-transmog-on) !important; }
-            /* ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Magic Buttons ^ */
+
             body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="ring2_off.png"] { content: var(--ik-theme-char-ring2-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.icon[src*="ring2_on.png"] { content: var(--ik-theme-char-ring2-on) !important; }
             body.ik-dark-mode div.iconBox.ib8 a img.icon[src*="bg_off.png"] { content: var(--ik-theme-button-darkbg-off) !important; }
@@ -839,7 +804,7 @@ function initMailEditorHook() {
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-account-diplo-on) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-support-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-support-on) !important; }
-            /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Top Row Character Buttons ^ */
+
             body.ik-dark-mode h1 img.h1Icon[src*="world_64x64_off.png"] { content: var(--ik-theme-button-world-off) !important; }
             body.ik-dark-mode h1 img.h1Icon[src*="regionalbonus_32x32_off.png"] { content: var(--ik-theme-button-region-off) !important; }
             body.ik-dark-mode h1 img.h1Icon[src*="quests_32x32_off.png"] { content: var(--ik-theme-button-quest-off) !important; }
@@ -851,21 +816,20 @@ function initMailEditorHook() {
             body.ik-dark-mode h1 img.h1Icon[src*="production_summary_32x32_off.png"] { content: var(--ik-theme-button-prod-off) !important; }
             body.ik-dark-mode h1 img.h1Icon[src*="sovereignty_32x32_off.png"] { content: var(--ik-theme-button-sov-off) !important; }
             body.ik-dark-mode h1 img.h1Icon[src*="inventory_32x32_off.png"] { content: var(--ik-theme-button-inv-off) !important; }
-            /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Header Title Images ^ */  
+
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.t { background-image: var(--ik-theme-popup-top) !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m { background-image: var(--ik-theme-popup-mid) !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.b { background-image: var(--ik-theme-popup-bot) !important; }
-            /* -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Scroll Popup ^ */
+
             body.ik-dark-mode .ui-widget-header.ui-progressbar-value {
                 background-image: var(--ik-theme-headerP-texture) !important;
                 background-repeat: repeat !important;
             }
-            /* -------------------------------------------------------------------------------------------------------------------------------------------------------- ^ City Research and Build Progress Bar ^ */
-            
-            /* ==================================================================================================================================================================================================
-                                                                                                       DARK MODE DEFAULT OVERRIDES
-            ===================================================================================================================================================================================================== */
-                       
+
+            /* =========================================================================
+               DARK MODE DEFAULT OVERRIDES
+               ========================================================================= */
+
             body.ik-dark-mode .ui-tabs-selected,
             body.ik-dark-mode .ui-tabs-active,
             body.ik-dark-mode .ui-tabs-selected a,
@@ -875,11 +839,11 @@ function initMailEditorHook() {
             body.ik-dark-mode .ui-tabs-nav li.ui-tabs-selected a,
             body.ik-dark-mode .ui-tabs-nav li.ui-tabs-selected a[href] {
                 color: var(--ik-theme-special-text5) !important;
-            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Selected Tabs Override ^ */
+            }
             body.ik-dark-mode #resbar .resPos, body.ik-dark-mode #resbar span[class*="pos"],
             body.ik-dark-mode #resbar [style*="color: green"],
             body.ik-dark-mode #resbar [style*="color:green"] {
-                color: #55ff55 !important; 
+                color: #55ff55 !important;
             }
             body.ik-dark-mode #resbar .resNeg, body.ik-dark-mode #resbar .resFull,
             body.ik-dark-mode #resbar span[class*="neg"],
@@ -888,51 +852,50 @@ function initMailEditorHook() {
                 color: #ff5555 !important;
             }
             body.ik-dark-mode #resbar .resMax, body.ik-dark-mode #resbar span[class*="max"] { color: #ffaa00 !important; }
-            body.ik-dark-mode div#advRes { background-color: var(--ik-theme-alt-bg) !important; } /* T2 res dropdown background */
+            body.ik-dark-mode div#advRes { background-color: var(--ik-theme-alt-bg) !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m div div b span [style*="860008"] { color: #ff5555 !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m div div b span [style*="004B00"] { color: #55ff55 !important; }
             body.ik-dark-mode div#WzTtDiV [style*="color: #004B00"],
             body.ik-dark-mode div#WzTtDiV [style*="color:#004B00"],
             body.ik-dark-mode div#WzTtDiV span[style*="004B00"] {
                 color: #55ff55 !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Resbar Stat Colors ^ */                      
+            }
             body.ik-dark-mode div#WzTtDiV [style*="color: #860008"],
             body.ik-dark-mode div#WzTtDiV [style*="color:#860008"],
             body.ik-dark-mode div#WzTtDiV span[style*="860008"] {
                 color: #ff5555 !important;
-            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Item Popup Stat Colors ^ */
+            }
             body.ik-dark-mode .indOwn, body.ik-dark-mode .indOwn a[href],
             body.ik-dark-mode .indHostile, body.ik-dark-mode .indHostile a[href],
             body.ik-dark-mode .indFriendly, body.ik-dark-mode .indFriendly a[href],
             body.ik-dark-mode .indCommunication, body.ik-dark-mode .indCommunication a[href],
             body.ik-dark-mode [class*="ind"], body.ik-dark-mode [class*="ind"] a[href] {
                 color: var(--ik-theme-special-text9) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Diplomatic & System Popups ^ */
-            body.ik-dark-mode div.ui-slider-range.ui-widget-header.ui-slider-range-min { 
+            }
+            body.ik-dark-mode div.ui-slider-range.ui-widget-header.ui-slider-range-min {
                 background-image: var(--ik-theme-headerP-texture) !important;
                 background-repeat: repeat !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------ ^ Slider Background Override ^ */
+            }
             body.ik-dark-mode .selected,
             body.ik-dark-mode a.selected,
             body.ik-dark-mode a:link.selected,
             body.ik-dark-mode a:visited.selected,
             body.ik-dark-mode span.selected {
                 color: var(--ik-theme-special-text5) !important;
-            } /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Selected State Color Override ^ */
+            }
             body.ik-dark-mode span.ikcat-dialog-tab {
                 color: var(--ik-theme-special-text4) !important;
-            } /* --------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Inactive LuperLists / Catalogue Tabs ^ */
+            }
             body.ik-dark-mode span.ikcat-dialog-tab.active,
             body.ik-dark-mode span.ikcat-dialog-tab.data-tab,
             body.ik-dark-mode span.ikcat-dialog-tab.active.data-tab {
                 color: var(--ik-theme-special-text5) !important;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------ ^ Active / Selected LuperLists / Catalogue Tabs ^ */
+            }
             body.ik-dark-mode div.iconBox img.icon,
             body.ik-dark-mode div.iconBox img.sIcon {
                 color: transparent !important;
                 text-indent: -9999px;
-            } /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- ^ Alt Text Suprression ^ */
-   
+            }
         `;
     }
 
@@ -941,13 +904,11 @@ function initMailEditorHook() {
             document.documentElement.classList.add("ik-dark-mode");
             document.body.classList.add("ik-dark-mode");
 
-            // Preload images for the newly selected theme
             preloadCustomImages();
 
-            // Apply selected theme variables dynamically to main document root
             const themes = window.IKLuperThemes || {};
             const activeThemeObj = themes[settings.activeTheme] || themes["Dark-mode"] || {};
-            
+
             const root = document.documentElement;
             for (const [key, value] of Object.entries(activeThemeObj)) {
                 root.style.setProperty(key, value);
@@ -956,6 +917,7 @@ function initMailEditorHook() {
             document.documentElement.classList.remove("ik-dark-mode");
             document.body.classList.remove("ik-dark-mode");
         }
+        styleCKEditorPanels();
         SovImbalanceCheck();
     }
 
@@ -1013,7 +975,7 @@ function initMailEditorHook() {
                         <span>Highlight Sov Level Imbalance</span>
                     </label>
                 </div>
-                <div class="iklt-footer">LuperTweaks v2.22</div>
+                <div class="iklt-footer">LuperTweaks v2.26</div>
             </div>
         `;
         document.body.appendChild(content);
@@ -1084,15 +1046,12 @@ function initMailEditorHook() {
         restoreSettings();
         if (!createTweaksDialog()) return false;
 
-        // Start dynamic value scanner loop (for city values & sov check)
         setInterval(() => {
             highlightZeroCityValues();
             SovImbalanceCheck();
         }, 1000);
 
-        // Instant MutationObserver for Mail Iframe & Context Menu Panels
         const uiObserver = new MutationObserver(() => {
-            initMailEditorHook();
             styleCKEditorPanels();
         });
         uiObserver.observe(document.body, { childList: true, subtree: true });
