@@ -30,6 +30,7 @@ const THEMES = {
         "--ik-theme-link": "#ea882e",
         "--ik-theme-link-hover": "#e54e20",
         "--ik-theme-warning-highlight": "#ff000042",
+        "--ik-theme-border-color": "#202021"
 
         /* ==================== Background Images ==================== */
         "--ik-theme-texture": 'url("https://i.imgur.com/rcUBS5t.jpeg")',
