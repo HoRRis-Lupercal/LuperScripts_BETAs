@@ -140,7 +140,7 @@ const THEMES = {
     "Custom": {
         /* You can modify these values or inherit/override specific variables for your custom theme */
         "--ik-theme-bg": "#1e1e1e",
-        "--ik-theme-content-bg": "#252526",
+        "--ik-theme-content-bg": "#cb5959",
         "--ik-theme-alt-bg": "#2d2d2d",
         "--ik-theme-light-alt-bg": "#3c3c3c",
         "--ik-theme-input-bg": "#3c3c3c",
