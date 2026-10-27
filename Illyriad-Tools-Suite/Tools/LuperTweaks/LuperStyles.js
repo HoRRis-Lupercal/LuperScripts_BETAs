@@ -30,7 +30,8 @@ const THEMES = {
         "--ik-theme-link": "#ea882e",
         "--ik-theme-link-hover": "#e54e20",
         "--ik-theme-warning-highlight": "#ff000042",
-        "--ik-theme-border-color": "#202021"
+        "--ik-theme-border-color": "#515252",
+        "--ik-theme-alt-border-color": "#515252",
 
         /* ==================== Background Images ==================== */
         "--ik-theme-texture": 'url("https://i.imgur.com/rcUBS5t.jpeg")',
@@ -46,6 +47,8 @@ const THEMES = {
         "--ik-theme-herald-title": 'url("https://i.imgur.com/GWSmxmu.jpeg")',
         "--ik-theme-herald-book": 'url("https://i.imgur.com/5wmEX8r.jpeg")',
         "--ik-theme-darkmode-credits": 'url("https://i.imgur.com/L2TjMJF.png")',
+        "--ik-theme-border-image": "url(https://i.imgur.com/SHT1UIv.png)",
+        "--ik-theme-small-border-image": "url(https://i.imgur.com/3R045vM.png)",
 
         /* ==================== Button Images ==================== */
         "--ik-theme-button-short-off": 'url("https://assets.illyriad.net/img/buttons/short_off_rev.png")',
