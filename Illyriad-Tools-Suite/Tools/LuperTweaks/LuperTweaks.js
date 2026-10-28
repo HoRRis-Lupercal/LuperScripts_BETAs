@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      0.2.29
+// @version      0.2.30
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -913,6 +913,37 @@
             body.ik-dark-mode div.iconBox.ib8.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-support-off) !important; }
             body.ik-dark-mode div.iconBox.ib8.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-support-on) !important; }
 
+            body.ik-dark-mode div.iconBox.ib9 a img.icon { content: var(--ik-theme-button-alliance-off) !important; }
+            body.ik-dark-mode div.iconBox.ib9 a:hover img.icon { content: var(--ik-theme-button-alliance-on) !important; }
+            body.ik-dark-mode div.iconBox.ib9.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-favourites-off) !important; }
+            body.ik-dark-mode div.iconBox.ib9.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-favourites-on) !important; }
+            body.ik-dark-mode div.iconBox.ib9.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-recruit-off) !important; }
+            body.ik-dark-mode div.iconBox.ib9.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-recruit-on) !important; }
+            body.ik-dark-mode div.iconBox.ib9.top a img.sIcon.sIcon3 { content: var(--ik-theme-button-standings-off) !important; }
+            body.ik-dark-mode div.iconBox.ib9.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-button-standings-on) !important; }
+
+            body.ik-dark-mode div.iconBox.ib10 a img.icon { content: var(--ik-theme-button-prestige-off) !important; }
+            body.ik-dark-mode div.iconBox.ib10 a:hover img.icon { content: var(--ik-theme-button-prestige-on) !important; }
+            body.ik-dark-mode div.iconBox.ib10.top a img.sIcon.sIcon1 { content: var(--ik-theme-button-medal-off) !important; }
+            body.ik-dark-mode div.iconBox.ib10.top a:hover img.sIcon.sIcon1 { content: var(--ik-theme-button-medal-on) !important; }
+            body.ik-dark-mode div.iconBox.ib10.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-buy-off) !important; }
+            body.ik-dark-mode div.iconBox.ib10.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-buy-on) !important; }
+            body.ik-dark-mode div.iconBox.ib10.top a img.sIcon.sIcon3 { content: var(--ik-theme-button-alliance-off) !important; }
+            body.ik-dark-mode div.iconBox.ib10.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-button-alliance-on) !important; }
+            body.ik-dark-mode div.iconBox.ib10.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-support-off) !important; }
+            body.ik-dark-mode div.iconBox.ib10.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-support-on) !important; }
+            body.ik-dark-mode div.iconBox.ib10.top a img.sIcon.sIcon5 { content: var(--ik-theme-button-history-off) !important; }
+            body.ik-dark-mode div.iconBox.ib10.top a:hover img.sIcon.sIcon5 { content: var(--ik-theme-button-history-on) !important; }
+
+            body.ik-dark-mode div.iconBox.ib11 a img.icon { content: var(--ik-theme-button-mail-off) !important; }
+            body.ik-dark-mode div.iconBox.ib11 a:hover img.icon { content: var(--ik-theme-button-mail-on) !important; }
+            body.ik-dark-mode div.iconBox.ib11.top a img.sIcon.sIcon2 { content: var(--ik-theme-button-notif-off) !important; }
+            body.ik-dark-mode div.iconBox.ib11.top a:hover img.sIcon.sIcon2 { content: var(--ik-theme-button-notif-on) !important; }
+            body.ik-dark-mode div.iconBox.ib11.top a img.sIcon.sIcon3 { content: var(--ik-theme-button-forum-off) !important; }
+            body.ik-dark-mode div.iconBox.ib11.top a:hover img.sIcon.sIcon3 { content: var(--ik-theme-button-forum-on) !important; }
+            body.ik-dark-mode div.iconBox.ib11.top a img.sIcon.sIcon4 { content: var(--ik-theme-button-chat-off) !important; }
+            body.ik-dark-mode div.iconBox.ib11.top a:hover img.sIcon.sIcon4 { content: var(--ik-theme-button-chat-on) !important; }
+
             body.ik-dark-mode h1 img.h1Icon[src*="world_64x64_off.png"] { content: var(--ik-theme-button-world-off) !important; }
             body.ik-dark-mode h1 img.h1Icon[src*="regionalbonus_32x32_off.png"] { content: var(--ik-theme-button-region-off) !important; }
             body.ik-dark-mode h1 img.h1Icon[src*="quests_32x32_off.png"] { content: var(--ik-theme-button-quest-off) !important; }
@@ -924,6 +955,38 @@
             body.ik-dark-mode h1 img.h1Icon[src*="production_summary_32x32_off.png"] { content: var(--ik-theme-button-prod-off) !important; }
             body.ik-dark-mode h1 img.h1Icon[src*="sovereignty_32x32_off.png"] { content: var(--ik-theme-button-sov-off) !important; }
             body.ik-dark-mode h1 img.h1Icon[src*="inventory_32x32_off.png"] { content: var(--ik-theme-button-inv-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="movements_32x32_off.png"] { content: var(--ik-theme-button-moves-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="orders_32x32_off.png"] { content: var(--ik-theme-button-orders-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="armies_32x32_off.png"] { content: var(--ik-theme-button-armies-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="commanders_32x32_off.png"] { content: var(--ik-theme-button-command-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="military_64x64_off.png"] { content: var(--ik-theme-button-military-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="diplomacy_64x64_off.png"] { content: var(--ik-theme-button-diplomacy-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="prices_32x32_off.png"] { content: var(--ik-theme-button-markets-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="factionmarket_32x32_off.png"] { content: var(--ik-theme-button-factions-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="trade_64x64_off.png"] { content: var(--ik-theme-button-trade-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="available_32x32_off.png"] { content: var(--ik-theme-button-available-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="complete_research_tree_32x32_off.png"] { content: var(--ik-theme-button-tree-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="discovery_32x32_off.png"] { content: var(--ik-theme-button-discovery-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="reading_32x32_off.png"] { content: var(--ik-theme-button-reading-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="research_64x64_off.png"] { content: var(--ik-theme-button-research-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="spells_in_progress_32x32_off.png"] { content: var(--ik-theme-button-active-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="cast_spell_32x32_off.png"] { content: var(--ik-theme-button-cast-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="transmogrification_32x32_off.png"] { content: var(--ik-theme-button-transmog-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="magic_64x64_off.png"] { content: var(--ik-theme-button-magic-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="favourites_32x32_off.png"] { content: var(--ik-theme-button-favourites-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="rankings_32x32_off.png"] { content: var(--ik-theme-button-leaderboard-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="account_preferences_32x32_off.png"] { content: var(--ik-theme-button-account-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="about_32x32_off.png"] { content: var(--ik-theme-button-support-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="alliances_64x64_off.png"], body.ik-dark-mode h1 img[src*="alliances_64x64_off.png"] { content: var(--ik-theme-button-alliance-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="alliance_32x32_off.png"] { content: var(--ik-theme-button-recruit-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="factions_standings_32x32_off.png"] { content: var(--ik-theme-button-standings-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="prestige_64x64_off.png"] { content: var(--ik-theme-button-prestige-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="medal_32x32_off.png"] { content: var(--ik-theme-button-medal-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="buy_prestige_32x32_off.png"] { content: var(--ik-theme-button-buy-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="history_32x32_off.png"] { content: var(--ik-theme-button-history-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="notifications_32x32_off.png"] { content: var(--ik-theme-button-notif-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="chat_32x32_off.png"] { content: var(--ik-theme-button-chat-off) !important; }
+            body.ik-dark-mode h1 img.h1Icon[src*="mail_64x64_off.png"] { content: var(--ik-theme-button-mail-off) !important; }
 
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.t { background-image: var(--ik-theme-popup-top) !important; }
             body.ik-dark-mode div#WzTtDiV div#WzBoDy table tbody tr td#WzBoDyI div.popup div.m { background-image: var(--ik-theme-popup-mid) !important; }
