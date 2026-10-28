@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      0.2.30
+// @version      0.2.29
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -267,7 +267,7 @@
         style.textContent = `
             #ikLuperTweaks {
                 padding: 0 !important;
-                overflow: hidden !important;
+                overflow: auto !important; /* Changed from hidden to auto so it scrolls when content is too long */
                 background-color: #fffae8;
             }
 
@@ -276,10 +276,50 @@
                 display: flex;
                 flex-direction: column;
                 width: 100%;
-                height: 100%;
+                min-height: 100%; /* Changed from height: 100% to min-height: 100% */
                 padding: 12px;
                 font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
                 color: #4a3311;
+            }
+
+            #ikltAccordion {
+                margin-bottom: 12px;
+            }
+
+            #ikltAccordion h3 {
+                cursor: pointer;
+                padding: 6px 10px;
+                font-size: 13px;
+                margin-bottom: 2px;
+                display: block !important;
+            }
+
+            #ikltAccordion h3 a {
+                display: block !important;
+                text-decoration: none;
+            }
+
+            #iklt220 {
+               height: 220px !important;
+            }
+
+            .iklt-option-row {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 12px;
+                cursor: pointer;
+            }
+
+            .iklt-footer {
+                margin-top: auto;
+                text-align: right;
+                font-size: 11px;
+                opacity: 0.7;
+            }
+
+            .ui-widget-content .ui-state-active {
+                background: url("https://assets.illyriad.net/img/backgrounds/paper2.jpg");
             }
 
             .iklt-section {
@@ -1074,7 +1114,7 @@
         `;
     }
 
-    function applySettings() {
+function applySettings() {
         if (settings.darkMode) {
             document.documentElement.classList.add("ik-dark-mode");
             document.body.classList.add("ik-dark-mode");
@@ -1128,32 +1168,118 @@
         if (document.querySelector("#ikLuperTweaks")) return;
         const content = document.createElement("div");
         content.id = "ikLuperTweaks";
-        content.innerHTML = `
+content.innerHTML = `
             <div class="iklt-flex-wrapper">
-                <div class="iklt-section">
-                    <div class="iklt-section-title">Theme Preferences</div>
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
-                        <label class="iklt-option-row" style="margin-bottom: 0;">
-                            <input type="checkbox" id="ikltDarkCheckbox" />
-                            <span>Enable Global Dark Mode</span>
+                <div id="ikltAccordion">
+                    <h3 style="display: block !important; cursor: pointer; padding: 6px 10px; font-size: 13px; margin-bottom: 2px;"><a href="#" style="display: block !important; text-decoration: none;">User Interface Customizer</a></h3>
+                    <div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                            <label class="iklt-option-row" style="margin-bottom: 0;">
+                                <input type="checkbox" id="ikltDarkCheckbox" />
+                                <span>Enable Preset Dark Mode Style</span>
+                            </label>
+                            <select id="ikltThemeSelect" style="padding: 2px 6px; font-size: 11px;">
+                                <option value="Dark-mode">Dark-mode</option>
+                                <option value="Custom">Custom</option>
+                            </select>
+                        </div>
+                        <div id="ikltSubAccordion" style="margin-top: 8px;">
+                            <h3 style="display: block !important; cursor: pointer; padding: 4px 8px; font-size: 12px; margin-bottom: 2px;"><a href="#" style="display: block !important; text-decoration: none;">Advanced Customization Options</a></h3>
+                            <div id="iklt220">
+                            <table style="width: 100%; font-size: 11px; border-collapse: collapse;">
+                                <tr>
+                                    <td style="padding: 3px;">Header color</td>
+                                    <td style="padding: 3px; white-space: nowrap;">
+                                        <input type="text" id="iklt_headerColor" style="width: 110px;" />
+                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px;">Active tab color</td>
+                                    <td style="padding: 3px; white-space: nowrap;">
+                                        <input type="text" id="iklt_activeTabColor" style="width: 110px;" />
+                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px;">Link color</td>
+                                    <td style="padding: 3px; white-space: nowrap;">
+                                        <input type="text" id="iklt_linkColor" style="width: 110px;" />
+                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px;">Name color</td>
+                                    <td style="padding: 3px; white-space: nowrap;">
+                                        <input type="text" id="iklt_nameColor" style="width: 110px;" />
+                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px;">Self color</td>
+                                    <td style="padding: 3px; white-space: nowrap;">
+                                        <input type="text" id="iklt_selfColor" style="width: 110px;" />
+                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px;">Border color</td>
+                                    <td style="padding: 3px; white-space: nowrap;">
+                                        <input type="text" id="iklt_borderColor" style="width: 110px;" />
+                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px;">Background color</td>
+                                    <td style="padding: 3px; white-space: nowrap;">
+                                        <input type="text" id="iklt_bgColor" style="width: 110px;" />
+                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3px;">Background alternate color</td>
+                                    <td style="padding: 3px; white-space: nowrap;">
+                                        <input type="text" id="iklt_bgAltColor" style="width: 110px;" />
+                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                    </td>
+                                </tr>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 style="display: block !important; cursor: pointer; padding: 6px 10px; font-size: 13px; margin-bottom: 2px;"><a href="#" style="display: block !important; text-decoration: none;">City Skin Customizer</a></h3>
+                    <div>
+                        <label class="iklt-option-row">
+                            <input type="checkbox" id="ikltSovCheckbox" />
+                            <span>Highlight Sov Level Imbalance</span>
                         </label>
-                        <select id="ikltThemeSelect" style="padding: 2px 6px; font-size: 11px;">
-                            <option value="Dark-mode">Dark-mode</option>
-                            <option value="Custom">Custom</option>
-                        </select>
                     </div>
                 </div>
-                <div class="iklt-section">
-                    <div class="iklt-section-title">Sovereignty Helper</div>
-                    <label class="iklt-option-row">
-                        <input type="checkbox" id="ikltSovCheckbox" />
-                        <span>Highlight Sov Level Imbalance</span>
-                    </label>
-                </div>
-                <div class="iklt-footer">LuperTweaks v2.29</div>
+                <div class="iklt-footer">LuperTweaks v2.32</div>
             </div>
         `;
         document.body.appendChild(content);
+
+        // Initialize jQuery UI Accordion matching Illyriad's native style
+        if (window.jQuery && jQuery.fn && typeof jQuery.fn.accordion === "function") {
+            jQuery("#ikltAccordion").accordion({
+                header: "> h3", // Use direct child selector so it ignores nested h3s
+                collapsible: true,
+                active: false,
+                heightStyle: "content"
+            });
+            jQuery("#ikltSubAccordion").accordion({
+                header: "h3",
+                collapsible: true,
+                active: false,
+                heightStyle: "content",
+                beforeActivate: function(event, ui) {
+                    setTimeout(() => {
+                        jQuery("#ikltAccordion").accordion("refresh");
+                    }, 0);
+                }
+            });
+        }
 
         content.querySelector("#ikltDarkCheckbox").addEventListener("change", saveSettings);
         content.querySelector("#ikltThemeSelect").addEventListener("change", saveSettings);
@@ -1200,7 +1326,13 @@
                 saveJSON(STORAGE.OPEN, true);
                 $tweaks.dialog("widget").addClass("flora").css("z-index", 11000);
                 restoreSettings();
-                setTimeout(clampTweaks, 0);
+                setTimeout(() => {
+                    clampTweaks();
+                    if (window.jQuery && jQuery.fn.accordion) {
+                        jQuery("#ikltAccordion").accordion("refresh");
+                        jQuery("#ikltSubAccordion").accordion("refresh");
+                    }
+                }, 0);
             },
             close: function () { saveTweaksGeometry(); saveJSON(STORAGE.OPEN, false); }
         });
@@ -1221,13 +1353,11 @@
         restoreSettings();
         if (!createTweaksDialog()) return false;
 
-        // Keep interval ONLY for non-DOM helper checks if needed, but remove styleCKEditorPanels from it
         setInterval(() => {
             highlightZeroCityValues();
             SovImbalanceCheck();
         }, 1000);
 
-        // Listen to native CKEditor events if CKEditor is loaded on the page
         if (window.CKEDITOR) {
             window.CKEDITOR.on('instanceReady', function(evt) {
                 styleCKEditorPanels();
@@ -1238,12 +1368,10 @@
             });
         }
 
-        // Event-driven MutationObserver for UI changes & fullscreen toggling
         const uiObserver = new MutationObserver(() => {
             styleCKEditorPanels();
         });
         uiObserver.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
-
 
         if (!resizeBound) {
             resizeBound = true;
