@@ -145,8 +145,8 @@ const THEMES = {
         "--ik-theme-button-alliance-on": 'url("https://i.imgur.com/ID9pQhs.png")',
         "--ik-theme-button-recruit-off": 'url("https://i.imgur.com/Y5hmywH.png")',
         "--ik-theme-button-recruit-on": 'url("https://i.imgur.com/jtWx47t.png")',
-        "--ik-theme-button-recruit-off": 'url("https://i.imgur.com/jWDFmqp.png")',
-        "--ik-theme-button-recruit-on": 'url("https://i.imgur.com/6KymOzB.png")',
+        "--ik-theme-button-standings-off": 'url("https://i.imgur.com/jWDFmqp.png")',
+        "--ik-theme-button-standings-on": 'url("https://i.imgur.com/6KymOzB.png")',
 
         "--ik-theme-button-prestige-off": 'url("https://i.imgur.com/E1VkYZl.png")',
         "--ik-theme-button-prestige-on": 'url("https://i.imgur.com/I4JKA2b.png")',
