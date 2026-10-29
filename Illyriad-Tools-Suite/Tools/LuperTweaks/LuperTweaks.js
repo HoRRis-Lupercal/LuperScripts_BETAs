@@ -1110,6 +1110,7 @@
             body.ik-dark-mode span.ikcat-dialog-tab.data-tab,
             body.ik-dark-mode span.ikcat-dialog-tab.active.data-tab {
                 color: var(--ik-theme-special-text5) !important;
+                background-image: var(--ik-theme-texture) !important;
             }
             body.ik-dark-mode div.iconBox img.icon,
             body.ik-dark-mode div.iconBox img.sIcon {
