@@ -299,17 +299,19 @@
                 text-decoration: none;
             }
 
-            #iklt220 {
-               height: 220px !important;
+            #iklt290 {
+               height: 290px !important;
             }
 
+            /* Default closed height for User Interface Customizer */
             #ikltAccordion > div:first-of-type {
                 height: 75px !important;
                 overflow-y: hidden !important;
             }
 
-            /* Open state when Advanced Customization Options is expanded */
-            #ikltAccordion.iklt-advanced-open > div:first-of-type {
+            /* Automatically resize to 385px when Advanced Customization Options is open */
+            #ikltAccordion:has(#ikltSubAccordion h3.ui-state-active) > div:first-of-type,
+            #ikltAccordion:has(#ikltSubAccordion h3[aria-expanded="true"]) > div:first-of-type {
                 height: 385px !important;
                 overflow-y: auto !important;
             }
@@ -1110,7 +1112,6 @@
             body.ik-dark-mode span.ikcat-dialog-tab.data-tab,
             body.ik-dark-mode span.ikcat-dialog-tab.active.data-tab {
                 color: var(--ik-theme-special-text5) !important;
-                background-image: var(--ik-theme-texture) !important;
             }
             body.ik-dark-mode div.iconBox img.icon,
             body.ik-dark-mode div.iconBox img.sIcon {
@@ -1177,8 +1178,8 @@ function applySettings() {
         content.innerHTML = `
             <div class="iklt-flex-wrapper">
                 <div id="ikltAccordion">
-                    <h3 style="display: block !important; cursor: pointer; padding: 6px 10px; font-size: 13px; margin-bottom: 2px;"><a href="#" style="display: block !important; text-decoration: none;">User Interface Customizer</a></h3>
-                    <div>
+                    <h3 style="display: block !important; cursor: pointer; padding: 6px 10px; font-size: 13px; margin-bottom: 2px;"><a href="#" style="display: block !important; text-decoration: none;">User Interface Presets</a></h3>
+                    <div id="ikltPanelWrapper" style="height: 75px; overflow: hidden;">
                         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
                             <label class="iklt-option-row" style="margin-bottom: 0;">
                                 <input type="checkbox" id="ikltDarkCheckbox" />
@@ -1189,9 +1190,16 @@ function applySettings() {
                                 <option value="Custom">Custom</option>
                             </select>
                         </div>
-                        <div id="ikltSubAccordion" style="margin-top: 8px;">
-                            <h3 style="display: block !important; cursor: pointer; padding: 4px 8px; font-size: 12px; margin-bottom: 2px;"><a href="#" style="display: block !important; text-decoration: none;">Advanced Customization Options</a></h3>
-                            <div id="iklt220">
+                    </div>
+                    <h3 style="display: block !important; cursor: pointer; padding: 6px 10px; font-size: 13px; margin-bottom: 2px;"><a href="#" style="display: block !important; text-decoration: none;">City Skin Customizer</a></h3>
+                    <div>
+                        <label class="iklt-option-row">
+                            <input type="checkbox" id="ikltSovCheckbox" />
+                            <span>Highlight Sov Level Imbalance</span>
+                        </label>
+                    </div>
+                        <h3 style="display: block !important; cursor: pointer; padding: 6px 10px; font-size: 13px; margin-bottom: 2px;"><a href="#" style="display: block !important; text-decoration: none;">Advanced Customization Options</a></h3>
+                          <div id="iklt290">
                             <table style="width: 100%; font-size: 11px; border-collapse: collapse;">
                                 <tr>
                                     <td style="padding: 3px;">Header color</td>
@@ -1251,65 +1259,19 @@ function applySettings() {
                                 </tr>
                             </table>
                             </div>
-                        </div>
-                    </div>
-                    <h3 style="display: block !important; cursor: pointer; padding: 6px 10px; font-size: 13px; margin-bottom: 2px;"><a href="#" style="display: block !important; text-decoration: none;">City Skin Customizer</a></h3>
-                    <div>
-                        <label class="iklt-option-row">
-                            <input type="checkbox" id="ikltSovCheckbox" />
-                            <span>Highlight Sov Level Imbalance</span>
-                        </label>
-                    </div>
-                </div>
                 <div class="iklt-footer">LuperTweaks v2.32</div>
             </div>
         `;
         document.body.appendChild(content);
 
-// Initialize jQuery UI Accordion matching Illyriad's native style
+        // Initialize clean single accordion
         if (window.jQuery && jQuery.fn && typeof jQuery.fn.accordion === "function") {
             jQuery("#ikltAccordion").accordion({
                 header: "> h3",
                 collapsible: true,
                 active: false,
-                heightStyle: "content"
+                heightStyle: "content" // Lets jQuery UI cleanly size to fit your panel wrapper
             });
-
-            jQuery("#ikltSubAccordion").accordion({
-                header: "h3",
-                collapsible: true,
-                active: false,
-                heightStyle: "content"
-            });
-
-            // Set initial default closed height and attach MutationObserver to sub-accordion header
-            setTimeout(() => {
-                const contentDiv = jQuery("#ikltAccordion > div:first-of-type")[0];
-                const subHeader = document.querySelector("#ikltSubAccordion h3");
-
-                if (contentDiv) {
-                    contentDiv.style.setProperty("height", "75px", "important");
-                    contentDiv.style.setProperty("overflow-y", "hidden", "important");
-                }
-
-                if (contentDiv && subHeader) {
-                    const observer = new MutationObserver(() => {
-                        const isOpen = subHeader.getAttribute("aria-expanded") === "true";
-
-                        const targetHeight = isOpen ? "385px" : "75px";
-                        const overflowVal = isOpen ? "auto" : "hidden";
-
-                        contentDiv.style.setProperty("height", targetHeight, "important");
-                        contentDiv.style.setProperty("overflow-y", overflowVal, "important");
-
-                        // Refresh parent accordion so it updates its layout state when expanding or shrinking
-                        jQuery("#ikltAccordion").accordion("refresh");
-                    });
-
-                    // Watch aria-expanded changes to handle both opening and closing cleanly while ignoring hover
-                    observer.observe(subHeader, { attributes: true, attributeFilter: ["aria-expanded"] });
-                }
-            }, 50);
         }
 
         content.querySelector("#ikltDarkCheckbox").addEventListener("change", saveSettings);
