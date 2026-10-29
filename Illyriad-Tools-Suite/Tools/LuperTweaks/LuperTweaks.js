@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      0.2.31
+// @version      0.2.29
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -1265,7 +1265,7 @@ function applySettings() {
         `;
         document.body.appendChild(content);
 
-        // Initialize jQuery UI Accordion matching Illyriad's native style
+// Initialize jQuery UI Accordion matching Illyriad's native style
         if (window.jQuery && jQuery.fn && typeof jQuery.fn.accordion === "function") {
             jQuery("#ikltAccordion").accordion({
                 header: "> h3",
@@ -1293,18 +1293,20 @@ function applySettings() {
 
                 if (contentDiv && subHeader) {
                     const observer = new MutationObserver(() => {
-                        const isOpen = subHeader.getAttribute("aria-expanded") === "true" ||
-                                       subHeader.getAttribute("aria-selected") === "true" ||
-                                       subHeader.classList.contains("ui-state-active");
+                        const isOpen = subHeader.getAttribute("aria-expanded") === "true";
 
                         const targetHeight = isOpen ? "385px" : "75px";
                         const overflowVal = isOpen ? "auto" : "hidden";
 
                         contentDiv.style.setProperty("height", targetHeight, "important");
                         contentDiv.style.setProperty("overflow-y", overflowVal, "important");
+
+                        // Refresh parent accordion so it updates its layout state when expanding or shrinking
+                        jQuery("#ikltAccordion").accordion("refresh");
                     });
 
-                    observer.observe(subHeader, { attributes: true, attributeFilter: ["aria-expanded", "aria-selected", "class"] });
+                    // Watch aria-expanded changes to handle both opening and closing cleanly while ignoring hover
+                    observer.observe(subHeader, { attributes: true, attributeFilter: ["aria-expanded"] });
                 }
             }, 50);
         }
