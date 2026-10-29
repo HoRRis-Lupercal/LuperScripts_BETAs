@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Illyriad Tools Suite
+// @name         Illyriad LuperTools Suite
 // @namespace    Developed by IKnights, modified by HoRRis
 // @version      0.2.24
 // @description  Unified Illyriad tools suite.
