@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Illyriad Tools Suite - LuperTweaks
 // @namespace    http://tampermonkey.net/
-// @version      0.2.29
+// @version      0.2.31
 // @match        https://*.illyriad.co.uk/*
 // ==/UserScript==
 
@@ -267,7 +267,7 @@
         style.textContent = `
             #ikLuperTweaks {
                 padding: 0 !important;
-                overflow: auto !important; /* Changed from hidden to auto so it scrolls when content is too long */
+                overflow: auto !important;
                 background-color: #fffae8;
             }
 
@@ -301,6 +301,17 @@
 
             #iklt220 {
                height: 220px !important;
+            }
+
+            #ikltAccordion > div:first-of-type {
+                height: 75px !important;
+                overflow-y: hidden !important;
+            }
+
+            /* Open state when Advanced Customization Options is expanded */
+            #ikltAccordion.iklt-advanced-open > div:first-of-type {
+                height: 385px !important;
+                overflow-y: auto !important;
             }
 
             .iklt-option-row {
@@ -358,12 +369,6 @@
             /* =========================================================================
                Dialog & UI Container Layout
                ========================================================================= */
-
-            #ikLuperTweaks {
-                padding: 0 !important;
-                overflow: hidden !important;
-                background-color: #fffae8;
-            }
 
             .iklt-flex-wrapper {
                 box-sizing: border-box;
@@ -1168,7 +1173,7 @@ function applySettings() {
         if (document.querySelector("#ikLuperTweaks")) return;
         const content = document.createElement("div");
         content.id = "ikLuperTweaks";
-content.innerHTML = `
+        content.innerHTML = `
             <div class="iklt-flex-wrapper">
                 <div id="ikltAccordion">
                     <h3 style="display: block !important; cursor: pointer; padding: 6px 10px; font-size: 13px; margin-bottom: 2px;"><a href="#" style="display: block !important; text-decoration: none;">User Interface Customizer</a></h3>
@@ -1191,56 +1196,56 @@ content.innerHTML = `
                                     <td style="padding: 3px;">Header color</td>
                                     <td style="padding: 3px; white-space: nowrap;">
                                         <input type="text" id="iklt_headerColor" style="width: 110px;" />
-                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                        <input type="submit" class="short" value="Apply" style="margin-left: 6px;" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 3px;">Active tab color</td>
                                     <td style="padding: 3px; white-space: nowrap;">
                                         <input type="text" id="iklt_activeTabColor" style="width: 110px;" />
-                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                        <input type="submit" class="short" value="Apply" style="margin-left: 6px;" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 3px;">Link color</td>
                                     <td style="padding: 3px; white-space: nowrap;">
                                         <input type="text" id="iklt_linkColor" style="width: 110px;" />
-                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                        <input type="submit" class="short" value="Apply" style="margin-left: 6px;" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 3px;">Name color</td>
                                     <td style="padding: 3px; white-space: nowrap;">
                                         <input type="text" id="iklt_nameColor" style="width: 110px;" />
-                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                        <input type="submit" class="short" value="Apply" style="margin-left: 6px;" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 3px;">Self color</td>
                                     <td style="padding: 3px; white-space: nowrap;">
                                         <input type="text" id="iklt_selfColor" style="width: 110px;" />
-                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                        <input type="submit" class="short" value="Apply" style="margin-left: 6px;" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 3px;">Border color</td>
                                     <td style="padding: 3px; white-space: nowrap;">
                                         <input type="text" id="iklt_borderColor" style="width: 110px;" />
-                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                        <input type="submit" class="short" value="Apply" style="margin-left: 6px;" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 3px;">Background color</td>
                                     <td style="padding: 3px; white-space: nowrap;">
                                         <input type="text" id="iklt_bgColor" style="width: 110px;" />
-                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                        <input type="submit" class="short" value="Apply" style="margin-left: 6px;" />
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 3px;">Background alternate color</td>
                                     <td style="padding: 3px; white-space: nowrap;">
                                         <input type="text" id="iklt_bgAltColor" style="width: 110px;" />
-                                        <input type="button" class="short" value="Apply" style="margin-left: 6px;" />
+                                        <input type="submit" class="short" value="Apply" style="margin-left: 6px;" />
                                     </td>
                                 </tr>
                             </table>
@@ -1263,22 +1268,45 @@ content.innerHTML = `
         // Initialize jQuery UI Accordion matching Illyriad's native style
         if (window.jQuery && jQuery.fn && typeof jQuery.fn.accordion === "function") {
             jQuery("#ikltAccordion").accordion({
-                header: "> h3", // Use direct child selector so it ignores nested h3s
+                header: "> h3",
                 collapsible: true,
                 active: false,
                 heightStyle: "content"
             });
+
             jQuery("#ikltSubAccordion").accordion({
                 header: "h3",
                 collapsible: true,
                 active: false,
-                heightStyle: "content",
-                beforeActivate: function(event, ui) {
-                    setTimeout(() => {
-                        jQuery("#ikltAccordion").accordion("refresh");
-                    }, 0);
-                }
+                heightStyle: "content"
             });
+
+            // Set initial default closed height and attach MutationObserver to sub-accordion header
+            setTimeout(() => {
+                const contentDiv = jQuery("#ikltAccordion > div:first-of-type")[0];
+                const subHeader = document.querySelector("#ikltSubAccordion h3");
+
+                if (contentDiv) {
+                    contentDiv.style.setProperty("height", "75px", "important");
+                    contentDiv.style.setProperty("overflow-y", "hidden", "important");
+                }
+
+                if (contentDiv && subHeader) {
+                    const observer = new MutationObserver(() => {
+                        const isOpen = subHeader.getAttribute("aria-expanded") === "true" ||
+                                       subHeader.getAttribute("aria-selected") === "true" ||
+                                       subHeader.classList.contains("ui-state-active");
+
+                        const targetHeight = isOpen ? "385px" : "75px";
+                        const overflowVal = isOpen ? "auto" : "hidden";
+
+                        contentDiv.style.setProperty("height", targetHeight, "important");
+                        contentDiv.style.setProperty("overflow-y", overflowVal, "important");
+                    });
+
+                    observer.observe(subHeader, { attributes: true, attributeFilter: ["aria-expanded", "aria-selected", "class"] });
+                }
+            }, 50);
         }
 
         content.querySelector("#ikltDarkCheckbox").addEventListener("change", saveSettings);
@@ -1318,9 +1346,9 @@ content.innerHTML = `
         $tweaks = jQuery("#ikLuperTweaks");
         $tweaks.dialog({
             title: "LuperTweaks", autoOpen: false,
-            width: Math.max(340, Number(saved.width) || 380),
-            height: Math.max(260, Number(saved.height) || 320),
-            minWidth: 300, minHeight: 220, draggable: true, resizable: true, closeOnEscape: false,
+            width: Math.max(380, Number(saved.width) || 380),
+            height: Math.max(265, Number(saved.height) || 320),
+            minWidth: 380, minHeight: 265, draggable: true, resizable: true, closeOnEscape: false,
             dragStop: saveTweaksGeometry, resizeStop: saveTweaksGeometry,
             open: function () {
                 saveJSON(STORAGE.OPEN, true);
